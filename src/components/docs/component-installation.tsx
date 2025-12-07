@@ -293,7 +293,7 @@ export function ComponentInstallation({ cli, manual, className }: ComponentInsta
                 <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-6">Install using CLI</h2>
                 <Tabs value={installType} onValueChange={setInstallType} className="relative w-full !border-[1px] !border-neutral-200 dark:!border-neutral-700 rounded-xl overflow-hidden bg-neutral-100 dark:bg-[#161616] border-b border-neutral-200 dark:border-neutral-800">
                     <div className="flex items-center justify-between px-3 py-2 border-b border-neutral-300 dark:border-neutral-800 bg-white dark:bg-black">
-                        <TabsList className="justify-start gap-6 bg-transparent p-0">
+                        <TabsList className="justify-start gap-6 bg-transparent p-0 h-auto">
                             {["npm", "pnpm", "bun", "yarn"].map((tab) => {
                                 const isActive = installType === tab
                                 return (
@@ -301,15 +301,15 @@ export function ComponentInstallation({ cli, manual, className }: ComponentInsta
                                         key={tab}
                                         value={tab}
                                         className={cn(
-                                            "relative px-10 py-2.5 min-w-20 justify-center rounded-lg border border-transparent font-medium text-sm transition-all outline-none cursor-pointer select-none",
-                                            isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground",
-                                            "bg-transparent data-[state=active]:bg-transparent data-[state=active]:shadow-none hover:bg-transparent dark:hover:bg-transparent"
+                                            "relative h-auto px-4 py-2 min-w-20 justify-center rounded-none border-t-2 border-transparent font-medium text-sm transition-all outline-none cursor-pointer select-none",
+                                            isActive ? "text-neutral-900 dark:text-white" : "text-muted-foreground hover:text-foreground",
+                                            "bg-transparent hover:bg-transparent dark:hover:bg-transparent"
                                         )}
                                     >
                                         {isActive && (
                                             <motion.div
-                                                layoutId="active-tab-pill"
-                                                className="absolute inset-0 bg-neutral-200 dark:bg-neutral-800 rounded-lg"
+                                                layoutId="active-tab-underline"
+                                                className="absolute bottom-[-11px] left-0 right-0 h-[2px] bg-neutral-900 dark:bg-white"
                                                 initial={false}
                                                 transition={{ type: "spring", stiffness: 500, damping: 30 }}
                                             />

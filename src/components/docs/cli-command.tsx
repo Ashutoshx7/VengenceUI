@@ -111,7 +111,7 @@ export function CLICommand({ componentName, className }: CLICommandProps) {
                                 key={pm}
                                 onClick={() => setActiveTab(pm)}
                                 className={cn(
-                                    "relative flex items-center gap-2  px-2 py-2.5  text-sm font-medium rounded-lg transition-colors select-none z-10",
+                                    "relative flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-none transition-colors select-none z-10",
                                     isActive
                                         ? "text-neutral-900 dark:text-white"
                                         : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200"
@@ -120,7 +120,7 @@ export function CLICommand({ componentName, className }: CLICommandProps) {
                                 {isActive && (
                                     <motion.div
                                         layoutId="active-pill"
-                                        className="absolute inset-0 bg-neutral-200 dark:bg-neutral-800 rounded-md -z-10"
+                                        className="absolute bottom-[-11px] left-0 right-0 h-[2px] bg-neutral-900 dark:bg-white"
                                         transition={{ type: "spring", stiffness: 300, damping: 30 }}
                                     />
                                 )}
