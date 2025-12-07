@@ -86,7 +86,7 @@ export function CLICommand({ componentName, className }: CLICommandProps) {
                 {" "}
                 <span className="text-sky-500 dark:text-sky-400">shadcn@latest</span>
                 {" "}
-                <span className="text-neutral-600 dark:text-neutral-300">add</span>
+                <span className="text-neutral-600 dark:text-green-400">add</span>
                 {" "}
                 <span className="text-amber-600 dark:text-amber-400">{`"https://vengeance-ui.vercel.app/r/${componentName}.json"`}</span>
             </code>

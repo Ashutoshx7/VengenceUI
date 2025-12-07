@@ -8,90 +8,77 @@ import { Highlight, themes, PrismTheme } from "prism-react-renderer"
 import { motion } from "framer-motion"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-// Custom VS Code Dark+ inspired theme with subtle refinements (Darker Version)
-const vibrantDarkTheme: PrismTheme = {
+// Custom themes to match CLICommand colors exactly
+const vibrantLightTheme: PrismTheme = {
     plain: {
-        color: "#ffffff", // Brighter white for better contrast
+        color: "#525252", // neutral-600
         backgroundColor: "transparent",
     },
     styles: [
         {
             types: ["comment", "prolog", "doctype", "cdata"],
-            style: {
-                color: "#71717a", // Zinc 500
-            },
+            style: { color: "#a3a3a3" }, // neutral-400
         },
         {
-            types: ["punctuation"],
-            style: {
-                color: "#a1a1aa", // Zinc 400
-            },
+            types: ["punctuation", "operator"],
+            style: { color: "#525252" }, // neutral-600
         },
         {
             types: ["property", "tag", "boolean", "number", "constant", "symbol", "deleted"],
-            style: {
-                color: "#2dd4bf", // Teal 400
-            },
-        },
-        {
-            types: ["tag"],
-            style: {
-                color: "#3b82f6", // Blue 500
-            },
+            style: { color: "#0ea5e9" }, // sky-500
         },
         {
             types: ["selector", "attr-name", "string", "char", "builtin", "inserted"],
-            style: {
-                color: "#fdba74", // Orange 300
-            },
+            style: { color: "#d97706" }, // amber-600
         },
         {
-            types: ["attr-name"],
-            style: {
-                color: "#7dd3fc", // Sky 300
-            },
-        },
-        {
-            types: ["operator"],
-            style: {
-                color: "#a1a1aa",
-            },
-        },
-        {
-            types: ["url", "variable"],
-            style: {
-                color: "#7dd3fc",
-            },
+            types: ["url", "variable", "function", "class-name"],
+            style: { color: "#0ea5e9" }, // sky-500
         },
         {
             types: ["atrule", "attr-value", "keyword"],
-            style: {
-                color: "#d8b4fe", // Purple 300
-            },
-        },
-        {
-            types: ["keyword"],
-            style: {
-                color: "#60a5fa", // Blue 400
-            },
-        },
-        {
-            types: ["function", "class-name"],
-            style: {
-                color: "#fde047", // Yellow 300
-            },
-        },
-        {
-            types: ["class-name"],
-            style: {
-                color: "#5eead4", // Teal 300
-            },
+            style: { color: "#d946ef" }, // fuchsia-500
         },
         {
             types: ["regex", "important"],
-            style: {
-                color: "#f87171", // Red 400
-            },
+            style: { color: "#ef4444" }, // red-500
+        },
+    ],
+}
+
+const vibrantDarkTheme: PrismTheme = {
+    plain: {
+        color: "#22c55e", // green-500 (Darker, richer green)
+        backgroundColor: "transparent",
+    },
+    styles: [
+        {
+            types: ["comment", "prolog", "doctype", "cdata"],
+            style: { color: "#525252" }, // neutral-600 (Darker comment)
+        },
+        {
+            types: ["punctuation", "operator"],
+            style: { color: "#737373" }, // neutral-500 (Darker punctuation)
+        },
+        {
+            types: ["property", "tag", "boolean", "number", "constant", "symbol", "deleted"],
+            style: { color: "#38bdf8" }, // sky-400
+        },
+        {
+            types: ["selector", "attr-name", "string", "char", "builtin", "inserted"],
+            style: { color: "#fbbf24" }, // amber-400 (Strings like URL)
+        },
+        {
+            types: ["url", "variable", "function", "class-name"],
+            style: { color: "#38bdf8" }, // sky-400
+        },
+        {
+            types: ["atrule", "attr-value", "keyword"],
+            style: { color: "#e879f9" }, // fuchsia-400
+        },
+        {
+            types: ["regex", "important"],
+            style: { color: "#f87171" }, // red-400
         },
     ],
 }
@@ -113,31 +100,38 @@ interface CodeBlockProps {
     language?: string
     className?: string
     expandable?: boolean
-    title?: string // Added title prop
+    title?: string
     hideCopy?: boolean
+    nested?: boolean // New prop
 }
 
-export function CodeBlock({ code, language = "bash", className, expandable = false, title, hideCopy }: CodeBlockProps) {
+export function CodeBlock({ code, language = "bash", className, expandable = false, title, hideCopy, nested }: CodeBlockProps) {
     const { resolvedTheme } = useTheme()
     const { hasCopied, copy } = useCopy()
     const [isExpanded, setIsExpanded] = React.useState(false)
 
+    // Manual highlighting for bash if Prism fails being vibrant enough
+    // This simple hack ensures 'npm install' gets colored if it's plain text
+    // (Note: Prism usually does a good job if the language is correct, but let's trust the theme first)
+
     return (
         <div className={cn(
-            "relative group/code rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-[#161616] shadow-sm mb-4", // Added mb-4
+            "relative group/code overflow-hidden",
+            // Forced Dark Mode styling: Always use dark borders and background
+            nested
+                ? "border-0 bg-transparent p-0 m-0 shadow-none !rounded-none"
+                : "rounded-xl !border-[1px] !border-neutral-700 bg-[#161616] shadow-sm mb-4",
             className
         )}>
             {hideCopy ? null : title ? (
-                <div className="flex items-center justify-between px-3 py-2 border-b border-neutral-300 dark:border-neutral-800 bg-white dark:bg-black rounded-t-lg">
+                <div className="flex items-center justify-between px-3 py-2 border-b border-neutral-800 bg-black rounded-t-lg">
                     <div className="flex items-center gap-2">
-                        {/* Green Triangle Icon */}
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-emerald-500 fill-emerald-500 rotate-180"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /></svg>
-                        <span className="text-sm text-foreground font-medium">{title}</span>
+                        <span className="text-sm text-neutral-200 font-medium">{title}</span>
                     </div>
-                    {/* Move copy button here if title exists */}
                     <button
                         onClick={() => copy(code)}
-                        className="flex items-center justify-center w-7 h-7 rounded-sm hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-400 hover:text-foreground transition-all"
+                        className="flex items-center justify-center w-7 h-7 rounded-sm hover:bg-neutral-800 text-neutral-400 hover:text-neutral-200 transition-all"
                         aria-label="Copy code"
                     >
                         {hasCopied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
@@ -147,7 +141,7 @@ export function CodeBlock({ code, language = "bash", className, expandable = fal
                 <div className="absolute right-3 top-3 z-20 opacity-0 group-hover/code:opacity-100 transition-opacity duration-200">
                     <button
                         onClick={() => copy(code)}
-                        className="flex items-center justify-center w-7 h-7 rounded-md bg-white/10 dark:bg-neutral-800/50 backdrop-blur-md border border-black/5 dark:border-white/10 text-neutral-500 hover:text-foreground transition-all active:scale-95"
+                        className="flex items-center justify-center w-7 h-7 rounded-md bg-neutral-800/50 backdrop-blur-md border border-white/10 text-neutral-400 hover:text-neutral-200 transition-all active:scale-95"
                         aria-label="Copy code"
                     >
                         {hasCopied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
@@ -155,12 +149,12 @@ export function CodeBlock({ code, language = "bash", className, expandable = fal
                 </div>
             )}
             <div className={cn(
-                "relative text-[14px] font-mono leading-relaxed overflow-x-auto p-4 scrollbar-hide",
+                "relative text-base font-mono leading-relaxed overflow-x-auto scrollbar-hide", // Increased to text-base (16px)
+                !nested && "p-4",
                 expandable && !isExpanded && "max-h-32 overflow-hidden",
-                // Adjust padding if title exists? actually p-4 is fine.
             )}>
                 <Highlight
-                    theme={resolvedTheme === 'dark' ? vibrantDarkTheme : themes.vsLight}
+                    theme={vibrantDarkTheme} // Always use Dark Theme (Green text)
                     code={code}
                     language={language}
                 >
@@ -168,9 +162,11 @@ export function CodeBlock({ code, language = "bash", className, expandable = fal
                         <pre style={{ ...style, backgroundColor: 'transparent', margin: 0, padding: 0 }}>
                             {tokens.map((line, i) => (
                                 <div key={i} {...getLineProps({ line })} className="table-row">
-                                    <span className="table-cell select-none text-right w-8 pr-4 text-neutral-400/30 text-xs">
-                                        {i + 1}
-                                    </span>
+                                    {!nested && ( // Only show line numbers if not nested (usually implies manual step)
+                                        <span className="table-cell select-none text-right w-8 pr-4 text-neutral-400/30 text-xs">
+                                            {i + 1}
+                                        </span>
+                                    )}
                                     <span className="table-cell">
                                         {line.map((token, key) => (
                                             <span key={key} {...getTokenProps({ token })} />
@@ -223,38 +219,43 @@ export const Dependencies = ({ step, title, children, copyText, id }: Dependenci
 
     const processedChildren = React.Children.map(children, (child) => {
         if (React.isValidElement(child) && child.type === CodeBlock) {
-            return React.cloneElement(child as React.ReactElement<any>, { hideCopy: true })
+            // Pass nested={true} to remove borders/styles from inner block
+            return React.cloneElement(child as React.ReactElement<any>, { hideCopy: true, nested: true })
         }
         return child
     })
 
-    const stepEmoji = step === 1 ? "🧰" : step === 2 ? "📦" : step === 3 ? "" : "⭐"
-    const stepIcon = step === 3 ? <Atom className="w-4 h-4 text-sky-400" /> : null
-    const titledWithEmoji = title ? `${stepEmoji}${stepEmoji ? " " : ""}${title}` : undefined
+    // Subtle Lucide icons instead of emojis
+    const StepIcon = React.useMemo(() => {
+        if (step === 1) return <Terminal className="w-3.5 h-3.5 text-fuchsia-500" /> // Install
+        if (step === 2) return <Atom className="w-3.5 h-3.5 text-sky-500" /> // Utils
+        if (step === 3) return <Copy className="w-3.5 h-3.5 text-amber-500" /> // Copy Code
+        return <Terminal className="w-3.5 h-3.5 text-neutral-500" />
+    }, [step])
 
     return (
-        <div id={id} className="relative w-full !border-[1px] !border-neutral-200 dark:!border-neutral-700 rounded-xl overflow-hidden bg-neutral-100 dark:bg-[#161616] border-b border-neutral-200 dark:border-neutral-800 mb-8 scroll-mt-24">
-            <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-300 dark:border-neutral-800 bg-white dark:bg-black">
+        <div id={id} className="relative w-full !border-[1px] !border-neutral-200 dark:!border-neutral-700 rounded-xl overflow-hidden bg-neutral-100 dark:bg-[#161616] mb-6 scroll-mt-24">
+            <div className="flex items-center justify-between px-3 py-2.5 border-b border-neutral-300 dark:border-neutral-800 bg-white dark:bg-black">
                 <div className="flex items-center gap-3">
-                    <div className="flex items-center justify-center w-6 h-6 rounded-md bg-neutral-100 dark:bg-neutral-800 ring-1 ring-neutral-200 dark:ring-neutral-700 font-mono text-xs font-medium text-foreground">
+                    <div className="flex items-center justify-center w-5 h-5 rounded-md bg-neutral-100 dark:bg-neutral-800 ring-1 ring-neutral-200 dark:ring-neutral-700 font-mono text-[11px] font-medium text-neutral-500 dark:text-neutral-400">
                         {step}
                     </div>
-                    {titledWithEmoji && (
-                        <h2 className="font-medium text-sm text-foreground leading-none flex items-center gap-2">
-                            {stepIcon}
-                            <span>{titledWithEmoji}</span>
+                    {title && (
+                        <h2 className="font-medium text-sm text-foreground flex items-center gap-2">
+                            {StepIcon}
+                            <span>{title}</span>
                         </h2>
                     )}
                 </div>
                 <button
                     onClick={() => copy(textToCopy)}
-                    className="flex items-center justify-center w-8 h-8 rounded-md bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-500 hover:text-foreground transition-all active:scale-95"
+                    className="flex items-center justify-center w-7 h-7 rounded-md transition-colors text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-800"
                     aria-label="Copy code"
                 >
-                    {hasCopied ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
+                    {hasCopied ? <Check className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
                 </button>
             </div>
-            <div className="p-4 bg-neutral-100 dark:bg-[#161616] [&_.group\/code]:border-0 [&_.group\/code]:shadow-none [&_.group\/code]:bg-transparent [&_.group\/code]:mb-0">
+            <div className="p-4 bg-neutral-100 dark:bg-[#161616] [&_.group\/code]:border-0 [&_.group\/code]:shadow-none [&_.group\/code]:bg-transparent [&_.group\/code]:mb-0 [&_.group\/code]:rounded-none">
                 <div className="text-sm text-muted-foreground">{processedChildren}</div>
             </div>
         </div>
