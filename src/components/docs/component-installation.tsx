@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { cn } from "@/lib/utils"
-import { Check, Copy } from "lucide-react"
+import { Check, Copy, Terminal } from "lucide-react"
 import { useTheme } from "next-themes"
 import { Highlight, themes, PrismTheme } from "prism-react-renderer"
 import { motion } from "framer-motion"
@@ -127,7 +127,7 @@ export function CodeBlock({ code, language = "bash", className, expandable = fal
             className
         )}>
             {title ? (
-                <div className="flex items-center justify-between px-3 py-2 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#0c0c0c] rounded-t-lg">
+                <div className="flex items-center justify-between px-3 py-2 border-b border-neutral-300 dark:border-neutral-800 bg-white dark:bg-black rounded-t-lg">
                     <div className="flex items-center gap-2">
                         {/* Green Triangle Icon */}
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-emerald-500 fill-emerald-500 rotate-180"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /></svg>
@@ -213,24 +213,19 @@ interface DependenciesProps {
 
 export const Dependencies = ({ step, title, children }: DependenciesProps) => {
     return (
-        <div className="flex flex-col gap-5 relative">
-            <div className="absolute flex h-9 w-9 select-none items-center justify-center rounded-full border-[4px] border-background bg-neutral-100 dark:bg-neutral-800 z-10">
-                <span className="font-bold text-sm text-foreground">{step}</span>
-            </div>
-            <div
-                className={cn(
-                    "ml-[1.125rem]",
-                    children && "border-l border-neutral-200 dark:border-neutral-800"
-                )}
-            >
-                <div className="flex flex-col gap-1 pb-12 pl-8 pt-1">
-                    <h2 className="font-semibold text-primary/90 leading-none mb-2">{title}</h2>
-                    <div className="text-sm text-foreground/80">{children}</div>
+        <div className="relative w-full !border-[1px] !border-neutral-200 dark:!border-neutral-700 rounded-xl overflow-hidden bg-neutral-100 dark:bg-[#161616] border-b border-neutral-200 dark:border-neutral-800 mb-8">
+            <div className="flex items-center gap-3 px-4 py-3 border-b border-neutral-300 dark:border-neutral-800 bg-white dark:bg-black">
+                <div className="flex items-center justify-center w-6 h-6 rounded-md bg-neutral-100 dark:bg-neutral-800 ring-1 ring-neutral-200 dark:ring-neutral-700 font-mono text-xs font-medium text-foreground">
+                    {step}
                 </div>
+                {title && <h2 className="font-medium text-sm text-foreground leading-none">{title}</h2>}
+            </div>
+            <div className="p-4 bg-neutral-100 dark:bg-[#161616] [&_.group\/code]:border-0 [&_.group\/code]:shadow-none [&_.group\/code]:bg-transparent [&_.group\/code]:mb-0">
+                <div className="text-sm text-muted-foreground">{children}</div>
             </div>
         </div>
-    );
-};
+    )
+}
 
 interface ComponentInstallationProps {
     cli: string
@@ -261,7 +256,7 @@ export function ComponentInstallation({ cli, manual, className }: ComponentInsta
         <div className={cn("group relative my-8", className)}>
             <div className="mb-10">
                 <h3 className="font-semibold text-2xl md:text-3xl mb-4 tracking-tight text-foreground">Install using CLI</h3>
-                <Tabs value={installType} onValueChange={setInstallType} className="relative w-full !border-[1px] !border-neutral-200 dark:!border-neutral-700 rounded-xl overflow-hidden bg-neutral-100 dark:bg-[#0e0e0e] border-b border-neutral-200 dark:border-neutral-800">
+                <Tabs value={installType} onValueChange={setInstallType} className="relative w-full !border-[1px] !border-neutral-200 dark:!border-neutral-700 rounded-xl overflow-hidden bg-neutral-100 dark:bg-[#161616] border-b border-neutral-200 dark:border-neutral-800">
                     <div className="flex items-center justify-between px-3 py-2 border-b border-neutral-300 dark:border-neutral-800 bg-white dark:bg-black">
                         <TabsList className="justify-start gap-6 bg-transparent p-0">
                             {["npm", "pnpm", "bun", "yarn"].map((tab) => {
@@ -303,7 +298,7 @@ export function ComponentInstallation({ cli, manual, className }: ComponentInsta
                             {hasCopied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <div className="rounded-full border border-neutral-600 p-0.5"><Check className="w-2.5 h-2.5" /></div>}
                         </button>
                     </div>
-                    <div className="bg-neutral-100 dark:bg-[#0e0e0e] p-0 [&_.group\/code]:border-0 [&_.group\/code]:shadow-none [&_.group\/code]:bg-transparent [&_.group\/code]:mb-0">
+                    <div className="bg-neutral-100 dark:bg-[#161616] p-0 [&_.group\/code]:border-0 [&_.group\/code]:shadow-none [&_.group\/code]:bg-transparent [&_.group\/code]:mb-0">
                         <TabsContent value="npm" className="!mt-0">
                             <CodeBlock code={cli} className="border-0 shadow-none bg-transparent dark:bg-transparent rounded-none" />
                         </TabsContent>
@@ -322,9 +317,7 @@ export function ComponentInstallation({ cli, manual, className }: ComponentInsta
             {manual && (
                 <div>
                     <h3 className="font-semibold text-2xl md:text-3xl mb-4 tracking-tight text-foreground">Install Manually</h3>
-                    <div className="relative w-full !border-[1px] !border-neutral-200 dark:!border-neutral-700 rounded-xl overflow-hidden bg-neutral-100 dark:bg-[#0A0A0A] p-4 [&_.group\/code]:border-0 [&_.group\/code]:shadow-none [&_.group\/code]:bg-transparent [&_.group\/code]:mb-0">
-                        {manual}
-                    </div>
+                    {manual}
                 </div>
             )}
         </div>

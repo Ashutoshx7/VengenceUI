@@ -22,34 +22,34 @@ export function PropsTable({ data, title, className }: PropsTableProps) {
             {title && (
                 <h4 className="font-heading text-lg font-bold tracking-tight mt-6 mb-2">{title}</h4>
             )}
-            <div className="relative w-full overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-800">
+            <div className="relative w-full overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-[#121212]">
                 <table className="w-full text-left text-sm">
-                    <thead className="bg-neutral-100/50 dark:bg-neutral-900/50">
+                    <thead className="bg-white dark:bg-black">
                         <tr className="border-b border-neutral-200 dark:border-neutral-800">
-                            <th className="h-12 px-4 text-left align-middle font-semibold text-muted-foreground whitespace-nowrap w-[150px]">Prop</th>
-                            <th className="h-12 px-4 text-left align-middle font-semibold text-muted-foreground whitespace-nowrap w-[150px]">Type</th>
-                            <th className="h-12 px-4 text-left align-middle font-semibold text-muted-foreground whitespace-nowrap w-[150px]">Default</th>
-                            <th className="h-12 px-4 text-left align-middle font-semibold text-muted-foreground whitespace-nowrap">Description</th>
+                            <th className="h-10 px-4 text-left align-middle font-medium text-foreground whitespace-nowrap w-[150px] border-r border-neutral-200 dark:border-neutral-800 last:border-0">Prop Name</th>
+                            <th className="h-10 px-4 text-left align-middle font-medium text-foreground whitespace-nowrap w-[150px] border-r border-neutral-200 dark:border-neutral-800 last:border-0">Type</th>
+                            <th className="h-10 px-4 text-left align-middle font-medium text-foreground whitespace-nowrap w-[150px] border-r border-neutral-200 dark:border-neutral-800 last:border-0">Default</th>
+                            <th className="h-10 px-4 text-left align-middle font-medium text-foreground whitespace-nowrap">Description</th>
                         </tr>
                     </thead>
-                    <tbody className="divide-y divide-neutral-200 dark:divide-neutral-800 bg-white dark:bg-transparent">
+                    <tbody className="divide-y divide-neutral-200 dark:divide-neutral-800">
                         {data.map((item, index) => (
-                            <tr key={index} className="transition-colors hover:bg-neutral-50/50 dark:hover:bg-neutral-900/40">
-                                <td className="p-4 align-middle font-mono text-sm font-medium whitespace-nowrap">
+                            <tr key={index} className="transition-colors hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 odd:bg-white dark:odd:bg-black even:bg-neutral-50 dark:even:bg-[#121212]">
+                                <td className="p-4 align-middle font-mono text-xs font-semibold whitespace-nowrap text-primary border-r border-neutral-200 dark:border-neutral-800 last:border-0">
                                     {item.prop}
                                 </td>
-                                <td className="p-4 align-middle">
-                                    <code className="relative rounded bg-neutral-100 dark:bg-neutral-800 px-[0.5rem] py-[0.2rem] font-mono text-sm text-neutral-800 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700 whitespace-nowrap">
+                                <td className="p-4 align-middle border-r border-neutral-200 dark:border-neutral-800 last:border-0">
+                                    <code className="relative rounded-md bg-neutral-100 dark:bg-neutral-900 px-[0.5rem] py-[0.2rem] font-mono text-xs text-muted-foreground border border-neutral-200 dark:border-neutral-800 whitespace-nowrap">
                                         {item.type}
                                     </code>
                                 </td>
-                                <td className="p-4 align-middle">
+                                <td className="p-4 align-middle border-r border-neutral-200 dark:border-neutral-800 last:border-0">
                                     {item.defaultValue ? (
-                                        <code className="relative rounded bg-neutral-100 dark:bg-neutral-800 px-[0.5rem] py-[0.2rem] font-mono text-sm text-neutral-800 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700 whitespace-nowrap">
+                                        <code className="relative rounded-md bg-neutral-100 dark:bg-neutral-900 px-[0.5rem] py-[0.2rem] font-mono text-xs text-muted-foreground border border-neutral-200 dark:border-neutral-800 whitespace-nowrap">
                                             {item.defaultValue}
                                         </code>
                                     ) : (
-                                        <span className="text-muted-foreground text-sm">-</span>
+                                        <span className="text-muted-foreground text-xs">-</span>
                                     )}
                                 </td>
                                 <td className="p-4 align-middle text-muted-foreground text-sm leading-relaxed">
