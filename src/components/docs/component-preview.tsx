@@ -83,7 +83,7 @@ export function ComponentPreview({
             </div>
 
             <Tabs value={activeTab} onValueChange={setActiveTab} className="relative w-full !border-[1px] !border-neutral-200 dark:!border-neutral-700 rounded-xl overflow-hidden bg-neutral-100 dark:bg-black border-b border-neutral-200 dark:border-neutral-900">
-                <div className="flex items-center justify-between px-3 py-2 border-b border-neutral-300 dark:border-neutral-900 bg-white dark:bg-black">
+                <div className="flex items-center justify-between px-3 py-2.5 border-b border-neutral-300 dark:border-neutral-800 bg-white dark:bg-black">
                     <TabsList className="justify-start gap-6 bg-transparent p-0">
                         {['preview', 'code'].map((tab) => {
                             const isActive = activeTab === tab;
@@ -92,16 +92,18 @@ export function ComponentPreview({
                                     key={tab}
                                     value={tab}
                                     className={cn(
-                                        "relative h-9 px-8 min-w-28 justify-center rounded-full border border-transparent font-medium text-sm transition-colors outline-none cursor-pointer select-none",
+                                        "relative flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-none transition-colors select-none z-10",
+                                        "bg-transparent hover:bg-transparent data-[state=active]:bg-transparent data-[state=active]:shadow-none",
                                         isActive
-                                            ? "text-neutral-900 dark:text-neutral-200"
-                                            : "text-neutral-500 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-300",
-                                        "bg-transparent data-[state=active]:bg-transparent data-[state=active]:shadow-none hover:bg-transparent dark:hover:bg-transparent"
+                                            ? "text-neutral-900 dark:text-white"
+                                            : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200"
                                     )}
                                 >
                                     {isActive && (
-                                        <div
-                                            className="absolute inset-0 bg-neutral-200 dark:bg-neutral-900 rounded-full transition-all"
+                                        <motion.div
+                                            layoutId="active-tab-preview"
+                                            className="absolute bottom-[-11px] left-0 right-0 h-[2px] bg-neutral-900 dark:bg-white"
+                                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
                                         />
                                     )}
                                     <span className="relative z-10 flex items-center gap-2">
@@ -137,7 +139,7 @@ export function ComponentPreview({
                         </div>
                     </TabsContent>
 
-                    <TabsContent value="code" className="m-0 bg-neutral-100 dark:bg-black">
+                    <TabsContent value="code" className="m-0 bg-neutral-100 dark:bg-[#161616]">
                         <div className="relative group/code">
                             <div className="relative text-base font-mono overflow-x-auto max-h-[400px]">
                                 <Highlight
