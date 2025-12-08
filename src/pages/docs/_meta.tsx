@@ -14,7 +14,9 @@ export default {
     },
     "components-overview": "Overview",
     "animated-button": "Animated Button",
-    "creepy-button": "Creepy Button"
+    "creepy-button": "Creepy Button",
+    "masked-avatars": "Masked Avatars",
+    "glass-dock": "Dock"
 }
 
 

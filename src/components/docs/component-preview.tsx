@@ -128,7 +128,7 @@ export function ComponentPreview({
                 <motion.div
                     className="relative bg-neutral-100 dark:bg-black overflow-hidden"
                 >
-                    <TabsContent value="preview" className="m-0 min-h-[350px] flex items-center justify-center bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] dark:bg-[radial-gradient(#404040_1px,transparent_1px)] bg-white dark:bg-neutral-950">
+                    <TabsContent value="preview" className="m-0 min-h-[350px] flex items-center justify-center bg-white dark:bg-black">
                         {/* Optional: Add a subtle overlay so the grid isn't too harsh */}
                         <div className="absolute inset-0 bg-white/30 dark:bg-neutral-950/30 pointer-events-none" />
 
