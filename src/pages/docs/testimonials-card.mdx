@@ -1,7 +1,7 @@
 import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
 import { CLICommand } from '@/components/docs/cli-command'
 import { PropsTable } from '@/components/docs/props-table'
-import { TestimonialsCardDemo } from '@/components/docs/testimonials-card'
+import { TestimonialsCardDemo, TestimonialsAutoPlayDemo, TestimonialsNoNavDemo, TestimonialsWidthDemo } from '@/components/docs/testimonials-card'
 import { ComponentPreview } from '@/components/docs/component-preview'
 
 # Testimonials Card
@@ -262,34 +262,34 @@ export function Example() {
 
 ### With Auto-Play
 
-<CodeBlock 
-    language="tsx" 
-    code={`<TestimonialsCard 
+<ComponentPreview
+  component={<TestimonialsAutoPlayDemo />}
+  code={`<TestimonialsCard 
   items={testimonials} 
   autoPlay={true} 
   autoPlayInterval={4000} 
-/>`} 
+/>`}
 />
 
 ### Without Navigation
 
-<CodeBlock 
-    language="tsx" 
-    code={`<TestimonialsCard 
+<ComponentPreview
+  component={<TestimonialsNoNavDemo />}
+  code={`<TestimonialsCard 
   items={testimonials} 
   showNavigation={false}
   autoPlay={true}
-/>`} 
+/>`}
 />
 
 ### Custom Width
 
-<CodeBlock 
-    language="tsx" 
-    code={`<TestimonialsCard 
+<ComponentPreview
+  component={<TestimonialsWidthDemo />}
+  code={`<TestimonialsCard 
   items={testimonials} 
   width={500}
-/>`} 
+/>`}
 />
 
 ## Props

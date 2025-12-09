@@ -36,3 +36,27 @@ export function TestimonialsCardDemo() {
         </div>
     );
 }
+
+export function TestimonialsAutoPlayDemo() {
+    return (
+        <div className="relative flex min-h-[500px] w-full items-center justify-center overflow-hidden rounded-lg border bg-background">
+            <TestimonialsCard items={demoItems} autoPlay={true} autoPlayInterval={4000} />
+        </div>
+    );
+}
+
+export function TestimonialsNoNavDemo() {
+    return (
+        <div className="relative flex min-h-[500px] w-full items-center justify-center overflow-hidden rounded-lg border bg-background">
+            <TestimonialsCard items={demoItems} showNavigation={false} autoPlay={true} />
+        </div>
+    );
+}
+
+export function TestimonialsWidthDemo() {
+    return (
+        <div className="relative flex min-h-[500px] w-full items-center justify-center overflow-hidden rounded-lg border bg-background">
+            <TestimonialsCard items={demoItems} width={500} />
+        </div>
+    );
+}

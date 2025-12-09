@@ -1,7 +1,7 @@
 import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
 import { CLICommand } from '@/components/docs/cli-command'
 import { PropsTable } from '@/components/docs/props-table'
-import { LiquidTextDemo } from '@/components/docs/liquid-text'
+import { LiquidTextDemo, LiquidTextColorDemo, LiquidTextThemeDemo, LiquidTextFontDemo } from '@/components/docs/liquid-text'
 import { ComponentPreview } from '@/components/docs/component-preview'
 
 # 3D Displacement Text
@@ -286,34 +286,34 @@ export function HeroSection() {
 
 ### Custom Colors
 
-<CodeBlock 
-    language="tsx" 
-    code={`<LiquidText 
+<ComponentPreview
+  component={<LiquidTextColorDemo />}
+  code={`<LiquidText 
   text="Colorful" 
   color="#ff6b6b" 
-/>`} 
+/>`}
 />
 
 ### Theme Aware
 
-<CodeBlock 
-    language="tsx" 
-    code={`<LiquidText 
+<ComponentPreview
+  component={<LiquidTextThemeDemo />}
+  code={`<LiquidText 
   text="Theme" 
   lightColor="#1a1a1a"
   darkColor="#f5f5f5"
-/>`} 
+/>`}
 />
 
 ### Custom Font
 
-<CodeBlock 
-    language="tsx" 
-    code={`<LiquidText 
+<ComponentPreview
+  component={<LiquidTextFontDemo />}
+  code={`<LiquidText 
   text="Fancy" 
   font="Georgia, serif"
-  fontSize={250}
-/>`} 
+  fontSize={200}
+/>`}
 />
 
 ## Props
