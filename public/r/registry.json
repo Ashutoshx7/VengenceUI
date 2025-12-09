@@ -49,17 +49,6 @@
     ]
   },
   {
-    "name": "testimonials-card",
-    "dependencies": [
-      "framer-motion",
-      "lucide-react"
-    ],
-    "type": "registry:ui",
-    "files": [
-      "public/r/testimonials-card.json"
-    ]
-  },
-  {
     "name": "breadcrumb",
     "dependencies": [
       "lucide-react",
@@ -222,6 +211,17 @@
     ]
   },
   {
+    "name": "expandable-bento-grid",
+    "dependencies": [
+      "framer-motion",
+      "lucide-react"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/expandable-bento-grid.json"
+    ]
+  },
+  {
     "name": "field",
     "dependencies": [],
     "type": "registry:ui",
@@ -258,6 +258,14 @@
     "type": "registry:ui",
     "files": [
       "public/r/glass-dock.json"
+    ]
+  },
+  {
+    "name": "gradient-tiles",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/gradient-tiles.json"
     ]
   },
   {
@@ -344,6 +352,14 @@
     "type": "registry:ui",
     "files": [
       "public/r/label.json"
+    ]
+  },
+  {
+    "name": "liquid-text",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/liquid-text.json"
     ]
   },
   {
@@ -509,6 +525,14 @@
     ]
   },
   {
+    "name": "smooth-scroll",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/smooth-scroll.json"
+    ]
+  },
+  {
     "name": "social-flip-button",
     "dependencies": [
       "framer-motion"
@@ -551,6 +575,16 @@
     ]
   },
   {
+    "name": "staggered-grid",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/staggered-grid.json"
+    ]
+  },
+  {
     "name": "switch",
     "dependencies": [
       "@radix-ui/react-switch"
@@ -576,6 +610,17 @@
     "type": "registry:ui",
     "files": [
       "public/r/tabs.json"
+    ]
+  },
+  {
+    "name": "testimonials-card",
+    "dependencies": [
+      "framer-motion",
+      "lucide-react"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/testimonials-card.json"
     ]
   },
   {

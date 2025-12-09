@@ -25,8 +25,7 @@ export default {
     "perspective-grid": "Perspective Grid",
     "social-flip-button": "Social Flip Button",
     "interactive-book": "Interactive Book",
-    "spotlight-navbar": "Spotlight Navbar"
+    "spotlight-navbar": "Spotlight Navbar",
+    "staggered-grid": "Staggered Grid",
+    "expandable-bento-grid": "Expandable Bento Grid"
 }
-
-
-

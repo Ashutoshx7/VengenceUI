@@ -1,0 +1,407 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { StaggeredGridDemo } from '@/components/docs/staggered-grid'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import { Callout } from 'nextra/components'
+
+# Staggered Grid
+
+A stunning scroll-animated grid layout with staggered column animations and expandable bento cards. Perfect for showcasing products, services, or portfolio items with smooth GSAP-powered animations.
+
+<Callout type="info">
+**Full-Page Component**: This component is designed to be used in a full-page scrollable context. The scroll animations require actual scrolling to trigger.
+</Callout>
+
+<div className="flex gap-3 my-6">
+  <a 
+    href="/demo/staggered-grid" 
+    target="_blank"
+    className="inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium text-neutral-600 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-xl hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white transition-all duration-200 no-underline"
+  >
+    View Live Demo
+  </a>
+</div>
+
+
+<ComponentPreview
+  component={<StaggeredGridDemo />}
+  code={`"use client";
+
+import { StaggeredGrid, BentoItem } from "@/components/ui/staggered-grid";
+import { SmoothScroll } from "@/components/ui/smooth-scroll";
+import { Github, Slack, Twitter } from "lucide-react";
+
+export default function Page() {
+  const images = [
+    "/img/1.jpg",
+    "/img/2.jpg",
+    "/img/3.jpg",
+    "/img/4.jpg",
+    "/img/5.jpg",
+  ];
+
+  const bentoItems: BentoItem[] = [
+    {
+      id: 1,
+      title: "Repository",
+      subtitle: "Version Control",
+      description: "Secure, scalable code management.",
+      icon: <Github className="w-4 h-4" />,
+      image: "/img/1.jpg"
+    },
+    {
+      id: 2,
+      title: "Connect",
+      subtitle: "Team Communication",
+      description: "Real-time messaging and collaboration.",
+      icon: <Slack className="w-4 h-4" />,
+      image: "/img/5.jpg"
+    },
+    {
+      id: 3,
+      title: "Reach",
+      subtitle: "Audience Engagement",
+      description: "Connect with your community globally.",
+      icon: <Twitter className="w-4 h-4" />,
+      image: "/img/3.jpg"
+    },
+  ];
+
+  return (
+    <SmoothScroll>
+      <main className="min-h-screen bg-black">
+        <StaggeredGrid
+          images={images}
+          bentoItems={bentoItems}
+          centerText="HALCYON"
+        />
+      </main>
+    </SmoothScroll>
+  );
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="staggered-grid" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock 
+        code="npm install gsap imagesloaded lenis clsx tailwind-merge" 
+    />
+</Dependencies>
+
+<Dependencies step={2} title="Add TypeScript types">
+    <CodeBlock 
+        code="npm install -D @types/imagesloaded" 
+    />
+</Dependencies>
+
+<Dependencies step={3} title="Add util file">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">
+        <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md">lib/utils.ts</code>
+    </p>
+    <CodeBlock 
+        language="tsx"
+        code={`import { ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}`}
+    />
+</Dependencies>
+
+<Dependencies step={4} title="Copy the SmoothScroll component">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">This component uses Lenis for smooth scrolling which is essential for the scroll animations. Copy it to <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md mx-1">components/ui/smooth-scroll.tsx</code></p>
+    <CodeBlock
+        language="tsx"
+        title="components/ui/smooth-scroll.tsx"
+        code={`'use client'
+import { ReactNode, useEffect } from 'react'
+import Lenis from 'lenis'
+
+export function SmoothScroll({ children }: { children: ReactNode }) {
+    useEffect(() => {
+        const lenis = new Lenis()
+        function raf(time: number) {
+            lenis.raf(time)
+            requestAnimationFrame(raf)
+        }
+        requestAnimationFrame(raf)
+        document.body.classList.remove('loading');
+        return () => lenis.destroy()
+    }, [])
+    return <>{children}</>
+}
+
+export default SmoothScroll`}
+    />
+</Dependencies>
+
+<Dependencies step={5} title="Copy the StaggeredGrid component">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy the code below and paste it into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md mx-1">components/ui/staggered-grid.tsx</code></p>
+    <CodeBlock
+        language="tsx"
+        title="components/ui/staggered-grid.tsx"
+        expandable={true}
+        code={`'use client'
+import React, { useEffect, useRef, useState } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import imagesLoaded from 'imagesloaded'
+import { cn } from '@/lib/utils'
+import { Github, Slack, Twitter } from 'lucide-react'
+
+gsap.registerPlugin(ScrollTrigger)
+
+export interface BentoItem {
+    id: number | string
+    title: string
+    subtitle: string
+    description: string
+    icon: React.ReactNode
+    content?: React.ReactNode
+    image?: string
+}
+
+export interface StaggeredGridProps {
+    images: string[]
+    bentoItems: BentoItem[]
+    centerText?: string
+    credits?: {
+        madeBy: { text: string; href: string }
+        moreDemos: { text: string; href: string }
+    }
+    className?: string
+    showFooter?: boolean
+}
+
+export function StaggeredGrid({
+    images,
+    bentoItems,
+    centerText = "Halcyon",
+    credits = {
+        madeBy: { text: "@codrops", href: "https://x.com/codrops" },
+        moreDemos: { text: "More demos", href: "https://tympanus.net/codrops/demos" }
+    },
+    className,
+    showFooter = true
+}: StaggeredGridProps) {
+    const [isLoaded, setIsLoaded] = useState(false)
+    const gridFullRef = useRef<HTMLDivElement>(null)
+    const textRef = useRef<HTMLDivElement>(null)
+    const [activeBento, setActiveBento] = useState<number>(0);
+
+    // ... Full implementation available in the component file
+    // See the source code for complete GSAP ScrollTrigger animations
+}
+
+export default StaggeredGrid`}
+    />
+</Dependencies>
+
+<Dependencies step={6} title="Add required CSS">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Add these styles to your <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md mx-1">app/globals.css</code></p>
+    <CodeBlock
+        language="css"
+        code={`:root {
+  --color-text: #fff;
+  --color-bg: #000;
+}
+
+body {
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.font-alt {
+  font-family: system-ui, sans-serif;
+  font-weight: 700;
+}
+
+/* Loader animation */
+.loading::before,
+.loading::after {
+  content: '';
+  position: fixed;
+  z-index: 10000;
+}
+
+.loading::before {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-bg);
+}
+
+.loading::after {
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  margin: -30px 0 0 -30px;
+  border-radius: 50%;
+  opacity: 0.4;
+  background: #fff;
+  animation: loaderAnim 0.7s linear infinite alternate;
+}
+
+@keyframes loaderAnim {
+  to {
+    opacity: 1;
+    transform: scale3d(0.5, 0.5, 1);
+  }
+}`}
+    />
+</Dependencies>
+
+## Usage
+
+<CodeBlock 
+    language="tsx" 
+    code={`import { StaggeredGrid, BentoItem } from "@/components/ui/staggered-grid"
+import { SmoothScroll } from "@/components/ui/smooth-scroll"
+import { Github, Slack, Twitter } from "lucide-react"
+
+export default function Page() {
+  const images = Array.from({ length: 20 }, (_, i) => \`/img/\${i + 1}.jpg\`);
+
+  const bentoItems: BentoItem[] = [
+    {
+      id: 1,
+      title: "Repository",
+      subtitle: "Version Control",
+      description: "Secure, scalable code management.",
+      icon: <Github className="w-4 h-4" />,
+      image: "/img/1.jpg"
+    },
+    // ... more items
+  ];
+
+  return (
+    <SmoothScroll>
+      <main className="min-h-screen bg-black">
+        <StaggeredGrid
+          images={images}
+          bentoItems={bentoItems}
+          centerText="HALCYON"
+        />
+      </main>
+    </SmoothScroll>
+  );
+}`} 
+/>
+
+## Props
+
+### StaggeredGridProps
+
+<PropsTable
+  data={[
+    {
+      prop: "images",
+      type: "string[]",
+      defaultValue: "-",
+      description: "Array of image URLs to display in the grid cells."
+    },
+    {
+      prop: "bentoItems",
+      type: "BentoItem[]",
+      defaultValue: "-",
+      description: "Array of bento items for the expandable cards section."
+    },
+    {
+      prop: "centerText",
+      type: "string",
+      defaultValue: "\"Halcyon\"",
+      description: "Large centered text displayed above the grid with character animation."
+    },
+    {
+      prop: "credits",
+      type: "object",
+      defaultValue: "-",
+      description: "Footer credits configuration with 'madeBy' and 'moreDemos' links."
+    },
+    {
+      prop: "className",
+      type: "string",
+      defaultValue: "-",
+      description: "Additional CSS classes for the container."
+    },
+    {
+      prop: "showFooter",
+      type: "boolean",
+      defaultValue: "true",
+      description: "Whether to show the footer credits section."
+    },
+  ]}
+/>
+
+### BentoItem
+
+<PropsTable
+  data={[
+    {
+      prop: "id",
+      type: "number | string",
+      defaultValue: "-",
+      description: "Unique identifier for the bento item."
+    },
+    {
+      prop: "title",
+      type: "string",
+      defaultValue: "-",
+      description: "Title displayed in the card footer."
+    },
+    {
+      prop: "subtitle",
+      type: "string",
+      defaultValue: "-",
+      description: "Subtitle for the bento item."
+    },
+    {
+      prop: "description",
+      type: "string",
+      defaultValue: "-",
+      description: "Description text for the bento item."
+    },
+    {
+      prop: "icon",
+      type: "React.ReactNode",
+      defaultValue: "-",
+      description: "Icon component displayed in the card."
+    },
+    {
+      prop: "image",
+      type: "string",
+      defaultValue: "-",
+      description: "Background image URL for the expanded card."
+    },
+  ]}
+/>
+
+## Features
+
+**Staggered Column Animation**: Grid items animate in with staggered delays based on their column position, creating a wave-like effect from the center outward as you scroll.
+
+**Expandable Bento Cards**: Interactive cards that expand on hover to reveal full-width images with smooth transitions and text protection gradients.
+
+**Scroll-Triggered Animations**: All animations are tied to scroll position using GSAP ScrollTrigger for a smooth, performant experience.
+
+**Text Character Animation**: The centered text animates character-by-character as you scroll, with letters appearing from the center outward.
+
+**Grid Icons with Hover Reveal**: Each grid cell shows icons (Github, Slack, Twitter) with text reveal on hover.
+
+**Dark Mode Optimized**: Designed with a dark theme in mind with zinc color palette.
+
+**Smooth Scrolling**: Uses Lenis for buttery-smooth scroll experience.
+
+**GPU Acceleration**: Uses `will-change` and `force3D` for hardware-accelerated animations.
+
+**Responsive Grid**: 7-column, 5-row grid layout that maintains aspect ratio.

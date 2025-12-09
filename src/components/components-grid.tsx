@@ -15,7 +15,8 @@ import {
     Menu,
     Waves,
     MousePointerClick,
-    Loader2
+    Loader2,
+    Layers
 } from 'lucide-react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
@@ -67,6 +68,7 @@ const SocialFlipButton = dynamic(() => import('@/components/ui/social-flip-butto
 const CreepyButton = dynamic(() => import('@/components/ui/creepy-button'), { ssr: false })
 const FlipText = dynamic(() => import('@/components/ui/flip-text').then(mod => mod.FlipText), { ssr: false })
 const MaskedAvatars = dynamic(() => import('@/components/ui/masked-avatars').then(mod => mod.MaskedAvatars), { ssr: false })
+const StaggeredGridDemo = dynamic(() => import('@/components/docs/staggered-grid').then(mod => mod.StaggeredGridDemo), { ssr: false, loading: () => <LoadingPlaceholder /> })
 
 
 const components = [
@@ -211,6 +213,20 @@ const components = [
         href: "/docs/masked-avatars",
         icon: Users,
         component: <div className="scale-[0.6]"><MaskedAvatars /></div>
+    },
+    {
+        title: "Staggered Grid",
+        description: "Scroll-animated grid",
+        category: "Layouts",
+        href: "/docs/staggered-grid",
+        icon: Layers,
+        component: (
+            <div className="absolute inset-0 bg-zinc-950 overflow-hidden flex items-center justify-center">
+                <div className="scale-[0.3] origin-center transform">
+                    <StaggeredGridDemo />
+                </div>
+            </div>
+        )
     },
 ]
 

@@ -1,0 +1,102 @@
+import { ExpandableBentoGridDemo } from '@/components/docs/expandable-bento-grid'
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import { demoCode, hookCode, componentCode } from '@/components/docs/expandable-bento-grid-snippets'
+
+# Expandable Bento Grid
+
+A responsive bento grid layout with expandable cards using Framer Motion layout animations.
+
+<ComponentPreview
+  component={<ExpandableBentoGridDemo />}
+  code={demoCode}
+/>
+
+## Installation
+
+<div className="steps-container">
+
+### 1. Install Dependencies
+
+<Dependencies dependencies={["framer-motion", "lucide-react"]} />
+
+### 2. Run the CLI command
+
+<CLICommand command="npx vengeance-ui@latest add expandable-bento-grid" />
+
+### 3. Manual Installation
+
+<div className="steps">
+
+<div className="step">
+  <div className="step-content">
+    <div className="step-title">Add the hook</div>
+    <div className="step-description">
+      Create a file at `src/hooks/use-outside-click.ts` and add the following code:
+    </div>
+  </div>
+</div>
+
+<CodeBlock language="typescript" code={hookCode} />
+
+<div className="step">
+  <div className="step-content">
+    <div className="step-title">Add the component</div>
+    <div className="step-description">
+      Create a file at `src/components/ui/expandable-bento-grid.tsx` and copy the source code:
+    </div>
+  </div>
+</div>
+
+<CodeBlock language="tsx" code={componentCode} />
+
+</div>
+
+</div>
+
+## Usage
+
+```tsx
+import ExpandableBentoGrid from "@/components/ui/expandable-bento-grid"
+import { Github, Slack } from 'lucide-react'
+
+// ... items definition
+
+export default function MyPage() {
+  return (
+    <div className="p-10">
+      <ExpandableBentoGrid items={items} />
+    </div>
+  )
+}
+```
+
+## Props
+
+### BentoGridProps
+
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `items` | `BentoItem[]` | Array of items to display in the grid. |
+
+### BentoItem
+
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `id` | `string \| number` | Unique identifier for the item. |
+| `title` | `string` | Title of the card. |
+| `subtitle` | `string` | Subtitle text. |
+| `description` | `string` | Short description text. |
+| `content` | `React.ReactNode` | Content to display when expanded. |
+| `icon` | `React.ReactNode` | Icon to display. |
+| `className` | `string` | Optional CSS class. |
+
+## Features
+
+- **Smooth Expansion**: Cards expand smoothly using Framer Motion layout transitions.
+- **Shared Layout**: Elements transition seamlessly between the grid and the expanded view.
+- **Backdrop Blur**: Adds a backdrop when a card is active.
+- **Accessibility**: Handles Escape key and outside clicks to close the expanded view.
+- **Responsive**: Adapts to different screen sizes.
