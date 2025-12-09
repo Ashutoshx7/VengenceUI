@@ -14,6 +14,9 @@ import { LiquidText } from '@/components/ui/liquid-text'
 import { PerspectiveGrid } from '@/components/ui/perspective-grid'
 import SocialFlipButton from '@/components/ui/social-flip-button'
 import { SpotlightNavbar } from '@/components/ui/spotlight-navbar'
+import { MaskedAvatars } from '@/components/ui/masked-avatars'
+import InteractiveBook from '@/components/ui/interactive-book'
+import TestimonialsCard from '@/components/ui/testimonials-card'
 import {
     Sparkles, Book, Grid3X3, Users,
     Layers, Type, MousePointer2, Palette, Dock, PanelTop, Image,
@@ -48,7 +51,7 @@ const documentedComponents: ComponentPreview[] = [
         name: 'Creepy Button',
         icon: <Sparkles className="w-6 h-6" />,
         preview: (
-            <div className="w-full h-full flex items-center justify-center scale-[0.65]">
+            <div className="w-full h-full flex items-center justify-center scale-[0.85]">
                 <CreepyButton>Click Me</CreepyButton>
             </div>
         ),
@@ -72,7 +75,7 @@ const documentedComponents: ComponentPreview[] = [
         name: 'Glass Dock',
         icon: <Dock className="w-6 h-6" />,
         preview: (
-            <div className="w-full h-full flex items-center justify-center scale-[0.5]">
+            <div className="w-full h-full flex items-center justify-center scale-[0.7]">
                 <GlassDock
                     items={[
                         { icon: Home, title: 'Home', href: '#' },
@@ -96,7 +99,7 @@ const documentedComponents: ComponentPreview[] = [
         name: 'Liquid Text',
         icon: <Type className="w-6 h-6" />,
         preview: (
-            <div className="w-full h-full flex items-center justify-center scale-[0.7]">
+            <div className="w-full h-full flex items-center justify-center scale-[0.9]">
                 <LiquidText text="Liquid" className="text-lg" />
             </div>
         ),
@@ -129,7 +132,7 @@ const documentedComponents: ComponentPreview[] = [
         name: 'Spotlight Nav',
         icon: <PanelTop className="w-6 h-6" />,
         preview: (
-            <div className="w-full h-full flex items-center justify-center scale-[0.4]">
+            <div className="w-full h-full flex items-center justify-center scale-[0.6]">
                 <SpotlightNavbar
                     items={[
                         { label: 'Home', href: '#' },
@@ -145,15 +148,35 @@ const documentedComponents: ComponentPreview[] = [
         id: 'masked-avatars',
         name: 'Masked Avatars',
         icon: <Image className="w-8 h-8" />,
+        preview: (
+            <div className="w-full h-full flex items-center justify-center scale-[0.7]">
+                <MaskedAvatars size={50} />
+            </div>
+        ),
         docPath: '/docs/masked-avatars'
     },
-    // These components are complex, show icons instead
     {
         id: 'interactive-book',
         name: 'Interactive Book',
         icon: <Book className="w-8 h-8" />,
+        preview: (
+            <div className="w-full h-full flex items-center justify-center scale-[0.4]">
+                <InteractiveBook
+                    coverImage="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=350&h=500&fit=crop"
+                    bookTitle="Preview"
+                    bookAuthor="VengeanceUI"
+                    width={200}
+                    height={280}
+                    pages={[
+                        { pageNumber: 1, content: <div className="p-4 text-sm">Page 1</div> },
+                        { pageNumber: 2, content: <div className="p-4 text-sm">Page 2</div> },
+                    ]}
+                />
+            </div>
+        ),
         docPath: '/docs/interactive-book'
     },
+    // These components are complex, show icons instead
     {
         id: 'expandable-bento',
         name: 'Bento Grid',
@@ -164,6 +187,23 @@ const documentedComponents: ComponentPreview[] = [
         id: 'testimonials-card',
         name: 'Testimonials',
         icon: <Users className="w-8 h-8" />,
+        preview: (
+            <div className="w-full h-full flex items-center justify-center scale-[0.55] overflow-visible">
+                <TestimonialsCard
+                    width={300}
+                    showNavigation={false}
+                    showCounter={false}
+                    items={[
+                        {
+                            id: 1,
+                            title: "John Doe",
+                            description: "Amazing UI components!",
+                            image: "https://i.pravatar.cc/100?u=1"
+                        },
+                    ]}
+                />
+            </div>
+        ),
         docPath: '/docs/testimonials-card'
     },
     {
@@ -185,7 +225,6 @@ const featuredComponents = [
     {
         id: 'creepy-button',
         name: 'Creepy Button',
-        gradient: 'from-purple-600 to-pink-600',
         preview: (
             <div className="scale-[0.6] origin-center">
                 <CreepyButton>Hover</CreepyButton>
@@ -195,9 +234,8 @@ const featuredComponents = [
     {
         id: 'flip-text',
         name: 'Flip Text',
-        gradient: 'from-blue-600 to-indigo-600',
         preview: (
-            <FlipText className="text-base font-bold text-white">
+            <FlipText className="text-base font-bold text-zinc-700 dark:text-zinc-300">
                 Animate
             </FlipText>
         ),
@@ -205,7 +243,6 @@ const featuredComponents = [
     {
         id: 'animated-button',
         name: 'Animated Button',
-        gradient: 'from-emerald-600 to-teal-600',
         preview: (
             <AnimatedButton className="text-xs px-3 py-1.5">Explore</AnimatedButton>
         ),
@@ -351,8 +388,7 @@ export function LandingPageGrid({
                                             <div
                                                 key={feat.id}
                                                 className={cn(
-                                                    "relative cursor-pointer overflow-hidden rounded-2xl h-full transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]",
-                                                    `bg-gradient-to-br ${feat.gradient}`,
+                                                    "relative cursor-pointer overflow-hidden rounded-2xl h-full transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800",
                                                     isActive ? "shadow-2xl" : ""
                                                 )}
                                                 style={{ width: isActive ? "60%" : "20%" }}
@@ -361,7 +397,7 @@ export function LandingPageGrid({
                                             >
                                                 <div className={cn(
                                                     "absolute inset-0 rounded-2xl border z-50 pointer-events-none transition-colors duration-700",
-                                                    isActive ? "border-white/30" : "border-white/10"
+                                                    isActive ? "border-zinc-300 dark:border-zinc-700" : "border-transparent"
                                                 )} />
                                                 <div className="relative z-10 w-full h-full flex flex-col items-center justify-center p-2">
                                                     <div className={cn(
@@ -369,13 +405,13 @@ export function LandingPageGrid({
                                                         isActive ? "opacity-100 scale-100" : "opacity-0 scale-90"
                                                     )}>
                                                         {feat.preview}
-                                                        <span className="text-[10px] text-white/80 mt-2 font-medium">{feat.name}</span>
+                                                        <span className="text-[10px] text-zinc-500 dark:text-zinc-400 mt-2 font-medium">{feat.name}</span>
                                                     </div>
                                                     <div className={cn(
                                                         "absolute inset-0 flex items-center justify-center transition-all duration-500",
                                                         isActive ? "opacity-0" : "opacity-100"
                                                     )}>
-                                                        <span className="text-[9px] text-white/70 font-medium">{feat.name}</span>
+                                                        <span className="text-[9px] text-zinc-500 dark:text-zinc-400 font-medium">{feat.name}</span>
                                                     </div>
                                                 </div>
                                             </div>
