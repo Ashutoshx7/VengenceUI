@@ -696,5 +696,13 @@
     "files": [
       "public/r/tooltip.json"
     ]
+  },
+  {
+    "name": "logo-slider",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/logo-slider.json"
+    ]
   }
 ]

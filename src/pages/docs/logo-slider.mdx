@@ -1,0 +1,235 @@
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import LogoSliderDemo, { LogoSliderRight, LogoSliderFast, LogoSliderSlow, LogoSliderNoBlur, LogoSliderDouble } from '@/components/docs/logo-slider'
+
+# Logo Slider
+
+A smooth, infinite marquee component for showcasing logos with progressive blur edge effects.
+
+<ComponentPreview
+  component={<LogoSliderDemo />}
+  code={`import { LogoSlider } from "@/components/ui/logo-slider"
+
+const logos = [
+  <Logo1 key="1" />,
+  <Logo2 key="2" />,
+  <Logo3 key="3" />,
+]
+
+export function TrustedBy() {
+  return (
+    <LogoSlider
+      logos={logos}
+      speed={60}
+      direction="left"
+    />
+  )
+}`}
+/>
+
+## Features
+
+- **Per-Item Animation** - Smoother than track-based animation
+- **Progressive Blur** - Beautiful edge fade effect
+- **Tailwind First** - Uses Tailwind CSS, minimal raw CSS
+- **Responsive** - Adapts to all screen sizes
+- **Light/Dark Mode** - Automatic theme adaptation
+- **Accessible** - Respects reduced motion preferences
+
+## Installation
+
+### CLI Installation
+
+<CLICommand componentName="logo-slider" />
+
+### Manual Installation
+
+**Step 1:** Copy the component:
+
+```tsx
+// components/ui/logo-slider.tsx
+"use client";
+
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+export interface LogoSliderProps {
+    logos: React.ReactNode[];
+    speed?: number;
+    direction?: "left" | "right";
+    showBlur?: boolean;
+    blurLayers?: number;
+    blurIntensity?: number;
+    className?: string;
+    pauseOnHover?: boolean;
+}
+
+export const LogoSlider = ({
+    logos,
+    speed = 60,
+    direction = "left",
+    showBlur = true,
+    blurLayers = 8,
+    blurIntensity = 1,
+    className,
+    pauseOnHover = false,
+}: LogoSliderProps) => {
+    return (
+        <div
+            className={cn("logo-slider w-full overflow-hidden", className)}
+            style={{
+                "--speed": speed,
+                "--count": logos.length,
+                "--blurs": blurLayers,
+                "--blur": blurIntensity,
+            } as React.CSSProperties}
+        >
+            <div
+                className={cn(
+                    "logo-slider__container",
+                    "relative w-full min-h-[80px] grid pointer-events-none"
+                )}
+                data-direction={direction}
+                data-pause-on-hover={pauseOnHover}
+            >
+                {showBlur && (
+                    <div className="logo-slider__blur logo-slider__blur--left absolute top-0 bottom-0 left-0 w-1/4 z-10 pointer-events-none rotate-180">
+                        {Array.from({ length: blurLayers }).map((_, i) => (
+                            <div key={i} className="absolute inset-0" style={{ "--blur-index": i } as React.CSSProperties} />
+                        ))}
+                    </div>
+                )}
+                {showBlur && (
+                    <div className="logo-slider__blur logo-slider__blur--right absolute top-0 bottom-0 right-0 w-1/4 z-10 pointer-events-none">
+                        {Array.from({ length: blurLayers }).map((_, i) => (
+                            <div key={i} className="absolute inset-0" style={{ "--blur-index": i } as React.CSSProperties} />
+                        ))}
+                    </div>
+                )}
+                <ul className="logo-slider__track flex items-center h-full w-fit m-0 p-0 list-none pointer-events-none">
+                    {logos.map((logo, index) => (
+                        <li
+                            key={index}
+                            className="logo-slider__item h-4/5 w-[120px] sm:w-[140px] lg:w-[160px] aspect-video grid place-items-center shrink-0"
+                            style={{ "--item-index": index } as React.CSSProperties}
+                        >
+                            <div className="w-full h-full flex items-center justify-center [&>svg]:h-[65%] [&>svg]:w-auto [&>svg]:fill-zinc-800 dark:[&>svg]:fill-zinc-200 [&>img]:h-[65%] [&>img]:w-auto [&>img]:object-contain [&>img]:grayscale [&>img]:brightness-50 dark:[&>img]:brightness-125">
+                                {logo}
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    );
+};
+
+LogoSlider.displayName = "LogoSlider";
+export default LogoSlider;
+```
+
+**Step 2:** Add CSS to `globals.css` (only what Tailwind can't handle):
+
+```css
+/* LogoSlider - CSS Variables & Animations */
+.logo-slider {
+  --speed: 60;
+  --count: 8;
+  --blurs: 8;
+  --blur: 1;
+}
+
+.logo-slider__container {
+  mask: linear-gradient(90deg, transparent, black 15% 85%, transparent);
+  -webkit-mask: linear-gradient(90deg, transparent, black 15% 85%, transparent);
+}
+
+.logo-slider__blur > div {
+  z-index: var(--blur-index);
+  mask: linear-gradient(90deg,
+    transparent calc(var(--blur-index) * calc((100 / var(--blurs)) * 1%)),
+    black calc((var(--blur-index) + 1) * calc((100 / var(--blurs)) * 1%)),
+    black calc((var(--blur-index) + 2) * calc((100 / var(--blurs)) * 1%)),
+    transparent calc((var(--blur-index) + 3) * calc((100 / var(--blurs)) * 1%)));
+  backdrop-filter: blur(calc((var(--blur-index, 0) * var(--blur, 0)) * 1px));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .logo-slider__track { gap: 0; }
+  .logo-slider__item {
+    --duration: calc(var(--speed) * 1s);
+    --delay: calc((var(--duration) / var(--count)) * (var(--item-index, 0) * -1));
+    --origin-x: calc(((var(--count) - var(--item-index)) + var(--inset, 0)) * 100%);
+    --destination-x: calc((var(--item-index) + 1 + var(--outset, 0)) * -100%);
+    animation: logo-slider-slide var(--duration) var(--delay) infinite linear;
+    translate: var(--origin-x) 0;
+  }
+  @keyframes logo-slider-slide {
+    100% { translate: var(--destination-x) 0; }
+  }
+}
+
+.logo-slider__container[data-direction="right"] .logo-slider__item {
+  animation-direction: reverse;
+}
+
+.logo-slider__container[data-pause-on-hover="true"]:hover .logo-slider__item {
+  animation-play-state: paused;
+}
+```
+
+## Usage
+
+### Right Direction
+
+<ComponentPreview
+  component={<LogoSliderRight />}
+  code={`<LogoSlider logos={logos} speed={50} direction="right" />`}
+/>
+
+### Fast Speed
+
+<ComponentPreview
+  component={<LogoSliderFast />}
+  code={`<LogoSlider logos={logos} speed={30} />`}
+/>
+
+### Pause on Hover
+
+<ComponentPreview
+  component={<LogoSliderSlow />}
+  code={`<LogoSlider logos={logos} speed={100} pauseOnHover />`}
+/>
+
+### Without Blur
+
+<ComponentPreview
+  component={<LogoSliderNoBlur />}
+  code={`<LogoSlider logos={logos} showBlur={false} />`}
+/>
+
+### Double Row
+
+<ComponentPreview
+  component={<LogoSliderDouble />}
+  code={`<div className="space-y-4">
+  <LogoSlider logos={logos} direction="left" />
+  <LogoSlider logos={logos} direction="right" />
+</div>`}
+/>
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "logos", type: "React.ReactNode[]", defaultValue: "-", description: "Array of logo elements to display." },
+    { prop: "speed", type: "number", defaultValue: "60", description: "Animation speed. Higher = slower." },
+    { prop: "direction", type: "\"left\" | \"right\"", defaultValue: "\"left\"", description: "Scroll direction." },
+    { prop: "showBlur", type: "boolean", defaultValue: "true", description: "Show edge blur overlays." },
+    { prop: "blurLayers", type: "number", defaultValue: "8", description: "Number of blur layers." },
+    { prop: "blurIntensity", type: "number", defaultValue: "1", description: "Blur intensity multiplier." },
+    { prop: "pauseOnHover", type: "boolean", defaultValue: "false", description: "Pause on hover." },
+    { prop: "className", type: "string", defaultValue: "-", description: "Additional classes." }
+  ]}
+/>

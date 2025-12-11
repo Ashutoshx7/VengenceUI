@@ -918,3 +918,98 @@ footer,
   transition-timing-function: cubic-bezier(0.8, 1, 0.7, 1);
   transition-duration: 0.3s;
 }
+
+/* ============================================
+   LogoSlider / Marquee Component Styles
+   
+   Only CSS that Tailwind cannot handle:
+   - CSS variables for animation calculations
+   - Complex masks for edge fade and blur
+   - Keyframe animations
+   ============================================ */
+
+/* CSS Variables (can't be done in Tailwind) */
+.logo-slider {
+  --speed: 60;
+  --count: 8;
+  --blurs: 8;
+  --blur: 1;
+}
+
+/* Edge fade mask (complex gradient mask) */
+.logo-slider__container {
+  mask: linear-gradient(90deg, transparent, black 15% 85%, transparent);
+  -webkit-mask: linear-gradient(90deg, transparent, black 15% 85%, transparent);
+}
+
+/* Progressive blur layers (complex calculated mask) */
+.logo-slider__blur>div {
+  z-index: var(--blur-index);
+  mask: linear-gradient(90deg,
+      transparent calc(var(--blur-index) * calc((100 / var(--blurs)) * 1%)),
+      black calc((var(--blur-index) + 1) * calc((100 / var(--blurs)) * 1%)),
+      black calc((var(--blur-index) + 2) * calc((100 / var(--blurs)) * 1%)),
+      transparent calc((var(--blur-index) + 3) * calc((100 / var(--blurs)) * 1%)));
+  -webkit-mask: linear-gradient(90deg,
+      transparent calc(var(--blur-index) * calc((100 / var(--blurs)) * 1%)),
+      black calc((var(--blur-index) + 1) * calc((100 / var(--blurs)) * 1%)),
+      black calc((var(--blur-index) + 2) * calc((100 / var(--blurs)) * 1%)),
+      transparent calc((var(--blur-index) + 3) * calc((100 / var(--blurs)) * 1%)));
+  backdrop-filter: blur(calc((var(--blur-index, 0) * var(--blur, 0)) * 1px));
+  -webkit-backdrop-filter: blur(calc((var(--blur-index, 0) * var(--blur, 0)) * 1px));
+}
+
+/* Per-Item Animation (keyframes and calc-based animation) */
+@media (prefers-reduced-motion: no-preference) {
+  .logo-slider__track {
+    gap: 0;
+  }
+
+  .logo-slider__item {
+    --duration: calc(var(--speed) * 1s);
+    --delay: calc((var(--duration) / var(--count)) * (var(--item-index, 0) * -1));
+    --origin-x: calc(((var(--count) - var(--item-index)) + var(--inset, 0)) * 100%);
+    --destination-x: calc((var(--item-index) + 1 + var(--outset, 0)) * -100%);
+
+    animation: logo-slider-slide var(--duration) var(--delay) infinite linear;
+    translate: var(--origin-x) 0;
+  }
+
+  @keyframes logo-slider-slide {
+    100% {
+      translate: var(--destination-x) 0;
+    }
+  }
+}
+
+/* Direction Control */
+.logo-slider__container[data-direction="right"] .logo-slider__item {
+  animation-direction: reverse;
+}
+
+/* Pause on Hover */
+.logo-slider__container[data-pause-on-hover="true"]:hover .logo-slider__item {
+  animation-play-state: paused;
+}
+
+/* Reduced Motion Fallback */
+@media (prefers-reduced-motion: reduce) {
+  .logo-slider__item {
+    animation: none;
+    translate: none;
+  }
+
+  .logo-slider__track {
+    animation: logo-slider-fallback 120s linear infinite;
+  }
+
+  @keyframes logo-slider-fallback {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+}
