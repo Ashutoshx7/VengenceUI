@@ -75,6 +75,16 @@ export function cn(...inputs: ClassValue[]) {
     black calc((var(--blur-index) + 2) * calc((100 / var(--blurs)) * 1%)),
     transparent calc((var(--blur-index) + 3) * calc((100 / var(--blurs)) * 1%)));
   backdrop-filter: blur(calc((var(--blur-index, 0) * var(--blur, 0)) * 1px));
+  -webkit-backdrop-filter: blur(calc((var(--blur-index, 0) * var(--blur, 0)) * 1px));
+}
+
+/* Edge glow effect - dark mode */
+.dark .logo-slider__blur::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.15) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
