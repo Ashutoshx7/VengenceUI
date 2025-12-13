@@ -304,10 +304,15 @@ export function LandingPageGrid({
             })
         }
 
-        // Animate Grid
-        if (gridFullRef.current) {
+        // Animate Grid with Responsive Refresh
+        const mm = gsap.matchMedia();
+
+        const animateGrid = () => {
+            if (!gridFullRef.current) return;
+
             const gridFullItems = gridFullRef.current.querySelectorAll('.grid__item')
-            const numColumns = getComputedStyle(gridFullRef.current).getPropertyValue('grid-template-columns').split(' ').length
+            const gridStyle = getComputedStyle(gridFullRef.current);
+            const numColumns = gridStyle.getPropertyValue('grid-template-columns').split(' ').length
             const middleColumnIndex = Math.floor(numColumns / 2)
 
             const columns: Element[][] = Array.from({ length: numColumns }, () => [])
@@ -324,6 +329,7 @@ export function LandingPageGrid({
                         start: 'top bottom',
                         end: 'center center',
                         scrub: 1.5,
+                        invalidateOnRefresh: true,
                     }
                 }).from(columnItems, {
                     yPercent: 450,
@@ -339,6 +345,9 @@ export function LandingPageGrid({
             // Bento animation
             const bentoContainer = gridFullRef.current.querySelector('.bento-container')
             if (bentoContainer) {
+                // Check if mobile via matchMedia context or window width
+                const isMobile = window.innerWidth < 768; // Simple check for the scaling logic inside the function
+
                 gsap.timeline({
                     scrollTrigger: {
                         trigger: gridFullRef.current,
@@ -349,7 +358,7 @@ export function LandingPageGrid({
                     }
                 }).to(bentoContainer, {
                     y: window.innerHeight * 0.1,
-                    scale: 1.5,
+                    scale: isMobile ? 1 : 1.5, // Don't scale on mobile to prevent overflow/cutting
                     zIndex: 1000,
                     ease: 'power2.out',
                     duration: 1,
@@ -357,6 +366,14 @@ export function LandingPageGrid({
                 }, 0)
             }
         }
+
+        // Add breakpoints to trigger re-calculation
+        // We pass the same function, but it checks window.innerWidth internally or we could split it.
+        // For simplicity and robustness, relying on the function execution context.
+        mm.add("(min-width: 768px)", animateGrid);
+        mm.add("(max-width: 767px)", animateGrid);
+
+        return () => mm.revert();
     }, [isLoaded])
 
     // 21 items for 7x3 grid
@@ -368,21 +385,21 @@ export function LandingPageGrid({
 
             {/* Center Text */}
             <section className="grid place-items-center w-full relative mt-[10vh]">
-                <div ref={textRef} className="text font-alt uppercase flex content-center text-[clamp(3rem,14vw,10rem)] leading-[0.7] text-neutral-900 dark:text-white">
+                <div ref={textRef} className="text font-alt uppercase flex content-center text-[clamp(2rem,14vw,10rem)] leading-[0.7] text-neutral-900 dark:text-white">
                     {splitText(centerText)}
                 </div>
             </section>
 
             {/* Grid - 7x3 */}
             <section className="grid place-items-center w-full relative">
-                <div ref={gridFullRef} className="grid--full relative w-full my-[10vh] h-auto aspect-[2] max-w-none p-4 grid gap-4 grid-cols-7 grid-rows-3">
+                <div ref={gridFullRef} className="grid--full relative w-full my-[10vh] h-auto aspect-auto md:aspect-[2] max-w-none p-4 grid gap-4 grid-cols-2 md:grid-cols-7 md:grid-rows-3">
                     <div className="grid-overlay absolute inset-0 z-[15] pointer-events-none opacity-0 bg-white/80 dark:bg-black/80 rounded-lg transition-opacity duration-500" />
 
                     {gridItems.map((item, i) => {
                         // Bento at position 16 (row 3, center) - bottom row
                         if (i === 16) {
                             return (
-                                <div key="bento-group" className="grid__item bento-container col-span-3 row-span-1 relative z-20 flex items-center justify-center gap-2 h-full w-full will-change-transform">
+                                <div key="bento-group" className="grid__item bento-container col-span-2 md:col-span-3 row-span-1 relative z-20 flex items-center justify-center gap-2 h-full w-full will-change-transform min-h-[140px] md:min-h-0">
                                     {featuredComponents.map((feat, index) => {
                                         const isActive = activeBento === index
                                         return (
@@ -390,9 +407,8 @@ export function LandingPageGrid({
                                                 key={feat.id}
                                                 className={cn(
                                                     "relative cursor-pointer overflow-hidden rounded-2xl h-full transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800",
-                                                    isActive ? "shadow-2xl" : ""
+                                                    isActive ? "shadow-2xl flex-[1.5] md:flex-[3]" : "flex-1"
                                                 )}
-                                                style={{ width: isActive ? "60%" : "20%" }}
                                                 onMouseEnter={() => setActiveBento(index)}
                                                 onClick={() => setActiveBento(index)}
                                             >
@@ -409,10 +425,12 @@ export function LandingPageGrid({
                                                         <span className="text-[10px] text-zinc-500 dark:text-zinc-400 mt-2 font-medium">{feat.name}</span>
                                                     </div>
                                                     <div className={cn(
-                                                        "absolute inset-0 flex items-center justify-center transition-all duration-500",
+                                                        "absolute inset-0 flex items-center justify-center transition-all duration-500 overflow-hidden px-1",
                                                         isActive ? "opacity-0" : "opacity-100"
                                                     )}>
-                                                        <span className="text-[9px] text-zinc-500 dark:text-zinc-400 font-medium">{feat.name}</span>
+                                                        <span className="text-[8px] md:text-[9px] text-zinc-500 dark:text-zinc-400 font-medium text-center whitespace-normal leading-tight max-w-full">
+                                                            {feat.name}
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -425,7 +443,13 @@ export function LandingPageGrid({
                         if (i === 17 || i === 18) return null
 
                         return (
-                            <figure key={`${item.id}-${i}`} className="grid__item m-0 relative z-10 [perspective:800px] will-change-[transform,opacity] group cursor-pointer">
+                            <figure
+                                key={`${item.id}-${i}`}
+                                className={cn(
+                                    "grid__item m-0 relative z-10 [perspective:800px] will-change-[transform,opacity] group cursor-pointer min-h-[140px] md:min-h-0",
+                                    (item.id === 'gradient-tiles' || item.id === 'liquid-text') && "hidden md:block"
+                                )}
+                            >
                                 <Link href={item.docPath} className="absolute inset-0 z-30 opacity-0">
                                     <span className="sr-only">View {item.name}</span>
                                 </Link>

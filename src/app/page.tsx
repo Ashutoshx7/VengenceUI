@@ -9,7 +9,7 @@ const Page = () => {
   return (
     <SmoothScroll>
       <div className="overflow-hidden noScrollbar">
-        <div className="px-20">
+        <div className="px-4 md:px-20">
           <Navbar />
           <HeroSection />
         </div>
@@ -20,7 +20,7 @@ const Page = () => {
           className="mt-[-5vh]"
         />
 
-        <div className="px-20">
+        <div className="px-4 md:px-20">
           <Sec1 />
         </div>
       </div>

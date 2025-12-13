@@ -109,7 +109,7 @@ export function StackedLogosFast() {
 
 export function StackedLogosSlow() {
     return (
-        <div className="w-full py-16 bg-white dark:bg-black rounded-xl min-h-[250px] flex items-center justify-center">
+        <div className="w-full py-16 bg-white dark:bg-black rounded-xl min-h-[280px] flex items-center justify-center">
             <StackedLogos
                 logoGroups={[logoGroup1, logoGroup2, logoGroup3, logoGroup4]}
                 duration={40}
