@@ -21,12 +21,12 @@ export function PixelatedImageTrailDemo() {
                     "/trail-images/image4.jpg",
                     "/trail-images/image5.jpg",
                 ]}
-                slices={6}
-                smoothing={0.12}
-                spawnThreshold={80}
+                slices={4}
+                smoothing={0.1}
+                spawnThreshold={100}
                 config={{
-                    staggerIn: 12,
-                    inDuration: 280,
+                    staggerIn: 6,
+                    inDuration: 150,
                 }}
             />
             <div className="text-center z-10 pointer-events-none">

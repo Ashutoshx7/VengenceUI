@@ -63,7 +63,7 @@ export function PixelatedImageTrail({
     config: configOverride = {},
     slices = 4,
     spawnThreshold = 100,
-    smoothing = 0.25,
+    smoothing = 0.1,
 }: PixelatedImageTrailProps) {
     const [mounted, setMounted] = useState(false);
     const trailContainerRef = useRef<HTMLDivElement>(null);
@@ -80,16 +80,16 @@ export function PixelatedImageTrail({
     useEffect(() => {
         if (!mounted) return;
 
-        // Default configuration - ultra snappy
+        // Default configuration - Codrops-optimized timing
         const defaultConfig: TrailConfig = {
-            imageLifespan: 600,
-            inDuration: 200,
-            outDuration: 250,
-            staggerIn: 8,
-            staggerOut: 5,
-            slideDuration: 300,
-            slideEasing: "cubic-bezier(0.4, 0, 0.2, 1)",
-            easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+            imageLifespan: 400,
+            inDuration: 150,
+            outDuration: 1000,
+            staggerIn: 6,
+            staggerOut: 4,
+            slideDuration: 900,
+            slideEasing: "cubic-bezier(0.16, 1, 0.3, 1)", // Expo.easeOut
+            easing: "cubic-bezier(0.16, 1, 0.3, 1)",
         };
 
         const config = { ...defaultConfig, ...configOverride };
@@ -182,10 +182,11 @@ export function PixelatedImageTrail({
 
             trailContainer.appendChild(imgContainer);
 
-            // Animate in with staggered slice reveal
+            // Animate in with staggered slice reveal + scale pop
             requestAnimationFrame(() => {
                 imgContainer.style.left = `${targetX}px`;
                 imgContainer.style.top = `${targetY}px`;
+                imgContainer.style.transform = `rotate(${rotation}deg) translate3d(0, 0, 0) scale(1)`;
 
                 maskLayers.forEach((layer, i) => {
                     const sliceSize = 100 / slices;
@@ -202,10 +203,10 @@ export function PixelatedImageTrail({
                 });
             });
 
-            // Animate out after lifespan - simple opacity fade (no pixelation for performance)
+            // Animate out - Codrops style fade + scale down
             setTimeout(() => {
                 imgContainer.style.opacity = "0";
-                imgContainer.style.transform = `rotate(${rotation}deg) translate3d(0, 0, 0) scale(0.9)`;
+                imgContainer.style.transform = `rotate(${rotation}deg) translate3d(0, 0, 0) scale(0.2)`;
 
                 // Remove from DOM after fade completes
                 setTimeout(() => {

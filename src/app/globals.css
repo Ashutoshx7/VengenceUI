@@ -1169,17 +1169,16 @@ footer,
   pointer-events: none;
   /* Force GPU layer with 3D transform */
   transform: translate3d(0, 0, 0);
-  will-change: transform, left, top, opacity;
+  will-change: transform, opacity;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   /* Prevent layout thrashing */
   contain: layout style paint;
-  /* Subtle shadow for premium depth */
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
-  /* Smooth opacity for tasteful appearance */
-  opacity: 0.98;
-  /* Smooth exit transition */
-  transition: opacity 300ms ease-out, transform 300ms ease-out;
+  /* Subtle shadow */
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.1));
+  opacity: 1;
+  /* Codrops-style transitions: 1s fade + scale */
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .pixelated-mask-layer {
