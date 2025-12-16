@@ -146,13 +146,13 @@ export function PixelatedImageTrail({
             const targetX = startX + dx * 0.5;
             const targetY = startY + dy * 0.5;
 
-            // Minimal rotation for clean look
-            const rotation = Math.random() * 8 - 4;
-            imgContainer.style.transform = `rotate(${rotation}deg) translate3d(0, 0, 0) scale(0.95)`;
+            // Codrops doesn't use specific rotation, just proper placement
+            // We keep it simple: translate only, no rotation or scale-in
+            imgContainer.style.transform = `translate3d(0, 0, 0)`;
 
             imgContainer.style.left = `${startX}px`;
             imgContainer.style.top = `${startY}px`;
-            imgContainer.style.transition = `left ${config.slideDuration}ms ${config.slideEasing}, top ${config.slideDuration}ms ${config.slideEasing}, opacity 200ms ease-out`;
+            imgContainer.style.transition = `left ${config.slideDuration}ms ${config.slideEasing}, top ${config.slideDuration}ms ${config.slideEasing}`;
 
             const maskLayers: HTMLDivElement[] = [];
 
@@ -186,7 +186,8 @@ export function PixelatedImageTrail({
             requestAnimationFrame(() => {
                 imgContainer.style.left = `${targetX}px`;
                 imgContainer.style.top = `${targetY}px`;
-                imgContainer.style.transform = `rotate(${rotation}deg) translate3d(0, 0, 0) scale(1)`;
+                // No rotation or scale change on enter - just position
+                imgContainer.style.transform = `translate3d(0, 0, 0)`;
 
                 maskLayers.forEach((layer, i) => {
                     const sliceSize = 100 / slices;
@@ -205,11 +206,8 @@ export function PixelatedImageTrail({
 
             // Animate out - Codrops style fade + scale down
             setTimeout(() => {
-                // IMPORTANT: Override the initial transition to ensure slow fade out
-                imgContainer.style.transition = `opacity ${config.outDuration}ms ${config.easing}, transform ${config.outDuration}ms ${config.easing}`;
-
-                imgContainer.style.opacity = "0";
-                imgContainer.style.transform = `rotate(${rotation}deg) translate3d(0, 0, 0) scale(0.2)`;
+                // Use CSS class for reliable exit transition
+                imgContainer.classList.add("animate-out");
 
                 // Remove from DOM after fade completes
                 setTimeout(() => {

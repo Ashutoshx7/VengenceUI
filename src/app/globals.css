@@ -1162,23 +1162,28 @@ footer,
   perspective: 1000px;
 }
 
+/* Base state */
 .pixelated-trail-img {
   position: absolute;
   width: 175px;
   height: 175px;
   pointer-events: none;
-  /* Force GPU layer with 3D transform */
   transform: translate3d(0, 0, 0);
   will-change: transform, opacity;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  /* Prevent layout thrashing */
   contain: layout style paint;
-  /* Subtle shadow */
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.1));
   opacity: 1;
-  /* Codrops-style transitions: 1s fade + scale */
-  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+  /* Default slide transition */
+  transition: left 900ms cubic-bezier(0.16, 1, 0.3, 1), top 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Exit state - triggered by JS */
+.pixelated-trail-img.animate-out {
+  opacity: 0 !important;
+  transform: translate3d(0, 0, 0) scale(0.2) !important;
+  transition: opacity 1000ms cubic-bezier(0.16, 1, 0.3, 1), transform 1000ms cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .pixelated-mask-layer {
