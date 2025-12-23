@@ -34,5 +34,6 @@ export default {
     "light-lines": "Light Lines",
     "line-hover-link": "Line Hover Link",
     "logo-slider": "Logo Slider",
-    "stacked-logos": "Stacked Logos"
+    "stacked-logos": "Stacked Logos",
+    "scroll-effect":"Scroll Effect"
 }
