@@ -5,7 +5,7 @@ import { CommandMenu } from './src/components/command-menu'
 import { ModeToggle } from './src/components/mode-toggle'
 import { useRouter } from 'next/router'
 
-const siteUrl = 'https://vengeance-ui.vercel.app'
+const siteUrl = 'https://www.vengenceui.com'
 
 const config: DocsThemeConfig = {
     logo: (
