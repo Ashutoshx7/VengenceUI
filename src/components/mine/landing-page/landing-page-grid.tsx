@@ -365,7 +365,7 @@ export function LandingPageGrid({
                 }).to(bentoContainer, {
                     y: window.innerHeight * 0.1,
                     scale: isMobile ? 1 : 1.5, // Don't scale on mobile to prevent overflow/cutting
-                    zIndex: 1000,
+                    zIndex: 100,
                     ease: 'power2.out',
                     duration: 1,
                     force3D: true
@@ -405,7 +405,7 @@ export function LandingPageGrid({
                         // Bento at position 16 (row 3, center) - bottom row
                         if (i === 16) {
                             return (
-                                <div key="bento-group" className="grid__item bento-container col-span-2 md:col-span-3 row-span-1 relative z-20 flex items-center justify-center gap-2 h-full w-full will-change-transform min-h-[140px] md:min-h-0">
+                                <div key="bento-group" className="grid__item bento-container col-span-2 md:col-span-3 row-span-1 relative z-20 flex items-center justify-center gap-2 h-full w-full will-change-transform min-h-[140px] md:min-h-0 ">
                                     {featuredComponents.map((feat, index) => {
                                         const isActive = activeBento === index
                                         return (
@@ -462,7 +462,7 @@ export function LandingPageGrid({
                                 <div className="block w-full h-full">
                                     <div className="grid__item-img w-full h-full [backface-visibility:hidden] will-change-transform rounded-xl overflow-hidden shadow-sm border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 transition-all duration-500 ease-out group-hover:scale-105 group-hover:shadow-xl group-hover:border-zinc-300 dark:group-hover:border-zinc-700">
                                         {/* Full-size preview container */}
-                                        <div className="absolute inset-0 flex items-center justify-center p-2 overflow-hidden pointer-events-none">
+                                        <div className="absolute inset-0 flex items-center justify-center p-2 overflow-hidden pointer-events-none ">
                                             {item.preview ? (
                                                 <div className="w-full h-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
                                                     {item.preview}
@@ -476,7 +476,7 @@ export function LandingPageGrid({
                                         {/* Gradient overlay on hover */}
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 rounded-xl pointer-events-none" />
                                         {/* Label at bottom */}
-                                        <div className="absolute bottom-0 left-0 right-0 p-2 z-20 pointer-events-none">
+                                        <div className="absolute bottom-0 left-0 right-0 p-2 z-20 pointer-events-none ">
                                             <span className="text-[9px] font-medium text-zinc-500 dark:text-zinc-400 group-hover:text-white transition-colors uppercase tracking-wider text-center block">
                                                 {item.name}
                                             </span>

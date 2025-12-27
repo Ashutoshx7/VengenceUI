@@ -1604,3 +1604,15 @@ html:not(.dark) [class*="nav-container"] {
   border-radius: 2px;
   z-index: 1;
 }
+@keyframes background-shine {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.animate-background-shine {
+  animation: background-shine 2s linear infinite;
+}

@@ -37,6 +37,12 @@ interface FlipTextProps {
      * @default " "
      */
     separator?: string;
+
+    /**
+     * Whether all characters should animate together (no stagger)
+     * @default false
+     */
+    together?: boolean;
 }
 
 export function FlipText({
@@ -46,6 +52,7 @@ export function FlipText({
     delay = 0,
     loop = true,
     separator = " ",
+    together = false,
 }: FlipTextProps) {
     const words = useMemo(() => children.split(separator), [children, separator]);
     const totalChars = children.length;
@@ -79,10 +86,13 @@ export function FlipText({
                         {chars.map((char, charIndex) => {
                             const currentGlobalIndex = getCharIndex(wordIndex, charIndex);
 
-                            // Calculate delay based on character position
-                            const normalizedIndex = currentGlobalIndex / totalChars;
-                            const sineValue = Math.sin(normalizedIndex * (Math.PI / 2));
-                            const calculatedDelay = sineValue * (duration * 0.25) + delay;
+                            // Calculate delay - if together, use same delay for all
+                            let calculatedDelay = delay;
+                            if (!together) {
+                                const normalizedIndex = currentGlobalIndex / totalChars;
+                                const sineValue = Math.sin(normalizedIndex * (Math.PI / 2));
+                                calculatedDelay = sineValue * (duration * 0.25) + delay;
+                            }
 
                             return (
                                 <span
