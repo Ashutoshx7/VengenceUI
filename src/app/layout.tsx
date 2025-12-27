@@ -33,6 +33,7 @@ export const viewport = {
 };
 
 import { CommandMenu } from "@/components/command-menu";
+import Footer from "@/components/mine/landing-page/footer";
 
 // ... existing imports
 
@@ -47,6 +48,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <CommandMenu />
           {children}
+          <Footer/>
         </ThemeProvider>
       </body>
     </html>
