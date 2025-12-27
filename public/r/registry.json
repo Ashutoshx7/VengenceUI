@@ -266,6 +266,14 @@
     ]
   },
   {
+    "name": "footer",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/footer.json"
+    ]
+  },
+  {
     "name": "form",
     "dependencies": [
       "react-hook-form",
@@ -404,6 +412,14 @@
     "type": "registry:ui",
     "files": [
       "public/r/line-hover-link.json"
+    ]
+  },
+  {
+    "name": "liquid-ocean",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/liquid-ocean.json"
     ]
   },
   {

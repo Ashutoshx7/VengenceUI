@@ -1,16 +1,27 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import Link from "next/link"
 import { Home, User, Calendar, CreditCard, Menu, X, Sun, Moon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTheme } from "next-themes"
+import { useSound } from "@/hooks/use-sound"
+
+
 
 // Theme Toggle Component
 const ThemeToggle = () => {
   const { theme, setTheme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  const playClick = useSound("/audio/ui-sounds/click.wav");
+
+  const isDark = (theme === 'dark' || resolvedTheme === 'dark')
+
+  const switchTheme = useCallback(() => {
+    playClick();
+    setTheme(isDark ? 'light' : 'dark');
+  }, [setTheme, isDark, playClick])
 
   useEffect(() => {
     setMounted(true)
@@ -18,11 +29,9 @@ const ThemeToggle = () => {
 
   if (!mounted) return <div className="w-9 h-9" />
 
-  const isDark = (theme === 'dark' || resolvedTheme === 'dark')
-
   return (
     <button
-      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      onClick={switchTheme}
       className="flex items-center justify-center w-9 h-9 rounded-full hover:bg-foreground/5 transition-colors text-foreground/70 hover:text-foreground"
       aria-label="Toggle theme"
     >
@@ -81,7 +90,7 @@ const Navbar = ({ className, ...props }: React.HTMLAttributes<HTMLElement> & { l
 
   return (
     <>
-      <header className={cn("fixed top-0 inset-x-0 z-50 h-16 flex px-0", className)} {...props}>
+      <header className={cn("fixed top-0 inset-x-0 z-101 h-16 flex px-0", className)} {...props}>
 
         {/* Left Side Bar - Flexible width */}
         <div className="flex-1 h-10 bg-white dark:bg-black z-20 relative min-w-0">

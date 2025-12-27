@@ -37,5 +37,6 @@ export default {
     "logo-slider": "Logo Slider",
     "stacked-logos": "Stacked Logos",
     "scroll-effect":"Scroll Effect",
+    
     "pixelated-image-trail": "Pixelated Image Trail"
 }

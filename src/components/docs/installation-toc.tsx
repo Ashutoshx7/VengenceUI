@@ -12,6 +12,7 @@ const tocItems = [
     { id: "install-tailwind", label: "Install Tailwind CSS" },
     { id: "add-utilities", label: "Add utilities" },
     { id: "cli", label: "CLI", badge: "3.0" },
+
 ]
 
 export function InstallationTOC({ className }: InstallationTOCProps) {
@@ -47,7 +48,7 @@ export function InstallationTOC({ className }: InstallationTOCProps) {
 
     return (
         <nav className={cn("space-y-1", className)}>
-            <h4 className="font-medium text-sm text-foreground mb-3">Installation</h4>
+            <h4 className="font-medium text-sm text-foreground mb-3 ">Installation</h4>
             {tocItems.map((item) => (
                 <button
                     key={item.id}
