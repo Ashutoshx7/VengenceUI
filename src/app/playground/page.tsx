@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Navbar1 } from "../../../registry/new-york/navbars/navbar1";
