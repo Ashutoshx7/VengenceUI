@@ -11,7 +11,7 @@ Add the VengeanceUI registry to your project's `components.json` file:
 ```json
 {
   "registries": {
-    "@vengeance": "https://vengeance-ui.vercel.app/r/{name}.json"
+    "@vengeance": "https://www.vengenceui.com/r/{name}.json"
   }
 }
 ```
