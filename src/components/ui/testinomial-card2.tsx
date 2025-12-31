@@ -32,7 +32,7 @@ interface TestimonialsCardProps {
 export function TestimonialsCard2({ items, className }: TestimonialsCardProps) {
 
     return (
-        <div className={cn("flex flex-row gap-4", className)}>
+        <div className={cn("flex flex-row gap-1", className)}>
             {
                 items?.length > 0 && items.map((el, idx) => {
 
@@ -42,8 +42,8 @@ export function TestimonialsCard2({ items, className }: TestimonialsCardProps) {
                             <div
 
 
-                                className={cn("flex flex-col items-center justify-center md:p-4 w-60 h-60 flex-1 relative overflow-hidden rounded-lg bg-foreground text-background px-2 md:px-8 py-3.5 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg active:scale-95 cursor-pointer", el.big == true && "h-80")}>
-                            <div className="gap-4 my-4 border-b">
+                                className={cn("flex flex-col items-center justify-center md:p-4 w-60 h-60 flex-1 relative overflow-hidden  bg-foreground text-background px-2 md:px-8 py-3.5 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg active:scale-95 cursor-pointer", el.big == true && "h-80")}>
+                            <div className=" my-4 ">
                                 <div
                                     className=" grid  grid-cols-[1fr_1fr_1fr]  gap-2 md:gap-4    ">
 

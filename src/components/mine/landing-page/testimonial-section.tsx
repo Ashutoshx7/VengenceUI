@@ -75,11 +75,11 @@ export const TestimonialSection = () => {
     })
 
     return (
-        <div className="grid grid-rows-2  min-h-screen  relative mb-10 md:mb-30 gap-2 md:gap-4 overflow-hidden touch-pan-y ">
+        <div className="grid grid-rows-auto  max-h-screen  relative mb-10 md:mb-30 gap-2 space-y-20 md:gap-8 overflow-hidden touch-pan-y ">
 
             <motion.div 
                 style={{ x: x1 }}
-                className="flex flex-row gap-4 overflow-hidden">
+                className="flex flex-row  overflow-hidden rotate-45  ">
                 <TestimonialsCard2
                     items={demoItems} />
             </motion.div>
@@ -87,13 +87,25 @@ export const TestimonialSection = () => {
             <motion.div
                 style={{ x: x2 }}
 
-                className="flex flex-row gap-4 overflow-hidden">
+                className="flex flex-row  overflow-hidden rotate-45 ">
                 <TestimonialsCard2 items={demoItems} />
             </motion.div>
             <motion.div
                 style={{ x: x3 }}
 
-                className="flex flex-row gap-4 overflow-hidden">
+                className="flex flex-row  overflow-hidden rotate-45 ">
+                <TestimonialsCard2 items={demoItems} />
+            </motion.div>
+            <motion.div
+                style={{ x: x1 }}
+
+                className="flex flex-row  overflow-hidden rotate-45">
+                <TestimonialsCard2 items={demoItems} />
+            </motion.div>
+            <motion.div
+                style={{ x: x2 }}
+
+                className="flex flex-row  overflow-hidden rotate-45">
                 <TestimonialsCard2 items={demoItems} />
             </motion.div>
 
