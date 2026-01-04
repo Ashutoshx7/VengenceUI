@@ -7,10 +7,12 @@
     "build": "npm run registry:build && next build",
     "start": "next start",
     "lint": "eslint",
-    "registry:build": "npx tsx src/scripts/build-registry.ts"
+    "registry:build": "npx tsx src/scripts/build-registry.ts",
+    "mcp": "npx tsx src/scripts/mcp-server.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
+    "@modelcontextprotocol/sdk": "^1.25.1",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-alert-dialog": "^1.1.15",
     "@radix-ui/react-aspect-ratio": "^1.1.8",
