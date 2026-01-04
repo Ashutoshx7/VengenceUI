@@ -67,7 +67,7 @@ export const HeroSection = () => {
               Build beautiful interfaces
             </h1>
             <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-[1.1] text-black dark:text-white drop-shadow-2xl">
-              <FlipText delay={0.8} together={true} className="text-transparent bg-clip-text bg-gradient-to-b from-zinc-600 to-zinc-900 dark:from-zinc-200 dark:to-zinc-600">
+              <FlipText delay={0.8} together={true} className="text-zinc-700 dark:text-zinc-300">
                 with precision and speed
               </FlipText>
             </div>
@@ -91,11 +91,8 @@ export const HeroSection = () => {
             className="flex justify-center"
           >
             <Link href="/docs/components-overview">
-              <AnimatedButton
-                as="div"
-                className="group relative overflow-hidden rounded-xl bg-black text-white dark:bg-white dark:text-black px-10 py-4 transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_0_40px_-10px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)] active:scale-[0.98] cursor-pointer border-none"
-              >
-                <span className="relative z-10 font-bold text-sm tracking-wide">Browse Components</span>
+              <AnimatedButton className="text-sm px-8 py-4">
+                Browse Components
               </AnimatedButton>
             </Link>
           </motion.div>

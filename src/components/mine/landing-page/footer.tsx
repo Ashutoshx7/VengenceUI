@@ -21,12 +21,12 @@ import { motion } from "framer-motion";
 
 const Footer = () => {
 
-const icons = [
-                {
-                  icon: Instagram,
-                  link: "https://www.instagram.com/epitome0.0/",
-                }
-              ]
+  const icons = [
+    {
+      icon: Instagram,
+      link: "https://www.instagram.com/epitome0.0/",
+    }
+  ]
 
   const firstLI = [
     {
@@ -54,85 +54,70 @@ const icons = [
 
 
 
-    <div className=" md:flex justify-center  ">
-      <section className="min-h-svh md:min-h-0 md:w-7xl mx-4 grid grid-cols-1 md:grid-cols-[1fr_2fr] grid-rows-[1fr_1fr_1fr_1fr] h-80">
+    <div className="w-full flex justify-center items-center flex-col">
+      {/* Top Section - Full Width Border Bottom */}
+      <section className="w-full border-y border-foreground/10">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_2fr] min-h-[250px]">
 
-
-        <div className=" md:border-b md:border-r md:border-foreground/10  py-4 ">
-          <p className="text-lg text-muted-foreground leading-relaxed max-w-xl font-light text-balance">
-            A carefully crafted React component library for building modern, responsive web applications.
-            <br /> Every component is designed with attention to detail.
-          </p>
-
-          {/* {
-            icons.map((el , id)=>{
-              return <div className="" key={id} >
-               <span>{el.icon}</span>
-              </div>
-            })
-          } */}
-
-         
-        </div>
-
-        <div className=" p-4 md:border-b md:border-foreground/10 ">
-         
-          <div className="grid grid-cols-[2fr_2fr_1fr] md:grid-cols-[1fr_1fr_2fr] w-fit  gap-4 font-medium text-foreground/70 ">
-
-            <ul>
-
-              {
-                firstLI.map((el, id) => {
-                  return <Link href={el.href}>
-                    <li key={id} className="hover:text-foreground"> {el.li}</li>
-                  </Link>
-                })
-              }
-            </ul>
-            <ul>
-              {
-                secondLI.map((el, id) => {
-                  return <Link href={el.href}>
-                    <li key={id} className="hover:text-foreground">{el.li}</li>
-                  </Link>
-                })
-              }
-
-            </ul>
-            
-             <div className="py-2 flex gap-4 ">
-              <Link href='https://github.com/Ashutoshx7/VengeanceUI'>
-            < Github className="hover:text-foreground"/> 
-              </Link>
-            
-          </div> 
+          {/* Left: Description */}
+          <div className="md:border-r border-foreground/10 p-8 flex flex-col justify-center">
+            <p className="text-lg text-muted-foreground leading-relaxed font-light text-balance max-w-md">
+              A carefully crafted React component library for building modern, responsive web applications.
+              <br className="hidden md:block" /> Every component is designed with attention to detail.
+            </p>
           </div>
+
+          {/* Right: Links */}
+          <div className="p-8 flex items-center">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-8 w-full font-medium text-foreground/70">
+              <ul className="space-y-4">
+                {firstLI.map((el, id) => (
+                  <Link href={el.href} key={id} className="block w-fit">
+                    <li className="hover:text-foreground transition-colors">{el.li}</li>
+                  </Link>
+                ))}
+              </ul>
+              <ul className="space-y-4">
+                {secondLI.map((el, id) => (
+                  <Link href={el.href} key={id} className="block w-fit">
+                    <li className="hover:text-foreground transition-colors">{el.li}</li>
+                  </Link>
+                ))}
+              </ul>
+              <div className="flex items-start justify-start md:justify-end">
+                <Link href='https://github.com/Ashutoshx7/VengeanceUI' target="_blank" rel="noopener noreferrer">
+                  <Github className="w-6 h-6 hover:text-foreground transition-colors" />
+                </Link>
+              </div>
+            </div>
+          </div>
+
         </div>
+      </section>
 
-        <div className="perspective-distant transform-3d md:border-r md:border-foreground/10  flex items-center justify-center ">
-          <motion.img
+      {/* Bottom Section */}
+      <section className="w-full">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_2fr] min-h-[250px]">
 
-            src="/logo/bg-less.png"
-            alt="Logo"
-            className="  size-30 md:size-60 w-auto dark:invert rotate-180"
-            draggable={false}
+          {/* Left: Logo */}
+          <div className="md:border-r border-foreground/10 p-8 flex items-center justify-center">
+            <motion.img
+              src="/logo/bg-less.png"
+              alt="Logo"
+              className="w-32 h-32 md:w-40 md:h-40 dark:invert object-contain"
+              draggable={false}
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            />
+          </div>
 
-            whileHover={{
-              scale: 1.1
-            }}
+          {/* Right: Big Text */}
+          <div className="flex items-center justify-center p-8 overflow-hidden relative">
+            <h1 className="vengeanceUI-text text-[15vw] md:text-[8rem] lg:text-[9rem] leading-none tracking-tighter text-center md:text-left select-none">
+              VENGEANCEUI
+            </h1>
+          </div>
 
-            transition={{
-              duration: 0.3
-            }}
-
-          />
-            
-        </div>
-
-        <div className="flex text-[3rem] md:text-[6rem] items-center md:justify-center bg-[ #e91e63] overflow-hidden md:relative">
-          <h1 className="vengeanceUI-text">
-            VengeanceUI
-          </h1>
         </div>
       </section>
     </div>
