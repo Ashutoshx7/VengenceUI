@@ -4,6 +4,7 @@ import Navbar from "@/components/mine/landing-page/navbar";
 import { Sec1 } from "@/components/mine/landing-page/sec1";
 import { LandingPageGrid } from "@/components/mine/landing-page/landing-page-grid";
 import { SmoothScroll } from "@/components/ui/smooth-scroll";
+// import { TestimonialSection } from "@/components/mine/landing-page/testimonial-section";
 
 const Page = () => {
   return (
@@ -18,11 +19,11 @@ const Page = () => {
         <LandingPageGrid
           centerText="Components"
           className="mt-[-5vh]"
-        />
-
+          />
         <div className="px-4 md:px-20">
           <Sec1 />
         </div>
+          {/* <TestimonialSection/> */}
       </div>
     </SmoothScroll>
   );
