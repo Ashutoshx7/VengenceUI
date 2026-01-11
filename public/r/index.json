@@ -29,14 +29,6 @@
     ]
   },
   {
-    "name": "animated-tab-bar",
-    "dependencies": [],
-    "type": "registry:ui",
-    "files": [
-      "public/r/animated-tab-bar.json"
-    ]
-  },
-  {
     "name": "avatar",
     "dependencies": [
       "@radix-ui/react-avatar"
@@ -54,6 +46,14 @@
     "type": "registry:ui",
     "files": [
       "public/r/badge.json"
+    ]
+  },
+  {
+    "name": "border-beam",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/border-beam.json"
     ]
   },
   {
@@ -286,6 +286,16 @@
     ]
   },
   {
+    "name": "github-button",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/github-button.json"
+    ]
+  },
+  {
     "name": "glass-dock",
     "dependencies": [
       "framer-motion",
@@ -302,14 +312,6 @@
     "type": "registry:ui",
     "files": [
       "public/r/glow-border-card.json"
-    ]
-  },
-  {
-    "name": "gradient-tiles",
-    "dependencies": [],
-    "type": "registry:ui",
-    "files": [
-      "public/r/gradient-tiles.json"
     ]
   },
   {
@@ -412,6 +414,16 @@
     "type": "registry:ui",
     "files": [
       "public/r/line-hover-link.json"
+    ]
+  },
+  {
+    "name": "liquid-gradient",
+    "dependencies": [
+      "framer-motion"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/liquid-gradient.json"
     ]
   },
   {
@@ -545,16 +557,6 @@
     "type": "registry:ui",
     "files": [
       "public/r/scroll-area.json"
-    ]
-  },
-  {
-    "name": "scroll-effect",
-    "dependencies": [
-      "framer-motion"
-    ],
-    "type": "registry:ui",
-    "files": [
-      "public/r/scroll-effect.json"
     ]
   },
   {
@@ -723,6 +725,14 @@
     "type": "registry:ui",
     "files": [
       "public/r/testimonials-card.json"
+    ]
+  },
+  {
+    "name": "testinomial-card2",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/testinomial-card2.json"
     ]
   },
   {

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "border-beam",
+  "type": "registry:ui",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/ui/border-beam.tsx",
+      "content": "\"use client\";\r\n\r\nimport { cn } from \"@/lib/utils\";\r\n\r\ninterface BorderBeamProps {\r\n    className?: string;\r\n    size?: number;\r\n    duration?: number;\r\n    borderWidth?: number;\r\n    anchor?: number;\r\n    colorFrom?: string;\r\n    colorTo?: string;\r\n    delay?: number;\r\n}\r\n\r\nexport const BorderBeam = ({\r\n    className,\r\n    size = 200,\r\n    duration = 15,\r\n    anchor = 90,\r\n    borderWidth = 1.5,\r\n    colorFrom = \"#ffaa40\",\r\n    colorTo = \"#9c40ff\",\r\n    delay = 0,\r\n}: BorderBeamProps) => {\r\n    return (\r\n        <>\r\n            <style jsx>{`\r\n        @keyframes border-beam {\r\n          100% {\r\n            offset-distance: 100%;\r\n          }\r\n        }\r\n      `}</style>\r\n            <div\r\n                style={\r\n                    {\r\n                        \"--size\": size,\r\n                        \"--duration\": duration,\r\n                        \"--anchor\": anchor,\r\n                        \"--border-width\": borderWidth,\r\n                        \"--color-from\": colorFrom,\r\n                        \"--color-to\": colorTo,\r\n                        \"--delay\": delay,\r\n                    } as React.CSSProperties\r\n                }\r\n                className={cn(\r\n                    \"absolute inset-[0] rounded-[inherit] [border:calc(var(--border-width)*1px)_solid_transparent]\",\r\n                    \"![mask-clip:padding-box,border-box] ![mask-composite:intersect] [mask:linear-gradient(transparent,transparent),linear-gradient(white,white)]\",\r\n                    \"after:absolute after:aspect-square after:w-[calc(var(--size)*1px)] after:[animation:border-beam_calc(var(--duration)*1s)_infinite_linear] after:[animation-delay:var(--delay)s] after:[background:linear-gradient(to_left,var(--color-from),var(--color-to),transparent)] after:[offset-anchor:calc(var(--anchor)*1%)_50%] after:[offset-path:rect(0_auto_auto_0_round_calc(var(--size)*1px))]\",\r\n                    className,\r\n                )}\r\n            />\r\n        </>\r\n    );\r\n};\r\n",
+      "type": "registry:ui",
+      "target": "components/ui/border-beam.tsx"
+    }
+  ]
+}
