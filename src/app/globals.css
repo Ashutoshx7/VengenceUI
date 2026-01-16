@@ -72,8 +72,22 @@ body,
 #__next {
   font-family: var(--font-inter-tight);
   -webkit-font-smoothing: antialiased;
-  /* makes it look smoother */
   -moz-osx-font-smoothing: grayscale;
+  /* Performance optimizations */
+  text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* GPU acceleration for smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Content containment for better performance */
+main,
+section,
+article {
+  contain: layout style;
 }
 
 .font-pixelify {
@@ -272,17 +286,10 @@ div[data-nextra-sidebar="true"] {
   color: var(--muted-foreground);
 }
 
-/* Vertical Line - runs along the left of all items */
+/* Vertical Line - DISABLED - Now handled by SidebarHoverIndicator component */
 .nextra-sidebar-container a::before,
 .nextra-sidebar-container button:not([aria-label])::before {
-  content: "";
-  position: absolute;
-  left: 8px;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background-color: var(--border);
-  transition: background-color 0.3s ease;
+  display: none !important;
 }
 
 /* Active/Hover Indicator Bar - Now handled by SidebarHoverIndicator component */
