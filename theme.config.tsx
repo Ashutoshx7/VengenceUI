@@ -3,6 +3,7 @@ import React from 'react'
 import { DocsThemeConfig, useConfig } from 'nextra-theme-docs'
 import { CommandMenu } from './src/components/command-menu'
 import { ModeToggle } from './src/components/mode-toggle'
+import { LiquidGithub } from './src/components/liquid-github'
 import { useRouter } from 'next/router'
 
 const siteUrl = 'https://www.vengenceui.com'
@@ -16,9 +17,7 @@ const config: DocsThemeConfig = {
     ),
     project: {
         link: 'https://github.com/Ashutoshx7/VengeanceUI',
-    },
-    chat: {
-        link: 'https://discord.com',
+        icon: <LiquidGithub />
     },
     docsRepositoryBase: 'https://github.com/Ashutoshx7/VengeanceUI/tree/main',
     sidebar: {
