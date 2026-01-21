@@ -27,6 +27,8 @@ const DEPENDENCY_MAP: Record<string, string> = {
     'vaul': 'vaul',
     'zod': 'zod',
     '@paper-design/shaders-react': '@paper-design/shaders-react',
+    'gsap': 'gsap',
+    '@gsap/react': '@gsap/react',
     'react-hook-form': 'react-hook-form',
     '@hookform/resolvers': '@hookform/resolvers',
     '@radix-ui/react-accordion': '@radix-ui/react-accordion',

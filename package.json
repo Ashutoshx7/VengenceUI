@@ -12,6 +12,7 @@
     "mcp": "npx tsx src/scripts/mcp-server.ts"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@hookform/resolvers": "^5.2.2",
     "@modelcontextprotocol/sdk": "^1.25.1",
     "@paper-design/shaders-react": "^0.0.70",
