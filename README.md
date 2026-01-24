@@ -48,7 +48,25 @@ VengeanceUI is built using modern frontend technologies:
 
 
 ---
+## Star History
 
+<a href="https://star-history.com/#Ashutoshx7/VengeanceUI&Date">
+  <picture>
+    <source
+      media="(prefers-color-scheme: dark)"
+      srcset="https://api.star-history.com/svg?repos=Ashutoshx7/VengeanceUI&type=Date&theme=dark&legend=top-left"
+    />
+    <source
+      media="(prefers-color-scheme: light)"
+      srcset="https://api.star-history.com/svg?repos=Ashutoshx7/VengeanceUI&type=Date&legend=top-left"
+    />
+    <img
+      alt="Star History Chart"
+      src="https://api.star-history.com/svg?repos=Ashutoshx7/VengeanceUI&type=Date&legend=top-left"
+    />
+  </picture>
+</a>
+a
 
 
 
