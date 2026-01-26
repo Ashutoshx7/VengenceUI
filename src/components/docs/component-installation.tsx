@@ -221,7 +221,26 @@ interface DependenciesProps {
 
 export const Dependencies = ({ step, title, children, copyText, id }: DependenciesProps) => {
     const { hasCopied, copy } = useCopy()
-    const textToCopy = copyText ?? (typeof children === "string" ? children : "")
+    
+    // trying to extract code from children as string
+    const extractCodeFromChildren = React.useMemo(() => {
+        if (copyText) return copyText
+        if (typeof children === "string") return children
+        
+        // use the object method for finding the props
+        let codeText = ""
+        React.Children.forEach(children, (child) => {
+            if (React.isValidElement(child) && child.type === CodeBlock) {
+                const codeBlockProps = child.props as CodeBlockProps
+                if (codeBlockProps.code) {
+                    codeText = codeBlockProps.code
+                }
+            }
+        })
+        return codeText
+    }, [children, copyText])
+    
+    const textToCopy = extractCodeFromChildren
 
     const processedChildren = React.Children.map(children, (child) => {
         if (React.isValidElement(child) && child.type === CodeBlock) {
