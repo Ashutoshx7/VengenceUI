@@ -39,13 +39,6 @@ export const StackedLogos = ({
 }: StackedLogosProps) => {
   const itemCount = logoGroups[0]?.length || 0;
   const columns = logoGroups.length;
-  console.log(
-    "Rendered StackedLogos with",
-    columns,
-    "columns and",
-    itemCount,
-    "items per column.",
-  );
   const containerRef = React.useRef<HTMLDivElement>(null);
   const gridRef = React.useRef<HTMLDivElement>(null);
 
