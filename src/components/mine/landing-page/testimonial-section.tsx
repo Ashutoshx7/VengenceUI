@@ -76,7 +76,7 @@ export const TestimonialSection = () => {
     })
 
     return (
-        <div className="grid grid-rows-auto  max-h-screen  relative mb-10 md:mb-30 gap-5 space-y-20 md:gap-8 overflow-hidden touch-pan-y ">
+        <div className="grid grid-rows-auto  max-h-screen  relative mb-10 gap-5 space-y-20 md:gap-8 overflow-hidden touch-pan-y ">
 
             <motion.div
                 style={{ x: x1 }}
