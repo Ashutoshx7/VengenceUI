@@ -22,7 +22,7 @@ export function PropsTable({ data, title, className }: PropsTableProps) {
             {title && (
                 <h4 className="font-heading text-lg font-bold tracking-tight mt-6 mb-2">{title}</h4>
             )}
-            <div className="relative w-full overflow-hidden rounded-xl !border-[1px] !border-neutral-200 dark:!border-neutral-700 bg-neutral-100 dark:bg-[#121212]">
+            <div className="relative w-full overflow-hidden overflow-x-auto rounded-xl !border-[1px] !border-neutral-200 dark:!border-neutral-700 bg-neutral-100 dark:bg-[#121212]">
                 <table className="w-full text-left text-sm">
                     <thead className="bg-white dark:bg-black">
                         <tr className="!border-b-[1px] !border-neutral-200 dark:!border-neutral-700">
