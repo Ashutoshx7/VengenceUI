@@ -43,6 +43,28 @@
   --rainbow-pink: 330 81% 60%;
   --rainbow-cyan: 180 77% 50%;
   --stripe-color: rgba(255, 255, 255, 0.1);
+
+  /* morphing-disclosure component */
+  --jump-distance: 1.5rem;
+  --duration: 260ms;
+  --bounce: linear(0 0%,
+      0.5571 7.53%,
+      0.8252 11.98%,
+      0.9337 14.38%,
+      1.0166 16.8%,
+      1.0765 19.31%,
+      1.1146 21.97%,
+      1.1263 23.47%,
+      1.1325 25.06%,
+      1.133 26.76%,
+      1.128 28.62%,
+      1.1094 31.9%,
+      1.0484 39.77%,
+      1.0218 43.85%,
+      1.0011 48.42%,
+      0.9895 53.23%,
+      0.9861 59.8%,
+      1 81.27% 100%);
 }
 
 html,
@@ -50,8 +72,22 @@ body,
 #__next {
   font-family: var(--font-inter-tight);
   -webkit-font-smoothing: antialiased;
-  /* makes it look smoother */
   -moz-osx-font-smoothing: grayscale;
+  /* Performance optimizations */
+  text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* GPU acceleration for smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Content containment for better performance */
+main,
+section,
+article {
+  contain: layout style;
 }
 
 .font-pixelify {
@@ -192,11 +228,13 @@ body,
 }
 
 .spotlight-nav-shadow {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
 }
 
 .dark .spotlight-nav-shadow {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5),
+    0 4px 6px -4px rgba(0, 0, 0, 0.5);
 }
 
 /* Hide all scrollbars (visual only) across browsers) */
@@ -206,7 +244,6 @@ body,
   scrollbar-width: none;
   /* Firefox */
 }
-
 
 /* Sidebar & Layout: ANIMATE-UI STYLE */
 
@@ -382,40 +419,35 @@ html:not(.dark) [class*="nav-container"] {
   -webkit-text-fill-color: transparent;
 }
 
-
 .vengeanceUI-text {
-
-  
   font-weight: bold;
   text-transform: uppercase;
   position: relative;
-  animation: melt 3s infinite ease-in-out;
+  animation: melt 6s infinite ease-in-out;
   color: hsl(var(--foreground));
-  text-shadow: 0 0 40px hsl(var(--foreground) / 0.3);
+  text-shadow: 0 0 40px hsl(var(--foreground) / 0.1);
 }
 
 .vengeanceUI-text::before,
 .vengeanceUI-text::after {
-  content: 'vengeanceUI';
+  content: "vengeanceUI";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  color: hsl(var(--foreground) / 0.3);
+  color: hsl(var(--foreground) / 0.15);
   z-index: -1;
   transform: scaleY(1);
-  animation: drip 3s infinite ease-in-out;
-
+  animation: drip 6s infinite ease-in-out;
 }
 
 .vengeanceUI-text::after {
-  filter: blur(10px);
-  color: hsl(var(--foreground) / 0.15);
+  filter: blur(20px);
+  color: hsl(var(--foreground) / 0.1);
 }
 
 /* effect for vengeanceUI-text melting */
-
 @keyframes melt {
 
   0%,
@@ -424,7 +456,7 @@ html:not(.dark) [class*="nav-container"] {
   }
 
   50% {
-    transform: translateY(20px);
+    transform: translateY(10px);
   }
 }
 
@@ -436,11 +468,10 @@ html:not(.dark) [class*="nav-container"] {
   }
 
   50% {
-    transform: scaleY(1.5);
-    opacity: 0.4;
+    transform: scaleY(1.15);
+    opacity: 0.3;
   }
 }
-
 
 /* FORCE LOGO TO WHITE IN DARK MODE */
 .dark nav img,
@@ -643,7 +674,7 @@ html:not(.dark) [class*="nav-container"] {
 
 /* Register --glow-angle for animation */
 @property --glow-angle {
-  syntax: '<angle>';
+  syntax: "<angle>";
   initial-value: 0deg;
   inherits: false;
 }
@@ -709,7 +740,7 @@ html:not(.dark) [class*="nav-container"] {
 }
 
 .link-hover::before {
-  content: '';
+  content: "";
 }
 
 /* Slide - Simple slide from right to left */
@@ -738,7 +769,7 @@ html:not(.dark) [class*="nav-container"] {
 }
 
 .link-hover--double::after {
-  content: '';
+  content: "";
   top: calc(100% + 4px);
   transform-origin: 0% 50%;
   transform: scale3d(0, 1, 1);
@@ -765,7 +796,7 @@ html:not(.dark) [class*="nav-container"] {
 }
 
 .link-hover--grow::after {
-  content: '';
+  content: "";
   top: calc(100% + 4px);
   transform-origin: 100% 50%;
   transform: scale3d(0, 1, 1);
@@ -824,7 +855,7 @@ html:not(.dark) [class*="nav-container"] {
 }
 
 .link-hover--fade::after {
-  content: '';
+  content: "";
   top: calc(100% + 4px);
   width: 70%;
   left: 15%;
@@ -874,7 +905,7 @@ html:not(.dark) [class*="nav-container"] {
 }
 
 .link-hover--pulse::after {
-  content: '';
+  content: "";
   transition: opacity 0.3s;
   opacity: 0;
   transition-delay: 0s;
@@ -897,7 +928,7 @@ html:not(.dark) [class*="nav-container"] {
 }
 
 .link-hover--swap::after {
-  content: '';
+  content: "";
   top: calc(100% + 4px);
   transition: transform 0.3s;
   transform-origin: 100% 50%;
@@ -942,7 +973,7 @@ html:not(.dark) [class*="nav-container"] {
 }
 
 .link-hover--sweep::after {
-  content: '';
+  content: "";
   transition: opacity 0.3s;
 }
 
@@ -1210,8 +1241,6 @@ html:not(.dark) [class*="nav-container"] {
   }
 }
 
-
-
 /* ============================================
    ScrollEffect Component Styles
    
@@ -1221,19 +1250,15 @@ html:not(.dark) [class*="nav-container"] {
    - grid size calculatin
    ============================================ */
 
-
 @property --k {
-  syntax: '<number>';
+  syntax: "<number>";
   initial-value: 0;
   inherits: true;
-
 }
 
 .clip-root {
-
   --g: 1rem;
   --n: 2;
-
 
   position: sticky;
   top: 0;
@@ -1245,8 +1270,6 @@ html:not(.dark) [class*="nav-container"] {
   grid-auto-rows: 1fr;
   gap: var(--g);
   overflow: hidden;
-
-
 }
 
 /* image clip effect support */
@@ -1265,8 +1288,8 @@ html:not(.dark) [class*="nav-container"] {
   border-radius: var(--g);
   contain: size;
 
-  &:nth-child(n+3) {
-    --j: 1
+  &:nth-child(n + 3) {
+    --j: 1;
   }
 }
 
@@ -1283,42 +1306,32 @@ html:not(.dark) [class*="nav-container"] {
 }
 
 .clip-img:not(.feat) {
-  --d: calc(clamp(0, var(--i) + (1-2 * var(--k)) * (var(--n) - 1),
-        1) * 33cqw);
+  --d: calc(clamp(0, var(--i) + (1-2 * var(--k)) * (var(--n) - 1), 1) * 33cqw);
 
-  transform: translate(calc(var(--s) * var(--d)),
-      calc(0.5 * var(--d)));
+  transform: translate(calc(var(--s) * var(--d)), calc(0.5 * var(--d)));
   z-index: 0;
 }
 
 .mid {
-
   --j: 1;
   grid-column: var(--p);
   grid-row: calc(var(--i) + 1);
 
-
   &:nth-child(5) {
-
     width: 80%;
     height: 150px;
-
   }
 
   &:nth-child(4) {
     margin-top: -200px;
 
-
     width: 40%;
     height: 200px;
   }
-
-
 }
 
 /* end images grid calculations */
 .end {
-
   /* grid-area: var(--p) / var(--p); */
 
   grid-column: var(--p);
@@ -1336,7 +1349,6 @@ html:not(.dark) [class*="nav-container"] {
     width: 40%;
     height: 200px;
     justify-self: end;
-
   }
 }
 
@@ -1375,7 +1387,8 @@ html:not(.dark) [class*="nav-container"] {
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.1));
   opacity: 1;
   /* Default slide transition */
-  transition: left 900ms cubic-bezier(0.16, 1, 0.3, 1), top 900ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: left 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    top 900ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Exit state - triggered by JS */
@@ -1460,7 +1473,7 @@ html:not(.dark) [class*="nav-container"] {
 }
 
 .glass-dock button.active {
-  color: #7EE9F2;
+  color: #7ee9f2;
 }
 
 /* Dark mode adjustment for base icon color in glass dock if not active */
@@ -1469,7 +1482,7 @@ html:not(.dark) [class*="nav-container"] {
 }
 
 .tab-bar button.active {
-  color: #7EE9F2;
+  color: #7ee9f2;
 }
 
 .tab-bar button.home,
@@ -1480,7 +1493,7 @@ html:not(.dark) [class*="nav-container"] {
 
 .tab-bar button.home:before,
 .glass-dock button.home:before {
-  content: '';
+  content: "";
   width: 10px;
   height: 10px;
   border-radius: 5px;
@@ -1500,7 +1513,6 @@ html:not(.dark) [class*="nav-container"] {
   --tab-bar-chart-4-offset: 17px;
 }
 
-
 /* Marker Button Animation Styles */
 .tab-bar button.marker,
 .glass-dock button.marker {
@@ -1510,7 +1522,7 @@ html:not(.dark) [class*="nav-container"] {
 
 .tab-bar button.marker:before,
 .glass-dock button.marker:before {
-  content: '';
+  content: "";
   width: 11px;
   height: 11px;
   border-radius: 6px;
@@ -1543,8 +1555,6 @@ html:not(.dark) [class*="nav-container"] {
   --tab-bar-linkedin-opacity: 1;
 }
 
-
-
 /* X Button Animation Styles */
 .tab-bar button.x,
 .glass-dock button.x {
@@ -1571,7 +1581,6 @@ html:not(.dark) [class*="nav-container"] {
   will-change: transform;
 }
 
-
 /* Phone Container */
 .phone {
   position: relative;
@@ -1579,20 +1588,21 @@ html:not(.dark) [class*="nav-container"] {
   width: 100%;
   display: flex;
   background-color: #111113;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, .1), 0 4px 12px rgba(0, 0, 0, .1), 0 8px 24px rgba(0, 0, 0, .1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.1),
+    0 8px 24px rgba(0, 0, 0, 0.1);
   border-radius: 0 0 41px 41px;
   min-height: 100px;
 }
 
 .phone:before {
-  content: '';
+  content: "";
   height: 4px;
   bottom: 8px;
   width: 88px;
   left: 50%;
   transform: translateX(-50%) scaleY(0.75);
   position: absolute;
-  background-color: #2D2D34;
+  background-color: #2d2d34;
   border-radius: 2px;
   z-index: 1;
 }
@@ -1609,4 +1619,37 @@ html:not(.dark) [class*="nav-container"] {
 
 .animate-background-shine {
   animation: background-shine 2s linear infinite;
+}
+
+/* ============================================
+   Morphing disclosure Component Styles
+   ============================================ */
+
+.details {
+  transition: margin var(--duration) var(--bounce),
+    transform var(--duration) var(--bounce);
+}
+
+.details[open] {
+  margin-block: var(--jump-distance);
+}
+
+
+
+
+
+/* .details:last-child {
+  border-radius: 0px 0px 10px 10px;
+} */
+
+/* Safely hide Nextra Sidebar Footer */
+.nextra-sidebar-footer,
+.nx-sidebar-footer {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  pointer-events: none !important;
 }

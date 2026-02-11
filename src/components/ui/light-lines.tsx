@@ -93,7 +93,14 @@ export function LightLines({
             currentY: 0,
         }));
 
+        let isVisible = false;
+
         const animate = (time: number) => {
+            if (!isVisible) {
+                frameRef.current = requestAnimationFrame(animate);
+                return;
+            }
+
             animationsRef.current.forEach((ref, index) => {
                 if (!ref.element) return;
 
@@ -108,12 +115,22 @@ export function LightLines({
             frameRef.current = requestAnimationFrame(animate);
         };
 
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                isVisible = entry.isIntersecting;
+            },
+            { threshold: 0 }
+        );
+
+        observer.observe(container);
+
         frameRef.current = requestAnimationFrame(animate);
 
         return () => {
             if (frameRef.current) {
                 cancelAnimationFrame(frameRef.current);
             }
+            observer.disconnect();
         };
     }, [speedMultiplier]);
 

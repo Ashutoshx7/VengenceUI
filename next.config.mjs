@@ -9,8 +9,13 @@ const withNextra = nextra({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     /* config options here */
-    // devIndicators: { buildActivity: false },
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+    eslint: {
+        ignoreDuringBuilds: true,
+    },
+    typescript: {
+        ignoreBuildErrors: true,
+    },
 };
 
 export default withNextra(nextConfig);

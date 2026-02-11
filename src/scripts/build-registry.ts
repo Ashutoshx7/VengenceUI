@@ -26,6 +26,9 @@ const DEPENDENCY_MAP: Record<string, string> = {
     'sonner': 'sonner',
     'vaul': 'vaul',
     'zod': 'zod',
+    '@paper-design/shaders-react': '@paper-design/shaders-react',
+    'gsap': 'gsap',
+    '@gsap/react': '@gsap/react',
     'react-hook-form': 'react-hook-form',
     '@hookform/resolvers': '@hookform/resolvers',
     '@radix-ui/react-accordion': '@radix-ui/react-accordion',
@@ -113,7 +116,8 @@ async function main() {
         });
 
         fs.writeFileSync(path.join(REGISTRY_DIR, 'registry.json'), JSON.stringify(registryIndex, null, 2));
-        console.log('Generated registry.json index.');
+        fs.writeFileSync(path.join(REGISTRY_DIR, 'index.json'), JSON.stringify(registryIndex, null, 2));
+        console.log('Generated registry.json and index.json.');
 
         files.forEach(file => {
             processComponent(file);

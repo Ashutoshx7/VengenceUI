@@ -3,6 +3,7 @@ import React from 'react'
 import { DocsThemeConfig, useConfig } from 'nextra-theme-docs'
 import { CommandMenu } from './src/components/command-menu'
 import { ModeToggle } from './src/components/mode-toggle'
+import { LiquidGithub } from './src/components/liquid-github'
 import { useRouter } from 'next/router'
 
 const siteUrl = 'https://www.vengenceui.com'
@@ -16,9 +17,7 @@ const config: DocsThemeConfig = {
     ),
     project: {
         link: 'https://github.com/Ashutoshx7/VengeanceUI',
-    },
-    chat: {
-        link: 'https://discord.com',
+        icon: <LiquidGithub />
     },
     docsRepositoryBase: 'https://github.com/Ashutoshx7/VengeanceUI/tree/main',
     sidebar: {
@@ -27,13 +26,16 @@ const config: DocsThemeConfig = {
     },
     navbar: {
         extraContent: (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2  ">
                 <CommandMenu />
                 <ModeToggle />
             </div>
         )
     },
     themeSwitch: {
+        component: null
+    },
+    search: {
         component: null
     },
     navigation: {
@@ -54,6 +56,24 @@ const config: DocsThemeConfig = {
 
         return (
             <>
+                {/* JSON-LD Structured Data */}
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "WebSite",
+                            "name": "VengeanceUI",
+                            "url": siteUrl,
+                            "description": description,
+                            "author": {
+                                "@type": "Organization",
+                                "name": "VengeanceUI"
+                            }
+                        })
+                    }}
+                />
+
                 {/* Page Title */}
                 <title>{pageTitle}</title>
 

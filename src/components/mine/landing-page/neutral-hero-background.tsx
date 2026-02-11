@@ -1,12 +1,8 @@
-"use client";
-
 import React, { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
-import { useTheme } from "next-themes";
 
 export const NeutralHeroBackground = ({ className }: { className?: string }) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const { theme } = useTheme();
 
     // Determine colors based on theme
     // We can't purely rely on CSS variables inside the canvas logic easily without parsing,
@@ -30,7 +26,7 @@ export const NeutralHeroBackground = ({ className }: { className?: string }) => 
         let particleCount = 0;
 
         const calculateParticleCount = () => {
-            return Math.floor((window.innerWidth * window.innerHeight) / 6000);
+            return Math.floor((window.innerWidth * window.innerHeight) / 12000); // Reduced particle density for performance
         };
 
         class Particle {
@@ -128,11 +124,35 @@ export const NeutralHeroBackground = ({ className }: { className?: string }) => 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         initParticles();
-        animate();
+
+        // Intersection Observer to pause animation when off-screen
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        if (!animationFrameId) {
+                            animate();
+                        }
+                    } else {
+                        if (animationFrameId) {
+                            cancelAnimationFrame(animationFrameId);
+                            animationFrameId = 0 as any; // forceful cast to stop loop
+                        }
+                    }
+                });
+            },
+            { threshold: 0 }
+        );
+
+        // We observe the canvas parent (the component div)
+        // Since we don't have a ref to the div directly here easily without changing props or wrapping
+        // we can observe the canvas itself.
+        if (canvas) observer.observe(canvas);
 
         return () => {
             window.removeEventListener("resize", onResize);
-            cancelAnimationFrame(animationFrameId);
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            observer.disconnect();
         };
     }, []);
 
@@ -167,8 +187,12 @@ export const NeutralHeroBackground = ({ className }: { className?: string }) => 
             background-image: conic-gradient(from 0deg at 50% -5%, transparent 45%, rgba(100, 100, 100, .1) 49%, rgba(0, 0, 0, .1) 50%, rgba(100, 100, 100, .1) 51%, transparent 55%);
             
             transform-origin: 50% 0;
-            filter: blur(15px) opacity(0.5);
+            filter: blur(10px) opacity(0.5);
+            -webkit-backdrop-filter: blur(0px); /* Hack to trigger GPU sometimes */
             z-index: -1;
+            /* Force GPU acceleration */
+            transform: translate3d(0,0,0);
+            will-change: transform;
             animation: load 2s ease-in-out forwards, loadrot 2s ease-in-out forwards, spotlight 21s ease-in-out infinite reverse;
         }
         
@@ -255,9 +279,7 @@ export const NeutralHeroBackground = ({ className }: { className?: string }) => 
             /* Light mode shadows/bg */
             box-shadow: 
             -1em -0.2em 0.4em -1.1em #e5e7eb,
-            inset 0em 0em 0em 2px #e5e7eb,
-            inset 0.2em 0.3em 0.2em -0.2em #e5e7eb,
-            inset 10.2em 10.3em 2em -10em rgba(0,0,0, 0.05);
+            inset 0em 0em 0em 2px #e5e7eb;
             background: #ffffff;
             z-index: 1;
             filter: brightness(1);

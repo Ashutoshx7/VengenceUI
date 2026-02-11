@@ -79,8 +79,30 @@ export function ComponentPreview({
 
     // ... inside ComponentPreview ...
 
+    // Lazy loading logic
+    const [isVisible, setIsVisible] = useState(false);
+    const containerRef = React.useRef<HTMLDivElement>(null);
+
+    React.useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.1, rootMargin: "50px" }
+        );
+
+        if (containerRef.current) {
+            observer.observe(containerRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <div className={cn("group relative my-8 flex flex-col space-y-4", className)}>
+        <div ref={containerRef} className={cn("group relative my-8 flex flex-col space-y-4", className)}>
             <div className="flex flex-col space-y-1.5">
                 {description && <p className="text-muted-foreground text-sm leading-relaxed max-w-2xl">{description}</p>}
             </div>
@@ -138,7 +160,12 @@ export function ComponentPreview({
                         <div className="absolute inset-0 bg-white/30 dark:bg-neutral-950/30 pointer-events-none" />
 
                         <div className="preview relative z-10 flex min-h-[350px] w-full items-center justify-center p-10">
-                            {component}
+                            {isVisible ? component : (
+                                <div className="flex flex-col items-center gap-2 text-neutral-400">
+                                    <div className="w-8 h-8 border-2 border-neutral-300 dark:border-neutral-700 border-t-transparent rounded-full animate-spin" />
+                                    <span className="text-xs font-medium">Loading Preview...</span>
+                                </div>
+                            )}
                         </div>
                     </TabsContent>
 

@@ -1,30 +1,42 @@
-'use client'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, memo } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import imagesLoaded from 'imagesloaded'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
-
-// Import ACTUAL UI components from the library
-import AnimatedButton from '@/components/ui/animated-button'
-import { CreepyButton } from '@/components/ui/creepy-button'
-import { FlipText } from '@/components/ui/flip-text'
-import { GlassDock } from '@/components/ui/glass-dock'
-import { LiquidText } from '@/components/ui/liquid-text'
-import { PerspectiveGrid } from '@/components/ui/perspective-grid'
-import SocialFlipButton from '@/components/ui/social-flip-button'
-import { SpotlightNavbar } from '@/components/ui/spotlight-navbar'
-import { MaskedAvatars } from '@/components/ui/masked-avatars'
-import InteractiveBook from '@/components/ui/interactive-book'
-import TestimonialsCard from '@/components/ui/testimonials-card'
+import dynamic from 'next/dynamic'
 import {
     Sparkles, Book, Grid3X3, Users,
-    Layers, Type, MousePointer2, Palette, Dock, PanelTop, Image,
-    Home, Settings, User, Mail, Search, MousePointerClick
+    Layers, Type, MousePointer2, Palette, Dock, PanelTop, Image as ImageIcon,
+    Home, Settings, User
 } from 'lucide-react'
 
+// Lightweight components (can stay standard import or be dynamic if very large)
+import AnimatedButton from '@/components/ui/animated-button'
+import { FlipText } from '@/components/ui/flip-text'
+import SocialFlipButton from '@/components/ui/social-flip-button'
+
+// Heavy UI components - Lazy Loaded
+// ssr: false ensures they don't break hydration and saves server load
+const CreepyButton = dynamic(() => import('@/components/ui/creepy-button').then(mod => mod.CreepyButton), { ssr: false })
+const GlassDock = dynamic(() => import('@/components/ui/glass-dock').then(mod => mod.GlassDock), { ssr: false })
+const LiquidText = dynamic(() => import('@/components/ui/liquid-text').then(mod => mod.LiquidText), { ssr: false })
+const PerspectiveGrid = dynamic(() => import('@/components/ui/perspective-grid').then(mod => mod.PerspectiveGrid), { ssr: false })
+const SpotlightNavbar = dynamic(() => import('@/components/ui/spotlight-navbar').then(mod => mod.SpotlightNavbar), { ssr: false })
+const MaskedAvatars = dynamic(() => import('@/components/ui/masked-avatars').then(mod => mod.MaskedAvatars), { ssr: false })
+const InteractiveBook = dynamic(() => import('@/components/ui/interactive-book'), { ssr: false })
+const TestimonialsCard = dynamic(() => import('@/components/ui/testimonials-card'), { ssr: false })
+const GlowBorderCard = dynamic(() => import('@/components/ui/glow-border-card').then(mod => mod.GlowBorderCard), { ssr: false })
+const LightLines = dynamic(() => import('@/components/ui/light-lines'), { ssr: false })
+const LiquidOcean = dynamic(() => import('@/components/ui/liquid-ocean'), { ssr: false })
+
 gsap.registerPlugin(ScrollTrigger)
+
+// Simple placeholder for loading states if needed
+const ComponentPlaceholder = () => <div className="w-full h-full bg-neutral-100 dark:bg-neutral-900 animate-pulse rounded-lg" />
+
+// Wrappers replaced by dynamic components directly
+
 
 interface ComponentPreview {
     id: string
@@ -34,7 +46,7 @@ interface ComponentPreview {
     docPath: string
 }
 
-// Using ACTUAL UI library components as previews
+// OPTIMIZED: Actual UI components with dynamic loading + reduced complexity
 const documentedComponents: ComponentPreview[] = [
     {
         id: 'animated-button',
@@ -52,7 +64,7 @@ const documentedComponents: ComponentPreview[] = [
         name: 'Creepy Button',
         icon: <Sparkles className="w-6 h-6" />,
         preview: (
-            <div className="w-full h-full flex items-center justify-center scale-[0.85]">
+            <div className="w-full h-full flex items-center justify-center scale-[0.7]">
                 <CreepyButton>Click Me</CreepyButton>
             </div>
         ),
@@ -64,7 +76,7 @@ const documentedComponents: ComponentPreview[] = [
         icon: <Type className="w-6 h-6" />,
         preview: (
             <div className="w-full h-full flex items-center justify-center">
-                <FlipText className="text-xl font-bold text-zinc-700 dark:text-zinc-300">
+                <FlipText className="text-lg font-bold text-zinc-700 dark:text-zinc-300">
                     Flip
                 </FlipText>
             </div>
@@ -74,84 +86,84 @@ const documentedComponents: ComponentPreview[] = [
     {
         id: 'glass-dock',
         name: 'Glass Dock',
-        icon: <Dock className="w-6 h-6" />,
+        icon: <Dock className="w-8 h-8" />,
         preview: (
-            <div className="w-full h-full flex items-center justify-center scale-[0.7]">
-                <GlassDock
-                    items={[
-                        { icon: Home, title: 'Home', href: '#' },
-                        { icon: User, title: 'User', href: '#' },
-                        { icon: Settings, title: 'Settings', href: '#' },
-                    ]}
-                    className="relative"
-                />
+            <div className="w-full h-full flex items-center justify-center scale-[0.5]">
+                <GlassDock items={[
+                    { title: 'Home', icon: Home },
+                    { title: 'Settings', icon: Settings },
+                    { title: 'User', icon: User },
+                ]} />
             </div>
         ),
         docPath: '/docs/glass-dock'
     },
     {
-        id: 'gradient-tiles',
-        name: 'Gradient Tiles',
+        id: 'glow-border-card',
+        name: 'Glow Card',
         icon: <Palette className="w-8 h-8" />,
-        docPath: '/docs/gradient-tiles'
+        preview: (
+            <GlowBorderCard
+                width="100%"
+                height="100%"
+                colorPreset="aurora"
+                animationDuration={6}
+                borderRadius="0.75rem"
+            />
+        ),
+        docPath: '/docs/glow-border-card'
     },
     {
         id: 'liquid-text',
         name: 'Liquid Text',
         icon: <Type className="w-6 h-6" />,
         preview: (
-            <div className="w-full h-full flex items-center justify-center scale-[0.9]">
-                <LiquidText text="Liquid" className="text-lg" />
+            <div className="w-full h-full flex items-center justify-center scale-[0.8]">
+                <LiquidText text="Liquid" className="text-base" />
             </div>
         ),
         docPath: '/docs/liquid-text'
     },
     {
-        id: 'perspective-grid',
-        name: 'Perspective Grid',
-        icon: <Layers className="w-6 h-6" />,
+        id: 'liquid-ocean',
+        name: 'Liquid Ocean',
+        icon: <Sparkles className="w-8 h-8" />,
         preview: (
-            <div className="w-full h-full overflow-hidden rounded-lg">
-                <PerspectiveGrid />
+            <div className="w-full h-full relative overflow-hidden rounded-lg">
+                <LiquidOcean className="absolute inset-0" showBoats={false} showGrid={false} oceanFragments={10} showWireframe={false} />
             </div>
         ),
-        docPath: '/docs/perspective-grid'
+        docPath: '/docs/liquid-ocean'
     },
     {
         id: 'social-flip-button',
         name: 'Social Flip',
         icon: <MousePointer2 className="w-6 h-6" />,
         preview: (
-            <div className="w-full h-full flex items-center justify-center scale-[0.45]">
+            <div className="w-full h-full flex items-center justify-center scale-[0.4]">
                 <SocialFlipButton />
             </div>
         ),
         docPath: '/docs/social-flip-button'
     },
     {
-        id: 'spotlight-navbar',
-        name: 'Spotlight Nav',
-        icon: <PanelTop className="w-6 h-6" />,
+        id: 'perspective-grid',
+        name: 'Perspective Grid',
+        icon: <Layers className="w-8 h-8" />,
         preview: (
-            <div className="w-full h-full flex items-center justify-center scale-[0.6]">
-                <SpotlightNavbar
-                    items={[
-                        { label: 'Home', href: '#' },
-                        { label: 'About', href: '#' },
-                        { label: 'Work', href: '#' },
-                    ]}
-                />
+            <div className="w-full h-full relative overflow-hidden">
+                <PerspectiveGrid gridSize={4} showOverlay={true} fadeRadius={85} className="absolute inset-0" />
             </div>
         ),
-        docPath: '/docs/spotlight-navbar'
+        docPath: '/docs/perspective-grid'
     },
     {
         id: 'masked-avatars',
         name: 'Masked Avatars',
-        icon: <Image className="w-8 h-8" />,
+        icon: <ImageIcon className="w-8 h-8" />,
         preview: (
-            <div className="w-full h-full flex items-center justify-center scale-[0.7]">
-                <MaskedAvatars size={50} />
+            <div className="w-full h-full flex items-center justify-center scale-[0.6]">
+                <MaskedAvatars />
             </div>
         ),
         docPath: '/docs/masked-avatars'
@@ -161,13 +173,11 @@ const documentedComponents: ComponentPreview[] = [
         name: 'Interactive Book',
         icon: <Book className="w-8 h-8" />,
         preview: (
-            <div className="w-full h-full flex items-center justify-center scale-[0.4]">
+            <div className="w-full h-full flex items-center justify-center scale-[0.3]">
                 <InteractiveBook
-                    coverImage="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=350&h=500&fit=crop"
-                    bookTitle="Preview"
-                    bookAuthor="VengeanceUI"
-                    width={200}
-                    height={280}
+                    coverImage="/og-image.png"
+                    bookTitle="UI Book"
+                    bookAuthor="Vengeance"
                     pages={[
                         { pageNumber: 1, content: <div className="p-4 text-sm">Page 1</div> },
                         { pageNumber: 2, content: <div className="p-4 text-sm">Page 2</div> },
@@ -177,7 +187,47 @@ const documentedComponents: ComponentPreview[] = [
         ),
         docPath: '/docs/interactive-book'
     },
-    // These components are complex, show icons instead
+    {
+        id: 'testimonials-card',
+        name: 'Testimonials',
+        icon: <Users className="w-8 h-8" />,
+        preview: (
+            <div className="w-full h-full flex items-center justify-center scale-[0.35]">
+                <TestimonialsCard
+                    items={[
+                        { id: 1, title: "Amazing!", description: "Best UI library ever", image: "/Avatar11.jpg" },
+                        { id: 2, title: "Love it!", description: "So easy to use", image: "/Avatar6.jpg" },
+                    ]}
+                    showNavigation={false}
+                    showCounter={false}
+                    autoPlay={false}
+                />
+            </div>
+        ),
+        docPath: '/docs/testimonials-card'
+    },
+    {
+        id: 'spotlight-navbar',
+        name: 'Spotlight Nav',
+        icon: <PanelTop className="w-8 h-8" />,
+        preview: (
+            <div className="w-full h-full flex items-center justify-center scale-[0.5]">
+                <SpotlightNavbar />
+            </div>
+        ),
+        docPath: '/docs/spotlight-navbar'
+    },
+    {
+        id: 'light-lines',
+        name: 'Light Lines',
+        icon: <Sparkles className="w-8 h-8" />,
+        preview: (
+            <div className="w-full h-full relative overflow-hidden rounded-lg">
+                <LightLines className="absolute inset-0" speedMultiplier={0.5} />
+            </div>
+        ),
+        docPath: '/docs/light-lines'
+    },
     {
         id: 'expandable-bento',
         name: 'Bento Grid',
@@ -185,73 +235,40 @@ const documentedComponents: ComponentPreview[] = [
         docPath: '/docs/expandable-bento-grid'
     },
     {
-        id: 'testimonials-card',
-        name: 'Testimonials',
-        icon: <Users className="w-8 h-8" />,
-        preview: (
-            <div className="w-full h-full flex items-center justify-center scale-[0.55] overflow-visible">
-                <TestimonialsCard
-                    width={300}
-                    showNavigation={false}
-                    showCounter={false}
-                    items={[
-                        {
-                            id: 1,
-                            title: "John Doe",
-                            description: "Amazing UI components!",
-                            image: "https://i.pravatar.cc/100?u=1"
-                        },
-                    ]}
-                />
-            </div>
-        ),
-        docPath: '/docs/testimonials-card'
-    },
-    {
         id: 'staggered-grid',
         name: 'Staggered Grid',
         icon: <Grid3X3 className="w-8 h-8" />,
         docPath: '/docs/staggered-grid'
     },
-    {
-        id: 'animated-hero',
-        name: 'Animated Hero',
-        icon: <Sparkles className="w-8 h-8" />,
-        docPath: '/docs/animated-hero'
-    },
-    {
-        id: 'pixelated-image-trail',
-        name: 'Image Trail',
-        icon: <MousePointerClick className="w-8 h-8" />,
-        docPath: '/docs/pixelated-image-trail'
-    },
 ]
 
-// Featured components for center bento - using ACTUAL components
+// Featured components - ACTUAL components with dynamic loading + reduced complexity
 const featuredComponents = [
     {
-        id: 'creepy-button',
-        name: 'Creepy Button',
+        id: 'card-1',
+        name: 'Light Lines',
         preview: (
-            <div className="scale-[0.6] origin-center">
-                <CreepyButton>Hover</CreepyButton>
+            <div className="relative w-full h-full overflow-hidden rounded-xl">
+                <LightLines className="absolute inset-0" speedMultiplier={0.5} />
             </div>
         ),
     },
     {
-        id: 'flip-text',
-        name: 'Flip Text',
+        id: 'card-2',
+        name: 'Perspective Grid',
         preview: (
-            <FlipText className="text-base font-bold text-zinc-700 dark:text-zinc-300">
-                Animate
-            </FlipText>
+            <div className="relative w-full h-full overflow-hidden rounded-xl">
+                <PerspectiveGrid gridSize={10} showOverlay={true} fadeRadius={90} className="absolute inset-0" />
+            </div>
         ),
     },
     {
-        id: 'animated-button',
-        name: 'Animated Button',
+        id: 'card-3',
+        name: 'Liquid Ocean',
         preview: (
-            <AnimatedButton className="text-xs px-3 py-1.5">Explore</AnimatedButton>
+            <div className="relative w-full h-full overflow-hidden rounded-xl">
+                <LiquidOcean className="absolute inset-0" showBoats={false} showGrid={false} oceanFragments={15} showWireframe={false} />
+            </div>
         ),
     },
 ]
@@ -304,9 +321,10 @@ export function LandingPageGrid({
                 }
             }).from(chars, {
                 ease: 'sine.out',
-                yPercent: 300,
+                yPercent: 150, // Reduced from 300 to 150 for snappier, less resource heavy feel
                 autoAlpha: 0,
-                stagger: { each: 0.05, from: 'center' }
+                stagger: { each: 0.05, from: 'center' },
+                force3D: true
             })
         }
 
@@ -328,24 +346,24 @@ export function LandingPageGrid({
             })
 
             columns.forEach((columnItems, columnIndex) => {
-                const delayFactor = Math.abs(columnIndex - middleColumnIndex) * 0.2
+                const delayFactor = Math.abs(columnIndex - middleColumnIndex) * 0.1 // Reduced delay factor for snappy feel
+
+                // Optimized Timeline with standard Transforms
                 gsap.timeline({
                     scrollTrigger: {
                         trigger: gridFullRef.current,
                         start: 'top bottom',
                         end: 'center center',
-                        scrub: 1.5,
+                        scrub: 1, // Faster scrub response
                         invalidateOnRefresh: true,
                     }
                 }).from(columnItems, {
-                    yPercent: 450,
+                    yPercent: 100, // Reduced from 300 to 100 for significantly less composite layer memory
                     autoAlpha: 0,
                     delay: delayFactor,
                     ease: 'sine.out',
-                }).from(columnItems.map(item => item.querySelector('.grid__item-img')), {
-                    transformOrigin: '50% 0%',
-                    ease: 'sine.out',
-                }, 0)
+                    // force3D: true // Removed to let browser manage layer promotion automatically
+                })
             })
 
             // Bento animation
@@ -363,12 +381,12 @@ export function LandingPageGrid({
                         invalidateOnRefresh: true,
                     }
                 }).to(bentoContainer, {
-                    y: window.innerHeight * 0.1,
-                    scale: isMobile ? 1 : 1.5, // Don't scale on mobile to prevent overflow/cutting
+                    y: window.innerHeight * 0.05, // Reduced parallax movement
+                    // scale removed to prevent rasterization lag
                     zIndex: 100,
-                    ease: 'power2.out',
-                    duration: 1,
-                    force3D: true
+                    ease: 'none', // Linear ease for strictly linked scroll
+                    force3D: true,
+                    overwrite: 'auto'
                 }, 0)
             }
         }
@@ -418,18 +436,17 @@ export function LandingPageGrid({
                                                 onMouseEnter={() => setActiveBento(index)}
                                                 onClick={() => setActiveBento(index)}
                                             >
+                                                {/* Background preview layer */}
+                                                {feat.preview && (
+                                                    <div className="absolute inset-0 z-0 overflow-hidden rounded-2xl">
+                                                        {feat.preview}
+                                                    </div>
+                                                )}
                                                 <div className={cn(
                                                     "absolute inset-0 rounded-2xl border z-50 pointer-events-none transition-colors duration-700",
                                                     isActive ? "border-zinc-300 dark:border-zinc-700" : "border-transparent"
                                                 )} />
                                                 <div className="relative z-10 w-full h-full flex flex-col items-center justify-center p-2">
-                                                    <div className={cn(
-                                                        "flex flex-col items-center justify-center transition-all duration-500",
-                                                        isActive ? "opacity-100 scale-100" : "opacity-0 scale-90"
-                                                    )}>
-                                                        {feat.preview}
-                                                        <span className="text-[10px] text-zinc-500 dark:text-zinc-400 mt-2 font-medium">{feat.name}</span>
-                                                    </div>
                                                     <div className={cn(
                                                         "absolute inset-0 flex items-center justify-center transition-all duration-500 overflow-hidden px-1",
                                                         isActive ? "opacity-0" : "opacity-100"

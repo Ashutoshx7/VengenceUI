@@ -3,8 +3,9 @@ import { Analytics } from "@vercel/analytics/react";
 import { Inter_Tight, Pixelify_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { CommandMenu } from "@/components/command-menu";
+import { CommandMenuProvider } from "@/components/command-menu";
 import Footer from "@/components/mine/landing-page/footer";
+import Navbar from "@/components/mine/landing-page/navbar";
 
 // Default font
 const interTight = Inter_Tight({
@@ -90,13 +91,21 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Preconnect for faster external resource loading */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://vercel.live" />
+      </head>
       <body
         className={`${interTight.variable} ${pixelify.variable} ${playfair.variable} antialiased`}
+        suppressHydrationWarning
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <CommandMenu />
-          {children}
-          <Footer />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <CommandMenuProvider>
+            {children}
+            <Footer />
+          </CommandMenuProvider>
           <Analytics />
         </ThemeProvider>
       </body>

@@ -1,0 +1,367 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { LiquidMetalPreview, LiquidMetalThemesPreview } from '@/components/docs/liquid-metal'
+import { ComponentPreview } from '@/components/docs/component-preview'
+
+# Liquid Metal
+
+A premium button component with a mesmerizing liquid chrome border effect using WebGL shaders. Perfect for CTAs and hero sections.
+
+<ComponentPreview
+  component={<LiquidMetalPreview />}
+  code={`import { LiquidMetalButton } from "@/components/ui/liquid-metal";
+
+export function Demo() {
+  return (
+    <LiquidMetalButton
+      icon={<div className="w-5 h-5 rounded border-2 border-current" />}
+      size="lg"
+      borderWidth={5}
+      metalConfig={{
+        colorBack: "#888888",
+        colorTint: "#ffffff",
+        distortion: 0.15,
+        speed: 0.4,
+      }}
+    >
+      Request access
+    </LiquidMetalButton>
+  );
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="liquid-metal" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock 
+        code="npm install @paper-design/shaders-react clsx tailwind-merge" 
+    />
+</Dependencies>
+
+<Dependencies step={2} title="Add util file">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">
+        <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md">lib/utils.ts</code>
+    </p>
+    <CodeBlock 
+        language="tsx"
+        code={`import { ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}`}
+    />
+</Dependencies>
+
+<Dependencies step={3} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy the code below and paste it into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md mx-1">components/ui/liquid-metal.tsx</code></p>
+    <CodeBlock
+        language="tsx"
+        title="components/ui/liquid-metal.tsx"
+        expandable={true}
+        code={`"use client";
+
+import React, { memo, forwardRef } from "react";
+import { LiquidMetal as LiquidMetalShader } from "@paper-design/shaders-react";
+import { cn } from "@/lib/utils";
+
+export interface LiquidMetalProps {
+    colorBack?: string;
+    colorTint?: string;
+    speed?: number;
+    repetition?: number;
+    distortion?: number;
+    scale?: number;
+    className?: string;
+    style?: React.CSSProperties;
+}
+
+export const LiquidMetal = memo(function LiquidMetal({
+    colorBack = "#aaaaac",
+    colorTint = "#ffffff",
+    speed = 0.5,
+    repetition = 4,
+    distortion = 0.1,
+    scale = 1,
+    className,
+    style,
+}: LiquidMetalProps) {
+    return (
+        <div className={cn("absolute inset-0 z-0 overflow-hidden", className)} style={style}>
+            <LiquidMetalShader
+                colorBack={colorBack}
+                colorTint={colorTint}
+                speed={speed}
+                repetition={repetition}
+                distortion={distortion}
+                softness={0}
+                shiftRed={0.3}
+                shiftBlue={-0.3}
+                angle={45}
+                shape="none"
+                scale={scale}
+                fit="cover"
+                style={{ width: "100%", height: "100%" }}
+            />
+        </div>
+    );
+});
+
+LiquidMetal.displayName = "LiquidMetal";
+
+export interface LiquidMetalButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+    children: React.ReactNode;
+    icon?: React.ReactNode;
+    borderWidth?: number;
+    metalConfig?: Omit<LiquidMetalProps, "className" | "style">;
+    size?: "sm" | "md" | "lg";
+}
+
+export const LiquidMetalButton = forwardRef<HTMLButtonElement, LiquidMetalButtonProps>(
+    ({ children, icon, borderWidth = 4, metalConfig, size = "md", className, disabled, ...props }, ref) => {
+        const sizeStyles = {
+            sm: "py-2 pl-2 pr-6 gap-3 text-sm",
+            md: "py-3 pl-3 pr-8 gap-4 text-base",
+            lg: "py-4 pl-4 pr-10 gap-6 text-lg",
+        };
+
+        const iconSizes = { sm: "w-8 h-8", md: "w-10 h-10", lg: "w-12 h-12" };
+
+        return (
+            <button
+                ref={ref}
+                disabled={disabled}
+                className={cn(
+                    "relative group cursor-pointer border-none bg-transparent p-0 outline-none transition-transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed",
+                    className
+                )}
+                {...props}
+            >
+                <div className="relative rounded-full overflow-hidden shadow-[0_20px_50px_-12px_rgba(0,0,0,0.25)]" style={{ padding: borderWidth }}>
+                    <LiquidMetal
+                        colorBack={metalConfig?.colorBack ?? "#888888"}
+                        colorTint={metalConfig?.colorTint ?? "#ffffff"}
+                        speed={metalConfig?.speed ?? 0.4}
+                        repetition={metalConfig?.repetition ?? 4}
+                        distortion={metalConfig?.distortion ?? 0.15}
+                        scale={metalConfig?.scale ?? 1}
+                        className="absolute inset-0 z-0 rounded-full"
+                    />
+                    <div className={cn(
+                        "relative z-10 rounded-full flex items-center bg-white dark:bg-black transition-colors group-hover:bg-neutral-50 dark:group-hover:bg-neutral-900",
+                        sizeStyles[size]
+                    )}>
+                        {icon && (
+                            <div className={cn("rounded-full flex items-center justify-center bg-neutral-100 dark:bg-neutral-800 shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)]", iconSizes[size])}>
+                                <span className="text-neutral-700 dark:text-neutral-300">{icon}</span>
+                            </div>
+                        )}
+                        <span className="font-medium tracking-tight text-neutral-900 dark:text-white">{children}</span>
+                    </div>
+                </div>
+            </button>
+        );
+    }
+);
+
+LiquidMetalButton.displayName = "LiquidMetalButton";
+export default LiquidMetalButton;`}
+    />
+</Dependencies>
+
+## Usage
+
+<CodeBlock 
+    language="tsx" 
+    code={`import { LiquidMetalButton } from "@/components/ui/liquid-metal"
+import { ArrowRight } from "lucide-react"
+
+export function LiquidMetalDemo() {
+  return (
+    <LiquidMetalButton
+      icon={<ArrowRight className="w-5 h-5" />}
+      metalConfig={{
+        colorBack: "#3b82f6",
+        colorTint: "#93c5fd",
+      }}
+    >
+      Click Me
+    </LiquidMetalButton>
+  )
+}`} 
+/>
+
+## Color Themes
+
+All available color themes in one view: Chrome, Blue, Gold, Prism, and Emerald.
+
+<ComponentPreview
+  component={<LiquidMetalThemesPreview />}
+  code={`import { LiquidMetalButton } from "@/components/ui/liquid-metal";
+import { Sparkles, Zap, Crown, Star, ArrowRight } from "lucide-react";
+
+// Chrome
+<LiquidMetalButton
+  icon={<Sparkles className="w-5 h-5" />}
+  metalConfig={{ colorBack: "#888888", colorTint: "#ffffff" }}
+>
+  Chrome
+</LiquidMetalButton>
+
+// Blue
+<LiquidMetalButton
+  icon={<Zap className="w-5 h-5" />}
+  metalConfig={{ colorBack: "#1e3a5f", colorTint: "#3b82f6" }}
+>
+  Blue
+</LiquidMetalButton>
+
+// Gold
+<LiquidMetalButton
+  icon={<Crown className="w-5 h-5" />}
+  metalConfig={{ colorBack: "#78350f", colorTint: "#fbbf24" }}
+>
+  Gold
+</LiquidMetalButton>
+
+// Prism
+<LiquidMetalButton
+  icon={<Star className="w-5 h-5" />}
+  metalConfig={{ colorBack: "#374151", colorTint: "#9ca3af" }}
+>
+  Prism
+</LiquidMetalButton>
+
+// Emerald
+<LiquidMetalButton
+  icon={<ArrowRight className="w-5 h-5" />}
+  metalConfig={{ colorBack: "#064e3b", colorTint: "#10b981" }}
+>
+  Emerald
+</LiquidMetalButton>`}
+/>
+
+
+## Props
+
+### LiquidMetalButton
+
+<PropsTable
+  data={[
+    {
+      prop: "children",
+      type: "React.ReactNode",
+      defaultValue: "-",
+      description: "The button text/content."
+    },
+    {
+      prop: "icon",
+      type: "React.ReactNode",
+      defaultValue: "-",
+      description: "Optional icon displayed on the left side of the button."
+    },
+    {
+      prop: "size",
+      type: "'sm' | 'md' | 'lg'",
+      defaultValue: "'md'",
+      description: "Size variant of the button."
+    },
+    {
+      prop: "borderWidth",
+      type: "number",
+      defaultValue: "4",
+      description: "Width of the liquid metal border in pixels."
+    },
+    {
+      prop: "metalConfig",
+      type: "LiquidMetalProps",
+      defaultValue: "-",
+      description: "Configuration object for the liquid metal shader effect."
+    },
+    {
+      prop: "className",
+      type: "string",
+      defaultValue: "-",
+      description: "Additional CSS classes for the button container."
+    },
+    {
+      prop: "disabled",
+      type: "boolean",
+      defaultValue: "false",
+      description: "Whether the button is disabled."
+    }
+  ]}
+/>
+
+### metalConfig (LiquidMetalProps)
+
+<PropsTable
+  data={[
+    {
+      prop: "colorBack",
+      type: "string",
+      defaultValue: "'#888888'",
+      description: "Base background color of the liquid metal effect."
+    },
+    {
+      prop: "colorTint",
+      type: "string",
+      defaultValue: "'#ffffff'",
+      description: "Tint/highlight color for the chrome reflections."
+    },
+    {
+      prop: "speed",
+      type: "number",
+      defaultValue: "0.4",
+      description: "Animation speed of the fluid movement (0.1 - 2.0 recommended)."
+    },
+    {
+      prop: "repetition",
+      type: "number",
+      defaultValue: "4",
+      description: "Pattern complexity (1 - 10)."
+    },
+    {
+      prop: "distortion",
+      type: "number",
+      defaultValue: "0.15",
+      description: "Wave distortion amount (0 - 1)."
+    },
+    {
+      prop: "scale",
+      type: "number",
+      defaultValue: "1",
+      description: "Scale of the effect texture."
+    }
+  ]}
+/>
+
+## Credits
+
+This component was created by **Anshu**. 
+
+<div className="flex items-center gap-4 mt-4">
+  <a 
+    href="https://x.com/101xanshu" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-neutral-900 dark:text-neutral-100 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors text-sm font-medium"
+  >
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    @101xanshu
+  </a>
+  <a 
+    href="https://github.com/101xAnshu" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-neutral-900 dark:text-neutral-100 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors text-sm font-medium"
+  >
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+    101xAnshu
+  </a>
+</div>

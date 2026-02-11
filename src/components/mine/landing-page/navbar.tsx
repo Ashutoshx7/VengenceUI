@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback , useRef } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import Link from "next/link"
 import { Home, User, Calendar, CreditCard, Menu, X, Sun, Moon } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -75,7 +75,7 @@ const MobileThemeToggle = () => {
 }
 
 
-const Navbar = ({  className, ...props }: React.HTMLAttributes<HTMLElement> & { logo?: React.ReactNode }) => {
+const Navbar = ({ className, ...props }: React.HTMLAttributes<HTMLElement> & { logo?: React.ReactNode }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const navRef = useRef<HTMLElement | null>(null);
@@ -87,11 +87,7 @@ const Navbar = ({  className, ...props }: React.HTMLAttributes<HTMLElement> & { 
       { label: "Components", href: "/docs/components-overview", icon: Home },
       { label: "Templates", href: "/templates", icon: User }
     ],
-    right: [
-      { label: "Playground", href: "/playground", icon: Calendar },
-      // { label: "Pricing", href: "/pricing", icon: CreditCard }
-     
-    ]
+    right: [] as { label: string; href: string; icon: React.ComponentType<{ className?: string }> }[]
   }
 
   return (
@@ -130,7 +126,7 @@ const Navbar = ({  className, ...props }: React.HTMLAttributes<HTMLElement> & { 
               </svg>
             </div>
             {/* Content Layer */}
-            <div className="relative w-full h-full flex items-end justify-between md:justify-center pb-2 px-4 md:px-8 md:gap-12">
+            <div className="relative w-full h-full flex items-end justify-between pb-2 px-4 md:px-8">
 
               {/* Desktop Left Nav */}
               <nav className="hidden md:flex gap-8 mb-1 shrink-0 items-center">
@@ -139,8 +135,8 @@ const Navbar = ({  className, ...props }: React.HTMLAttributes<HTMLElement> & { 
                 ))}
               </nav>
 
-              {/* Desktop Logo */}
-              <div className="hidden md:flex shrink-0 items-center">
+              {/* Desktop Logo - centered */}
+              <div className="hidden md:flex shrink-0 items-center justify-center translate-x-2">
                 {props.logo || (
                   <Link href="/" className="transition-opacity hover:opacity-80">
                     <img
@@ -162,7 +158,7 @@ const Navbar = ({  className, ...props }: React.HTMLAttributes<HTMLElement> & { 
               </button>
 
               {/* Logo (Center) - Mobile */}
-              <div className="md:hidden flex justify-center shrink-0 mx-2 md:mx-4 mt-1">
+              <div className="md:hidden flex-1 flex justify-center shrink-0 mx-2 md:mx-4 mt-1">
                 {props.logo || (
                   <Link href="/" className="transition-opacity hover:opacity-80">
                     <img

@@ -333,12 +333,28 @@ export function LiquidOcean({
     oceanOpacity = 0.85,
     children,
 }: LiquidOceanProps) {
+    const [isVisible, setIsVisible] = React.useState(false);
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsVisible(entry.isIntersecting);
+            },
+            { threshold: 0 }
+        );
+        if (containerRef.current) observer.observe(containerRef.current);
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <div className={cn("relative w-full h-full min-h-[400px] overflow-hidden bg-black cursor-crosshair", className)}>
+        <div ref={containerRef} className={cn("relative w-full h-full min-h-[400px] overflow-hidden bg-black cursor-crosshair", className)}>
             <Canvas
                 shadows
+                dpr={1}
+                frameloop={isVisible ? "always" : "never"}
                 camera={{ position: [0, 2, 10], fov }}
-                gl={{ antialias: true, alpha: false }}
+                gl={{ antialias: false, alpha: false }}
                 style={{ position: "absolute", inset: 0 }}
             >
                 <SceneContent
@@ -351,7 +367,7 @@ export function LiquidOcean({
                     boatCount={boatCount}
                     boatSpread={boatSpread}
                     oceanSize={oceanSize}
-                    oceanFragments={oceanFragments}
+                    oceanFragments={isVisible ? oceanFragments : 5}
                     waveAmplitude={waveAmplitude}
                     waveSpeed={waveSpeed}
                     showWireframe={showWireframe}

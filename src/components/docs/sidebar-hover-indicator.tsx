@@ -84,18 +84,24 @@ export function SidebarHoverIndicator() {
     React.useEffect(() => {
         if (!sidebarContainer) return;
 
+        let rafId: number;
         const updateActivePosition = () => {
-            const activeLink = sidebarContainer.querySelector('a[aria-current="page"]') as HTMLElement;
+            if (rafId) return; // Drop frame if already requested
 
-            if (activeLink) {
-                const rect = activeLink.getBoundingClientRect();
-                const sidebarRect = sidebarContainer.getBoundingClientRect();
-                setIndicatorStyle({
-                    top: rect.top - sidebarRect.top + rect.height * 0.22,
-                    height: rect.height * 0.56,
-                    left: rect.left - sidebarRect.left + 7,
-                });
-            }
+            rafId = requestAnimationFrame(() => {
+                const activeLink = sidebarContainer.querySelector('a[aria-current="page"]') as HTMLElement;
+
+                if (activeLink) {
+                    const rect = activeLink.getBoundingClientRect();
+                    const sidebarRect = sidebarContainer.getBoundingClientRect();
+                    setIndicatorStyle({
+                        top: rect.top - sidebarRect.top + rect.height * 0.22,
+                        height: rect.height * 0.56,
+                        left: rect.left - sidebarRect.left + 7,
+                    });
+                }
+                rafId = 0;
+            });
         };
 
         window.addEventListener("scroll", updateActivePosition, true);
@@ -108,6 +114,7 @@ export function SidebarHoverIndicator() {
             window.removeEventListener("scroll", updateActivePosition, true);
             window.removeEventListener("resize", updateActivePosition);
             clearTimeout(timeout);
+            if (rafId) cancelAnimationFrame(rafId);
         };
     }, [pathname, sidebarContainer]);
 

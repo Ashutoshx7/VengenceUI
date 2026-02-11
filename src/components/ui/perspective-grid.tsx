@@ -14,6 +14,7 @@ interface PerspectiveGridProps {
     fadeRadius?: number;
 }
 
+
 export function PerspectiveGrid({
     className,
     gridSize = 40,
