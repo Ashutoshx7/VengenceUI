@@ -51,6 +51,23 @@ The project mixes two Next.js routing approaches:
 3. Create `src/pages/docs/your-component.mdx` using the existing MDX docs as a template.
 4. Run `npm run registry:build` to add it to the registry.
 
+### Package manager
+
+Use **npm** for all commands. The repo contains multiple lock files (`bun.lock`, `pnpm-lock.yaml`, `package-lock.json`) — always use npm to keep `package-lock.json` as the source of truth.
+
+### shadcn/ui configuration
+
+The project uses shadcn's **new-york** style with **lucide** icons (see `components.json`). RSC is enabled. When adding shadcn components, use `npx shadcn@latest add <component>` — it will respect these settings automatically.
+
+### Deployment
+
+Deployed on **Vercel**. The project uses `@vercel/analytics` and `next-sitemap` for post-build sitemap generation.
+
+### TypeScript & formatting
+
+- TypeScript **strict mode** is enabled.
+- There is **no Prettier config** — formatting is handled by ESLint (`next/core-web-vitals` + `next/typescript`). Do not add a Prettier config or reformat files beyond what ESLint enforces.
+
 ### MCP server
 
 `src/scripts/mcp-server.ts` exposes an MCP (Model Context Protocol) server so AI assistants can browse and install components. See `MCP.md` for setup details.
