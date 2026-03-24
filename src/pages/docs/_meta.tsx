@@ -13,6 +13,7 @@ export default {
         "title": "Components"
     },
     "components-overview": "Overview",
+    "cyber-glitch-text": "Cyber Glitch Text",
     "animated-button": "Animated Button",
     "animated-hero": "Animated Hero",
     "glow-border-card": "Glow Border Card",
