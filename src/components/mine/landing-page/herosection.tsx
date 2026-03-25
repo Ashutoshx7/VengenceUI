@@ -41,15 +41,15 @@ export const HeroSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
-          className="text-center z-30 relative max-w-4xl"
+          className="text-center z-30 relative max-w-4xl "
         >
           {/* Badge - Adaptive Zinc/White Monochrome */}
           <motion.div
             initial={{ opacity: 0, y: 15, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
-            className="relative inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-100/50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 text-xs font-medium text-zinc-600 dark:text-zinc-100 mb-8 backdrop-blur-sm shadow-sm overflow-hidden"
-          >
+            className="relative inline-flex items-center gap-2 px-2 py-1.5 rounded-full bg-zinc-100/50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 text-xs font-medium text-zinc-600 dark:text-zinc-100 mb-8 backdrop-blur-sm shadow-sm overflow-hidden z-10"
+            >
             <VercelOSSProgramBadge/>
             <BorderBeam
               size={40}
@@ -121,6 +121,6 @@ export const HeroSection = () => {
 
 export const VercelOSSProgramBadge = () =>{
     return(
-        <a className="flex h-8 items-center gap-2 rounded-full bg-zinc-50 px-4 text-sm font-medium dark:bg-white/5"  target="_blank" rel="noopener"><span className="text-muted-foreground">Backed by</span><span>▲Vercel OSS Program</span></a>
+        <a className="flex h-8 items-center gap-2 rounded-[20px]  px-4 text-sm font-medium dark:bg-white/5 z-20 bg-zinc-50"  href="https://vercel.com/blog/vercel-open-source-program-winter-2026-cohort#vengenceui" target="_blank" rel="noopener" ><span className="text-muted-foreground">Backed by</span><span>▲Vercel OSS Program</span></a>
     )
 }
