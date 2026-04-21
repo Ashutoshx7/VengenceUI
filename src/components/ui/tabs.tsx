@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { motion, useSpring, useMotionValue, useTransform } from "framer-motion";
 
 export const TabsContext = React.createContext<{
   activeTab: string;
@@ -20,42 +19,29 @@ export function Tabs({ children, defaultValue, className }: { children: React.Re
 
 export function TabsList({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={cn("flex items-center space-x-4 border-b border-white/10 mb-4", className)}>
+    <div className={cn("inline-flex h-10 items-center justify-center rounded-lg bg-zinc-800/80 p-1 text-zinc-400 mb-4", className)}>
       {children}
     </div>
   );
 }
 
-export function TabsTrigger({ value, children }: { value: string; children: React.ReactNode }) {
+export function TabsTrigger({ value, children, className }: { value: string; children: React.ReactNode; className?: string }) {
   const { activeTab, setActiveTab } = React.useContext(TabsContext);
-
-  const mouseX = useMotionValue(0);
-
+  const isActive = activeTab === value;
+  
   return (
-    <div className="relative">
-      <motion.div
-        onMouseMove={(e) => {
-          const rect = e.currentTarget.getBoundingClientRect();
-          mouseX.set(e.clientX - rect.left - rect.width / 2);
-        }}
-        onMouseLeave={() => mouseX.set(0)}
-        className="absolute inset-0 z-0 rounded-md"
-        whileHover={{ opacity: 1 }}
-        initial={{ opacity: 0 }}
-        transition={{ duration: 0.15 }}
-        style={{
-          x: useTransform(mouseX, [-100, 100], [4, -4]),
-        }}
-      >
-        <div className="absolute inset-0 bg-white/10" />
-      </motion.div>
-      <button
-        onClick={() => setActiveTab(value)}
-        className="relative z-10 pb-3 text-sm font-medium border-b-2 -mb-[1px] border-white text-white cursor-pointer"
-      >
-        {children}
-      </button>
-    </div>
+    <button
+      onClick={() => setActiveTab(value)}
+      className={cn(
+        "inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 disabled:pointer-events-none disabled:opacity-50",
+        isActive 
+          ? "bg-zinc-700/80 text-white shadow-sm" 
+          : "text-zinc-400 hover:text-zinc-200",
+        className
+      )}
+    >
+      {children}
+    </button>
   );
 }
 
