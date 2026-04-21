@@ -56,7 +56,7 @@ export function ComponentShowcase({
             </TabsTrigger>
           </TabsList>
 
-          <div className="flex w-full items-center gap-2 rounded-xl border border-white/10 bg-zinc-900 px-1.5 py-1.5 text-xs text-zinc-300 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] lg:w-auto">
+          <div className="flex w-full items-center gap-2 rounded-xl border border-white/10 bg-black px-1.5 py-1.5 text-xs text-zinc-300 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] lg:w-auto">
             <div className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-zinc-800 text-zinc-500">
               <Terminal className="h-3.5 w-3.5" />
             </div>
@@ -89,8 +89,8 @@ export function ComponentShowcase({
         {/* Live Preview */}
         <TabsContent value="preview">
           <div className="w-full">
-            <div id="preview" className="w-full scroll-mt-24 rounded-2xl border border-zinc-800 bg-zinc-950 p-2.5 shadow-[0_20px_60px_rgba(0,0,0,0.45)] sm:p-4">
-              <div className="relative flex min-h-[620px] items-center justify-center overflow-hidden rounded-xl border border-zinc-800 bg-black p-10">
+            <div id="preview" className="w-full scroll-mt-24 rounded-2xl border border-zinc-800 bg-zinc-900 p-2.5 shadow-[0_20px_60px_rgba(0,0,0,0.45)] sm:p-4">
+              <div className="relative flex min-h-[700px] items-center justify-center overflow-hidden rounded-xl border border-zinc-800 bg-black p-10">
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/10" />
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(255,255,255,0.08),transparent_32%),radial-gradient(circle_at_80%_100%,rgba(255,255,255,0.04),transparent_34%)]" />
 

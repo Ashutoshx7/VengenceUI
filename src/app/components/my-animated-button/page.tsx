@@ -3,7 +3,7 @@ import MyAnimatedButton from "@/registry/my-animated-button";
 
 export default function Page() {
   return (
-    <div className="w-full max-w-4xl">
+    <div className="w-full max-w-5xl">
       <ComponentShowcase 
         componentName="my-animated-button"
         title="Glowing Button"
