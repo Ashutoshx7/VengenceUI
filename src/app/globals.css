@@ -1,26 +1,549 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@source "../components";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@plugin "../../node_modules/tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
+
+  --font-mono: 'Geist Mono', 'Fira Code', monospace;
+  --font-orbitron: var(--font-orbitron);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000000;
-    --foreground: #ededed;
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1200px;
+  --breakpoint-xl: 1440px;
+  --breakpoint-2xl: 1600px;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+
+    to {
+      height: 0;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
+  :root {
+    --background: var(--color-white);
+    --foreground: var(--color-zinc-950);
+    --card: var(--color-white);
+    --card-foreground: var(--color-zinc-950);
+    --popover: var(--color-white);
+    --popover-foreground: var(--color-zinc-950);
+    --primary: var(--color-zinc-950);
+    --primary-foreground: var(--color-white);
+    --secondary: var(--color-zinc-100);
+    --secondary-foreground: var(--color-zinc-950);
+    --muted: var(--color-zinc-100);
+    --muted-foreground: var(--color-zinc-500);
+    --accent: var(--color-zinc-100);
+    --accent-foreground: var(--color-zinc-950);
+    --destructive: var(--color-red-600);
+    --destructive-foreground: var(--color-white);
+    --border: var(--color-zinc-200);
+    --input: var(--color-zinc-200);
+    --ring: var(--color-zinc-950);
+    --chart-1: var(--color-blue-500);
+    --chart-2: var(--color-indigo-500);
+    --chart-3: var(--color-purple-500);
+    --chart-4: var(--color-indigo-400);
+    --chart-5: var(--color-red-500);
+    --radius: 0.5rem
+  }
+
+  .dark {
+    --background: var(--color-zinc-950);
+    --foreground: var(--color-white);
+    --card: var(--color-zinc-950);
+    --card-foreground: var(--color-white);
+    --popover: var(--color-zinc-950);
+    --popover-foreground: var(--color-white);
+    --primary: var(--color-white);
+    --primary-foreground: var(--color-zinc-950);
+    --secondary: var(--color-zinc-800);
+    --secondary-foreground: var(--color-white);
+    --muted: var(--color-zinc-800);
+    --muted-foreground: var(--color-zinc-400);
+    --accent: var(--color-zinc-800);
+    --accent-foreground: var(--color-white);
+    --destructive: var(--color-red-600);
+    --destructive-foreground: var(--color-white);
+    --border: var(--color-zinc-800);
+    --input: var(--color-zinc-800);
+    --ring: var(--color-white);
+  }
+
+  * {
+    @apply border-border outline-ring/50;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  *::-webkit-scrollbar {
+    display: none;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
+  .line {
+    counter-increment: css-counter 1;
+    @apply relative pl-7 before:absolute before:text-white/20 before:inset-y-0 before:transition-colors before:duration-200 before:content-[counter(css-counter)] before:text-xs before:left-0 before:my-auto hover:before:text-white
+  }
+}
+
+[data-theme="mist"] {
+  --radius: 0.625rem;
+  --background: var(--color-white);
+  --foreground: var(--color-zinc-950);
+  --card: var(--color-white);
+  --card-foreground: var(--color-zinc-950);
+  --popover: var(--color-white);
+  --popover-foreground: var(--color-zinc-950);
+  --primary: var(--color-indigo-500);
+  --primary-foreground: var(--color-white);
+  --secondary: var(--color-indigo-100);
+  --secondary-foreground: var(--color-indigo-600);
+  --muted: var(--color-zinc-100);
+  --muted-foreground: var(--color-zinc-600);
+  --accent: var(--color-zinc-700);
+  --accent-foreground: var(--color-white);
+  --destructive: var(--color-red-600);
+  --border: var(--color-zinc-200);
+  --input: var(--color-zinc-200);
+  --ring: var(--color-indigo-500);
+
+  @variant dark {
+    --radius: 0.625rem;
+    --background: var(--color-white);
+    --foreground: var(--color-zinc-950);
+    --card: var(--color-white);
+    --card-foreground: black;
+    --popover: var(--color-white);
+    --popover-foreground: var(--color-zinc-950);
+    --primary: var(--color-indigo-500);
+    --primary-foreground: var(--color-white);
+    --secondary: var(--color-indigo-100);
+    --secondary-foreground: var(--color-indigo-600);
+    --muted: var(--color-zinc-100);
+    --muted-foreground: var(--color-zinc-600);
+    --accent: var(--color-zinc-700);
+    --accent-foreground: var(--color-white);
+    --destructive: var(--color-red-600);
+    --border: var(--color-zinc-200);
+    --input: var(--color-zinc-200);
+    --ring: var(--color-indigo-500);
+  }
+
+  @apply *:text-foreground
+}
+
+/* FlipText Component Styles */
+.flip-char {
+  color: inherit;
+  -webkit-text-fill-color: transparent;
+  height: 1.2em;
+  line-height: 1.2em;
+  vertical-align: middle;
+  animation: flip var(--flip-duration, 2.2s) var(--flip-delay, 0s) var(--flip-iteration, infinite) ease;
+}
+
+.flip-char::before,
+.flip-char::after {
+  color: inherit;
+  -webkit-text-fill-color: currentColor;
+  content: attr(data-char);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  animation: fade var(--flip-duration, 2.2s) var(--flip-delay, 0s) var(--flip-iteration, infinite) ease;
+}
+
+/* Front Face (Initial) */
+.flip-char::after {
+  transform: translate(-50%, -50%) translateZ(0.6em);
+}
+
+/* Bottom Face (Rotates in) */
+.flip-char::before {
+  transform: translate(-50%, -50%) rotateX(-90deg) translateZ(0.6em);
+  opacity: 0;
+  --opacity: 1;
+}
+
+@keyframes flip {
+  0% {
+    transform: rotateX(0deg);
+  }
+
+  25%,
+  100% {
+    transform: rotateX(90deg);
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 1;
+  }
+
+  30%,
+  100% {
+    opacity: var(--opacity, 0);
+  }
+}
+
+/* PerspectiveGrid Component Styles */
+.tile {
+  min-width: 1px;
+  min-height: 1px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.1);
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+.dark .tile {
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.tile:nth-child(4n):hover {
+  background-color: rgb(248 113 113);
+}
+
+.tile:nth-child(4n + 1):hover {
+  background-color: rgb(56 189 248);
+}
+
+.tile:nth-child(4n + 2):hover {
+  background-color: rgb(74 222 128);
+}
+
+.tile:nth-child(4n + 3):hover {
+  background-color: rgb(253 224 71);
+}
+
+/* GlowBorderCard Animation Utilities */
+@property --glow-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes glow-angle-rotate {
+  to {
+    --glow-angle: 1turn;
+  }
+}
+
+.glow-conic {
+  border-image: conic-gradient(from var(--glow-angle),
+      var(--glow-color-1, #669900),
+      var(--glow-color-2, #99cc33),
+      var(--glow-color-3, #ccee66),
+      var(--glow-color-4, #006699),
+      var(--glow-color-5, #3399cc),
+      var(--glow-color-6, #990066),
+      var(--glow-color-7, #cc3399),
+      var(--glow-color-8, #ff6600),
+      var(--glow-color-9, #ff9900),
+      var(--glow-color-10, #ffcc00),
+      var(--glow-color-1, #669900)) 1;
+  animation: glow-angle-rotate var(--glow-animation-duration, 4s) linear infinite;
+}
+
+/* Aurora Hero Component Styles */
+:root {
+  --rainbow-blue: 217 91% 60%;
+  --rainbow-pink: 330 81% 60%;
+  --rainbow-cyan: 180 77% 50%;
+  --stripe-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark {
+  --stripe-color: rgba(0, 0, 0, 0.3);
+}
+
+@keyframes aurora-bg {
+  0% {
+    background-position: 0% 50%, 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%, 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%, 0% 50%;
+  }
+}
+
+@keyframes aurora-blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.animate-aurora-bg {
+  animation: aurora-bg 15s ease infinite;
+}
+
+.animate-aurora-blink {
+  animation: aurora-blink 2s ease-in-out infinite;
+}
+
+/* Spotlight Navbar Component Styles */
+.spotlight-nav {
+  --spotlight-color: rgba(0, 0, 0, 0.08);
+  --ambience-color: rgba(0, 0, 0, 0.8);
+}
+
+.dark .spotlight-nav {
+  --spotlight-color: rgba(255, 255, 255, 0.15);
+  --ambience-color: rgba(255, 255, 255, 1);
+}
+
+.spotlight-nav-bg {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.dark .spotlight-nav-bg {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+}
+
+.spotlight-nav-shadow {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+}
+
+.dark .spotlight-nav-shadow {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+}
+
+/* Glass Dock Component Styles */
+.glass-dock {
+  --tab-bar-home-scale: 0.7;
+  --tab-bar-home-opacity: 1;
+  --tab-bar-blog-scale: 0.7;
+  --tab-bar-blog-opacity: 1;
+  --tab-bar-marker-scale: 0.7;
+  --tab-bar-marker-opacity: 1;
+  --tab-bar-email-scale: 0.7;
+  --tab-bar-email-opacity: 1;
+  --tab-bar-linkedin-scale: 0.7;
+  --tab-bar-linkedin-opacity: 1;
+  --tab-bar-x-scale: 0.7;
+  --tab-bar-x-opacity: 1;
+  --tab-bar-github-scale: 0.7;
+  --tab-bar-github-opacity: 1;
+}
+
+.glass-dock button {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #737373;
+  transition: color 0.1s;
+}
+
+.dark .glass-dock button {
+  color: #a3a3a3;
+}
+
+.glass-dock button.active,
+.glass-dock button:hover {
+  color: #000;
+}
+
+.dark .glass-dock button.active,
+.dark .glass-dock button:hover {
+  color: #fff;
+}
+
+.glass-dock button svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+/* StackedLogos - CSS Variables & Animations */
+.stacked-logos {
+  --duration: 30;
+  --items: 4;
+  --lists: 4;
+  --stagger: 0;
+  --logo-width: 200px;
+  --mouse-x: 0px;
+  --mouse-y: 0px;
+}
+
+.stacked-logos:hover .stacked-logos__glow {
+  opacity: 1;
+}
+
+.stacked-logos:hover .stacked-logos__border-glow {
+  opacity: 1;
+}
+
+.stacked-logos__cell {
+  --base-delay: calc(sin((var(--index) / var(--lists)) * 45deg) * var(--stagger));
+}
+
+.stacked-logos__logo {
+  animation-name: stacked-logos-appear;
+  animation-duration: calc(var(--duration) * 1s);
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  animation-delay: calc((var(--duration) / var(--items)) * (var(--items) - var(--i)) * -1s + (var(--base-delay, 0) * 1s));
+}
+
+@keyframes stacked-logos-appear {
+
+  0%,
+  100% {
+    opacity: 0;
+    filter: blur(4px);
+  }
+
+  5%,
+  20% {
+    opacity: 1;
+    filter: blur(0);
+  }
+
+  25%,
+  100% {
+    opacity: 0;
+    filter: blur(4px);
+  }
+}
+
+/* Glass Component Borders */
+.glass-border {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.dark .glass-border {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.spotlight-nav-bg {
+  background-color: rgb(250, 250, 250);
+}
+
+.dark .spotlight-nav-bg {
+  background-color: rgb(10, 10, 10);
+}
+
+.spotlight-nav-shadow {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.dark .spotlight-nav-shadow {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
 }

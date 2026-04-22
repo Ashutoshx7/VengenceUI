@@ -1,35 +1,57 @@
-import Link from "next/link";
+"use client";
 
-export default function Home() {
-  return (
-    <main className="flex-1 flex flex-col items-center justify-center p-12 md:p-24 selection:bg-zinc-800">
-      
-      {/* Massive Hero Section */}
-      <div className="max-w-5xl mx-auto text-center mt-20">
-        <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-6 bg-gradient-to-br from-white to-zinc-600 bg-clip-text text-transparent">
-          Vengeance UI
-        </h1>
-        <p className="text-xl md:text-2xl text-zinc-400 font-medium max-w-2xl mx-auto leading-relaxed mb-10">
-          The ultimate collection of animated, copy-paste React components. Built for agencies, loved by developers.
-        </p>
+import React from 'react'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
+import dynamic from 'next/dynamic'
+import Hero from '@/components/landing/hero';
+import ComponentsGrid from '@/components/landing/components-gird';
+import TechStack from '@/components/landing/tech-stack';
+import Features from '@/components/landing/features';
+import Testimonial from '@/components/landing/testimonial';
+import CTA from '@/components/landing/cta';
+import Footer from '@/components/landing/footer';
 
-        <div className="flex items-center justify-center space-x-4">
-          <Link 
-            href="/components/my-animated-button" 
-            className="px-8 py-4 bg-white text-black font-bold rounded-full hover:scale-105 transition-transform"
-          >
-            Browse Components
-          </Link>
-          <Link 
-            href="https://github.com" 
-            target="_blank"
-            className="px-8 py-4 bg-zinc-900 border border-zinc-800 text-white font-bold rounded-full hover:bg-zinc-800 transition-colors"
-          >
-            View GitHub
-          </Link>
-        </div>
-      </div>
+const LandingPageGrid = dynamic(() => import('@/components/landing/landing-page-grid'), { ssr: false })
+const SmoothScroll = dynamic(() => import('@/components/landing/smooth-scroll'), { ssr: false })
 
-    </main>
-  );
+export default function Home(): React.ReactNode {
+    return (
+        <SmoothScroll>
+            {/* <div className="flex flex-col min-h-screen">
+                <section className="overflow-hidden">
+                    <div className="mx-auto max-w-7xl px-4 py-12 lg:py-16">
+                        <div className="max-w-md">
+                            <h1 className="text-foreground text-balance text-4xl font-semibold leading-10 tracking-tight">
+                                Build modern marketing websites with Vengeance UI blocks
+                            </h1>
+                            <Button
+                                asChild
+                                className="mt-5 rounded-full">
+                                <Link href="/hero-section">
+                                    Explore blocks <span className="border-l-primary-foreground/50 ml-0.5 block size-0 border-y-4 border-l-4 border-y-transparent" />
+                                </Link>
+                            </Button>
+                        </div>
+                    </div>
+                </section>
+
+                <LandingPageGrid
+                    centerText="Components"
+                    className="mt-60 md:mt-96"
+                />
+            </div> */}
+
+            <main>
+                <Hero />
+                <TechStack />
+                <ComponentsGrid />
+                <Features />
+                <Testimonial />
+                <CTA />
+                <Footer />
+            </main>
+        </SmoothScroll>
+    )
 }
+
