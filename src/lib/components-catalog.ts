@@ -20,7 +20,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
     name: "Text & Motion",
     icon: Type,
     items: [
-      { name: "My Animated Button", slug: "my-animated-button", description: "Animated CTA button", componentName: "my-animated-button" },
+      { name: "Animated Button", slug: "my-animated-button", description: "Animated CTA button with shine effect", componentName: "animated-button" },
       { name: "Animated Hero", slug: "animated-hero", description: "Hero with animated heading", componentName: "animated-hero", isNew: true },
       { name: "Animated Number", slug: "animated-number", description: "Smooth numeric transitions", componentName: "animated-number", isNew: true },
       { name: "Flip Text", slug: "flip-text", description: "Character flip text animation", componentName: "flip-text", isNew: true },

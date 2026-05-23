@@ -22,7 +22,7 @@ export const Navbar = () => {
     }
 
     return (
-        <header className="border-b relative z-50 bg-background/50 backdrop-blur-md">
+        <header className="sticky top-0 border-b border-neutral-200 dark:border-[#222] relative z-50 bg-background/80 backdrop-blur-md">
             <div className="w-full px-4 md:px-8 xl:px-8">
                 <div>
                     <div className="flex items-center justify-between py-3 lg:py-4">

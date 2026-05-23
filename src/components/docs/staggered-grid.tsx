@@ -9,7 +9,7 @@ export function StaggeredGridDemo({ className }: { className?: string }) {
     const columnOffsets = [40, 80, 0, 60, 20, 90, 50];
 
     return (
-        <div className={`relative w-full h-[500px] overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-black ${className || ''}`}>
+        <div className={`relative w-full h-[500px] overflow-hidden rounded-xl border border-neutral-200 dark:border-[#222] bg-neutral-50 dark:bg-black ${className || ''}`}>
             {/* Info Text Overlay */}
             <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 px-4 py-2 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm rounded-full border border-neutral-200 dark:border-neutral-700">
                 <p className="text-xs text-neutral-500 dark:text-neutral-400 text-center">

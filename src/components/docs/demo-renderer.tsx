@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 
 const FALLBACK = () => (
-  <div className="text-sm text-zinc-400">Preview is unavailable for this component.</div>
+  <div className="text-sm text-neutral-400 dark:text-zinc-400">Preview is unavailable for this component.</div>
 );
 
 const DEMO_LOADERS: Record<string, () => Promise<{ default: React.ComponentType }>> = {
@@ -48,7 +48,12 @@ export function DemoRenderer({ slug }: { slug: string }) {
 
   const Demo = dynamic(loader, {
     ssr: false,
-    loading: () => <div className="text-sm text-zinc-500">Loading preview...</div>,
+    loading: () => (
+      <div className="flex flex-col items-center gap-2 text-neutral-400 dark:text-zinc-500">
+        <div className="w-6 h-6 border-2 border-neutral-300 dark:border-zinc-700 border-t-transparent rounded-full animate-spin" />
+        <span className="text-xs font-medium">Loading preview…</span>
+      </div>
+    ),
   });
 
   return <Demo />;

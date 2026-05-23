@@ -39,7 +39,7 @@ export function Tabs({ children, defaultValue = "", value, onValueChange, classN
 
 export function TabsList({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={cn("inline-flex h-10 items-center justify-center rounded-lg bg-zinc-800/80 p-1 text-zinc-400 mb-4", className)}>
+    <div className={cn("inline-flex h-10 items-center justify-center rounded-lg bg-neutral-100 dark:bg-zinc-800/80 p-1 text-neutral-500 dark:text-zinc-400 mb-4", className)}>
       {children}
     </div>
   );
@@ -55,8 +55,8 @@ export function TabsTrigger({ value, children, className }: { value: string; chi
       className={cn(
         "inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 disabled:pointer-events-none disabled:opacity-50",
         isActive 
-          ? "bg-zinc-700/80 text-white shadow-sm" 
-          : "text-zinc-400 hover:text-zinc-200",
+          ? "bg-white dark:bg-zinc-700/80 text-neutral-900 dark:text-white shadow-sm" 
+          : "text-neutral-500 dark:text-zinc-400 hover:text-neutral-900 dark:hover:text-zinc-200",
         className
       )}
     >

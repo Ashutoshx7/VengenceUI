@@ -12,6 +12,9 @@ const nextConfig: NextConfig = {
             { protocol: 'https', hostname: 'vengeance-ui.com' },
         ],
     },
+    reactStrictMode: true,
+    poweredByHeader: false,
+    compress: true,
 };
 
 export default nextConfig;

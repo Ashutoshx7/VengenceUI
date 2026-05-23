@@ -1,9 +1,10 @@
 "use client";
 
-import React from "react";
 import { Check, Copy } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import { useTheme } from "next-themes";
+import React from "react";
 
 interface CLICommandProps {
     componentName: string;
@@ -56,6 +57,7 @@ const packageManagerConfig: Record<PackageManager, { icon: React.ReactNode; comm
 export function CLICommand({ componentName, className }: CLICommandProps) {
     const [activeTab, setActiveTab] = React.useState<PackageManager>("npm");
     const [copied, setCopied] = React.useState(false);
+    const { resolvedTheme } = useTheme();
 
     const getFullCommand = (pm: PackageManager) => {
         const config = packageManagerConfig[pm];
@@ -74,35 +76,43 @@ export function CLICommand({ componentName, className }: CLICommandProps) {
     const renderHighlightedCommand = () => {
         const command = config.command;
         const parts = command.split(" ");
+        const isDark = resolvedTheme === "dark";
+
+        const colors = {
+            keyword: isDark ? "#a0a0cc" : "#6b6b99",
+            pkg: isDark ? "#8bb8d0" : "#4a7f94",
+            sub: isDark ? "#a1a1aa" : "#71717a",
+            str: isDark ? "#c9a87c" : "#8a6d3b",
+        };
 
         return (
             <code className="text-sm font-mono leading-relaxed">
-                <span className="text-fuchsia-500 dark:text-fuchsia-400">{parts[0]}</span>
+                <span style={{ color: colors.keyword }}>{parts[0]}</span>
                 {parts[1] && (
                     <>
                         {" "}
-                        <span className="text-fuchsia-500 dark:text-fuchsia-400">{parts[1]}</span>
+                        <span style={{ color: colors.keyword }}>{parts[1]}</span>
                     </>
                 )}
                 {" "}
-                <span className="text-sky-500 dark:text-sky-400">shadcn@latest</span>
+                <span style={{ color: colors.pkg }}>shadcn@latest</span>
                 {" "}
-                <span className="text-neutral-600 dark:text-green-400">add</span>
+                <span style={{ color: colors.sub }}>add</span>
                 {" "}
-                <span className="text-amber-600 dark:text-amber-400">{`"https://www.vengenceui.com/r/${componentName}.json"`}</span>
+                <span style={{ color: colors.str }}>{`"https://www.vengenceui.com/r/${componentName}.json"`}</span>
             </code>
         );
     };
 
     return (
         <div className={cn(
-            "rounded-xl overflow-hidden",
-            "!border-[1px] !border-neutral-200 dark:!border-neutral-700",
-            "bg-neutral-100 dark:bg-[#161616]",
+            "rounded-sm overflow-hidden",
+            "border border-neutral-200 dark:border-[#222]",
+            "bg-neutral-50 dark:bg-zinc-950",
             className
         )}>
             {/* Tab bar */}
-            <div className="flex items-center justify-between px-3 py-2.5 border-b border-neutral-300 dark:border-neutral-800 bg-white dark:bg-black">
+            <div className="flex items-center justify-between px-3 py-2.5 border-b border-neutral-200 dark:border-[#222] bg-white dark:bg-zinc-900/80">
                 <div className="flex items-center gap-6">
                     {(Object.keys(packageManagerConfig) as PackageManager[]).map((pm) => {
                         const isActive = activeTab === pm;
@@ -114,7 +124,7 @@ export function CLICommand({ componentName, className }: CLICommandProps) {
                                     "relative flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-none transition-colors select-none z-10",
                                     isActive
                                         ? "text-neutral-900 dark:text-white"
-                                        : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200"
+                                        : "text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-300"
                                 )}
                             >
                                 {isActive && (
@@ -136,8 +146,8 @@ export function CLICommand({ componentName, className }: CLICommandProps) {
                     onClick={copyToClipboard}
                     className={cn(
                         "p-2 rounded-md transition-colors",
-                        "text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200",
-                        "hover:bg-neutral-200 dark:hover:bg-neutral-800"
+                        "text-neutral-400 dark:text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300",
+                        "hover:bg-neutral-100 dark:hover:bg-neutral-800"
                     )}
                     aria-label="Copy command"
                 >
@@ -150,7 +160,7 @@ export function CLICommand({ componentName, className }: CLICommandProps) {
             </div>
 
             {/* Command */}
-            <div className="px-4 py-4 overflow-x-auto bg-neutral-100 dark:bg-[#161616]">
+            <div className="px-4 py-4 overflow-x-auto bg-neutral-50 dark:bg-zinc-950">
                 {renderHighlightedCommand()}
             </div>
         </div>

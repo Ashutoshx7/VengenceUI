@@ -12,7 +12,7 @@ export function MaskedAvatarsDemo() {
     ];
 
     return (
-        <div className="relative flex h-[300px] w-full items-center justify-center overflow-hidden bg-white dark:bg-black rounded-lg border border-neutral-200 dark:border-neutral-800">
+        <div className="relative flex h-[300px] w-full items-center justify-center overflow-hidden bg-white dark:bg-black rounded-lg border border-neutral-200 dark:border-[#222]">
             <MaskedAvatars avatars={avatars} />
         </div>
     );

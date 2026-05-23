@@ -26,12 +26,12 @@ function SidebarItem({
       className="relative"
     >
       {isActive && (
-        <div className="absolute inset-0 rounded-md bg-zinc-800/80 z-0" />
+        <div className="absolute inset-0 rounded-md bg-neutral-100 dark:bg-zinc-800/80 z-0" />
       )}
       {isHovered && (
         <motion.div
           layoutId="sidebar-hover-bg"
-          className="absolute inset-0 rounded-md bg-zinc-800/40 z-0"
+          className="absolute inset-0 rounded-md bg-neutral-100 dark:bg-zinc-800/40 z-0"
           transition={{
             type: "spring",
             stiffness: 600,
@@ -44,13 +44,13 @@ function SidebarItem({
         className={cn(
           "relative z-10 flex w-full justify-between items-center rounded-md px-3 py-1.5 text-sm transition-colors",
           isActive
-            ? "font-medium text-white"
-            : "text-zinc-400 hover:text-zinc-200"
+            ? "font-medium text-neutral-900 dark:text-white"
+            : "text-neutral-500 dark:text-zinc-400 hover:text-neutral-900 dark:hover:text-zinc-200"
         )}
       >
         <span className="truncate">{item.name}</span>
         {item.isNew && (
-          <span className="ml-2 rounded-md bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium leading-none text-emerald-400">
+          <span className="ml-2 rounded-md bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium leading-none text-emerald-500 dark:text-emerald-400">
             New
           </span>
         )}
@@ -78,15 +78,15 @@ export function Sidebar() {
               className={cn(
                 "flex items-center gap-2.5 rounded-md px-2 py-2 text-sm font-medium transition-colors w-full text-left",
                 isCategoryActive 
-                  ? "bg-zinc-800/80 text-zinc-100" 
-                  : "text-zinc-300 hover:bg-zinc-800/40 hover:text-zinc-100"
+                  ? "bg-neutral-100 dark:bg-zinc-800/80 text-neutral-900 dark:text-zinc-100" 
+                  : "text-neutral-600 dark:text-zinc-300 hover:bg-neutral-100 dark:hover:bg-zinc-800/40 hover:text-neutral-900 dark:hover:text-zinc-100"
               )}
             >
               <category.icon className="h-4 w-4" />
               {category.name}
             </button>
             
-            <div className="mt-1 ml-4 flex flex-col border-l border-zinc-800/80 pl-2 space-y-0.5">
+            <div className="mt-1 ml-4 flex flex-col border-l border-neutral-200 dark:border-[#222]/80 pl-2 space-y-0.5">
               {category.items.map((item) => (
                 <SidebarItem 
                   key={item.slug}
