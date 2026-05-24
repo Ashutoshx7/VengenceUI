@@ -1,7 +1,16 @@
 import { notFound } from "next/navigation";
 import { ComponentShowcase } from "@/components/ui/component-showcase";
 import { DemoRenderer } from "@/components/docs/demo-renderer";
-import { COMPONENT_BY_SLUG } from "@/lib/components-catalog";
+import { COMPONENT_BY_SLUG, COMPONENT_CATEGORIES } from "@/lib/components-catalog";
+
+/**
+ * Pre-generate all component pages at build time for instant navigation.
+ */
+export function generateStaticParams() {
+  return COMPONENT_CATEGORIES.flatMap((category) =>
+    category.items.map((item) => ({ slug: item.slug }))
+  );
+}
 
 export default async function ComponentPage({
   params,
@@ -25,3 +34,4 @@ export default async function ComponentPage({
     </ComponentShowcase>
   );
 }
+

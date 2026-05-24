@@ -6,55 +6,57 @@ const FALLBACK = () => (
   <div className="text-sm text-neutral-400 dark:text-zinc-400">Preview is unavailable for this component.</div>
 );
 
-const DEMO_LOADERS: Record<string, () => Promise<{ default: React.ComponentType }>> = {
-  "bento-grid": () => import("@/registry/bento-grid").then((m) => ({ default: m.default })),
-  "my-animated-button": () => import("@/registry/my-animated-button").then((m) => ({ default: m.default })),
+const LOADING = () => (
+  <div className="flex flex-col items-center gap-2 text-neutral-400 dark:text-zinc-500">
+    <div className="w-6 h-6 border-2 border-neutral-300 dark:border-zinc-700 border-t-transparent rounded-full animate-spin" />
+    <span className="text-xs font-medium">Loading preview…</span>
+  </div>
+);
 
-  "animated-hero": () => import("@/components/docs/animated-hero").then((m) => ({ default: m.AnimatedHeroDemo })),
-  "animated-number": () => import("@/components/docs/animated-number").then((m) => ({ default: m.AnimatedNumberDemo })),
-  "flip-text": () => import("@/components/docs/Fliptext-examples/flip-text-demo").then((m) => ({ default: m.default })),
-  "flip-fade-text": () => import("@/components/docs/flip-fade-text").then((m) => ({ default: m.FlipFadeTextDemo })),
-  "liquid-text": () => import("@/components/docs/liquid-text").then((m) => ({ default: m.LiquidTextDemo })),
-  "liquid-metal": () => import("@/components/docs/liquid-metal").then((m) => ({ default: m.LiquidMetalPreview })),
+/**
+ * Pre-build all dynamic components at module scope (not inside render).
+ * This ensures each component is only resolved once and cached by Next.js,
+ * rather than creating a new dynamic() wrapper on every render cycle.
+ */
+const DEMO_COMPONENTS: Record<string, React.ComponentType> = {
+  "bento-grid": dynamic(() => import("@/registry/bento-grid").then((m) => ({ default: m.default })), { ssr: false, loading: LOADING }),
+  "my-animated-button": dynamic(() => import("@/registry/my-animated-button").then((m) => ({ default: m.default })), { ssr: false, loading: LOADING }),
 
-  "reveal-loader": () => import("@/components/docs/reveal-loader-demo").then((m) => ({ default: m.RevealLoaderDemo })),
-  "social-flip-button": () => import("@/components/docs/social-flip-button").then((m) => ({ default: m.SocialFlipButtonDemo })),
-  "line-hover-link": () => import("@/components/docs/line-hover-link").then((m) => ({ default: m.LineHoverLinkDemo })),
-  "interactive-book": () => import("@/components/docs/interactive-book").then((m) => ({ default: m.InteractiveBookDemo })),
-  "pixelated-image-trail": () => import("@/components/docs/pixelated-image-trail").then((m) => ({ default: m.default })),
+  "animated-hero": dynamic(() => import("@/components/docs/animated-hero").then((m) => ({ default: m.AnimatedHeroDemo })), { ssr: false, loading: LOADING }),
+  "animated-number": dynamic(() => import("@/components/docs/animated-number").then((m) => ({ default: m.AnimatedNumberDemo })), { ssr: false, loading: LOADING }),
+  "flip-text": dynamic(() => import("@/components/docs/Fliptext-examples/flip-text-demo").then((m) => ({ default: m.default })), { ssr: false, loading: LOADING }),
+  "flip-fade-text": dynamic(() => import("@/components/docs/flip-fade-text").then((m) => ({ default: m.FlipFadeTextDemo })), { ssr: false, loading: LOADING }),
+  "liquid-text": dynamic(() => import("@/components/docs/liquid-text").then((m) => ({ default: m.LiquidTextDemo })), { ssr: false, loading: LOADING }),
+  "liquid-metal": dynamic(() => import("@/components/docs/liquid-metal").then((m) => ({ default: m.LiquidMetalPreview })), { ssr: false, loading: LOADING }),
 
-  "expandable-bento-grid": () => import("@/components/docs/expandable-bento-grid").then((m) => ({ default: m.ExpandableBentoGridDemo })),
-  "staggered-grid": () => import("@/components/docs/staggered-grid").then((m) => ({ default: m.StaggeredGridDemo })),
-  "perspective-grid": () => import("@/components/docs/perspective-grid").then((m) => ({ default: m.PerspectiveGridDemo })),
-  "glow-border-card": () => import("@/components/docs/glow-border-card").then((m) => ({ default: m.GlowBorderCardDemo })),
-  "testimonials-card": () => import("@/components/docs/testimonials-card").then((m) => ({ default: m.TestimonialsCardDemo })),
-  "folder-preview": () => import("@/components/docs/folder-preview").then((m) => ({ default: m.FolderPreviewDemo })),
-  "glass-dock": () => import("@/components/docs/glass-dock").then((m) => ({ default: m.GlassDockDemo })),
-  "masked-avatars": () => import("@/components/docs/masked-avatars").then((m) => ({ default: m.MaskedAvatarsDemo })),
+  "reveal-loader": dynamic(() => import("@/components/docs/reveal-loader-demo").then((m) => ({ default: m.RevealLoaderDemo })), { ssr: false, loading: LOADING }),
+  "social-flip-button": dynamic(() => import("@/components/docs/social-flip-button").then((m) => ({ default: m.SocialFlipButtonDemo })), { ssr: false, loading: LOADING }),
+  "line-hover-link": dynamic(() => import("@/components/docs/line-hover-link").then((m) => ({ default: m.LineHoverLinkDemo })), { ssr: false, loading: LOADING }),
+  "interactive-book": dynamic(() => import("@/components/docs/interactive-book").then((m) => ({ default: m.InteractiveBookDemo })), { ssr: false, loading: LOADING }),
+  "pixelated-image-trail": dynamic(() => import("@/components/docs/pixelated-image-trail").then((m) => ({ default: m.default })), { ssr: false, loading: LOADING }),
 
-  "logo-slider": () => import("@/components/docs/logo-slider").then((m) => ({ default: m.LogoSliderDemo })),
-  "stacked-logos": () => import("@/components/docs/stacked-logos").then((m) => ({ default: m.StackedLogosDemo })),
+  "expandable-bento-grid": dynamic(() => import("@/components/docs/expandable-bento-grid").then((m) => ({ default: m.ExpandableBentoGridDemo })), { ssr: false, loading: LOADING }),
+  "staggered-grid": dynamic(() => import("@/components/docs/staggered-grid").then((m) => ({ default: m.StaggeredGridDemo })), { ssr: false, loading: LOADING }),
+  "perspective-grid": dynamic(() => import("@/components/docs/perspective-grid").then((m) => ({ default: m.PerspectiveGridDemo })), { ssr: false, loading: LOADING }),
+  "glow-border-card": dynamic(() => import("@/components/docs/glow-border-card").then((m) => ({ default: m.GlowBorderCardDemo })), { ssr: false, loading: LOADING }),
+  "testimonials-card": dynamic(() => import("@/components/docs/testimonials-card").then((m) => ({ default: m.TestimonialsCardDemo })), { ssr: false, loading: LOADING }),
+  "folder-preview": dynamic(() => import("@/components/docs/folder-preview").then((m) => ({ default: m.FolderPreviewDemo })), { ssr: false, loading: LOADING }),
+  "glass-dock": dynamic(() => import("@/components/docs/glass-dock").then((m) => ({ default: m.GlassDockDemo })), { ssr: false, loading: LOADING }),
+  "masked-avatars": dynamic(() => import("@/components/docs/masked-avatars").then((m) => ({ default: m.MaskedAvatarsDemo })), { ssr: false, loading: LOADING }),
 
-  "light-lines": () => import("@/components/docs/light-lines").then((m) => ({ default: m.LightLinesDemo })),
-  "liquid-ocean": () => import("@/components/docs/liquid-ocean").then((m) => ({ default: m.LiquidOceanDemo })),
+  "logo-slider": dynamic(() => import("@/components/docs/logo-slider").then((m) => ({ default: m.LogoSliderDemo })), { ssr: false, loading: LOADING }),
+  "stacked-logos": dynamic(() => import("@/components/docs/stacked-logos").then((m) => ({ default: m.StackedLogosDemo })), { ssr: false, loading: LOADING }),
+
+  "light-lines": dynamic(() => import("@/components/docs/light-lines").then((m) => ({ default: m.LightLinesDemo })), { ssr: false, loading: LOADING }),
+  "liquid-ocean": dynamic(() => import("@/components/docs/liquid-ocean").then((m) => ({ default: m.LiquidOceanDemo })), { ssr: false, loading: LOADING }),
 };
 
 export function DemoRenderer({ slug }: { slug: string }) {
-  const loader = DEMO_LOADERS[slug];
+  const Demo = DEMO_COMPONENTS[slug];
 
-  if (!loader) {
+  if (!Demo) {
     return <FALLBACK />;
   }
-
-  const Demo = dynamic(loader, {
-    ssr: false,
-    loading: () => (
-      <div className="flex flex-col items-center gap-2 text-neutral-400 dark:text-zinc-500">
-        <div className="w-6 h-6 border-2 border-neutral-300 dark:border-zinc-700 border-t-transparent rounded-full animate-spin" />
-        <span className="text-xs font-medium">Loading preview…</span>
-      </div>
-    ),
-  });
 
   return <Demo />;
 }

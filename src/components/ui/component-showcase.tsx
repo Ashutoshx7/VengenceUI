@@ -17,13 +17,15 @@ interface ComponentShowcaseProps {
 /**
  * Read the component source code from the filesystem (server-side only).
  * Tries multiple candidate directories.
+ * The turbopackIgnore comment prevents Turbopack from tracing the entire project.
  */
 function readComponentSource(componentName: string): string {
   const fileName = `${componentName}.tsx`;
+  const root = /* turbopackIgnore: true */ process.cwd();
   const candidates = [
-    path.join(process.cwd(), "src", "components", "ui", fileName),
-    path.join(process.cwd(), "src", "registry", fileName),
-    path.join(process.cwd(), "src", "components", "docs", fileName),
+    path.join(root, "src", "components", "ui", fileName),
+    path.join(root, "src", "registry", fileName),
+    path.join(root, "src", "components", "docs", fileName),
   ];
 
   for (const candidate of candidates) {
