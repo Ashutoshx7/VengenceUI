@@ -4,8 +4,9 @@ import path from "path";
 import { CodeBlock } from "@/components/ui/code-block";
 import { CopyButton } from "@/components/ui/copy-button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ChevronDown, Expand, Terminal, WandSparkles, TerminalSquare, PictureInPicture2 } from "lucide-react";
+import { ChevronDown, Terminal, WandSparkles, TerminalSquare, PictureInPicture2 } from "lucide-react";
 import { ComponentDocsSections } from "@/components/docs/component-docs-sections";
+import { FullscreenPreview } from "@/components/ui/fullscreen-preview";
 
 interface ComponentShowcaseProps {
   componentName: string; // The exact filename in the registry (without .tsx)
@@ -90,20 +91,7 @@ export function ComponentShowcase({
               <ChevronDown className="h-3.5 w-3.5" />
             </button>
             <CopyButton code={installCommand} className="h-7 w-7 border-neutral-200 dark:border-white/10 bg-transparent hover:bg-neutral-100 dark:hover:bg-white/10" />
-            <button
-              type="button"
-              className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-neutral-200 dark:border-white/10 bg-transparent text-neutral-400 dark:text-zinc-400 transition-colors hover:bg-neutral-100 dark:hover:bg-white/10 hover:text-neutral-700 dark:hover:text-zinc-200"
-              aria-label="Open in v0"
-            >
-              <WandSparkles className="h-3.5 w-3.5" />
-            </button>
-            <button
-              type="button"
-              className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-neutral-200 dark:border-white/10 bg-transparent text-neutral-400 dark:text-zinc-400 transition-colors hover:bg-neutral-100 dark:hover:bg-white/10 hover:text-neutral-700 dark:hover:text-zinc-200"
-              aria-label="Expand preview"
-            >
-              <Expand className="h-3.5 w-3.5" />
-            </button>
+            <FullscreenPreview>{children}</FullscreenPreview>
           </div>
         </div>
 

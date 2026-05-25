@@ -344,41 +344,34 @@
   --rainbow-blue: 217 91% 60%;
   --rainbow-pink: 330 81% 60%;
   --rainbow-cyan: 180 77% 50%;
-  --stripe-color: rgba(255, 255, 255, 0.1);
+  --stripe-color: #fff;
 }
 
 .dark {
-  --stripe-color: rgba(0, 0, 0, 0.3);
+  --stripe-color: #000;
 }
 
-@keyframes aurora-bg {
-  0% {
-    background-position: 0% 50%, 0% 50%;
+@keyframes aurora-smooth-bg {
+  from {
+    background-position: 50% 50%, 50% 50%;
   }
-
-  50% {
-    background-position: 100% 50%, 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%, 0% 50%;
+  to {
+    background-position: 350% 50%, 350% 50%;
   }
 }
 
 @keyframes aurora-blink {
-
   0%,
   100% {
     opacity: 1;
   }
-
   50% {
     opacity: 0.3;
   }
 }
 
 .animate-aurora-bg {
-  animation: aurora-bg 15s ease infinite;
+  animation: aurora-smooth-bg 60s linear infinite;
 }
 
 .animate-aurora-blink {
