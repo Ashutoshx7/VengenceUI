@@ -571,4 +571,45 @@ export function LiquidOceanDemo() {
       { prop: "color2", type: "string", defaultValue: "'#00ccff'", description: "Secondary ocean color." },
     ],
   },
+  
+  "creepy-button": {
+    dependencies: "npm install framer-motion clsx tailwind-merge",
+    includeUtils: true,
+    usageCode: `import { CreepyButton } from "@/components/ui/creepy-button"
+
+export function CreepyButtonDemo() {
+  return (
+    <CreepyButton>
+      Hover Me
+    </CreepyButton>
+  )
+}`,
+    props: [
+      { prop: "children", type: "React.ReactNode", defaultValue: "-", description: "The button content." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes." },
+    ],
+  },
+  
+  "spotlight-navbar": {
+    dependencies: "npm install framer-motion clsx tailwind-merge",
+    includeUtils: true,
+    usageCode: `import { SpotlightNavbar } from "@/components/ui/spotlight-navbar"
+
+export function SpotlightNavbarDemo() {
+  return (
+    <SpotlightNavbar
+      items={[
+        { label: "Home", href: "#" },
+        { label: "About", href: "#" },
+        { label: "Pricing", href: "#" }
+      ]}
+    />
+  )
+}`,
+    props: [
+      { prop: "items", type: "NavItem[]", defaultValue: "-", description: "Array of navigation items." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes." },
+      { prop: "defaultActiveIndex", type: "number", defaultValue: "0", description: "Initial active item index." },
+    ],
+  },
 };

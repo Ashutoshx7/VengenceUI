@@ -11,6 +11,7 @@ interface ComponentShowcaseProps {
   componentName: string; // The exact filename in the registry (without .tsx)
   title: string;
   description: string;
+  slug: string;
   children: React.ReactNode; // The live component itself
 }
 
@@ -44,6 +45,7 @@ export function ComponentShowcase({
   componentName,
   title,
   description,
+  slug,
   children,
 }: ComponentShowcaseProps) {
   const installCommand = `npx shadcn@latest add @vengeanceui/${componentName}`;
@@ -131,7 +133,7 @@ export function ComponentShowcase({
       </Tabs>
 
       {/* ─── Documentation Sections (Client Component) ─── */}
-      <ComponentDocsSections componentName={componentName} sourceCode={sourceCode} />
+      <ComponentDocsSections componentName={componentName} slug={slug} sourceCode={sourceCode} />
     </div>
   );
 }

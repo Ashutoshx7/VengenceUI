@@ -4,7 +4,7 @@ import { FlipFadeText } from "@/components/ui/flip-fade-text"
 
 export function FlipFadeTextDemo() {
     return (
-        <div className="w-full h-full flex items-center justify-center bg-neutral-50 dark:bg-neutral-950">
+        <div className="w-full h-full flex items-center justify-center">
             <FlipFadeText />
         </div>
     )
@@ -12,7 +12,7 @@ export function FlipFadeTextDemo() {
 
 export function FlipFadeTextCustomWordsDemo() {
     return (
-        <div className="w-full h-full flex items-center justify-center bg-neutral-50 dark:bg-neutral-950">
+        <div className="w-full h-full flex items-center justify-center">
             <FlipFadeText
                 words={["SYNCING", "PROCESSING", "ANALYZING", "OPTIMIZING"]}
                 interval={2000}
@@ -23,7 +23,7 @@ export function FlipFadeTextCustomWordsDemo() {
 
 export function FlipFadeTextFastDemo() {
     return (
-        <div className="w-full h-full flex items-center justify-center bg-neutral-50 dark:bg-neutral-950">
+        <div className="w-full h-full flex items-center justify-center">
             <FlipFadeText
                 words={["FAST", "QUICK", "RAPID", "SWIFT"]}
                 interval={1500}

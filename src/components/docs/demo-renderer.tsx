@@ -21,6 +21,7 @@ const LOADING = () => (
 const DEMO_COMPONENTS: Record<string, React.ComponentType> = {
   "bento-grid": dynamic(() => import("@/registry/bento-grid").then((m) => ({ default: m.default })), { ssr: false, loading: LOADING }),
   "my-animated-button": dynamic(() => import("@/registry/my-animated-button").then((m) => ({ default: m.default })), { ssr: false, loading: LOADING }),
+  "creepy-button": dynamic(() => import("@/components/docs/creepy-button-demo").then((m) => ({ default: m.CreepyButtonDemo })), { ssr: false, loading: LOADING }),
 
   "animated-hero": dynamic(() => import("@/components/docs/animated-hero").then((m) => ({ default: m.AnimatedHeroDemo })), { ssr: false, loading: LOADING }),
   "animated-number": dynamic(() => import("@/components/docs/animated-number").then((m) => ({ default: m.AnimatedNumberDemo })), { ssr: false, loading: LOADING }),
@@ -42,6 +43,7 @@ const DEMO_COMPONENTS: Record<string, React.ComponentType> = {
   "testimonials-card": dynamic(() => import("@/components/docs/testimonials-card").then((m) => ({ default: m.TestimonialsCardDemo })), { ssr: false, loading: LOADING }),
   "folder-preview": dynamic(() => import("@/components/docs/folder-preview").then((m) => ({ default: m.FolderPreviewDemo })), { ssr: false, loading: LOADING }),
   "glass-dock": dynamic(() => import("@/components/docs/glass-dock").then((m) => ({ default: m.GlassDockDemo })), { ssr: false, loading: LOADING }),
+  "spotlight-navbar": dynamic(() => import("@/components/docs/spotlight-navbar-demo").then((m) => ({ default: m.SpotlightNavbarDemo })), { ssr: false, loading: LOADING }),
   "masked-avatars": dynamic(() => import("@/components/docs/masked-avatars").then((m) => ({ default: m.MaskedAvatarsDemo })), { ssr: false, loading: LOADING }),
 
   "logo-slider": dynamic(() => import("@/components/docs/logo-slider").then((m) => ({ default: m.LogoSliderDemo })), { ssr: false, loading: LOADING }),

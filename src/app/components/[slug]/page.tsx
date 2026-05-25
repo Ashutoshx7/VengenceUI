@@ -27,6 +27,7 @@ export default async function ComponentPage({
   return (
     <ComponentShowcase
       componentName={component.componentName}
+      slug={component.slug}
       title={component.name}
       description={component.description}
     >

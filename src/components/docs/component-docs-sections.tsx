@@ -7,6 +7,8 @@ import { CLICommand } from "@/components/docs/cli-command";
 import { CodeBlock as DocCodeBlock, Dependencies } from "@/components/docs/component-installation";
 import { PropsTable } from "@/components/docs/props-table";
 import { COMPONENT_DOCS } from "@/lib/component-docs";
+import { ComponentPreview } from "@/components/docs/component-preview";
+import { DemoRenderer } from "@/components/docs/demo-renderer";
 
 const UTILS_CODE = `import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -17,11 +19,12 @@ export function cn(...inputs: ClassValue[]) {
 
 interface ComponentDocsSectionsProps {
   componentName: string;
+  slug: string;
   sourceCode: string;
 }
 
-export function ComponentDocsSections({ componentName, sourceCode }: ComponentDocsSectionsProps) {
-  const docs = COMPONENT_DOCS[componentName];
+export function ComponentDocsSections({ componentName, slug, sourceCode }: ComponentDocsSectionsProps) {
+  const docs = COMPONENT_DOCS[slug] || COMPONENT_DOCS[componentName];
   const [installTab, setInstallTab] = useState<"cli" | "manual">("cli");
 
   if (!docs) {
@@ -110,7 +113,10 @@ export function ComponentDocsSections({ componentName, sourceCode }: ComponentDo
       {/* ─── Usage Section ─── */}
       <section id="usage" className="scroll-mt-24">
         <h2 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-zinc-100 mb-6">Usage</h2>
-        <DocCodeBlock language="tsx" code={docs.usageCode} />
+        <ComponentPreview
+          component={<DemoRenderer slug={slug} />}
+          code={docs.usageCode}
+        />
       </section>
 
       {/* ─── Props Section ─── */}
