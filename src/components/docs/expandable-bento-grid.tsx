@@ -71,7 +71,7 @@ const items = [
 
 export function ExpandableBentoGridDemo() {
     return (
-        <div className="w-full h-full min-h-[500px] flex items-center justify-center p-4 relative overflow-hidden">
+        <div className="w-full h-full h-full flex items-center justify-center p-4 relative overflow-hidden">
             <div className="absolute inset-0 bg-grid-black/[0.1] dark:bg-grid-white/[0.1] -z-10" />
             <ExpandableBentoGrid items={items} />
         </div>

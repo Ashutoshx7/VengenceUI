@@ -52,9 +52,9 @@ export function ComponentShowcase({
   const sourceCode = readComponentSource(componentName);
 
   return (
-    <div className="mb-24 space-y-7">
+    <div className="mb-8 space-y-4">
       {/* Component Header */}
-      <div id="overview" className="space-y-3 scroll-mt-24">
+      <div id="overview" className="space-y-1 scroll-mt-24">
         <p className="text-sm font-medium text-neutral-500 dark:text-zinc-500">
           Components <span className="mx-1 text-neutral-400 dark:text-zinc-700">/</span>
           <span className="text-neutral-900 dark:text-zinc-200">{title}</span>
@@ -111,11 +111,11 @@ export function ComponentShowcase({
         <TabsContent value="preview">
           <div className="w-full">
             <div id="preview" className="w-full scroll-mt-24 rounded-2xl border border-neutral-200 dark:border-[#222] bg-neutral-100 dark:bg-zinc-900 p-2.5 shadow-lg dark:shadow-[0_20px_60px_rgba(0,0,0,0.45)] sm:p-4">
-              <div className="relative flex min-h-[700px] items-center justify-center overflow-hidden rounded-xl border border-neutral-200 dark:border-[#222] bg-white dark:bg-black p-10">
+              <div className="relative flex h-[680px] items-stretch overflow-hidden rounded-xl border border-neutral-200 dark:border-[#222] bg-white dark:bg-black">
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-black/5 dark:bg-white/10" />
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(0,0,0,0.03),transparent_32%),radial-gradient(circle_at_80%_100%,rgba(0,0,0,0.02),transparent_34%)] dark:bg-[radial-gradient(circle_at_20%_0%,rgba(255,255,255,0.08),transparent_32%),radial-gradient(circle_at_80%_100%,rgba(255,255,255,0.04),transparent_34%)]" />
 
-                <div className="relative z-10 w-full flex justify-center items-center">
+                <div className="relative z-10 w-full h-full flex justify-center items-center">
                   {children}
                 </div>
               </div>

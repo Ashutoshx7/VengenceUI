@@ -31,7 +31,7 @@ const demoItems = [
 
 export function TestimonialsCardDemo() {
     return (
-        <div className="relative flex min-h-[500px] w-full items-center justify-center overflow-hidden">
+        <div className="relative flex min-h-full w-full items-center justify-center overflow-hidden">
             <TestimonialsCard items={demoItems} />
         </div>
     );
@@ -39,7 +39,7 @@ export function TestimonialsCardDemo() {
 
 export function TestimonialsAutoPlayDemo() {
     return (
-        <div className="relative flex min-h-[500px] w-full items-center justify-center overflow-hidden">
+        <div className="relative flex min-h-full w-full items-center justify-center overflow-hidden">
             <TestimonialsCard items={demoItems} autoPlay={true} autoPlayInterval={4000} />
         </div>
     );
@@ -47,7 +47,7 @@ export function TestimonialsAutoPlayDemo() {
 
 export function TestimonialsNoNavDemo() {
     return (
-        <div className="relative flex min-h-[500px] w-full items-center justify-center overflow-hidden">
+        <div className="relative flex min-h-full w-full items-center justify-center overflow-hidden">
             <TestimonialsCard items={demoItems} showNavigation={false} autoPlay={true} />
         </div>
     );
@@ -55,7 +55,7 @@ export function TestimonialsNoNavDemo() {
 
 export function TestimonialsWidthDemo() {
     return (
-        <div className="relative flex min-h-[500px] w-full items-center justify-center overflow-hidden">
+        <div className="relative flex min-h-full w-full items-center justify-center overflow-hidden">
             <TestimonialsCard items={demoItems} width={500} />
         </div>
     );

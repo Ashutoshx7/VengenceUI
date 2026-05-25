@@ -7,8 +7,6 @@ import { CLICommand } from "@/components/docs/cli-command";
 import { CodeBlock as DocCodeBlock, Dependencies } from "@/components/docs/component-installation";
 import { PropsTable } from "@/components/docs/props-table";
 import { COMPONENT_DOCS } from "@/lib/component-docs";
-import { ComponentPreview } from "@/components/docs/component-preview";
-import { DemoRenderer } from "@/components/docs/demo-renderer";
 
 const UTILS_CODE = `import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -32,7 +30,7 @@ export function ComponentDocsSections({ componentName, slug, sourceCode }: Compo
   }
 
   return (
-    <div className="space-y-14 mt-12">
+    <div className="space-y-10 mt-6">
       {/* ─── Installation Section with CLI | Manual Toggle ─── */}
       <section id="installation" className="scroll-mt-24">
         <h2 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-zinc-100 mb-6">Installation</h2>
@@ -113,10 +111,7 @@ export function ComponentDocsSections({ componentName, slug, sourceCode }: Compo
       {/* ─── Usage Section ─── */}
       <section id="usage" className="scroll-mt-24">
         <h2 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-zinc-100 mb-6">Usage</h2>
-        <ComponentPreview
-          component={<DemoRenderer slug={slug} />}
-          code={docs.usageCode}
-        />
+        <DocCodeBlock language="tsx" code={docs.usageCode} />
       </section>
 
       {/* ─── Props Section ─── */}

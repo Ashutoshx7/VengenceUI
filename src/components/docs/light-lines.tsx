@@ -4,7 +4,7 @@ import { LightLines } from "@/components/ui/light-lines";
 
 export function LightLinesDemo() {
     return (
-        <div className="relative w-full h-[400px] overflow-hidden rounded-xl">
+        <div className="relative w-full h-full overflow-hidden rounded-xl">
             <LightLines>
                 <div className="flex items-center justify-center h-full">
                     <h1 className="text-4xl font-bold text-white uppercase tracking-widest">
@@ -18,7 +18,7 @@ export function LightLinesDemo() {
 
 export function LightLinesPurpleDemo() {
     return (
-        <div className="relative w-full h-[400px] overflow-hidden rounded-xl">
+        <div className="relative w-full h-full overflow-hidden rounded-xl">
             <LightLines
                 gradientFrom="#6B21A8"
                 gradientTo="#A855F7"
@@ -37,7 +37,7 @@ export function LightLinesPurpleDemo() {
 
 export function LightLinesDarkDemo() {
     return (
-        <div className="relative w-full h-[400px] overflow-hidden rounded-xl">
+        <div className="relative w-full h-full overflow-hidden rounded-xl">
             <LightLines
                 gradientFrom="#0f0f0f"
                 gradientTo="#1a1a2e"
@@ -59,7 +59,7 @@ export function LightLinesDarkDemo() {
 
 export function LightLinesFastDemo() {
     return (
-        <div className="relative w-full h-[400px] overflow-hidden rounded-xl">
+        <div className="relative w-full h-full overflow-hidden rounded-xl">
             <LightLines speedMultiplier={2}>
                 <div className="flex items-center justify-center h-full">
                     <h1 className="text-4xl font-bold text-white uppercase tracking-widest">

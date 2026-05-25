@@ -7,7 +7,7 @@ import { LiquidOcean } from "@/components/ui/liquid-ocean";
  */
 export function LiquidOceanDemo() {
     return (
-        <div className="relative flex h-[500px] w-full items-center justify-center overflow-hidden rounded-lg">
+        <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-lg">
             <LiquidOcean />
         </div>
     );
@@ -18,7 +18,7 @@ export function LiquidOceanDemo() {
  */
 export function LiquidOceanMinimal() {
     return (
-        <div className="relative flex h-[400px] w-full overflow-hidden">
+        <div className="relative flex h-full w-full overflow-hidden">
             <LiquidOcean
                 showBoats={false}
                 showGrid={false}
@@ -35,7 +35,7 @@ export function LiquidOceanMinimal() {
  */
 export function LiquidOceanCyan() {
     return (
-        <div className="relative flex h-[400px] w-full overflow-hidden">
+        <div className="relative flex h-full w-full overflow-hidden">
             <LiquidOcean
                 backgroundColor={0x0a1a1a}
                 accentColor={0x00ffff}
@@ -56,7 +56,7 @@ export function LiquidOceanCyan() {
  */
 export function LiquidOceanPurple() {
     return (
-        <div className="relative flex h-[400px] w-full overflow-hidden">
+        <div className="relative flex h-full w-full overflow-hidden">
             <LiquidOcean
                 backgroundColor={0x0a0a1a}
                 accentColor={0x9933ff}
@@ -78,7 +78,7 @@ export function LiquidOceanPurple() {
  */
 export function LiquidOceanHighDetail() {
     return (
-        <div className="relative flex h-[400px] w-full overflow-hidden">
+        <div className="relative flex h-full w-full overflow-hidden">
             <LiquidOcean
                 oceanFragments={50}
                 boatCount={10}
@@ -101,7 +101,7 @@ export function LiquidOceanHighDetail() {
  */
 export function LiquidOceanCalm() {
     return (
-        <div className="relative flex h-[400px] w-full overflow-hidden">
+        <div className="relative flex h-full w-full overflow-hidden">
             <LiquidOcean
                 backgroundColor={0x0a1a1a}
                 accentColor={0x00ffff}
@@ -125,7 +125,7 @@ export function LiquidOceanCalm() {
  */
 export function LiquidOceanMatrix() {
     return (
-        <div className="relative flex h-[400px] w-full overflow-hidden">
+        <div className="relative flex h-full w-full overflow-hidden">
             <LiquidOcean
                 backgroundColor={0x0a1a0a}
                 accentColor={0x00ff66}
@@ -148,7 +148,7 @@ export function LiquidOceanMatrix() {
  */
 export function LiquidOceanSunset() {
     return (
-        <div className="relative flex h-[400px] w-full overflow-hidden">
+        <div className="relative flex h-full w-full overflow-hidden">
             <LiquidOcean
                 backgroundColor={0x1a0a0a}
                 accentColor={0xff6600}

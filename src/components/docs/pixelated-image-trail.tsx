@@ -14,7 +14,7 @@ const PixelatedImageTrail = dynamic(
  */
 export function PixelatedImageTrailDemo() {
     return (
-        <div className="relative w-full h-[400px] bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900 rounded-xl overflow-hidden flex items-center justify-center">
+        <div className="relative w-full h-full bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900 rounded-xl overflow-hidden flex items-center justify-center">
             <PixelatedImageTrail
                 images={[
                     "/trail-images/image1.jpg",
@@ -42,7 +42,7 @@ export function PixelatedImageTrailDemo() {
  */
 export function PixelatedImageTrailFastDemo() {
     return (
-        <div className="relative w-full h-[400px] bg-gradient-to-br from-purple-900 via-violet-800 to-indigo-900 rounded-xl overflow-hidden flex items-center justify-center">
+        <div className="relative w-full h-full bg-gradient-to-br from-purple-900 via-violet-800 to-indigo-900 rounded-xl overflow-hidden flex items-center justify-center">
             <PixelatedImageTrail
                 images={[
                     "/trail-images/image8.jpg",
@@ -72,7 +72,7 @@ export function PixelatedImageTrailFastDemo() {
  */
 export function PixelatedImageTrailFineDemo() {
     return (
-        <div className="relative w-full h-[400px] bg-gradient-to-br from-emerald-900 via-teal-800 to-cyan-900 rounded-xl overflow-hidden flex items-center justify-center">
+        <div className="relative w-full h-full bg-gradient-to-br from-emerald-900 via-teal-800 to-cyan-900 rounded-xl overflow-hidden flex items-center justify-center">
             <PixelatedImageTrail
                 images={[
                     "/trail-images/image11.jpg",
@@ -101,7 +101,7 @@ export function PixelatedImageTrailFineDemo() {
  */
 export function PixelatedImageTrailCoarseDemo() {
     return (
-        <div className="relative w-full h-[400px] bg-gradient-to-br from-orange-900 via-red-800 to-rose-900 rounded-xl overflow-hidden flex items-center justify-center">
+        <div className="relative w-full h-full bg-gradient-to-br from-orange-900 via-red-800 to-rose-900 rounded-xl overflow-hidden flex items-center justify-center">
             <PixelatedImageTrail
                 images={[
                     "/trail-images/image2.jpg",

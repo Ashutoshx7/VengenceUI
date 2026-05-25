@@ -8,7 +8,7 @@ import { GlowBorderCard } from '@/components/ui/glow-border-card';
  */
 export function GlowBorderCardDemo() {
     return (
-        <div className="relative flex min-h-[400px] w-full flex-col items-center justify-center overflow-hidden p-8">
+        <div className="relative flex min-h-full w-full flex-col items-center justify-center overflow-hidden p-8">
             <GlowBorderCard
                 width="280px"
                 aspectRatio="1"
