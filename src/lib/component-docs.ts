@@ -615,6 +615,34 @@ export function TwistingRibbonDemo() {
     ],
   },
 
+  "corner-button": {
+    dependencies: "npm install clsx tailwind-merge",
+    includeUtils: true,
+    usageCode: `import { CornerButton } from "@/components/ui/corner-button"
+
+// Default usage
+export function MySection() {
+  return <CornerButton>Start designing</CornerButton>
+}
+
+// Custom accent colour, no icon
+export function CustomSection() {
+  return (
+    <CornerButton accentColor="#00e5ff" showIcon={false}>
+      Get started
+    </CornerButton>
+  )
+}`,
+    props: [
+      { prop: "children", type: "React.ReactNode", defaultValue: "\"Start designing\"", description: "Button label content." },
+      { prop: "icon", type: "React.ReactNode", defaultValue: "PencilIcon", description: "Custom icon rendered to the right of the label. Overrides showIcon." },
+      { prop: "showIcon", type: "boolean", defaultValue: "true", description: "Show the default pencil icon. Set to false to hide it entirely." },
+      { prop: "accentColor", type: "string", defaultValue: "\"#e5ff00\"", description: "Accent colour used for the button background and corner glow." },
+      { prop: "wrapperClassName", type: "string", defaultValue: "-", description: "Extra classes applied to the outer wrapper div." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Extra classes applied to the button element." },
+    ],
+  },
+
   "aurora-hero": {
     dependencies: "npm install clsx tailwind-merge",
     includeUtils: true,

@@ -24,6 +24,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
       { name: "Social Flip Button", slug: "social-flip-button", description: "Social icon flip interaction", componentName: "social-flip-button", isNew: true },
       { name: "Liquid Metal", slug: "liquid-metal", description: "Metallic fluid shader effect", componentName: "liquid-metal", isNew: true },
       { name: "Creepy Button", slug: "creepy-button", description: "Button with tracking eyes", componentName: "creepy-button", isNew: true },
+      { name: "Corner Button", slug: "corner-button", description: "Animated corner dots & lines button", componentName: "corner-button", isNew: true },
     ],
   },
   {
