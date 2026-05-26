@@ -2,7 +2,7 @@ import { CornerButton } from "@/components/ui/corner-button";
 
 export function CornerButtonDemo() {
   return (
-    <div className="flex flex-col items-center justify-center gap-10 w-full min-h-[300px] bg-white dark:bg-neutral-950 p-10">
+    <div className="flex flex-col items-center justify-center gap-10 w-full h-full p-10">
       {/* Default */}
       <CornerButton>Start designing</CornerButton>
 

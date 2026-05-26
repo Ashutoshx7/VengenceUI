@@ -654,7 +654,7 @@ export function Card4() {
           {namespaces.map((ns, i) => {
             const c = NS_COLORS[ns.name];
             const isActive = ns.name === activeNs;
-            const Icon = NS_ICONS[ns.name] || Database;
+            const Icon = (NS_ICONS[ns.name] || Database) as React.ComponentType<{ size?: number; weight?: string; className?: string }>;
 
             return (
               <div key={ns.name} className="flex items-center gap-3 group relative">
