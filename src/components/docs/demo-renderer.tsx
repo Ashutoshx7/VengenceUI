@@ -45,6 +45,7 @@ const DEMO_COMPONENTS: Record<string, React.ComponentType> = {
   "glass-dock": dynamic(() => import("@/components/docs/glass-dock").then((m) => ({ default: m.GlassDockDemo })), { ssr: false, loading: LOADING }),
   "spotlight-navbar": dynamic(() => import("@/components/docs/spotlight-navbar-demo").then((m) => ({ default: m.SpotlightNavbarDemo })), { ssr: false, loading: LOADING }),
   "masked-avatars": dynamic(() => import("@/components/docs/masked-avatars").then((m) => ({ default: m.MaskedAvatarsDemo })), { ssr: false, loading: LOADING }),
+  "agent-bento-grid": dynamic(() => import("@/components/docs/agent-bento-grid-demo").then((m) => ({ default: m.AgentBentoGridDemo })), { ssr: false, loading: LOADING }),
 
   "logo-slider": dynamic(() => import("@/components/docs/logo-slider").then((m) => ({ default: m.LogoSliderDemo })), { ssr: false, loading: LOADING }),
   "stacked-logos": dynamic(() => import("@/components/docs/stacked-logos").then((m) => ({ default: m.StackedLogosDemo })), { ssr: false, loading: LOADING }),

@@ -276,6 +276,21 @@ export function BentoGridDemo() {
     ],
   },
 
+  "agent-bento-grid": {
+    dependencies: "npm install framer-motion @phosphor-icons/react clsx tailwind-merge",
+    includeUtils: true,
+    usageCode: `import { AgentBentoGrid } from "@/components/ui/agent-bento-grid"
+
+export function AgentBentoGridDemo() {
+  return (
+    <AgentBentoGrid className="my-8" />
+  )
+}`,
+    props: [
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the grid container." },
+    ],
+  },
+
   "expandable-bento-grid": {
     dependencies: "npm install framer-motion clsx tailwind-merge",
     includeUtils: true,

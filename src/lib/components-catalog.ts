@@ -48,6 +48,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
     name: "Layout & Cards",
     icon: LayoutGrid,
     items: [
+      { name: "Agent Bento Grid", slug: "agent-bento-grid", description: "Multi-agent workspace grid layout", componentName: "agent-bento-grid", isNew: true },
       { name: "Expandable Bento Grid", slug: "expandable-bento-grid", description: "Interactive multi-panel bento", componentName: "expandable-bento-grid", isNew: true },
       { name: "Staggered Grid", slug: "staggered-grid", description: "Offset card grid composition", componentName: "staggered-grid", isNew: true },
       { name: "Glow Border Card", slug: "glow-border-card", description: "Card with animated glow border", componentName: "glow-border-card", isNew: true },
