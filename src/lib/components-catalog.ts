@@ -64,6 +64,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
       { name: "Logo Slider", slug: "logo-slider", description: "Infinite logo marquee", componentName: "logo-slider", isNew: true },
       { name: "Stacked Logos", slug: "stacked-logos", description: "Overlapping brand logos", componentName: "stacked-logos", isNew: true },
       { name: "Masked Avatars", slug: "masked-avatars", description: "Stacked masked avatar list", componentName: "masked-avatars", isNew: true },
+      { name: "Image Reveal List", slug: "image-reveal-list", description: "Hover-based image reveal tooltip list", componentName: "image-reveal-list", isNew: true },
     ],
   },
   {
