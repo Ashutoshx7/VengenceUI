@@ -84,6 +84,8 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
     name: "Backgrounds",
     icon: Image,
     items: [
+      { name: "Aurora Hero", slug: "aurora-hero", description: "Fluted glass dynamic hero with interactive switch", componentName: "aurora-hero", isNew: true },
+      { name: "Twisting Ribbon", slug: "twisting-ribbon", description: "3D waving neon ribbon animation", componentName: "twisting-ribbon", isNew: true },
       { name: "Animated Rays", slug: "animated-rays", description: "Hero with animated heading", componentName: "animated-rays", isNew: true },
       { name: "Perspective Grid", slug: "perspective-grid", description: "3D perspective matrix background", componentName: "perspective-grid", isNew: true },
       { name: "Light Lines", slug: "light-lines", description: "Animated flowing line background", componentName: "light-lines", isNew: true },

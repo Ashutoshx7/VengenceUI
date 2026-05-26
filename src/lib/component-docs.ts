@@ -587,6 +587,52 @@ export function LiquidOceanDemo() {
     ],
   },
 
+  "twisting-ribbon": {
+    dependencies: "npm install clsx tailwind-merge",
+    includeUtils: true,
+    usageCode: `import { TwistingRibbon } from "@/components/ui/twisting-ribbon"
+
+export function TwistingRibbonDemo() {
+  return (
+    <div className="w-full h-[400px]">
+      <TwistingRibbon
+        segments={400}
+        waveSpeed={0.018}
+        waveAmplitude={1}
+        twistCycles={6}
+      />
+    </div>
+  )
+}`,
+    props: [
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the container." },
+      { prop: "segments", type: "number", defaultValue: "400", description: "Number of geometric segments along the ribbon." },
+      { prop: "waveSpeed", type: "number", defaultValue: "0.018", description: "Speed of the ribbon motion." },
+      { prop: "waveAmplitude", type: "number", defaultValue: "1", description: "Scale multiplier for the wave height." },
+      { prop: "twistCycles", type: "number", defaultValue: "6", description: "Number of full twists across the ribbon length." },
+      { prop: "lightColors", type: "RibbonColors", defaultValue: "-", description: "Object containing hex colors (face, foldA, foldB, foldC) for light mode." },
+      { prop: "darkColors", type: "RibbonColors", defaultValue: "-", description: "Object containing hex colors (face, foldA, foldB, foldC) for dark mode." },
+    ],
+  },
+
+  "aurora-hero": {
+    dependencies: "npm install clsx tailwind-merge",
+    includeUtils: true,
+    usageCode: `import { AuroraHero } from "@/components/ui/aurora-hero"
+
+export function AuroraHeroDemo() {
+  return (
+    <div className="w-full h-full min-h-[500px]">
+      <AuroraHero title="Vengeance UI" />
+    </div>
+  )
+}`,
+    props: [
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the container." },
+      { prop: "title", type: "string", defaultValue: "'An awesome title'", description: "The text to display with the fluted glass effect." },
+    ],
+  },
+
   "creepy-button": {
     dependencies: "npm install framer-motion clsx tailwind-merge",
     includeUtils: true,
