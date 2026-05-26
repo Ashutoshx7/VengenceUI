@@ -37,6 +37,7 @@ const DEMO_COMPONENTS: Record<string, React.ComponentType> = {
   "line-hover-link": dynamic(() => import("@/components/docs/line-hover-link").then((m) => ({ default: m.LineHoverLinkDemo })), { ssr: false, loading: LOADING }),
   "interactive-book": dynamic(() => import("@/components/docs/interactive-book").then((m) => ({ default: m.InteractiveBookDemo })), { ssr: false, loading: LOADING }),
   "pixelated-image-trail": dynamic(() => import("@/components/docs/pixelated-image-trail").then((m) => ({ default: m.default })), { ssr: false, loading: LOADING }),
+  "interactive-keyboard": dynamic(() => import("@/components/docs/interactive-keyboard-demo").then((m) => ({ default: m.InteractiveKeyboardDemo })), { ssr: false, loading: LOADING }),
 
   "expandable-bento-grid": dynamic(() => import("@/components/docs/expandable-bento-grid").then((m) => ({ default: m.ExpandableBentoGridDemo })), { ssr: false, loading: LOADING }),
   "staggered-grid": dynamic(() => import("@/components/docs/staggered-grid").then((m) => ({ default: m.StaggeredGridDemo })), { ssr: false, loading: LOADING }),

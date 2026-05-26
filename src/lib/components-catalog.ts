@@ -44,6 +44,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
     items: [
       { name: "Interactive Book", slug: "interactive-book", description: "3D page-flip style book", componentName: "interactive-book", isNew: true },
       { name: "Pixelated Image Trail", slug: "pixelated-image-trail", description: "Cursor trail image reveal", componentName: "pixelated-image-trail", isNew: true },
+      { name: "Interactive Keyboard", slug: "interactive-keyboard", description: "Animated physical keyboard UI", componentName: "interactive-keyboard", isNew: true },
     ],
   },
   {
