@@ -28,6 +28,7 @@ const DEMO_COMPONENTS: Record<string, React.ComponentType> = {
   "animated-number": dynamic(() => import("@/components/docs/animated-number").then((m) => ({ default: m.AnimatedNumberDemo })), { ssr: false, loading: LOADING }),
   "flip-text": dynamic(() => import("@/components/docs/Fliptext-examples/flip-text-demo").then((m) => ({ default: m.default })), { ssr: false, loading: LOADING }),
   "flip-fade-text": dynamic(() => import("@/components/docs/flip-fade-text").then((m) => ({ default: m.FlipFadeTextDemo })), { ssr: false, loading: LOADING }),
+  "morph-text": dynamic(() => import("@/components/docs/morph-text-demo").then((m) => ({ default: m.MorphTextDemo })), { ssr: false, loading: LOADING }),
   "liquid-text": dynamic(() => import("@/components/docs/liquid-text").then((m) => ({ default: m.LiquidTextDemo })), { ssr: false, loading: LOADING }),
   "liquid-metal": dynamic(() => import("@/components/docs/liquid-metal").then((m) => ({ default: m.LiquidMetalPreview })), { ssr: false, loading: LOADING }),
 

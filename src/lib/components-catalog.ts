@@ -35,6 +35,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
       { name: "Flip Text", slug: "flip-text", description: "Character flip text animation", componentName: "flip-text", isNew: true },
       { name: "Flip Fade Text", slug: "flip-fade-text", description: "Word flip and fade cycle", componentName: "flip-fade-text", isNew: true },
       { name: "Liquid Text", slug: "liquid-text", description: "Fluid displacement text effect", componentName: "liquid-text", isNew: true },
+      { name: "Morph Text", slug: "morph-text", description: "Blur-morph word rotation effect", componentName: "morph-text", isNew: true },
     ],
   },
   {

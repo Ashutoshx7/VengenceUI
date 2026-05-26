@@ -615,6 +615,41 @@ export function TwistingRibbonDemo() {
     ],
   },
 
+  "morph-text": {
+    dependencies: "npm install clsx tailwind-merge",
+    includeUtils: true,
+    usageCode: `import { MorphText } from "@/components/ui/morph-text"
+
+// Default — cycles CREATE / DESIGN / DEVELOP
+export function MyHero() {
+  return (
+    <MorphText subtext="The Art of Code" />
+  )
+}
+
+// Custom words and interval
+export function CustomMorph() {
+  return (
+    <MorphText
+      words={["INNOVATE", "BUILD", "SHIP"]}
+      interval={2500}
+      subtext="Move fast. Break things."
+      fontSize="clamp(2rem, 10vw, 8rem)"
+    />
+  )
+}`,
+    props: [
+      { prop: "words", type: "string[]", defaultValue: '["CREATE", "DESIGN", "DEVELOP"]', description: "Array of words or phrases to cycle through." },
+      { prop: "interval", type: "number", defaultValue: "3000", description: "Duration in ms each word is shown before transitioning." },
+      { prop: "subtext", type: "string", defaultValue: "-", description: "Optional subtext rendered beneath the morphing word." },
+      { prop: "fontSize", type: "string", defaultValue: '"clamp(3rem, 15vw, 10rem)"', description: "CSS font-size value for the morphing text." },
+      { prop: "fontFamily", type: "string", defaultValue: '"Space Grotesk", sans-serif', description: "Font family applied to both the morph text and subtext." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Extra classes on the root wrapper." },
+      { prop: "textClassName", type: "string", defaultValue: "-", description: "Extra classes on the morphing text container." },
+      { prop: "subtextClassName", type: "string", defaultValue: "-", description: "Extra classes on the subtext element." },
+    ],
+  },
+
   "corner-button": {
     dependencies: "npm install clsx tailwind-merge",
     includeUtils: true,
