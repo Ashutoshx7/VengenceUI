@@ -33,7 +33,7 @@ const demoItems: ImageRevealListItem[] = [
 
 export function ImageRevealListDemo() {
   return (
-    <div className="w-full min-h-[500px] flex flex-col items-center justify-center relative p-8 bg-[#fafbfc] dark:bg-black overflow-hidden">
+    <div className="w-full min-h-[500px] flex flex-col items-center justify-center relative p-8 overflow-hidden">
       {/* Subtle grid background to match the original design */}
       <div 
         className="absolute inset-0 pointer-events-none opacity-50 dark:opacity-20"
@@ -54,16 +54,6 @@ export function ImageRevealListDemo() {
 
       <div className="relative z-10 w-full max-w-[500px] flex flex-col items-center">
         <ImageRevealList items={demoItems} className="mb-8 pl-[100px] sm:pl-0" />
-
-        {/* User requested link */}
-        <a 
-          href="https://websuperkit.in" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="mt-8 text-sm text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors border border-neutral-200 dark:border-white/10 rounded-full px-4 py-2 bg-white/50 dark:bg-white/5 backdrop-blur-sm"
-        >
-          Web SuperKit - One Extension for Everything (&lt;1Mb Size)
-        </a>
       </div>
     </div>
   );
