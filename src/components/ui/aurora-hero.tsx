@@ -49,14 +49,14 @@ export function AuroraHero({
     >
       <style>{`
         .aurora-hero-wrapper {
-          --stripe-color: #fff;
-          --bg-filter: blur(10px) invert(100%);
+          --stripe-color: #000;
+          --bg-filter: blur(10px) opacity(50%) saturate(200%);
           background: var(--stripe-color);
           font-family: Inter, sans-serif;
         }
         :is(.dark) .aurora-hero-wrapper {
-          --stripe-color: #000;
-          --bg-filter: blur(10px) opacity(50%) saturate(200%);
+          --stripe-color: #fff;
+          --bg-filter: blur(10px) invert(100%);
         }
         @keyframes smoothBg {
           from { background-position: 50% 50%, 50% 50%; }
