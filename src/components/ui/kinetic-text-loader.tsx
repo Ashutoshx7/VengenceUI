@@ -29,7 +29,7 @@ export function KineticTextLoader({
         }
         @keyframes ktl-letterStretch {
           0%, 100% { transform: scale(1, 0.35); transform-origin: 100% 75%; }
-          8%, 28% { transform: scale(1, 2.125); transform-origin: 100% 67%; }
+          8%, 28% { transform: scale(1, 1.4); transform-origin: 100% 67%; }
           37% { transform: scale(1, 0.875); transform-origin: 100% 75%; }
           46% { transform: scale(1, 1.03); transform-origin: 100% 75%; }
           50%, 97% { transform: scale(1); transform-origin: 100% 75%; }
