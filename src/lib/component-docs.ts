@@ -943,11 +943,9 @@ export function Demo() {
 
 export function Demo() {
   return (
-    <BeamTunnel className="h-[400px]">
-      <div className="bg-white/80 p-8 rounded-2xl backdrop-blur-md">
-        <h2>Hyperspace Jump</h2>
-      </div>
-    </BeamTunnel>
+    <div className="relative w-full h-[400px]">
+      <BeamTunnel className="absolute inset-0" />
+    </div>
   )
 }`,
     props: [

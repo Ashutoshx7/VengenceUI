@@ -36,7 +36,8 @@ export function BeamTunnel({
     const generateBeams = () => {
       const generateSideBeams = (prefix: string) => {
         return Array.from({ length: beamCount }).map((_, i) => {
-          const duration = 3 + Math.random() * 2;
+          // Slow down the animation significantly for a more tasteful feel
+          const duration = 6 + Math.random() * 6;
           return {
             id: `${prefix}-${i}`,
             // Randomize position across the plane
@@ -67,8 +68,8 @@ export function BeamTunnel({
       <style>{`
         @keyframes tunnel-beam-move {
           0% { transform: translateY(120%); opacity: 0; }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
+          20% { opacity: 0.8; }
+          80% { opacity: 0.8; }
           100% { transform: translateY(-120%); opacity: 0; }
         }
       `}</style>
@@ -135,11 +136,11 @@ function Grid({ sideBeams }: { sideBeams: Beam[] }) {
       {sideBeams.map((beam) => (
         <div
           key={beam.id}
-          className="absolute top-0 w-[5%] aspect-[1/6] rounded-md opacity-0"
+          className="absolute top-0 w-[3%] aspect-[1/8] rounded-md opacity-0 blur-[1px]"
           style={{
             left: beam.left,
             background: beam.background,
-            animation: `tunnel-beam-move ${beam.duration} linear infinite`,
+            animation: `tunnel-beam-move ${beam.duration} ease-in-out infinite`,
             animationDelay: beam.delay,
           }}
         />
