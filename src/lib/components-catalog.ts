@@ -71,6 +71,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
     name: "Tooltip & Marquee",
     icon: Layers,
     items: [
+      { name: "Cursor Card", slug: "cursor-card", description: "Inline text link with cursor tracking preview card", componentName: "cursor-card", isNew: true },
       { name: "Elastic Stack", slug: "elastic-stack", description: "Horizontal expanding staggered stack", componentName: "elastic-stack", isNew: true },
       { name: "Logo Slider", slug: "logo-slider", description: "Infinite logo marquee", componentName: "logo-slider", isNew: true },
       { name: "Stacked Logos", slug: "stacked-logos", description: "Overlapping brand logos", componentName: "stacked-logos", isNew: true },

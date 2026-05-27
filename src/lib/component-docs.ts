@@ -859,4 +859,25 @@ export function CandyButtonDemo() {
       { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the button." },
     ],
   },
+
+  "cursor-card": {
+    dependencies: "npm install framer-motion clsx tailwind-merge",
+    includeUtils: true,
+    usageCode: `import { CursorCard } from "@/components/ui/cursor-card"
+
+export function CursorCardDemo() {
+  return (
+    <p>
+      Hover over <CursorCard image="/demo.jpg" description="This is a cool location!">this link</CursorCard> to see the preview.
+    </p>
+  )
+}`,
+    props: [
+      { prop: "children", type: "React.ReactNode", defaultValue: "-", description: "The text or element that triggers the hover effect." },
+      { prop: "image", type: "string", defaultValue: "-", description: "The URL of the image to display in the hover card." },
+      { prop: "description", type: "string", defaultValue: "-", description: "The description text to display in the hover card." },
+      { prop: "href", type: "string", defaultValue: "'#'", description: "The destination URL for the link." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the link element." },
+    ],
+  },
 };

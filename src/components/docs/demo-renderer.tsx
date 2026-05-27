@@ -54,6 +54,7 @@ const DEMO_COMPONENTS: Record<string, React.ComponentType> = {
   "masked-avatars": dynamic(() => import("@/components/docs/masked-avatars").then((m) => ({ default: m.MaskedAvatarsDemo })), { ssr: false, loading: LOADING }),
   "agent-bento-grid": dynamic(() => import("@/components/docs/agent-bento-grid-demo").then((m) => ({ default: m.AgentBentoGridDemo })), { ssr: false, loading: LOADING }),
 
+  "cursor-card": dynamic(() => import("@/components/docs/cursor-card-demo").then((m) => ({ default: m.CursorCardDemo })), { ssr: false, loading: LOADING }),
   "logo-slider": dynamic(() => import("@/components/docs/logo-slider").then((m) => ({ default: m.LogoSliderDemo })), { ssr: false, loading: LOADING }),
   "stacked-logos": dynamic(() => import("@/components/docs/stacked-logos").then((m) => ({ default: m.StackedLogosDemo })), { ssr: false, loading: LOADING }),
   "image-reveal-list": dynamic(() => import("@/components/docs/image-reveal-list-demo").then((m) => ({ default: m.ImageRevealListDemo })), { ssr: false, loading: LOADING }),
