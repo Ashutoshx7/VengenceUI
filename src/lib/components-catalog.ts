@@ -115,7 +115,6 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
       { name: "Perspective Grid", slug: "perspective-grid", description: "3D perspective matrix background", componentName: "perspective-grid", isNew: true },
       { name: "Light Lines", slug: "light-lines", description: "Animated flowing line background", componentName: "light-lines", isNew: true },
       { name: "Liquid Ocean", slug: "liquid-ocean", description: "Animated ocean wave field", componentName: "liquid-ocean", isNew: true },
-      { name: "Beam Tunnel", slug: "beam-tunnel", description: "3D animated hyperspace tunnel with dynamic color beams", componentName: "beam-tunnel", isNew: true },
     ],
   },
 ];
