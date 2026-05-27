@@ -22,6 +22,7 @@ const DEMO_COMPONENTS: Record<string, React.ComponentType> = {
   "bento-grid": dynamic(() => import("@/registry/bento-grid").then((m) => ({ default: m.default })), { ssr: false, loading: LOADING }),
   "my-animated-button": dynamic(() => import("@/registry/my-animated-button").then((m) => ({ default: m.default })), { ssr: false, loading: LOADING }),
   "candy-button": dynamic(() => import("@/components/docs/candy-button-demo").then((m) => ({ default: m.CandyButtonDemo })), { ssr: false, loading: LOADING }),
+  "pop-button": dynamic(() => import("@/components/docs/pop-button-demo").then((m) => ({ default: m.PopButtonDemo })), { ssr: false, loading: LOADING }),
   "creepy-button": dynamic(() => import("@/components/docs/creepy-button-demo").then((m) => ({ default: m.CreepyButtonDemo })), { ssr: false, loading: LOADING }),
   "corner-button": dynamic(() => import("@/components/docs/corner-button-demo").then((m) => ({ default: m.CornerButtonDemo })), { ssr: false, loading: LOADING }),
   "generate-button": dynamic(() => import("@/components/docs/generate-button-demo").then((m) => ({ default: m.GenerateButtonDemo })), { ssr: false, loading: LOADING }),

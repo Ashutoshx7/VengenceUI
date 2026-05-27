@@ -860,6 +860,24 @@ export function CandyButtonDemo() {
     ],
   },
 
+  "pop-button": {
+    dependencies: "npm install clsx tailwind-merge",
+    includeUtils: true,
+    usageCode: `import { PopButton } from "@/components/ui/pop-button"
+
+export function PopButtonDemo() {
+  return (
+    <PopButton>
+      Learn More
+    </PopButton>
+  )
+}`,
+    props: [
+      { prop: "children", type: "React.ReactNode", defaultValue: "'Learn More'", description: "The content of the button." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the button container." },
+    ],
+  },
+
   "cursor-card": {
     dependencies: "npm install framer-motion clsx tailwind-merge",
     includeUtils: true,

@@ -22,6 +22,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
     items: [
       { name: "Animated Button", slug: "my-animated-button", description: "Animated CTA button with shine effect", componentName: "animated-button" },
       { name: "Candy Button", slug: "candy-button", description: "Glassy candy-like button with top highlight", componentName: "candy-button", isNew: true },
+      { name: "Pop Button", slug: "pop-button", description: "Interactive 3D pushable pop button", componentName: "pop-button", isNew: true },
       {
         name: "Generate Button",
         slug: "generate-button",
