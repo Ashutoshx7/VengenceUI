@@ -916,7 +916,7 @@ export function LoaderDemo() {
   },
 
   "shared-tooltip-avatars": {
-    dependencies: "npm install clsx tailwind-merge",
+    dependencies: "npm install framer-motion clsx tailwind-merge",
     includeUtils: true,
     usageCode: `import { SharedTooltipAvatars } from "@/components/ui/shared-tooltip-avatars"
 

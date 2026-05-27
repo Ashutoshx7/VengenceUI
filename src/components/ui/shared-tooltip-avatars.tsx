@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export interface AvatarItem {
@@ -20,12 +21,9 @@ export function SharedTooltipAvatars({
 }: SharedTooltipAvatarsProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [tooltipPos, setTooltipPos] = useState({ left: 0, top: 0 });
-  const [isTooltipVisible, setIsTooltipVisible] = useState(false);
   const [activeName, setActiveName] = useState("");
-  const [isTextChanging, setIsTextChanging] = useState(false);
   
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const textTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const avatarRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const handleMouseEnter = (index: number) => {
@@ -33,25 +31,11 @@ export function SharedTooltipAvatars({
 
     const avatar = avatarRefs.current[index];
     if (avatar) {
-      // Use offsetLeft/offsetTop to ensure stability regardless of transform animations
       const left = avatar.offsetLeft + avatar.offsetWidth / 2;
       const top = avatar.offsetTop;
 
       setTooltipPos({ left, top });
-      setIsTooltipVisible(true);
-
-      // Handle the text transition
-      if (hoveredIndex !== null && hoveredIndex !== index) {
-        setIsTextChanging(true);
-        if (textTimeoutRef.current) clearTimeout(textTimeoutRef.current);
-        textTimeoutRef.current = setTimeout(() => {
-          setActiveName(items[index].name);
-          setIsTextChanging(false);
-        }, 150);
-      } else {
-        setActiveName(items[index].name);
-      }
-
+      setActiveName(items[index].name);
       setHoveredIndex(index);
     }
   };
@@ -59,9 +43,8 @@ export function SharedTooltipAvatars({
   const handleMouseLeave = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
-      setIsTooltipVisible(false);
       setHoveredIndex(null);
-    }, 100);
+    }, 150);
   };
 
   return (
@@ -69,40 +52,45 @@ export function SharedTooltipAvatars({
       className={cn("relative flex items-center justify-center py-12", className)} 
       {...props}
     >
-      {/* Shared Tooltip */}
-      <div
-        className={cn(
-          "absolute pointer-events-none z-50 px-4 py-2 bg-white/95 dark:bg-black/95 backdrop-blur-md rounded-xl text-sm font-semibold text-neutral-900 dark:text-neutral-100 whitespace-nowrap shadow-xl border border-black/5 dark:border-white/10",
-          isTooltipVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
+      <AnimatePresence>
+        {hoveredIndex !== null && (
+          <motion.div
+            initial={{ opacity: 0, x: "-50%", y: "-80%", scale: 0.95, left: tooltipPos.left, top: tooltipPos.top - 12 }}
+            animate={{ 
+              opacity: 1, 
+              x: "-50%", 
+              y: "-100%", 
+              scale: 1,
+              left: tooltipPos.left,
+              top: tooltipPos.top - 12
+            }}
+            exit={{ opacity: 0, x: "-50%", y: "-80%", scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            className="absolute z-50 px-3.5 py-1.5 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl rounded-xl text-sm font-medium text-neutral-900 dark:text-neutral-100 shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] border border-neutral-200/50 dark:border-neutral-800/50 pointer-events-none"
+            role="tooltip"
+          >
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={activeName}
+                initial={{ opacity: 0, y: 4 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -4 }}
+                transition={{ duration: 0.15, ease: "easeOut" }}
+                className="inline-block"
+              >
+                {activeName || " "}
+              </motion.span>
+            </AnimatePresence>
+          </motion.div>
         )}
-        style={{
-          left: tooltipPos.left,
-          top: tooltipPos.top - 12, // Offset above the avatar
-          transform: "translateX(-50%) translateY(-100%)",
-          transition: "left 0.35s cubic-bezier(0.4, 0, 0.2, 1), top 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease, transform 0.25s ease"
-        }}
-        role="tooltip"
-        aria-hidden={!isTooltipVisible}
-      >
-        <span 
-          className={cn(
-            "inline-block transition-all duration-150 ease-out",
-            isTextChanging ? "opacity-0 -translate-y-1" : "opacity-100 translate-y-0"
-          )}
-        >
-          {activeName || " "}
-        </span>
-        
-        {/* Red gradient indicator line at the bottom of the tooltip */}
-        <div className="absolute top-full left-1/2 -translate-x-1/2 w-1/2 h-[2px] bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-90" />
-      </div>
+      </AnimatePresence>
 
       {/* Avatar Stack */}
       {items.map((item, index) => (
         <div
           key={item.id}
           ref={(el) => { avatarRefs.current[index] = el; }}
-          className="relative -ml-4 first:ml-0 transition-transform duration-300 ease-out hover:-translate-y-1 hover:z-10 cursor-pointer"
+          className="relative -ml-3 first:ml-0 transition-transform duration-300 ease-out hover:-translate-y-2 hover:z-10 cursor-pointer"
           onMouseEnter={() => handleMouseEnter(index)}
           onMouseLeave={handleMouseLeave}
           onFocus={() => handleMouseEnter(index)}
@@ -113,7 +101,7 @@ export function SharedTooltipAvatars({
           <img
             src={item.image}
             alt={item.name}
-            className="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover border-[3px] border-white dark:border-neutral-900 shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105"
+            className="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover border-[3px] border-white dark:border-[#09090b] shadow-sm hover:shadow-xl transition-all duration-300"
           />
         </div>
       ))}
