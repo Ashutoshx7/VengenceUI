@@ -16,7 +16,7 @@ export interface CursorCardProps {
 export function CursorCard({ children, image, description, href = "#", className }: CursorCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [mounted, setMounted] = useState(false);
-  
+
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -48,7 +48,7 @@ export function CursorCard({ children, image, description, href = "#", className
       >
         {children}
       </a>
-      
+
       {mounted && typeof document !== "undefined" && createPortal(
         <AnimatePresence>
           {isHovered && (
