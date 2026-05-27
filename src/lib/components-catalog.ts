@@ -21,6 +21,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
     icon: MousePointer2,
     items: [
       { name: "Animated Button", slug: "my-animated-button", description: "Animated CTA button with shine effect", componentName: "animated-button" },
+      { name: "Candy Button", slug: "candy-button", description: "Glassy candy-like button with top highlight", componentName: "candy-button", isNew: true },
       {
         name: "Generate Button",
         slug: "generate-button",

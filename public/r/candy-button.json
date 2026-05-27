@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "candy-button",
+  "type": "registry:ui",
+  "title": "Candy Button",
+  "description": "Glassy candy-like button with top highlight",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "components/ui/candy-button.tsx",
+      "content": "import React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface CandyButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}\n\nexport function CandyButton({ className, children = \"Candy Button\", ...props }: CandyButtonProps) {\n  return (\n    <button\n      className={cn(\n        \"relative text-white font-semibold text-base leading-[22px] tracking-[0.02em]\",\n        \"px-9 py-3 rounded-xl cursor-pointer transition-all duration-200 ease-out\",\n        \"border border-[#54A1FD] bg-[radial-gradient(95%_60%_at_50%_75%,#005FD6_0%,#209BFF_100%)]\",\n        \"shadow-[0px_4px_48px_-12px_#1187FF,inset_0px_1px_8px_-4px_#FFFFFF]\",\n        \"active:scale-95 active:rotate-1\",\n        \"after:absolute after:top-[1px] after:right-[10%] after:w-[60%] after:h-[1px]\",\n        \"after:bg-gradient-to-r after:from-transparent after:via-white/50 after:to-transparent\",\n        \"hover:brightness-110\",\n        className\n      )}\n      {...props}\n    >\n      {children}\n    </button>\n  );\n}\n\nexport default CandyButton;\n",
+      "type": "registry:ui",
+      "target": "components/ui/candy-button.tsx"
+    }
+  ]
+}

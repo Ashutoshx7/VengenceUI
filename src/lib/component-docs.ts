@@ -841,4 +841,22 @@ export function ElasticStackDemo() {
       { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the container." },
     ],
   },
+
+  "candy-button": {
+    dependencies: "npm install clsx tailwind-merge",
+    includeUtils: true,
+    usageCode: `import { CandyButton } from "@/components/ui/candy-button"
+
+export function CandyButtonDemo() {
+  return (
+    <CandyButton>
+      Candy Button
+    </CandyButton>
+  )
+}`,
+    props: [
+      { prop: "children", type: "React.ReactNode", defaultValue: "'Candy Button'", description: "The content of the button." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the button." },
+    ],
+  },
 };
