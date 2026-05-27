@@ -21,6 +21,13 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
     icon: MousePointer2,
     items: [
       { name: "Animated Button", slug: "my-animated-button", description: "Animated CTA button with shine effect", componentName: "animated-button" },
+      {
+        name: "Generate Button",
+        slug: "generate-button",
+        componentName: "generate-button",
+        description: "An interactive, animated button for AI generation tasks.",
+        isNew: true
+      },
       { name: "Social Flip Button", slug: "social-flip-button", description: "Social icon flip interaction", componentName: "social-flip-button", isNew: true },
       { name: "Liquid Metal", slug: "liquid-metal", description: "Metallic fluid shader effect", componentName: "liquid-metal", isNew: true },
       { name: "Creepy Button", slug: "creepy-button", description: "Button with tracking eyes", componentName: "creepy-button", isNew: true },
@@ -66,6 +73,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
       { name: "Stacked Logos", slug: "stacked-logos", description: "Overlapping brand logos", componentName: "stacked-logos", isNew: true },
       { name: "Masked Avatars", slug: "masked-avatars", description: "Stacked masked avatar list", componentName: "masked-avatars", isNew: true },
       { name: "Image Reveal List", slug: "image-reveal-list", description: "Hover-based image reveal tooltip list", componentName: "image-reveal-list", isNew: true },
+      { name: "FAQ Accordion", slug: "faq-accordion", description: "Animated expanding FAQ list", componentName: "faq-accordion", isNew: true },
     ],
   },
   {

@@ -771,4 +771,21 @@ export function InteractiveKeyboardDemo() {
       { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the keyboard wrapper." },
     ],
   },
+
+  "generate-button": {
+    dependencies: "npm install clsx tailwind-merge",
+    includeUtils: true,
+    usageCode: `import { GenerateButton } from "@/components/ui/generate-button"
+
+export function GenerateButtonDemo() {
+  return (
+    <GenerateButton hue={210} />
+  )
+}`,
+    props: [
+      { prop: "hue", type: "number", defaultValue: "210", description: "The hue value (0-360) for the button's highlight color. 210 is blue." },
+      { prop: "isGenerating", type: "boolean", defaultValue: "false", description: "If true, forces the button into its 'Generating' state. By default, it activates on focus or click." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the button." },
+    ],
+  },
 };
