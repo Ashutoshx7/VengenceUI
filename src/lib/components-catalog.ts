@@ -50,7 +50,6 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
     name: "Interactive",
     icon: MousePointerClick,
     items: [
-      { name: "Elastic Stack", slug: "elastic-stack", description: "Horizontal expanding staggered stack", componentName: "elastic-stack", isNew: true },
       { name: "Interactive Book", slug: "interactive-book", description: "3D page-flip style book", componentName: "interactive-book", isNew: true },
       { name: "Pixelated Image Trail", slug: "pixelated-image-trail", description: "Cursor trail image reveal", componentName: "pixelated-image-trail", isNew: true },
       { name: "Interactive Keyboard", slug: "interactive-keyboard", description: "Animated physical keyboard UI", componentName: "interactive-keyboard", isNew: true },
@@ -71,6 +70,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
     name: "Tooltip & Marquee",
     icon: Layers,
     items: [
+      { name: "Elastic Stack", slug: "elastic-stack", description: "Horizontal expanding staggered stack", componentName: "elastic-stack", isNew: true },
       { name: "Logo Slider", slug: "logo-slider", description: "Infinite logo marquee", componentName: "logo-slider", isNew: true },
       { name: "Stacked Logos", slug: "stacked-logos", description: "Overlapping brand logos", componentName: "stacked-logos", isNew: true },
       { name: "Masked Avatars", slug: "masked-avatars", description: "Stacked masked avatar list", componentName: "masked-avatars", isNew: true },

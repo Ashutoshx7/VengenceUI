@@ -813,10 +813,16 @@ export function RadialGlowButtonDemo() {
     usageCode: `import { ElasticStack } from "@/components/ui/elastic-stack"
 
 export function ElasticStackDemo() {
-  const items = Array.from({ length: 9 }).map((_, i) => ({
-    id: i,
-    content: i + 1,
-  }));
+  const items = [
+    { id: "1", name: "Felix", image: "https://api.dicebear.com/7.x/adventurer/svg?seed=Felix" },
+    { id: "2", name: "Aneka", image: "https://api.dicebear.com/7.x/adventurer/svg?seed=Aneka" },
+    { id: "3", name: "Oliver", image: "https://api.dicebear.com/7.x/adventurer/svg?seed=Oliver" },
+    { id: "4", name: "Zoe", image: "https://api.dicebear.com/7.x/adventurer/svg?seed=Zoe" },
+    { id: "5", name: "Leo", image: "https://api.dicebear.com/7.x/adventurer/svg?seed=Leo" },
+    { id: "6", name: "Mia", image: "https://api.dicebear.com/7.x/adventurer/svg?seed=Mia" },
+    { id: "7", name: "Noah", image: "https://api.dicebear.com/7.x/adventurer/svg?seed=Noah" },
+    { id: "8", name: "Ava", image: "https://api.dicebear.com/7.x/adventurer/svg?seed=Ava" },
+  ];
 
   return (
     <ElasticStack 
@@ -828,9 +834,9 @@ export function ElasticStackDemo() {
   )
 }`,
     props: [
-      { prop: "items", type: "ElasticStackItem[]", defaultValue: "-", description: "Array of items with id, content, and optional color." },
-      { prop: "itemSize", type: "number", defaultValue: "80", description: "The base width and height of each item in pixels." },
-      { prop: "overlap", type: "number", defaultValue: "40", description: "The negative margin used to overlap items in pixels." },
+      { prop: "items", type: "ElasticStackItem[]", defaultValue: "-", description: "Array of items with id, image, and optional name." },
+      { prop: "itemSize", type: "number", defaultValue: "70", description: "The base width and height of each item in pixels." },
+      { prop: "overlap", type: "number", defaultValue: "30", description: "The negative margin used to overlap items in pixels." },
       { prop: "pushForce", type: "number", defaultValue: "15", description: "The multiplier defining how far sibling items are pushed on hover." },
       { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the container." },
     ],
