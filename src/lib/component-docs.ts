@@ -911,7 +911,6 @@ export function LoaderDemo() {
 }`,
     props: [
       { prop: "text", type: "string", defaultValue: "'Loading'", description: "The text to display. Note: internal animations are optimized for the word 'Loading'." },
-      { prop: "maskColorClass", type: "string", defaultValue: "'bg-white dark:bg-[#09090b]'", description: "Tailwind classes for the background color of the masks. Must match your container's background." },
       { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the loader container." },
     ],
   },
