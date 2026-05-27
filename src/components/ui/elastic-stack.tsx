@@ -75,7 +75,7 @@ export function ElasticStack({
               // eslint-disable-next-line @next/next/no-img-element
               <img 
                 src={item.image} 
-                alt={item.name || \`Avatar \${i}\`}
+                alt={item.name || `Avatar ${i}`}
                 className="w-full h-full object-cover rounded-full pointer-events-none"
               />
             ) : (
