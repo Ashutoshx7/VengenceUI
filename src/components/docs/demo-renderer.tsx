@@ -54,6 +54,7 @@ const DEMO_COMPONENTS: Record<string, React.ComponentType> = {
   "spotlight-navbar": dynamic(() => import("@/components/docs/spotlight-navbar-demo").then((m) => ({ default: m.SpotlightNavbarDemo })), { ssr: false, loading: LOADING }),
   "masked-avatars": dynamic(() => import("@/components/docs/masked-avatars").then((m) => ({ default: m.MaskedAvatarsDemo })), { ssr: false, loading: LOADING }),
   "agent-bento-grid": dynamic(() => import("@/components/docs/agent-bento-grid-demo").then((m) => ({ default: m.AgentBentoGridDemo })), { ssr: false, loading: LOADING }),
+  "kinetic-text-loader": dynamic(() => import("@/components/docs/kinetic-text-loader-demo").then((m) => ({ default: m.KineticTextLoaderDemo })), { ssr: false, loading: LOADING }),
 
   "cursor-card": dynamic(() => import("@/components/docs/cursor-card-demo").then((m) => ({ default: m.CursorCardDemo })), { ssr: false, loading: LOADING }),
   "logo-slider": dynamic(() => import("@/components/docs/logo-slider").then((m) => ({ default: m.LogoSliderDemo })), { ssr: false, loading: LOADING }),

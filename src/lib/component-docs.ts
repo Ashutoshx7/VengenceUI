@@ -898,4 +898,21 @@ export function CursorCardDemo() {
       { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the link element." },
     ],
   },
+
+  "kinetic-text-loader": {
+    dependencies: "npm install clsx tailwind-merge",
+    includeUtils: true,
+    usageCode: `import { KineticTextLoader } from "@/components/ui/kinetic-text-loader"
+
+export function LoaderDemo() {
+  return (
+    <KineticTextLoader />
+  )
+}`,
+    props: [
+      { prop: "text", type: "string", defaultValue: "'Loading'", description: "The text to display. Note: internal animations are optimized for the word 'Loading'." },
+      { prop: "maskColorClass", type: "string", defaultValue: "'bg-white dark:bg-[#09090b]'", description: "Tailwind classes for the background color of the masks. Must match your container's background." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the loader container." },
+    ],
+  },
 };

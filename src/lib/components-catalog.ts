@@ -82,6 +82,13 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
     ],
   },
   {
+    name: "Loaders",
+    icon: Sparkles,
+    items: [
+      { name: "Kinetic Text Loader", slug: "kinetic-text-loader", description: "Typography-based animated loader", componentName: "kinetic-text-loader", isNew: true },
+    ],
+  },
+  {
     name: "Navbar & Docs",
     icon: Navigation,
     items: [
