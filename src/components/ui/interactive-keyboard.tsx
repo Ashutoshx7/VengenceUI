@@ -33,25 +33,23 @@ export function InteractiveKeyboard({ className, onKeyClick, ...props }: Interac
           --kb-focus-text: hsl(0,0%,54%);
           
           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-          font-size: 16px;
           display: flex;
-          overflow: auto;
           width: 100%;
           justify-content: center;
-          padding: 2em;
+          padding: 4em;
         }
 
         :is(.dark) .interactive-keyboard-wrapper {
-          --kb-bg: hsl(0,0%,20%);
-          --kb-text: hsl(0,0%,80%);
-          --kb-shadow-1: hsla(0,0%,0%,0.6);
-          --kb-shadow-2: hsla(0,0%,0%,0.8);
-          --kb-shadow-3: hsla(0,0%,0%,0.8);
-          --kb-shadow-4: hsla(0,0%,40%,0.8);
-          --kb-active-shadow-1: hsla(0,0%,0%,0.4);
-          --kb-active-shadow-2: hsla(0,0%,0%,0.6);
-          --kb-focus-bg: hsl(0,0%,30%);
-          --kb-focus-text: hsl(0,0%,90%);
+          --kb-bg: #1a1a1c;
+          --kb-text: #909096;
+          --kb-shadow-1: rgba(0,0,0,0.8);
+          --kb-shadow-2: rgba(0,0,0,0.4);
+          --kb-shadow-3: rgba(0,0,0,0.7);
+          --kb-shadow-4: rgba(255,255,255,0.06);
+          --kb-active-shadow-1: rgba(0,0,0,0.9);
+          --kb-active-shadow-2: rgba(0,0,0,0.6);
+          --kb-focus-bg: #222224;
+          --kb-focus-text: #ffffff;
         }
 
         .interactive-keyboard-wrapper button {
@@ -120,16 +118,19 @@ export function InteractiveKeyboard({ className, onKeyClick, ...props }: Interac
           gap: 0.375em 0.875em;
           grid-template-columns: 21.25em 4.125em 5.65em;
           grid-template-rows: 0.75em 1.125em 1.125em 1.125em 1.125em 1.375em;
-          font-size: clamp(8px, 2vw, 36px);
+          font-size: clamp(8px, 2.5vw, 24px);
           margin: auto;
           padding: 0.25em;
           width: 33.25em;
           height: 9em;
         }
 
-        :is(.dark) .ikb-keyboard {
-           background-image: linear-gradient(90deg,hsl(0,0%,20%),hsl(0,0%,30%));
-           box-shadow: -1em -1em 1.5em hsla(0,0%,0%,0.9), 0 0 0 1px hsl(0,0%,40%) inset;
+        :is(.dark) .interactive-keyboard-wrapper .ikb-keyboard {
+           background-image: linear-gradient(135deg, #2a2a2c, #161618);
+           box-shadow: 
+             0 2em 4em -1em rgba(0,0,0,0.6),
+             0 0 0 1px rgba(255,255,255,0.08) inset,
+             0 1px 1px rgba(255,255,255,0.15) inset;
         }
 
         .ikb-row {
@@ -142,7 +143,7 @@ export function InteractiveKeyboard({ className, onKeyClick, ...props }: Interac
         .ikb-row:nth-of-type(n + 14):nth-of-type(-3n + 17) {
           transform: translateY(0.25em);
         }
-        .ikb-bump {
+        .interactive-keyboard-wrapper button > span.ikb-bump {
           border-radius: 0.1em;
           box-shadow: -0.05em -0.02em 0 0.05em hsla(0,0%,0%,0.3);
           padding: 0;
@@ -150,6 +151,7 @@ export function InteractiveKeyboard({ className, onKeyClick, ...props }: Interac
           left: calc(50% - 0.4em);
           width: 0.8em;
           height: 0.15em;
+          transform: none;
         }
 
         /* Button size */
@@ -167,18 +169,25 @@ export function InteractiveKeyboard({ className, onKeyClick, ...props }: Interac
         .ikb-btn-longest { width: 8.625em; height: 1.375em; }
 
         /* Alignment */
-        .ikb-ul, .ikb-ll, .ikb-ur, .ikb-lr { top: 0; transform: scaleX(0.875); }
-        .ikb-ul, .ikb-ll { justify-content: flex-start; transform-origin: 0 50%; }
-        .ikb-ur, .ikb-lr { justify-content: flex-end; transform-origin: 100% 50%; }
-        .ikb-ll, .ikb-lr { top: auto; bottom: 0; }
-        .ikb-noxscale { transform: translateY(-50%) scaleX(1); }
-        .ikb-ll.ikb-noxscale, .ikb-lr.ikb-noxscale { transform: scaleX(1); }
+        .interactive-keyboard-wrapper button > span.ikb-ul, 
+        .interactive-keyboard-wrapper button > span.ikb-ll, 
+        .interactive-keyboard-wrapper button > span.ikb-ur, 
+        .interactive-keyboard-wrapper button > span.ikb-lr { top: 0; transform: scaleX(0.875); }
+        .interactive-keyboard-wrapper button > span.ikb-ul, 
+        .interactive-keyboard-wrapper button > span.ikb-ll { justify-content: flex-start; transform-origin: 0 50%; }
+        .interactive-keyboard-wrapper button > span.ikb-ur, 
+        .interactive-keyboard-wrapper button > span.ikb-lr { justify-content: flex-end; transform-origin: 100% 50%; }
+        .interactive-keyboard-wrapper button > span.ikb-ll, 
+        .interactive-keyboard-wrapper button > span.ikb-lr { top: auto; bottom: 0; }
+        .interactive-keyboard-wrapper button > span.ikb-noxscale { transform: translateY(-50%) scaleX(1); }
+        .interactive-keyboard-wrapper button > span.ikb-ll.ikb-noxscale, 
+        .interactive-keyboard-wrapper button > span.ikb-lr.ikb-noxscale { transform: scaleX(1); }
 
         /* Fonts */
-        .ikb-xxxs { font-size: 0.2em; line-height: 1.5; }
-        .ikb-xxs { font-size: 0.25em; line-height: 1.5; }
-        .ikb-xs { font-size: 0.3em; line-height: 1.125; }
-        .ikb-sm { font-size: 0.4em; line-height: 1.25; }
+        .interactive-keyboard-wrapper button > span.ikb-xxxs { font-size: 0.2em; line-height: 1.5; }
+        .interactive-keyboard-wrapper button > span.ikb-xxs { font-size: 0.25em; line-height: 1.5; }
+        .interactive-keyboard-wrapper button > span.ikb-xs { font-size: 0.3em; line-height: 1.125; }
+        .interactive-keyboard-wrapper button > span.ikb-sm { font-size: 0.4em; line-height: 1.25; }
 
         /* Icons */
         .ikb-up, .ikb-right, .ikb-down, .ikb-left { width: 0; height: 0; vertical-align: 0.1em; }
@@ -199,7 +208,7 @@ export function InteractiveKeyboard({ className, onKeyClick, ...props }: Interac
         .ikb-block, .ikb-cascade:before, .ikb-cascade:after { border: 1px solid; }
         .ikb-apps:before, .ikb-apps:after { font-weight: bold; display: block; content: "\\25A1\\25A1\\25A1"; line-height: 0.875; }
         
-        .ikb-noxpad { padding: 0.2em 0; }
+        .interactive-keyboard-wrapper button > span.ikb-noxpad { padding: 0.2em 0; }
       `}</style>
       
       <div className="ikb-keyboard">
@@ -274,7 +283,12 @@ export function InteractiveKeyboard({ className, onKeyClick, ...props }: Interac
           <button type="button" className="ikb-btn-2" onClick={() => handleKeyClick("\\")}><span className="ikb-sm">|<br/>\</span></button>
         </div>
         <div className="ikb-row">
-          <button type="button" className="ikb-btn-2" onClick={() => handleKeyClick("forward delete")}><span className="ikb-xs ikb-noxpad">delete⌦</span></button>
+          <button type="button" className="ikb-btn-2" onClick={() => handleKeyClick("forward delete")}>
+            <span className="ikb-xs flex flex-col items-center leading-tight">
+              <span>del</span>
+              <span className="text-[1.5em] leading-none mt-0.5">⌦</span>
+            </span>
+          </button>
           <button type="button" className="ikb-btn-2" onClick={() => handleKeyClick("end")}><span className="ikb-xs">end</span></button>
           <button type="button" className="ikb-btn-2" onClick={() => handleKeyClick("page down")}><span className="ikb-xs">page down</span></button>
         </div>
@@ -335,9 +349,19 @@ export function InteractiveKeyboard({ className, onKeyClick, ...props }: Interac
         <div className="ikb-row">
           <button type="button" className="ikb-btn-7" onClick={() => handleKeyClick("control")}><span className="ikb-ll ikb-xs">control</span></button>
           <button type="button" className="ikb-btn-6" onClick={() => handleKeyClick("option")}><span className="ikb-ul ikb-xxs">alt</span><span className="ikb-ll ikb-xs">option</span></button>
-          <button type="button" className="ikb-btn-7" onClick={() => handleKeyClick("command")}><span className="ikb-ll ikb-xs">command</span><span className="ikb-lr ikb-xs ikb-noxscale">⌘</span></button>
+          <button type="button" className="ikb-btn-7" onClick={() => handleKeyClick("command")}>
+            <span className="ikb-ll ikb-xs flex items-center gap-[0.3em]">
+              <span className="ikb-noxscale text-[1.2em] relative top-[1px]">⌘</span>
+              <span>command</span>
+            </span>
+          </button>
           <button type="button" className="ikb-btn-longest" onClick={() => handleKeyClick("space")}><span></span></button>
-          <button type="button" className="ikb-btn-7" onClick={() => handleKeyClick("command")}><span className="ikb-ll ikb-xs ikb-noxscale">⌘</span><span className="ikb-lr ikb-xs">command</span></button>
+          <button type="button" className="ikb-btn-7" onClick={() => handleKeyClick("command")}>
+            <span className="ikb-ll ikb-xs flex items-center gap-[0.3em]">
+              <span className="ikb-noxscale text-[1.2em] relative top-[1px]">⌘</span>
+              <span>command</span>
+            </span>
+          </button>
           <button type="button" className="ikb-btn-6" onClick={() => handleKeyClick("option")}><span className="ikb-ur ikb-xxs">alt</span><span className="ikb-lr ikb-xs">option</span></button>
           <button type="button" className="ikb-btn-7" onClick={() => handleKeyClick("control")}><span className="ikb-lr ikb-xs">control</span></button>
         </div>
