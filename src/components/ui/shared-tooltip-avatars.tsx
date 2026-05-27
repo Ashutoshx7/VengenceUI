@@ -66,7 +66,7 @@ export function SharedTooltipAvatars({
             }}
             exit={{ opacity: 0, x: "-50%", y: "-80%", scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className="absolute z-50 px-3.5 py-1.5 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl rounded-xl text-sm font-medium text-neutral-900 dark:text-neutral-100 shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] border border-neutral-200/50 dark:border-neutral-800/50 pointer-events-none"
+            className="absolute z-50 px-3.5 py-1.5 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl rounded-xl text-sm font-medium text-neutral-900 dark:text-neutral-100 whitespace-nowrap shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] border border-neutral-200/50 dark:border-neutral-800/50 pointer-events-none"
             role="tooltip"
           >
             <AnimatePresence mode="wait">
