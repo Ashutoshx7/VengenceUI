@@ -49,14 +49,11 @@ export function KineticTextLoader({
       <div className="relative scale-75 md:scale-90 lg:scale-100">
         {/* The moving dot */}
         <div 
-          className="absolute z-10 top-[40px] left-[115px] w-[6px] h-[6px] bg-black dark:bg-white rounded-full"
+          className="absolute z-10 top-[40px] left-[115px] w-[6px] h-[6px] bg-neutral-800 dark:bg-neutral-200 rounded-full"
           style={{ animation: "ktl-dotMove 1800ms cubic-bezier(0.25,0.25,0.75,0.75) infinite" }}
         />
         
-        {/* The divider mask */}
-        <div className={cn("absolute z-20 top-[65px] left-[200px] w-[50px] h-[15px]", maskColorClass)} aria-hidden="true" />
-        
-        <p className="relative m-0 whitespace-nowrap text-[3.75rem] text-black dark:text-white" aria-label={text}>
+        <p className="relative m-0 whitespace-nowrap text-[3.75rem] text-neutral-800 dark:text-neutral-200" aria-label={text}>
           {letters.map((char, index) => {
             if (index === 0 && char.toUpperCase() === 'L') {
               return (
