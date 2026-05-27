@@ -736,4 +736,39 @@ export function SpotlightNavbarDemo() {
       { prop: "defaultActiveIndex", type: "number", defaultValue: "0", description: "Initial active item index." },
     ],
   },
+
+  "faq-accordion": {
+    dependencies: "npm install clsx tailwind-merge",
+    includeUtils: true,
+    usageCode: `import { FaqAccordion } from "@/components/ui/faq-accordion"
+
+export function FaqAccordionDemo() {
+  return (
+    <FaqAccordion />
+  )
+}`,
+    props: [
+      { prop: "items", type: "FaqItem[]", defaultValue: "DEFAULT_ITEMS", description: "Array of FAQ objects with question and answer." },
+      { prop: "title", type: "string", defaultValue: "'Vengeance UI FAQs'", description: "The title displayed above the accordion." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the container." },
+    ],
+  },
+
+  "interactive-keyboard": {
+    dependencies: "npm install clsx tailwind-merge",
+    includeUtils: true,
+    usageCode: `import { InteractiveKeyboard } from "@/components/ui/interactive-keyboard"
+
+export function InteractiveKeyboardDemo() {
+  return (
+    <InteractiveKeyboard 
+      onKeyClick={(key) => console.log(key)}
+    />
+  )
+}`,
+    props: [
+      { prop: "onKeyClick", type: "(key: string) => void", defaultValue: "-", description: "Callback fired when any key is clicked. Returns the key's label." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the keyboard wrapper." },
+    ],
+  },
 };
