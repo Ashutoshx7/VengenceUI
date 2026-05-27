@@ -21,17 +21,17 @@ export interface TypingKeyboardProps extends React.HTMLAttributes<HTMLDivElement
 // ─── Key sub-component ──────────────────────────────────────────────────────
 
 function Key({ size = "", accent = "" }: { size?: string; accent?: string }) {
-  const s = size ? ` tk-key--${size}` : "";
+  const s = size ? `--${size}` : "";
   const a1 = accent === "b" ? " tk-face--b" : accent === "o" ? " tk-face--o" : "";
 
   return (
-    <div className={`tk-key tk-flex${s}`}>
-      <div className={`tk-key__front tk-face${s ? ` tk-key__front${s}` : ""}${a1 === " tk-face--b" ? " tk-face--b3" : a1 === " tk-face--o" ? " tk-face--o3" : ""}`} />
-      <div className={`tk-key__back tk-face${s ? ` tk-key__back${s}` : ""}${a1 === " tk-face--b" ? " tk-face--b1" : a1 === " tk-face--o" ? " tk-face--o1" : ""}`} />
-      <div className={`tk-key__right tk-face${s ? ` tk-key__right${s}` : ""}${a1 === " tk-face--b" ? " tk-face--b1" : a1 === " tk-face--o" ? " tk-face--o1" : ""}`} />
-      <div className={`tk-key__left tk-face${s ? ` tk-key__left${s}` : ""}${a1 === " tk-face--b" ? " tk-face--b2" : a1 === " tk-face--o" ? " tk-face--o2" : ""}`} />
-      <div className={`tk-key__top tk-face${s ? ` tk-key__top${s}` : ""}${a1 === " tk-face--b" ? " tk-face--b1" : a1 === " tk-face--o" ? " tk-face--o1" : ""}`} />
-      <div className={`tk-key__bottom tk-face${s ? ` tk-key__bottom${s}` : ""}${a1 === " tk-face--b" ? " tk-face--b2" : a1 === " tk-face--o" ? " tk-face--o2" : ""}`} />
+    <div className={`tk-key tk-flex${size ? ` tk-key${s}` : ""}`}>
+      <div className={`tk-key__front tk-face${size ? ` tk-key__front${s}` : ""}${a1 === " tk-face--b" ? " tk-face--b3" : a1 === " tk-face--o" ? " tk-face--o3" : ""}`} />
+      <div className={`tk-key__back tk-face${size ? ` tk-key__back${s}` : ""}${a1 === " tk-face--b" ? " tk-face--b1" : a1 === " tk-face--o" ? " tk-face--o1" : ""}`} />
+      <div className={`tk-key__right tk-face${size ? ` tk-key__right${s}` : ""}${a1 === " tk-face--b" ? " tk-face--b1" : a1 === " tk-face--o" ? " tk-face--o1" : ""}`} />
+      <div className={`tk-key__left tk-face${size ? ` tk-key__left${s}` : ""}${a1 === " tk-face--b" ? " tk-face--b2" : a1 === " tk-face--o" ? " tk-face--o2" : ""}`} />
+      <div className={`tk-key__top tk-face${size ? ` tk-key__top${s}` : ""}${a1 === " tk-face--b" ? " tk-face--b1" : a1 === " tk-face--o" ? " tk-face--o1" : ""}`} />
+      <div className={`tk-key__bottom tk-face${size ? ` tk-key__bottom${s}` : ""}${a1 === " tk-face--b" ? " tk-face--b2" : a1 === " tk-face--o" ? " tk-face--o2" : ""}`} />
     </div>
   );
 }
@@ -115,7 +115,6 @@ export function TypingKeyboard({
         .tk-container {
           width: 100%; height: 100%;
           display: flex; justify-content: center; align-items: center;
-          overflow: hidden;
           font-family: sans-serif; font-weight: bolder;
           color: rgba(255,255,251,0.7);
           text-transform: uppercase; letter-spacing: 2px;
@@ -177,10 +176,10 @@ export function TypingKeyboard({
 
         /* Keys container */
         .tk-keys {
-          display: flex; gap: 3px;
+          display: flex; justify-content: space-between;
           width: 100%;
           transform: translateZ(4px);
-          padding: 0 3px;
+          padding: 0 2px;
         }
 
         /* Individual key — depth is 8px */
@@ -204,6 +203,7 @@ export function TypingKeyboard({
           transform: rotateY(0deg) translateZ(4px);
           background-color: #FFFFFB;
           background-image: linear-gradient(to bottom, color-mix(in srgb, ${accentColor} 30%, white), #FFFFFB);
+          box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.12), 0 -1px 2px rgba(0,0,0,0.08);
         }
         .tk-key__top--w2 { width: 60px; }
         .tk-key__top--w3 { width: 90px; }
