@@ -914,4 +914,25 @@ export function LoaderDemo() {
       { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the loader container." },
     ],
   },
+
+  "shared-tooltip-avatars": {
+    dependencies: "npm install clsx tailwind-merge",
+    includeUtils: true,
+    usageCode: `import { SharedTooltipAvatars } from "@/components/ui/shared-tooltip-avatars"
+
+export function Demo() {
+  return (
+    <SharedTooltipAvatars 
+      items={[
+        { id: "1", name: "Alice", image: "/alice.jpg" },
+        { id: "2", name: "Bob", image: "/bob.jpg" }
+      ]} 
+    />
+  )
+}`,
+    props: [
+      { prop: "items", type: "AvatarItem[]", defaultValue: "[]", description: "Array of avatar items with id, name, and image." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the component." },
+    ],
+  },
 };

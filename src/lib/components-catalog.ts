@@ -79,6 +79,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
       { name: "Masked Avatars", slug: "masked-avatars", description: "Stacked masked avatar list", componentName: "masked-avatars", isNew: true },
       { name: "Image Reveal List", slug: "image-reveal-list", description: "Hover-based image reveal tooltip list", componentName: "image-reveal-list", isNew: true },
       { name: "FAQ Accordion", slug: "faq-accordion", description: "Animated expanding FAQ list", componentName: "faq-accordion", isNew: true },
+      { name: "Shared Tooltip Avatars", slug: "shared-tooltip-avatars", description: "Avatar stack with a sliding shared tooltip", componentName: "shared-tooltip-avatars", isNew: true },
     ],
   },
   {
