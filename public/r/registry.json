@@ -2,14 +2,14 @@
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "Vengeance UI",
   "homepage": "https://Vengeance UI.com",
-  "author" : "Méschac Irung <ashutosh@vengeance-ui.com>",
+  "author": "Méschac Irung <ashutosh@vengeance-ui.com>",
   "items": [
     {
       "name": "call-to-action-1",
       "type": "registry:block",
       "title": "Call To Action 1",
       "description": "Shadcn/ui call to action block",
-      "registryDependencies" : [
+      "registryDependencies": [
         "button"
       ],
       "files": [
@@ -25,7 +25,7 @@
       "type": "registry:block",
       "title": "Call To Action 2",
       "description": "Shadcn/ui call to action block",
-      "registryDependencies" : [
+      "registryDependencies": [
         "button"
       ],
       "files": [
@@ -41,7 +41,7 @@
       "type": "registry:block",
       "title": "Call To Action 3",
       "description": "Shadcn/ui call to action block",
-      "registryDependencies" : [
+      "registryDependencies": [
         "button"
       ],
       "files": [
@@ -52,13 +52,12 @@
         }
       ]
     },
-
     {
       "name": "comparator-1",
       "type": "registry:block",
       "title": "Pricing Comparator 1",
       "description": "Shadcn/ui pricing comparator table block",
-      "registryDependencies" : [
+      "registryDependencies": [
         "button"
       ],
       "files": [
@@ -69,7 +68,6 @@
         }
       ]
     },
-
     {
       "name": "content-1",
       "type": "registry:block",
@@ -114,7 +112,7 @@
       "type": "registry:block",
       "title": "Content Block 4",
       "description": "Shadcn/ui website content block",
-      "registryDependencies" : [
+      "registryDependencies": [
         "button"
       ],
       "files": [
@@ -164,7 +162,6 @@
         }
       ]
     },
-
     {
       "name": "faqs-1",
       "type": "registry:block",
@@ -178,7 +175,6 @@
         }
       ]
     },
-
     {
       "name": "faqs-2",
       "type": "registry:block",
@@ -195,7 +191,6 @@
         }
       ]
     },
-
     {
       "name": "faqs-3",
       "type": "registry:block",
@@ -212,7 +207,6 @@
         }
       ]
     },
-
     {
       "name": "faqs-4",
       "type": "registry:block",
@@ -234,7 +228,7 @@
       "type": "registry:block",
       "title": "Features Block 1",
       "description": "Shadcn/ui website features block",
-      "registryDependencies" : [
+      "registryDependencies": [
         "card"
       ],
       "files": [
@@ -250,7 +244,7 @@
       "type": "registry:block",
       "title": "Features Block 2",
       "description": "Shadcn/ui website features block",
-      "registryDependencies" : [
+      "registryDependencies": [
         "card"
       ],
       "files": [
@@ -266,7 +260,7 @@
       "type": "registry:block",
       "title": "Features Block 3",
       "description": "Shadcn/ui website features block",
-      "registryDependencies" : [
+      "registryDependencies": [
         "card"
       ],
       "files": [
@@ -334,7 +328,7 @@
       "type": "registry:block",
       "title": "Features Block 8",
       "description": "Shadcn/ui website features block",
-      "registryDependencies" : [
+      "registryDependencies": [
         "card"
       ],
       "files": [
@@ -350,7 +344,7 @@
       "type": "registry:block",
       "title": "Features Block 9",
       "description": "Shadcn/ui website features block",
-      "registryDependencies" : [
+      "registryDependencies": [
         "card",
         "chart"
       ],
@@ -364,7 +358,7 @@
           "target": "components/features-9.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         }
       ]
@@ -374,7 +368,7 @@
       "type": "registry:block",
       "title": "Features Block 10",
       "description": "Shadcn/ui website features block with cards and circular UI elements",
-      "registryDependencies" : [
+      "registryDependencies": [
         "card"
       ],
       "files": [
@@ -390,7 +384,7 @@
       "type": "registry:block",
       "title": "Features Block 11",
       "description": "Shadcn/ui website features block with grid layout and images",
-      "registryDependencies" : [
+      "registryDependencies": [
         "card"
       ],
       "files": [
@@ -406,7 +400,7 @@
       "type": "registry:block",
       "title": "Features Block 12",
       "description": "Shadcn/ui website features block with accordion and animated images",
-      "registryDependencies" : [
+      "registryDependencies": [
         "accordion",
         "https://magicui.design/r/border-beam"
       ],
@@ -433,7 +427,7 @@
           "target": "components/footer.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         }
       ]
@@ -450,7 +444,7 @@
           "target": "components/footer.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         }
       ]
@@ -472,7 +466,7 @@
           "target": "components/footer.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         }
       ]
@@ -489,7 +483,7 @@
           "target": "components/footer.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         }
       ]
@@ -511,7 +505,7 @@
           "target": "components/footer.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         }
       ]
@@ -533,11 +527,11 @@
           "target": "components/hero-section.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         },
         {
-          "path" : "../../packages/dusk-kit/blocks/hero-section/one/header.tsx",
+          "path": "../../packages/dusk-kit/blocks/hero-section/one/header.tsx",
           "type": "registry:component",
           "target": "components/header.tsx"
         }
@@ -560,11 +554,11 @@
           "target": "components/hero-section.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         },
         {
-          "path" : "../../packages/dusk-kit/blocks/hero-section/two/header.tsx",
+          "path": "../../packages/dusk-kit/blocks/hero-section/two/header.tsx",
           "type": "registry:component",
           "target": "components/header.tsx"
         }
@@ -587,16 +581,16 @@
           "target": "components/hero-section.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         },
         {
-          "path" : "../../packages/dusk-kit/blocks/hero-section/three/header.tsx",
+          "path": "../../packages/dusk-kit/blocks/hero-section/three/header.tsx",
           "type": "registry:component",
           "target": "components/header.tsx"
         },
         {
-          "path" : "../../packages/dusk-kit/blocks/hero-section/three/logo-cloud.tsx",
+          "path": "../../packages/dusk-kit/blocks/hero-section/three/logo-cloud.tsx",
           "type": "registry:component",
           "target": "components/logo-cloud.tsx"
         }
@@ -619,11 +613,11 @@
           "target": "components/hero-section.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         },
         {
-          "path" : "../../packages/dusk-kit/blocks/hero-section/four/header.tsx",
+          "path": "../../packages/dusk-kit/blocks/hero-section/four/header.tsx",
           "type": "registry:component",
           "target": "components/header.tsx"
         }
@@ -646,11 +640,11 @@
           "target": "components/hero-section.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         },
         {
-          "path" : "../../packages/dusk-kit/blocks/hero-section/five/header.tsx",
+          "path": "../../packages/dusk-kit/blocks/hero-section/five/header.tsx",
           "type": "registry:component",
           "target": "components/header.tsx"
         }
@@ -671,7 +665,7 @@
           "target": "components/hero-section.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         }
       ]
@@ -694,7 +688,7 @@
           "target": "components/hero-section.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         }
       ]
@@ -714,7 +708,7 @@
           "target": "components/hero-section.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         }
       ]
@@ -734,7 +728,7 @@
           "target": "components/hero-section.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         }
       ]
@@ -756,7 +750,7 @@
           "target": "components/login.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         }
       ]
@@ -778,7 +772,7 @@
           "target": "components/login.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         }
       ]
@@ -800,11 +794,12 @@
           "target": "components/login.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         }
       ]
-    },{
+    },
+    {
       "name": "sign-up-1",
       "type": "registry:block",
       "title": "Sign Up Page 1",
@@ -821,7 +816,7 @@
           "target": "components/sign-up.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         }
       ]
@@ -843,7 +838,7 @@
           "target": "components/sign-up.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         }
       ]
@@ -865,7 +860,7 @@
           "target": "components/sign-up.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         }
       ]
@@ -887,7 +882,7 @@
           "target": "components/forgot-password.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         }
       ]
@@ -909,7 +904,7 @@
           "target": "components/forgot-password.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         }
       ]
@@ -1290,39 +1285,39 @@
           "target": "components/integrations-1.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/index.ts",
+          "path": "../../packages/core/src/components/logos/index.ts",
           "type": "registry:component",
           "target": "components/logos/index.ts"
         },
         {
-          "path" : "../../packages/core/src/components/logos/Gemini.tsx",
+          "path": "../../packages/core/src/components/logos/Gemini.tsx",
           "type": "registry:component",
           "target": "components/logos/Gemini.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/GooglePaLM.tsx",
+          "path": "../../packages/core/src/components/logos/GooglePaLM.tsx",
           "type": "registry:component",
           "target": "components/logos/GooglePaLM.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/MagicUI.tsx",
+          "path": "../../packages/core/src/components/logos/MagicUI.tsx",
           "type": "registry:component",
-          "target": "components/logos/MagicUI.tsx" 
+          "target": "components/logos/MagicUI.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/MediaWiki.tsx",
+          "path": "../../packages/core/src/components/logos/MediaWiki.tsx",
           "type": "registry:component",
-          "target": "components/logos/MediaWiki.tsx" 
+          "target": "components/logos/MediaWiki.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/Replit.tsx",
+          "path": "../../packages/core/src/components/logos/Replit.tsx",
           "type": "registry:component",
-          "target": "components/logos/Replit.tsx" 
+          "target": "components/logos/Replit.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/VSCodium.tsx",
+          "path": "../../packages/core/src/components/logos/VSCodium.tsx",
           "type": "registry:component",
-          "target": "components/logos/VSCodium.tsx" 
+          "target": "components/logos/VSCodium.tsx"
         }
       ]
     },
@@ -1341,43 +1336,43 @@
           "target": "components/integrations-2.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         },
         {
-          "path" : "../../packages/core/src/components/logos/index.ts",
+          "path": "../../packages/core/src/components/logos/index.ts",
           "type": "registry:component",
           "target": "components/logos/index.ts"
         },
         {
-          "path" : "../../packages/core/src/components/logos/Gemini.tsx",
+          "path": "../../packages/core/src/components/logos/Gemini.tsx",
           "type": "registry:component",
           "target": "components/logos/Gemini.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/GooglePaLM.tsx",
+          "path": "../../packages/core/src/components/logos/GooglePaLM.tsx",
           "type": "registry:component",
           "target": "components/logos/GooglePaLM.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/MagicUI.tsx",
+          "path": "../../packages/core/src/components/logos/MagicUI.tsx",
           "type": "registry:component",
-          "target": "components/logos/MagicUI.tsx" 
+          "target": "components/logos/MagicUI.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/MediaWiki.tsx",
+          "path": "../../packages/core/src/components/logos/MediaWiki.tsx",
           "type": "registry:component",
-          "target": "components/logos/MediaWiki.tsx" 
+          "target": "components/logos/MediaWiki.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/Replit.tsx",
+          "path": "../../packages/core/src/components/logos/Replit.tsx",
           "type": "registry:component",
-          "target": "components/logos/Replit.tsx" 
+          "target": "components/logos/Replit.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/VSCodium.tsx",
+          "path": "../../packages/core/src/components/logos/VSCodium.tsx",
           "type": "registry:component",
-          "target": "components/logos/VSCodium.tsx" 
+          "target": "components/logos/VSCodium.tsx"
         }
       ]
     },
@@ -1396,43 +1391,43 @@
           "target": "components/integrations-3.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         },
         {
-          "path" : "../../packages/core/src/components/logos/index.ts",
+          "path": "../../packages/core/src/components/logos/index.ts",
           "type": "registry:component",
           "target": "components/logos/index.ts"
         },
         {
-          "path" : "../../packages/core/src/components/logos/Gemini.tsx",
+          "path": "../../packages/core/src/components/logos/Gemini.tsx",
           "type": "registry:component",
           "target": "components/logos/Gemini.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/GooglePaLM.tsx",
+          "path": "../../packages/core/src/components/logos/GooglePaLM.tsx",
           "type": "registry:component",
           "target": "components/logos/GooglePaLM.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/MagicUI.tsx",
+          "path": "../../packages/core/src/components/logos/MagicUI.tsx",
           "type": "registry:component",
-          "target": "components/logos/MagicUI.tsx" 
+          "target": "components/logos/MagicUI.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/MediaWiki.tsx",
+          "path": "../../packages/core/src/components/logos/MediaWiki.tsx",
           "type": "registry:component",
-          "target": "components/logos/MediaWiki.tsx" 
+          "target": "components/logos/MediaWiki.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/Replit.tsx",
+          "path": "../../packages/core/src/components/logos/Replit.tsx",
           "type": "registry:component",
-          "target": "components/logos/Replit.tsx" 
+          "target": "components/logos/Replit.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/VSCodium.tsx",
+          "path": "../../packages/core/src/components/logos/VSCodium.tsx",
           "type": "registry:component",
-          "target": "components/logos/VSCodium.tsx" 
+          "target": "components/logos/VSCodium.tsx"
         }
       ]
     },
@@ -1451,43 +1446,43 @@
           "target": "components/integrations-4.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         },
         {
-          "path" : "../../packages/core/src/components/logos/index.ts",
+          "path": "../../packages/core/src/components/logos/index.ts",
           "type": "registry:component",
           "target": "components/logos/index.ts"
         },
         {
-          "path" : "../../packages/core/src/components/logos/Gemini.tsx",
+          "path": "../../packages/core/src/components/logos/Gemini.tsx",
           "type": "registry:component",
           "target": "components/logos/Gemini.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/GooglePaLM.tsx",
+          "path": "../../packages/core/src/components/logos/GooglePaLM.tsx",
           "type": "registry:component",
           "target": "components/logos/GooglePaLM.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/MagicUI.tsx",
+          "path": "../../packages/core/src/components/logos/MagicUI.tsx",
           "type": "registry:component",
-          "target": "components/logos/MagicUI.tsx" 
+          "target": "components/logos/MagicUI.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/MediaWiki.tsx",
+          "path": "../../packages/core/src/components/logos/MediaWiki.tsx",
           "type": "registry:component",
-          "target": "components/logos/MediaWiki.tsx" 
+          "target": "components/logos/MediaWiki.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/Replit.tsx",
+          "path": "../../packages/core/src/components/logos/Replit.tsx",
           "type": "registry:component",
-          "target": "components/logos/Replit.tsx" 
+          "target": "components/logos/Replit.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/VSCodium.tsx",
+          "path": "../../packages/core/src/components/logos/VSCodium.tsx",
           "type": "registry:component",
-          "target": "components/logos/VSCodium.tsx" 
+          "target": "components/logos/VSCodium.tsx"
         }
       ]
     },
@@ -1506,43 +1501,43 @@
           "target": "components/integrations-5.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         },
         {
-          "path" : "../../packages/core/src/components/logos/index.ts",
+          "path": "../../packages/core/src/components/logos/index.ts",
           "type": "registry:component",
           "target": "components/logos/index.ts"
         },
         {
-          "path" : "../../packages/core/src/components/logos/Gemini.tsx",
+          "path": "../../packages/core/src/components/logos/Gemini.tsx",
           "type": "registry:component",
           "target": "components/logos/Gemini.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/GooglePaLM.tsx",
+          "path": "../../packages/core/src/components/logos/GooglePaLM.tsx",
           "type": "registry:component",
           "target": "components/logos/GooglePaLM.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/MagicUI.tsx",
+          "path": "../../packages/core/src/components/logos/MagicUI.tsx",
           "type": "registry:component",
-          "target": "components/logos/MagicUI.tsx" 
+          "target": "components/logos/MagicUI.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/MediaWiki.tsx",
+          "path": "../../packages/core/src/components/logos/MediaWiki.tsx",
           "type": "registry:component",
-          "target": "components/logos/MediaWiki.tsx" 
+          "target": "components/logos/MediaWiki.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/Replit.tsx",
+          "path": "../../packages/core/src/components/logos/Replit.tsx",
           "type": "registry:component",
-          "target": "components/logos/Replit.tsx" 
+          "target": "components/logos/Replit.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/VSCodium.tsx",
+          "path": "../../packages/core/src/components/logos/VSCodium.tsx",
           "type": "registry:component",
-          "target": "components/logos/VSCodium.tsx" 
+          "target": "components/logos/VSCodium.tsx"
         }
       ]
     },
@@ -1561,39 +1556,39 @@
           "target": "components/integrations-6.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/index.ts",
+          "path": "../../packages/core/src/components/logos/index.ts",
           "type": "registry:component",
           "target": "components/logos/index.ts"
         },
         {
-          "path" : "../../packages/core/src/components/logos/Gemini.tsx",
+          "path": "../../packages/core/src/components/logos/Gemini.tsx",
           "type": "registry:component",
           "target": "components/logos/Gemini.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/GooglePaLM.tsx",
+          "path": "../../packages/core/src/components/logos/GooglePaLM.tsx",
           "type": "registry:component",
           "target": "components/logos/GooglePaLM.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/MagicUI.tsx",
+          "path": "../../packages/core/src/components/logos/MagicUI.tsx",
           "type": "registry:component",
-          "target": "components/logos/MagicUI.tsx" 
+          "target": "components/logos/MagicUI.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/MediaWiki.tsx",
+          "path": "../../packages/core/src/components/logos/MediaWiki.tsx",
           "type": "registry:component",
-          "target": "components/logos/MediaWiki.tsx" 
+          "target": "components/logos/MediaWiki.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/Replit.tsx",
+          "path": "../../packages/core/src/components/logos/Replit.tsx",
           "type": "registry:component",
-          "target": "components/logos/Replit.tsx" 
+          "target": "components/logos/Replit.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/VSCodium.tsx",
+          "path": "../../packages/core/src/components/logos/VSCodium.tsx",
           "type": "registry:component",
-          "target": "components/logos/VSCodium.tsx" 
+          "target": "components/logos/VSCodium.tsx"
         }
       ]
     },
@@ -1613,46 +1608,46 @@
           "target": "components/integrations-7.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logo.tsx",
+          "path": "../../packages/core/src/components/logo.tsx",
           "type": "registry:component"
         },
         {
-          "path" : "../../packages/core/src/components/logos/index.ts",
+          "path": "../../packages/core/src/components/logos/index.ts",
           "type": "registry:component",
           "target": "components/logos/index.ts"
         },
         {
-          "path" : "../../packages/core/src/components/logos/Gemini.tsx",
+          "path": "../../packages/core/src/components/logos/Gemini.tsx",
           "type": "registry:component",
           "target": "components/logos/Gemini.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/GooglePaLM.tsx",
+          "path": "../../packages/core/src/components/logos/GooglePaLM.tsx",
           "type": "registry:component",
           "target": "components/logos/GooglePaLM.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/MagicUI.tsx",
+          "path": "../../packages/core/src/components/logos/MagicUI.tsx",
           "type": "registry:component",
-          "target": "components/logos/MagicUI.tsx" 
+          "target": "components/logos/MagicUI.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/MediaWiki.tsx",
+          "path": "../../packages/core/src/components/logos/MediaWiki.tsx",
           "type": "registry:component",
-          "target": "components/logos/MediaWiki.tsx" 
+          "target": "components/logos/MediaWiki.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/Replit.tsx",
+          "path": "../../packages/core/src/components/logos/Replit.tsx",
           "type": "registry:component",
-          "target": "components/logos/Replit.tsx" 
+          "target": "components/logos/Replit.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/VSCodium.tsx",
+          "path": "../../packages/core/src/components/logos/VSCodium.tsx",
           "type": "registry:component",
-          "target": "components/logos/VSCodium.tsx" 
+          "target": "components/logos/VSCodium.tsx"
         },
         {
-          "path" : "../../packages/core/src/motion-primitives/infinite-slider.tsx",
+          "path": "../../packages/core/src/motion-primitives/infinite-slider.tsx",
           "type": "registry:component"
         }
       ]
@@ -1673,44 +1668,42 @@
           "target": "components/integrations-8.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/index.ts",
+          "path": "../../packages/core/src/components/logos/index.ts",
           "type": "registry:component",
           "target": "components/logos/index.ts"
         },
         {
-          "path" : "../../packages/core/src/components/logos/Gemini.tsx",
+          "path": "../../packages/core/src/components/logos/Gemini.tsx",
           "type": "registry:component",
           "target": "components/logos/Gemini.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/GooglePaLM.tsx",
+          "path": "../../packages/core/src/components/logos/GooglePaLM.tsx",
           "type": "registry:component",
           "target": "components/logos/GooglePaLM.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/MagicUI.tsx",
+          "path": "../../packages/core/src/components/logos/MagicUI.tsx",
           "type": "registry:component",
-          "target": "components/logos/MagicUI.tsx" 
+          "target": "components/logos/MagicUI.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/MediaWiki.tsx",
+          "path": "../../packages/core/src/components/logos/MediaWiki.tsx",
           "type": "registry:component",
-          "target": "components/logos/MediaWiki.tsx" 
+          "target": "components/logos/MediaWiki.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/Replit.tsx",
+          "path": "../../packages/core/src/components/logos/Replit.tsx",
           "type": "registry:component",
-          "target": "components/logos/Replit.tsx" 
+          "target": "components/logos/Replit.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/VSCodium.tsx",
+          "path": "../../packages/core/src/components/logos/VSCodium.tsx",
           "type": "registry:component",
-          "target": "components/logos/VSCodium.tsx" 
+          "target": "components/logos/VSCodium.tsx"
         }
       ]
     },
-
-
     {
       "name": "mist-call-to-action-1",
       "type": "registry:block",
@@ -1780,7 +1773,7 @@
       "type": "registry:block",
       "title": "Contact One",
       "description": "Mist Kit Contact block, variant one",
-       "registryDependencies": [
+      "registryDependencies": [
         "button",
         "card",
         "input",
@@ -1801,7 +1794,7 @@
       "type": "registry:block",
       "title": "Content One",
       "description": "Mist Kit Content block, variant one",
-       "registryDependencies": [
+      "registryDependencies": [
         "toggle",
         "toggle-group"
       ],
@@ -1930,7 +1923,7 @@
       "type": "registry:block",
       "title": "Features Two",
       "description": "Mist Kit Features block, variant two",
-       "registryDependencies": [
+      "registryDependencies": [
         "card"
       ],
       "files": [
@@ -2215,7 +2208,7 @@
         }
       ]
     },
-        {
+    {
       "name": "mist-hero-section-2",
       "type": "registry:block",
       "title": "Hero Section Two",
@@ -2337,39 +2330,39 @@
           "target": "components/integrations-one.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/index.ts",
+          "path": "../../packages/core/src/components/logos/index.ts",
           "type": "registry:component",
           "target": "components/logos/index.ts"
         },
         {
-          "path" : "../../packages/core/src/components/logos/Gemini.tsx",
+          "path": "../../packages/core/src/components/logos/Gemini.tsx",
           "type": "registry:component",
           "target": "components/logos/Gemini.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/GooglePaLM.tsx",
+          "path": "../../packages/core/src/components/logos/GooglePaLM.tsx",
           "type": "registry:component",
           "target": "components/logos/GooglePaLM.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/MagicUI.tsx",
+          "path": "../../packages/core/src/components/logos/MagicUI.tsx",
           "type": "registry:component",
-          "target": "components/logos/MagicUI.tsx" 
+          "target": "components/logos/MagicUI.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/MediaWiki.tsx",
+          "path": "../../packages/core/src/components/logos/MediaWiki.tsx",
           "type": "registry:component",
-          "target": "components/logos/MediaWiki.tsx" 
+          "target": "components/logos/MediaWiki.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/Replit.tsx",
+          "path": "../../packages/core/src/components/logos/Replit.tsx",
           "type": "registry:component",
-          "target": "components/logos/Replit.tsx" 
+          "target": "components/logos/Replit.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/VSCodium.tsx",
+          "path": "../../packages/core/src/components/logos/VSCodium.tsx",
           "type": "registry:component",
-          "target": "components/logos/VSCodium.tsx" 
+          "target": "components/logos/VSCodium.tsx"
         }
       ]
     },
@@ -2385,39 +2378,39 @@
           "target": "components/integrations-two.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/index.ts",
+          "path": "../../packages/core/src/components/logos/index.ts",
           "type": "registry:component",
           "target": "components/logos/index.ts"
         },
         {
-          "path" : "../../packages/core/src/components/logos/Gemini.tsx",
+          "path": "../../packages/core/src/components/logos/Gemini.tsx",
           "type": "registry:component",
           "target": "components/logos/Gemini.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/GooglePaLM.tsx",
+          "path": "../../packages/core/src/components/logos/GooglePaLM.tsx",
           "type": "registry:component",
           "target": "components/logos/GooglePaLM.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/MagicUI.tsx",
+          "path": "../../packages/core/src/components/logos/MagicUI.tsx",
           "type": "registry:component",
-          "target": "components/logos/MagicUI.tsx" 
+          "target": "components/logos/MagicUI.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/MediaWiki.tsx",
+          "path": "../../packages/core/src/components/logos/MediaWiki.tsx",
           "type": "registry:component",
-          "target": "components/logos/MediaWiki.tsx" 
+          "target": "components/logos/MediaWiki.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/Replit.tsx",
+          "path": "../../packages/core/src/components/logos/Replit.tsx",
           "type": "registry:component",
-          "target": "components/logos/Replit.tsx" 
+          "target": "components/logos/Replit.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/VSCodium.tsx",
+          "path": "../../packages/core/src/components/logos/VSCodium.tsx",
           "type": "registry:component",
-          "target": "components/logos/VSCodium.tsx" 
+          "target": "components/logos/VSCodium.tsx"
         }
       ]
     },
@@ -2433,39 +2426,39 @@
           "target": "components/integrations-three.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/index.ts",
+          "path": "../../packages/core/src/components/logos/index.ts",
           "type": "registry:component",
           "target": "components/logos/index.ts"
         },
         {
-          "path" : "../../packages/core/src/components/logos/Gemini.tsx",
+          "path": "../../packages/core/src/components/logos/Gemini.tsx",
           "type": "registry:component",
           "target": "components/logos/Gemini.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/GooglePaLM.tsx",
+          "path": "../../packages/core/src/components/logos/GooglePaLM.tsx",
           "type": "registry:component",
           "target": "components/logos/GooglePaLM.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/MagicUI.tsx",
+          "path": "../../packages/core/src/components/logos/MagicUI.tsx",
           "type": "registry:component",
-          "target": "components/logos/MagicUI.tsx" 
+          "target": "components/logos/MagicUI.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/MediaWiki.tsx",
+          "path": "../../packages/core/src/components/logos/MediaWiki.tsx",
           "type": "registry:component",
-          "target": "components/logos/MediaWiki.tsx" 
+          "target": "components/logos/MediaWiki.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/Replit.tsx",
+          "path": "../../packages/core/src/components/logos/Replit.tsx",
           "type": "registry:component",
-          "target": "components/logos/Replit.tsx" 
+          "target": "components/logos/Replit.tsx"
         },
         {
-          "path" : "../../packages/core/src/components/logos/VSCodium.tsx",
+          "path": "../../packages/core/src/components/logos/VSCodium.tsx",
           "type": "registry:component",
-          "target": "components/logos/VSCodium.tsx" 
+          "target": "components/logos/VSCodium.tsx"
         }
       ]
     },
@@ -2746,8 +2739,25 @@
           "target": "components/testimonials-five.tsx"
         }
       ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "faq-accordion",
+      "type": "registry:ui",
+      "title": "FAQ Accordion",
+      "description": "Animated expanding FAQ list.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "components/ui/faq-accordion.tsx",
+          "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface FaqItem {\n  question: string;\n  answer: React.ReactNode;\n}\n\nexport interface FaqAccordionProps extends React.HTMLAttributes<HTMLDivElement> {\n  items?: FaqItem[];\n  title?: string;\n}\n\nconst DEFAULT_ITEMS: FaqItem[] = [\n  { question: \"Do you accept credit cards?\", answer: \"Yes, but we charge a 2% service charge.\" },\n  { question: \"Do you exchange dollar and euros?\", answer: \"No, but there are banks, ATMs, and currency exchanges at various locations around town.\" },\n  { question: \"Do you have WiFi?\", answer: \"Yes, we have free WiFi, but service cannot be guaranteed.\" },\n  { question: \"Do you offer shuttle service to the airport?\", answer: \"Yes, we offer shuttle service for a flat $30USD fee.\" },\n  { question: \"Is your facility handicap accessible?\", answer: \"We have one room that is wheelchair accessible with accessible bathroom features.\" },\n  { question: \"When is your busiest time of year?\", answer: \"May through August is our busiest time.\" },\n];\n\nexport function FaqAccordion({\n  items = DEFAULT_ITEMS,\n  title = \"HOTEL FAQs\",\n  className,\n  ...props\n}: FaqAccordionProps) {\n  const [activeIndex, setActiveIndex] = useState<number | null>(null);\n\n  const toggleItem = (index: number) => {\n    setActiveIndex(activeIndex === index ? null : index);\n  };\n\n  return (\n    <div className={cn(\"w-full max-w-3xl mx-auto py-8 relative font-sans\", className)} {...props}>\n      {title && (\n        <h2 className=\"text-center font-bold text-2xl md:text-3xl mb-10 text-neutral-500 dark:text-neutral-400\">\n          {title}\n        </h2>\n      )}\n      \n      <ul className=\"w-full mx-auto list-none p-0 flex flex-col\">\n        {items.map((item, index) => {\n          const isActive = activeIndex === index;\n          return (\n            <li\n              key={index}\n              className={cn(\n                \"w-full relative transition-all duration-300 ease-in\",\n                \"border-b-2 border-neutral-100 dark:border-neutral-800\",\n                \"last:border-b-0\",\n                isActive ? \"border-b border-neutral-200 dark:border-neutral-700\" : \"\"\n              )}\n            >\n              <button\n                className={cn(\n                  \"flex flex-row items-center justify-start w-full min-h-[60px] py-4 relative m-0 px-4 pl-14 cursor-pointer\",\n                  \"border-l-[6px] md:border-l-[10px] transition-colors duration-200 text-left outline-none text-base md:text-lg\",\n                  isActive \n                    ? \"border-l-neutral-900 dark:border-l-neutral-100 bg-neutral-100/50 dark:bg-neutral-800/30 text-neutral-900 dark:text-neutral-100 font-semibold\" \n                    : \"border-l-neutral-300 dark:border-l-neutral-700 bg-transparent text-neutral-600 dark:text-neutral-400 hover:border-l-neutral-500 dark:hover:border-l-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-900/50\"\n                )}\n                onClick={() => toggleItem(index)}\n                aria-expanded={isActive}\n              >\n                {/* Plus/Minus Icon */}\n                <span \n                  className={cn(\n                    \"absolute left-4 md:left-5 top-1/2 -translate-y-1/2 transition-all duration-200 leading-none\",\n                    isActive ? \"text-[32px] md:text-[40px] font-normal text-neutral-900 dark:text-neutral-100\" : \"text-[24px] md:text-[30px] font-normal text-neutral-400 dark:text-neutral-500\"\n                  )}\n                >\n                  {isActive ? \"-\" : \"+\"}\n                </span>\n                \n                <span className=\"pr-8\">{item.question}</span>\n                \n                {/* Chevron */}\n                <span \n                  className={cn(\n                    \"absolute right-6 block w-2 h-2 border-t-[3px] border-r-[3px] transition-transform duration-200 ease-in-out\",\n                    isActive ? \"rotate-[-44deg] border-neutral-900 dark:border-neutral-100\" : \"rotate-[133deg] border-neutral-400 dark:border-neutral-500\"\n                  )}\n                />\n              </button>\n\n              <div \n                className={cn(\n                  \"grid transition-all duration-300 ease-in-out w-full\",\n                  \"border-l-[6px] md:border-l-[10px]\",\n                  isActive ? \"grid-rows-[1fr] border-l-neutral-900 dark:border-l-neutral-100 bg-neutral-100/50 dark:bg-neutral-800/30\" : \"grid-rows-[0fr] border-l-neutral-300 dark:border-l-neutral-700 bg-transparent\"\n                )}\n              >\n                <div className=\"overflow-hidden\">\n                  <div className=\"flex flex-row items-start justify-start w-full px-4 pl-14 pb-6 pt-2 text-base md:text-lg font-normal text-neutral-700 dark:text-neutral-300\">\n                    <span className=\"opacity-90\">{item.answer}</span>\n                  </div>\n                </div>\n              </div>\n            </li>\n          );\n        })}\n      </ul>\n    </div>\n  );\n}\n\nexport default FaqAccordion;\n",
+          "type": "registry:ui",
+          "target": "components/ui/faq-accordion.tsx"
+        }
+      ]
     }
   ]
 }
-
-
