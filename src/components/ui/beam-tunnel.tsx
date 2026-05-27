@@ -36,8 +36,8 @@ export function BeamTunnel({
     const generateBeams = () => {
       const generateSideBeams = (prefix: string) => {
         return Array.from({ length: beamCount }).map((_, i) => {
-          // Very slow, meditative drift
-          const duration = 25 + Math.random() * 15;
+          // Glacially slow — each beam takes 60–90s to cross
+          const duration = 60 + Math.random() * 30;
           return {
             id: `${prefix}-${i}`,
             left: `${i * 30 + Math.random() * 15}%`, 
@@ -67,9 +67,9 @@ export function BeamTunnel({
       <style>{`
         @keyframes tunnel-beam-move {
           0%   { transform: translateY(120%); opacity: 0; }
-          15%  { opacity: 0.55; }
-          50%  { opacity: 0.6; }
-          85%  { opacity: 0.55; }
+          20%  { opacity: 0.3; }
+          50%  { opacity: 0.35; }
+          80%  { opacity: 0.3; }
           100% { transform: translateY(-120%); opacity: 0; }
         }
       `}</style>
