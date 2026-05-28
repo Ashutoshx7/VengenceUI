@@ -696,6 +696,28 @@ export function AuroraHeroDemo() {
     ],
   },
 
+  "fluid-morph-bg": {
+    dependencies: "npm install framer-motion clsx tailwind-merge",
+    includeUtils: true,
+    usageCode: `import { FluidMorphBg } from "@/components/ui/fluid-morph-bg"
+
+export function FluidMorphBgDemo() {
+  return (
+    <div className="relative w-full h-[500px] flex items-center justify-center">
+      <FluidMorphBg className="absolute inset-0" />
+      <h2 className="relative z-10 text-white text-5xl font-serif">Fluid Life</h2>
+    </div>
+  )
+}`,
+    props: [
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the container." },
+      { prop: "duration", type: "number", defaultValue: "4", description: "The duration of the morphing animation in seconds." },
+      { prop: "colors", type: "string[]", defaultValue: "['#4f4fea', '#0c27cf', ...]", description: "The base color palette to use for the morphing shapes." },
+      { prop: "backgroundColor", type: "string", defaultValue: "'#282886'", description: "Background color for the scene container." },
+    ],
+  },
+
+
   "creepy-button": {
     dependencies: "npm install framer-motion clsx tailwind-merge",
     includeUtils: true,

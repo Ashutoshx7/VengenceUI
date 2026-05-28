@@ -67,6 +67,7 @@ const DEMO_COMPONENTS: Record<string, React.ComponentType> = {
   "liquid-ocean": dynamic(() => import("@/components/docs/liquid-ocean").then((m) => ({ default: m.LiquidOceanDemo })), { ssr: false, loading: LOADING }),
   "twisting-ribbon": dynamic(() => import("@/components/docs/twisting-ribbon-demo").then((m) => ({ default: m.TwistingRibbonDemo })), { ssr: false, loading: LOADING }),
   "aurora-hero": dynamic(() => import("@/components/docs/aurora-hero-demo").then((m) => ({ default: m.AuroraHeroDemo })), { ssr: false, loading: LOADING }),
+  "fluid-morph-bg": dynamic(() => import("@/components/docs/fluid-morph-bg-demo").then((m) => ({ default: m.FluidMorphBgDemo })), { ssr: false, loading: LOADING }),
   "typing-keyboard": dynamic(() => import("@/components/docs/typing-keyboard-demo").then((m) => ({ default: m.TypingKeyboardDemo })), { ssr: false, loading: LOADING }),
 };
 
