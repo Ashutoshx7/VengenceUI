@@ -2,12 +2,8 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "cursor-card",
   "type": "registry:ui",
-  "title": "Cursor Card",
-  "description": "Inline text link with cursor tracking preview card",
   "dependencies": [
-    "framer-motion",
-    "clsx",
-    "tailwind-merge"
+    "framer-motion"
   ],
   "files": [
     {

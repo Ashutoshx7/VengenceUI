@@ -1,12 +1,9 @@
 {
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "fluid-morph-bg",
   "type": "registry:ui",
-  "title": "Fluid Morph Background",
-  "description": "Organic fluid shape morphing animation",
   "dependencies": [
-    "framer-motion",
-    "clsx",
-    "tailwind-merge"
+    "framer-motion"
   ],
   "files": [
     {

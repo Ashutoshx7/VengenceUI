@@ -2,12 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "faq-accordion",
   "type": "registry:ui",
-  "title": "FAQ Accordion",
-  "description": "Animated expanding FAQ list.",
-  "dependencies": [
-    "clsx",
-    "tailwind-merge"
-  ],
+  "dependencies": [],
   "files": [
     {
       "path": "components/ui/faq-accordion.tsx",

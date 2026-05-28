@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "testinomial-card2",
+  "type": "registry:ui",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/ui/testinomial-card2.tsx",
+      "content": "\r\nimport { cn } from \"@/lib/utils\";\r\nimport { FaXTwitter } from \"react-icons/fa6\";\r\n\r\n\r\ninterface TestimonialItem {\r\n    title: string;\r\n    company?: string;\r\n    description: string;\r\n    image: string;\r\n    href?: string;\r\n    big?: boolean;\r\n}\r\n\r\ninterface TestimonialsCardProps {\r\n    items: TestimonialItem[];\r\n    className?: string;\r\n}\r\n\r\nexport function TestimonialsCard2({ items, className }: TestimonialsCardProps) {\r\n    return (\r\n        <div className={cn(\"flex flex-row gap-4\", className)}>\r\n            {items?.length > 0 && items.map((el, idx) => (\r\n                <div\r\n                    key={idx}\r\n                    className=\"flex flex-col justify-between flex-shrink-0 w-72 bg-foreground text-background rounded-xl px-5 py-4 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg\"\r\n                >\r\n                    <div>\r\n                        <p className=\"text-sm leading-relaxed opacity-90\">{el.description}</p>\r\n                    </div>\r\n                    <div className=\"flex items-center gap-3 mt-4 pt-3 border-t border-background/10\">\r\n                        <div className=\"rounded-full overflow-hidden size-9 flex-shrink-0\">\r\n                            <img\r\n                                src={el.image}\r\n                                alt={el.title}\r\n                                className=\"w-full h-full object-cover\"\r\n                                draggable={false}\r\n                            />\r\n                        </div>\r\n                        <div className=\"flex-1 min-w-0\">\r\n                            <h1 className=\"text-sm font-semibold truncate\">{el.title}</h1>\r\n                            <p className=\"text-xs opacity-60 truncate\">{el.company}</p>\r\n                        </div>\r\n                        {el.href && (\r\n                            <a\r\n                                href={el.href}\r\n                                target=\"_blank\"\r\n                                rel=\"noopener noreferrer\"\r\n                                className=\"opacity-50 hover:opacity-100 transition-opacity flex-shrink-0\"\r\n                                onClick={e => e.stopPropagation()}\r\n                            >\r\n                                <FaXTwitter className=\"size-3.5\" />\r\n                            </a>\r\n                        )}\r\n                    </div>\r\n                </div>\r\n            ))}\r\n        </div>\r\n    );\r\n}\r\n\r\nexport default TestimonialsCard2;\r\n",
+      "type": "registry:ui",
+      "target": "components/ui/testinomial-card2.tsx"
+    }
+  ]
+}

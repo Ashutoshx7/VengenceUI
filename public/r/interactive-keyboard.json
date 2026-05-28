@@ -2,12 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "interactive-keyboard",
   "type": "registry:ui",
-  "title": "Interactive Keyboard",
-  "description": "Animated physical keyboard UI with fluid scaling.",
-  "dependencies": [
-    "clsx",
-    "tailwind-merge"
-  ],
+  "dependencies": [],
   "files": [
     {
       "path": "components/ui/interactive-keyboard.tsx",

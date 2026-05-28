@@ -2,12 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "radial-glow-button",
   "type": "registry:ui",
-  "title": "Radial Glow Button",
-  "description": "Button with animated radial gradient hover",
-  "dependencies": [
-    "clsx",
-    "tailwind-merge"
-  ],
+  "dependencies": [],
   "files": [
     {
       "path": "components/ui/radial-glow-button.tsx",

@@ -2,12 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "aurora-hero",
   "type": "registry:ui",
-  "title": "Aurora Hero",
-  "description": "Fluted glass dynamic hero with animated aurora background.",
-  "dependencies": [
-    "clsx",
-    "tailwind-merge"
-  ],
+  "dependencies": [],
   "files": [
     {
       "path": "components/ui/aurora-hero.tsx",

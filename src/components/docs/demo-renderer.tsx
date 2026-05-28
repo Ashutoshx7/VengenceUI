@@ -69,6 +69,7 @@ const DEMO_COMPONENTS: Record<string, React.ComponentType> = {
   "aurora-hero": dynamic(() => import("@/components/docs/aurora-hero-demo").then((m) => ({ default: m.AuroraHeroDemo })), { ssr: false, loading: LOADING }),
   "fluid-morph-bg": dynamic(() => import("@/components/docs/fluid-morph-bg-demo").then((m) => ({ default: m.FluidMorphBgDemo })), { ssr: false, loading: LOADING }),
   "typing-keyboard": dynamic(() => import("@/components/docs/typing-keyboard-demo").then((m) => ({ default: m.TypingKeyboardDemo })), { ssr: false, loading: LOADING }),
+  "notch-navbar": dynamic(() => import("@/components/docs/notch-navbar-demo").then((m) => ({ default: m.NotchNavbarDemo })), { ssr: false, loading: LOADING }),
 };
 
 export function DemoRenderer({ slug }: { slug: string }) {

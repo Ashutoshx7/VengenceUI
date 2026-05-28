@@ -2,11 +2,8 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "shared-tooltip-avatars",
   "type": "registry:ui",
-  "title": "Shared Tooltip Avatars",
-  "description": "Avatar stack with a sliding shared tooltip",
   "dependencies": [
-    "clsx",
-    "tailwind-merge"
+    "framer-motion"
   ],
   "files": [
     {

@@ -2,12 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "pop-button",
   "type": "registry:ui",
-  "title": "Pop Button",
-  "description": "Interactive 3D pushable pop button",
-  "dependencies": [
-    "clsx",
-    "tailwind-merge"
-  ],
+  "dependencies": [],
   "files": [
     {
       "path": "components/ui/pop-button.tsx",

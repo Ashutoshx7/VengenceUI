@@ -759,6 +759,22 @@ export function SpotlightNavbarDemo() {
     ],
   },
 
+  "notch-navbar": {
+    dependencies: "npm install lucide-react framer-motion next-themes clsx tailwind-merge",
+    includeUtils: true,
+    usageCode: `import { NotchNavbar } from "@/components/ui/notch-navbar"
+
+export function NotchNavbarDemo() {
+  return (
+    <NotchNavbar />
+  )
+}`,
+    props: [
+      { prop: "logo", type: "React.ReactNode", defaultValue: "-", description: "Custom logo to render in the center." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes." },
+    ],
+  },
+
   "faq-accordion": {
     dependencies: "npm install clsx tailwind-merge",
     includeUtils: true,

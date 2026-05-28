@@ -2,12 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "elastic-stack",
   "type": "registry:ui",
-  "title": "Elastic Stack",
-  "description": "Horizontal expanding staggered stack",
-  "dependencies": [
-    "clsx",
-    "tailwind-merge"
-  ],
+  "dependencies": [],
   "files": [
     {
       "path": "components/ui/elastic-stack.tsx",

@@ -2,12 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "kinetic-text-loader",
   "type": "registry:ui",
-  "title": "Kinetic Text Loader",
-  "description": "Typography-based animated loader",
-  "dependencies": [
-    "clsx",
-    "tailwind-merge"
-  ],
+  "dependencies": [],
   "files": [
     {
       "path": "components/ui/kinetic-text-loader.tsx",
