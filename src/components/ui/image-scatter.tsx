@@ -21,7 +21,6 @@ export interface ImageScatterProps extends React.HTMLAttributes<HTMLDivElement> 
   cardHeight?: number;
   animationDuration?: number;
   animationOverlap?: number;
-  animationOverlap?: number;
   headingFadeDuration?: number;
   scroller?: string | Element | null;
 }
