@@ -11,6 +11,7 @@ import { Separator } from '@/components/ui/separator'
 import { Menu, X } from 'lucide-react'
 import { Dialog, DialogClose, DialogTitle, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import LogoIcon from '@/assets/logo/logo-icon'
+import { NavbarCommandSearch } from './navbar-command-search'
 
 const GitHubIcon = memo(function GitHubIcon() {
     return (
@@ -67,9 +68,7 @@ export const Navbar = memo(function Navbar() {
 
     // Pre-compute active states to avoid recalculating in render
     const activeStates = useMemo(() => ({
-        heroSection: isActive('/hero-section'),
         templates: isActive('/templates'),
-        snippets: isActive('/snippets/button'),
         docs: isActive('/docs'),
     }), [isActive])
 
@@ -87,20 +86,9 @@ export const Navbar = memo(function Navbar() {
                         </Link>
 
                         <div className="-mr-2 hidden items-center gap-4 sm:flex">
-                            <div className="flex items-center gap-1">
-                                <Button
-                                    asChild
-                                    size="sm"
-                                    variant="ghost"
-                                    className={cn('text-foreground/75 rounded-full', activeStates.heroSection && 'text-foreground')}>
-                                    <Link
-                                        href="/hero-section"
-                                        prefetch={true}
-                                        className="text-sm!">
-                                        Blocks
-                                    </Link>
-                                </Button>
+                            <NavbarCommandSearch />
 
+                            <div className="flex items-center gap-1">
                                 <Button
                                     asChild
                                     size="sm"
@@ -114,18 +102,6 @@ export const Navbar = memo(function Navbar() {
                                     </Link>
                                 </Button>
 
-                                <Button
-                                    asChild
-                                    size="sm"
-                                    variant="ghost"
-                                    className={cn('text-foreground/75 rounded-full', activeStates.snippets && 'text-foreground')}>
-                                    <Link
-                                        href="/snippets/button"
-                                        prefetch={true}
-                                        className="text-sm!">
-                                        Snippets
-                                    </Link>
-                                </Button>
                                 <Button
                                     asChild
                                     size="sm"
@@ -210,36 +186,12 @@ export const Navbar = memo(function Navbar() {
                                                 asChild
                                                 size="sm"
                                                 variant="ghost"
-                                                className={cn('justify-start', activeStates.heroSection && 'bg-accent')}>
-                                                <Link
-                                                    href="/hero-section"
-                                                    className="text-sm!"
-                                                    onClick={closeMenu}>
-                                                    Blocks
-                                                </Link>
-                                            </Button>
-                                            <Button
-                                                asChild
-                                                size="sm"
-                                                variant="ghost"
                                                 className={cn('justify-start', activeStates.templates && 'bg-accent')}>
                                                 <Link
                                                     href="/templates"
                                                     className="text-sm!"
                                                     onClick={closeMenu}>
                                                     Templates
-                                                </Link>
-                                            </Button>
-                                            <Button
-                                                asChild
-                                                size="sm"
-                                                variant="ghost"
-                                                className={cn('justify-start', activeStates.snippets && 'bg-accent')}>
-                                                <Link
-                                                    href="/snippets/button"
-                                                    className="text-sm!"
-                                                    onClick={closeMenu}>
-                                                    Snippets
                                                 </Link>
                                             </Button>
                                             <Button
