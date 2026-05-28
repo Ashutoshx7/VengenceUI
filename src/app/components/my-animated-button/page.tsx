@@ -1,25 +1,23 @@
+import { notFound } from "next/navigation";
+import { DemoRenderer } from "@/components/docs/demo-renderer";
 import { ComponentShowcase } from "@/components/ui/component-showcase";
-import MyAnimatedButton from "@/registry/my-animated-button";
+import { COMPONENT_BY_SLUG } from "@/lib/components-catalog";
 
 export default function Page() {
-  return (
-    <div className="w-full max-w-5xl">
-      <ComponentShowcase 
-        componentName="my-animated-button"
-        title="Glowing Button"
-        description="A physics-based hover button using Framer Motion."
-      >
-        <MyAnimatedButton />
-      </ComponentShowcase>
+  const component = COMPONENT_BY_SLUG.get("my-animated-button");
 
-      {/* Installation Steps */}
-      <div className="mt-8 space-y-4">
-        <h3 className="text-2xl font-bold tracking-tight text-white">Installation</h3>
-        <p className="text-zinc-400">Copy and paste the code into your project or use the CLI.</p>
-        <div className="bg-zinc-900 rounded-lg p-4 border border-white/10 flex items-center justify-between">
-          <code className="text-sm text-zinc-300">npx vengenceui add my-animated-button</code>
-        </div>
-      </div>
-    </div>
+  if (!component) {
+    notFound();
+  }
+
+  return (
+    <ComponentShowcase
+      componentName={component.componentName}
+      slug={component.slug}
+      title={component.name}
+      description={component.description}
+    >
+      <DemoRenderer slug={component.slug} />
+    </ComponentShowcase>
   );
 }

@@ -527,6 +527,52 @@ export function StackedLogosDemo() {
     ],
   },
 
+  "image-reveal-list": {
+    dependencies: "npm install clsx tailwind-merge",
+    includeUtils: true,
+    usageCode: `import { ImageRevealList, type ImageRevealListItem } from "@/components/ui/image-reveal-list"
+
+const items: ImageRevealListItem[] = [
+  {
+    id: "1",
+    title: "The Great Gatsby",
+    subtitle: "F. Scott Fitzgerald",
+    image: "/covers/gatsby.jpg",
+    number: "01",
+    href: "/books/gatsby",
+  },
+  {
+    id: "2",
+    title: "To Kill a Mockingbird",
+    subtitle: "Harper Lee",
+    image: "/covers/mockingbird.jpg",
+    number: "02",
+    href: "/books/mockingbird",
+  },
+]
+
+export function ImageRevealListDemo() {
+  return <ImageRevealList items={items} />
+}`,
+    props: [
+      { prop: "items", type: "ImageRevealListItem[]", defaultValue: "-", description: "List rows to render with their hover preview image." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the wrapper." },
+    ],
+    additionalPropSections: [
+      {
+        title: "ImageRevealListItem",
+        data: [
+          { prop: "id", type: "string", defaultValue: "-", description: "Stable key for the item." },
+          { prop: "title", type: "string", defaultValue: "-", description: "Primary label shown in the row and used as the preview image alt text." },
+          { prop: "subtitle", type: "string", defaultValue: "-", description: "Optional secondary label aligned to the end of the row." },
+          { prop: "image", type: "string", defaultValue: "-", description: "Image URL shown when the row is hovered." },
+          { prop: "number", type: "string", defaultValue: "-", description: "Small leading index or label shown before the title." },
+          { prop: "href", type: "string", defaultValue: "'#'", description: "Optional link target for the row." },
+        ],
+      },
+    ],
+  },
+
   "liquid-metal": {
     dependencies: "npm install @paper-design/shaders-react clsx tailwind-merge",
     includeUtils: true,

@@ -4,9 +4,10 @@ import path from "path";
 import { CodeBlock } from "@/components/ui/code-block";
 import { CopyButton } from "@/components/ui/copy-button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ChevronDown, Terminal, WandSparkles, TerminalSquare, PictureInPicture2 } from "lucide-react";
+import { Terminal, TerminalSquare, PictureInPicture2 } from "lucide-react";
 import { ComponentDocsSections } from "@/components/docs/component-docs-sections";
 import { FullscreenPreview } from "@/components/ui/fullscreen-preview";
+import { getShadcnAddCommand } from "@/lib/registry";
 
 interface ComponentShowcaseProps {
   componentName: string; // The exact filename in the registry (without .tsx)
@@ -49,7 +50,7 @@ export function ComponentShowcase({
   slug = componentName,
   children,
 }: ComponentShowcaseProps) {
-  const installCommand = `npx shadcn@latest add @vengeanceui/${componentName}`;
+  const installCommand = getShadcnAddCommand(componentName);
   const sourceCode = readComponentSource(componentName);
 
   return (
@@ -83,14 +84,7 @@ export function ComponentShowcase({
               <Terminal className="h-3.5 w-3.5" />
             </div>
             <span className="max-w-[42vw] truncate font-mono text-neutral-500 dark:text-zinc-400 lg:max-w-[500px]">{installCommand}</span>
-            <button
-              type="button"
-              className="ml-auto hidden h-7 items-center gap-1 rounded-md border border-neutral-200 dark:border-white/10 bg-neutral-100 dark:bg-white/5 px-2.5 text-neutral-600 dark:text-zinc-300 transition-colors hover:bg-neutral-200 dark:hover:bg-white/10 sm:inline-flex"
-            >
-              Copy prompt
-              <ChevronDown className="h-3.5 w-3.5" />
-            </button>
-            <CopyButton code={installCommand} className="h-7 w-7 border-neutral-200 dark:border-white/10 bg-transparent hover:bg-neutral-100 dark:hover:bg-white/10" />
+            <CopyButton code={installCommand} className="ml-auto h-7 w-7 border-neutral-200 dark:border-white/10 bg-transparent hover:bg-neutral-100 dark:hover:bg-white/10" />
             <FullscreenPreview>{children}</FullscreenPreview>
           </div>
         </div>
