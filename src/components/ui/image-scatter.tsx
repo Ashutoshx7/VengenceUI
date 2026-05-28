@@ -263,7 +263,7 @@ export function ImageScatter({
   return (
     <section 
       ref={containerRef}
-      className={cn("relative w-full h-[600px] flex justify-center items-center overflow-hidden bg-transparent", className)}
+      className={cn("relative w-full h-full flex justify-center items-center overflow-hidden bg-transparent", className)}
       {...props}
     >
       <div ref={galleryRef} className="absolute inset-0 pointer-events-none" />
