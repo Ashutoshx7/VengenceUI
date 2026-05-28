@@ -312,6 +312,28 @@ export function ExpandableBentoGridDemo() {
     ],
   },
 
+  "image-scatter": {
+    dependencies: "npm install gsap @gsap/react",
+    includeUtils: true,
+    usageCode: `import { ImageScatter } from "@/components/ui/image-scatter"
+
+export function ImageScatterDemo() {
+  const data = [
+    { heading: "Section 1", images: ["/1.jpg", "/2.jpg"] },
+    { heading: "Section 2", images: ["/3.jpg", "/4.jpg"] }
+  ];
+  return <ImageScatter data={data} />
+}`,
+    props: [
+      { prop: "data", type: "ScatterSet[]", defaultValue: "-", description: "Array of sections containing a heading and an array of image URLs." },
+      { prop: "cardWidth", type: "number", defaultValue: "250", description: "Width of each scattered image card in pixels." },
+      { prop: "cardHeight", type: "number", defaultValue: "300", description: "Height of each scattered image card in pixels." },
+      { prop: "animationDuration", type: "number", defaultValue: "0.75", description: "Duration of the scattering animation." },
+      { prop: "animationOverlap", type: "number", defaultValue: "0.5", description: "Overlap timing for entering animations." },
+      { prop: "headingFadeDuration", type: "number", defaultValue: "0.5", description: "Duration for the heading crossfade." },
+    ],
+  },
+
   "staggered-grid": {
     dependencies: "npm install framer-motion clsx tailwind-merge",
     includeUtils: true,

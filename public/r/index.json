@@ -482,6 +482,16 @@
     ]
   },
   {
+    "name": "image-scatter",
+    "dependencies": [
+      "gsap"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/image-scatter.json"
+    ]
+  },
+  {
     "name": "input-group",
     "dependencies": [],
     "type": "registry:ui",

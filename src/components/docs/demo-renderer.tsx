@@ -46,6 +46,7 @@ const DEMO_COMPONENTS: Record<string, React.ComponentType> = {
 
   "expandable-bento-grid": dynamic(() => import("@/components/docs/expandable-bento-grid").then((m) => ({ default: m.ExpandableBentoGridDemo })), { ssr: false, loading: LOADING }),
   "staggered-grid": dynamic(() => import("@/components/docs/staggered-grid").then((m) => ({ default: m.StaggeredGridDemo })), { ssr: false, loading: LOADING }),
+  "image-scatter": dynamic(() => import("@/components/docs/image-scatter-demo").then((m) => ({ default: m.ImageScatterDemo })), { ssr: false, loading: LOADING }),
   "perspective-grid": dynamic(() => import("@/components/docs/perspective-grid").then((m) => ({ default: m.PerspectiveGridDemo })), { ssr: false, loading: LOADING }),
   "glow-border-card": dynamic(() => import("@/components/docs/glow-border-card").then((m) => ({ default: m.GlowBorderCardDemo })), { ssr: false, loading: LOADING }),
   "testimonials-card": dynamic(() => import("@/components/docs/testimonials-card").then((m) => ({ default: m.TestimonialsCardDemo })), { ssr: false, loading: LOADING }),

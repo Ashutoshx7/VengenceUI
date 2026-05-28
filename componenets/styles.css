@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
+
+:root {
+  --base-100: #fff;
+  --base-200: #4a4a4a;
+  --base-300: #141414;
+  --base-400: #0f0f0f;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Instrument Serif", sans-serif;
+}
+
+h1 {
+  font-size: clamp(3rem, 5vw, 7vw);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: -0.025rem;
+}
+
+section {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--base-100);
+  overflow: hidden;
+}
+
+section h1 {
+  width: 45%;
+  text-align: center;
+  will-change: opacity;
+  z-index: 2;
+}
+
+.intro,
+.outro {
+  background-color: var(--base-400);
+}
+
+.gallery {
+  background-color: var(--base-300);
+}
+
+.card {
+  position: absolute;
+  width: 250px;
+  height: 300px;
+  border-radius: 1rem;
+  border: 0.5rem solid var(--base-200);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+  will-change: transform;
+  overflow: hidden;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+@media (max-width: 1000px) {
+  section h1 {
+    width: 100%;
+    padding: 2rem;
+  }
+}
