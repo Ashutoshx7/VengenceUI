@@ -28,6 +28,7 @@ export interface StaggeredGridProps {
     }
     className?: string
     showFooter?: boolean
+    scroller?: string | Element | Window | null
 }
 
 export function StaggeredGrid({
@@ -39,7 +40,8 @@ export function StaggeredGrid({
         moreDemos: { text: "More demos", href: "https://tympanus.net/codrops/demos" }
     },
     className,
-    showFooter = true
+    showFooter = true,
+    scroller
 }: StaggeredGridProps) {
     const [isLoaded, setIsLoaded] = useState(false)
     const gridFullRef = useRef<HTMLDivElement>(null)
@@ -78,6 +80,7 @@ export function StaggeredGrid({
             gsap.timeline({
                 scrollTrigger: {
                     trigger: textRef.current,
+                    scroller: scroller || undefined,
                     start: 'top bottom',
                     end: 'center center-=25%',
                     scrub: 1,
@@ -112,6 +115,7 @@ export function StaggeredGrid({
                 gsap.timeline({
                     scrollTrigger: {
                         trigger: gridFullRef.current,
+                        scroller: scroller || undefined,
                         start: 'top bottom',
                         end: 'center center',
                         scrub: 1.5,
@@ -136,6 +140,7 @@ export function StaggeredGrid({
                 const tl = gsap.timeline({
                     scrollTrigger: {
                         trigger: gridFullRef.current,
+                        scroller: scroller || undefined,
                         start: 'top top+=15%',
                         end: 'bottom center',
                         scrub: 1,
