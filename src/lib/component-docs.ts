@@ -313,7 +313,7 @@ export function ExpandableBentoGridDemo() {
   },
 
   "image-scatter": {
-    dependencies: "npm install gsap @gsap/react",
+    dependencies: "npm install gsap",
     includeUtils: true,
     usageCode: `import { ImageScatter } from "@/components/ui/image-scatter"
 
