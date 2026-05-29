@@ -127,10 +127,10 @@ function StaticPreview({ kind }: { kind: PreviewKind }) {
         <span className="preview-shine relative overflow-hidden rounded-md border bg-background px-3 py-2 text-[10px] font-medium text-foreground">
           Hover
         </span>
-        <span className="preview-glow rounded-md border border-cyan-300/60 px-3 py-2 text-[10px] font-semibold text-white shadow-[0_14px_30px_-22px_rgba(34,211,238,0.9)]">
+        <span className="preview-glow rounded-md border border-cyan-300/50 px-3 py-2 text-[10px] font-semibold text-white shadow-[0_14px_30px_-24px_rgba(34,211,238,0.85)]">
           Glow
         </span>
-        <span className="rounded-md border bg-foreground px-3 py-2 text-[10px] font-medium text-background shadow-[0_4px_0_rgba(113,113,122,0.28)]">
+        <span className="rounded-md border bg-foreground/90 px-3 py-2 text-[10px] font-medium text-background shadow-[0_4px_0_rgba(113,113,122,0.22)]">
           Press
         </span>
       </div>
@@ -154,11 +154,11 @@ function StaticPreview({ kind }: { kind: PreviewKind }) {
   if (kind === "layout") {
     return (
       <div className="grid h-full grid-cols-5 grid-rows-3 gap-1.5 p-3">
-        <span className="col-span-2 row-span-2 rounded-sm border bg-background" />
-        <span className="col-span-3 rounded-sm border bg-background/70" />
-        <span className="col-span-1 rounded-sm border bg-muted" />
-        <span className="col-span-2 row-span-2 rounded-sm border bg-foreground" />
-        <span className="col-span-3 rounded-sm border bg-background/70" />
+        <span className="col-span-2 row-span-2 rounded-sm border bg-background/80" />
+        <span className="col-span-3 rounded-sm border bg-background/60" />
+        <span className="col-span-1 rounded-sm border bg-muted/70" />
+        <span className="col-span-2 row-span-2 rounded-sm border bg-foreground/80" />
+        <span className="col-span-3 rounded-sm border bg-background/60" />
       </div>
     );
   }
@@ -218,7 +218,7 @@ function PreviewCell({
   const Icon = family.icon;
 
   return (
-    <div className="group flex min-h-[210px] flex-col border-b border-r bg-background/45 p-4 transition-colors hover:bg-muted/20 md:last:border-r-0">
+    <div className="group flex min-h-[204px] flex-col border-b border-r bg-background/35 p-4 transition-colors hover:bg-muted/15 md:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(3n)]:border-r-0">
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <span className="flex size-7 items-center justify-center rounded-md border bg-background/70 text-muted-foreground">
@@ -241,21 +241,27 @@ function PreviewCell({
         </span>
       </div>
       <Link
-        className="mt-4 block h-20 overflow-hidden rounded-md border bg-muted/15 transition-colors group-hover:bg-muted/30"
+        className="mt-4 block h-[76px] overflow-hidden rounded-md border bg-muted/10 transition-colors group-hover:bg-muted/25"
         href={family.href}
       >
         <StaticPreview kind={family.preview} />
       </Link>
 
-      <div className="mt-auto flex flex-wrap gap-x-3 gap-y-1 pt-4">
-        {family.items.map((item) => (
-          <Link
-            className="text-[11px] text-muted-foreground transition-colors hover:text-foreground"
-            href={item.href}
-            key={item.name}
-          >
-            {item.name}
-          </Link>
+      <div className="mt-auto flex flex-wrap items-center gap-x-2 gap-y-1 pt-4 text-[11px] text-muted-foreground">
+        {family.items.map((item, itemIndex) => (
+          <span className="inline-flex items-center gap-x-2" key={item.name}>
+            <Link
+              className="transition-colors hover:text-foreground"
+              href={item.href}
+            >
+              {item.name}
+            </Link>
+            {itemIndex < family.items.length - 1 ? (
+              <span className="text-border" aria-hidden="true">
+                /
+              </span>
+            ) : null}
+          </span>
         ))}
       </div>
     </div>
@@ -270,16 +276,16 @@ function IntroBand() {
           Explore
         </p>
         <h2 className="mt-4 max-w-2xl font-orbitron text-3xl font-semibold leading-tight tracking-normal text-foreground md:text-4xl">
-          Library index.
+          Browse by interaction.
         </h2>
         <p className="mt-4 max-w-xl text-sm leading-6 text-muted-foreground">
-          Six focused families, lightweight previews, and one CLI path for
-          finding the right interaction without loading every component.
+          A compact index for motion, layout, feedback, and scene layers. Static
+          previews keep the landing page light while the links stay close.
         </p>
       </div>
 
       <div className="space-y-3">
-        <div className="grid gap-2 rounded-lg border bg-card/45 p-2 dark:bg-white/[0.025] sm:grid-cols-[auto_1fr_auto] sm:items-center">
+        <div className="grid gap-2 rounded-lg border bg-card/35 p-2 dark:bg-white/[0.02] sm:grid-cols-[auto_1fr_auto] sm:items-center">
           <span className="flex size-8 items-center justify-center rounded-md border bg-background/70 text-muted-foreground">
             <Command className="size-3.5" />
           </span>
@@ -294,7 +300,7 @@ function IntroBand() {
             <ArrowUpRight className="size-3" />
           </Link>
         </div>
-        <div className="grid grid-cols-3 overflow-hidden rounded-lg border bg-background/45">
+        <div className="grid grid-cols-3 overflow-hidden rounded-lg border bg-background/35">
           {stats.map((stat) => (
             <div className="border-r px-3 py-2.5 last:border-r-0" key={stat.label}>
               <p className="font-orbitron text-sm font-semibold leading-none tracking-normal text-foreground">
