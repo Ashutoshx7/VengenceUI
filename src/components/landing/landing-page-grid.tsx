@@ -490,42 +490,42 @@ function MotionHubCell({
           >
             <path
               className="motion-path"
-              d="M0 50H38"
+              d="M0 50H48"
               fill="none"
               stroke="currentColor"
               strokeWidth="0.55"
             />
             <path
               className="motion-path motion-path-b"
-              d="M56 50C64 50 63 25 77 25"
+              d="M64 50C70 50 69 25 78 25"
               fill="none"
               stroke="currentColor"
               strokeWidth="0.55"
             />
             <path
               className="motion-path motion-path-c"
-              d="M56 50C65 50 64 38 77 38"
+              d="M64 50C70 50 69 38 78 38"
               fill="none"
               stroke="currentColor"
               strokeWidth="0.55"
             />
             <path
               className="motion-path"
-              d="M56 50H100"
+              d="M64 50H100"
               fill="none"
               stroke="currentColor"
               strokeWidth="0.55"
             />
             <path
               className="motion-path motion-path-b"
-              d="M56 50C65 50 64 62 77 62"
+              d="M64 50C70 50 69 62 78 62"
               fill="none"
               stroke="currentColor"
               strokeWidth="0.55"
             />
             <path
               className="motion-path motion-path-c"
-              d="M56 50C64 50 63 75 77 75"
+              d="M64 50C70 50 69 75 78 75"
               fill="none"
               stroke="currentColor"
               strokeWidth="0.55"
@@ -550,11 +550,11 @@ function MotionHubCell({
             </span>
           </div>
 
-          <div className="absolute left-[25%] top-[55%] z-30 rounded-md border border-zinc-200 bg-white px-2 py-1 font-mono text-[10px] text-zinc-900 shadow-lg dark:border-white/10 dark:bg-zinc-950 dark:text-zinc-100">
+          <div className="absolute left-[34%] top-[55%] z-30 rounded-md border border-zinc-200 bg-white px-2 py-1 font-mono text-[10px] text-zinc-900 shadow-lg dark:border-white/10 dark:bg-zinc-950 dark:text-zinc-100">
             UI8
           </div>
 
-          <div className="motion-core absolute left-1/2 top-1/2 z-30 flex size-24 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[1.45rem] border border-white/90 bg-white shadow-[0_22px_52px_-32px_rgba(24,24,27,0.78),inset_0_1px_0_rgba(255,255,255,1)] dark:border-white/12 dark:bg-[#25262a] dark:shadow-[0_22px_52px_-34px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.1)]">
+          <div className="motion-core absolute left-[58%] top-1/2 z-30 flex size-24 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[1.45rem] border border-white/90 bg-white shadow-[0_22px_52px_-32px_rgba(24,24,27,0.78),inset_0_1px_0_rgba(255,255,255,1)] dark:border-white/12 dark:bg-[#25262a] dark:shadow-[0_22px_52px_-34px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.1)]">
             <div className="motion-core-ring absolute inset-2 rounded-[1.35rem] bg-[conic-gradient(from_120deg,transparent_0_33%,#60a5fa_42%,#7c3aed_54%,#fb7185_68%,transparent_78%)] opacity-95" />
             <Link
               className="relative flex size-[4.5rem] items-center justify-center rounded-full border border-zinc-800 bg-zinc-950 font-mono text-[10px] text-white shadow-inner"
