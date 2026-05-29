@@ -461,12 +461,12 @@ function MotionHubCell({
         </span>
       </div>
 
-      <div className="motion-panel relative mt-4 flex min-h-[356px] flex-1 items-center justify-center overflow-hidden rounded-xl border border-zinc-300/75 bg-[#dedede] text-zinc-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.78)] dark:border-white/10 dark:bg-[#151516] dark:text-zinc-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+      <div className="motion-panel relative mt-4 flex min-h-[326px] flex-1 items-center justify-center overflow-hidden rounded-xl border border-zinc-300/75 bg-[#dedede] text-zinc-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.78)] dark:border-white/10 dark:bg-[#151516] dark:text-zinc-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_34%,rgba(255,255,255,0.82),transparent_42%),linear-gradient(180deg,rgba(255,255,255,0.22),rgba(255,255,255,0.03))] dark:hidden" />
         <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_48%_36%,rgba(255,255,255,0.1),transparent_42%),linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.01))] dark:block" />
         <span className="absolute inset-x-[-22%] top-1/2 h-px bg-zinc-400/45 dark:bg-white/10" />
 
-        <div className="motion-island relative h-[88%] max-h-[334px] w-[84%] max-w-[410px] overflow-hidden rounded-[2.15rem] border border-white/70 bg-[#f2f2f2] shadow-[0_24px_72px_-40px_rgba(24,24,27,0.72),inset_0_1px_0_rgba(255,255,255,0.88)] dark:border-white/12 dark:bg-[#202123] dark:shadow-[0_24px_72px_-44px_rgba(0,0,0,0.95),inset_0_1px_0_rgba(255,255,255,0.08)]">
+        <div className="motion-island relative h-[86%] max-h-[306px] w-[88%] max-w-[410px] overflow-hidden rounded-[2.15rem] border border-white/70 bg-[#f2f2f2] shadow-[0_24px_72px_-40px_rgba(24,24,27,0.72),inset_0_1px_0_rgba(255,255,255,0.88)] dark:border-white/12 dark:bg-[#202123] dark:shadow-[0_24px_72px_-44px_rgba(0,0,0,0.95),inset_0_1px_0_rgba(255,255,255,0.08)]">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(24,24,27,0.055)_1px,transparent_1px),linear-gradient(to_bottom,rgba(24,24,27,0.035)_1px,transparent_1px)] bg-[size:58px_58px] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.052)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.035)_1px,transparent_1px)]" />
           <div className="absolute inset-y-0 left-[20%] w-px bg-zinc-300/75 dark:bg-white/10" />
           <div className="absolute inset-y-0 left-[36%] w-px bg-zinc-300/60 dark:bg-white/9" />
@@ -532,10 +532,10 @@ function MotionHubCell({
             />
           </svg>
 
-          <div className="motion-rail absolute left-[11%] top-1/2 z-30 flex -translate-y-1/2 flex-col items-center gap-3 rounded-full border border-zinc-200 bg-white/86 p-2 shadow-[0_18px_46px_-30px_rgba(24,24,27,0.72)] backdrop-blur-sm dark:border-white/10 dark:bg-zinc-950/80 dark:shadow-[0_18px_46px_-30px_rgba(0,0,0,1)]">
+          <div className="motion-rail absolute left-[11%] top-1/2 z-30 flex -translate-y-1/2 flex-col items-center gap-2.5 rounded-full border border-zinc-200 bg-white/86 p-2 shadow-[0_18px_46px_-30px_rgba(24,24,27,0.72)] backdrop-blur-sm dark:border-white/10 dark:bg-zinc-950/80 dark:shadow-[0_18px_46px_-30px_rgba(0,0,0,1)]">
             {[Grid3X3, Heart, Timer, Music2].map((Icon, index) => (
               <span
-                className={`flex size-8 items-center justify-center rounded-full text-zinc-500 transition-colors ${
+                className={`flex size-7 items-center justify-center rounded-full text-zinc-500 transition-colors ${
                   index === 2
                     ? "bg-zinc-200 text-zinc-700 shadow-sm dark:bg-white/12 dark:text-zinc-100"
                     : "dark:text-zinc-500"
@@ -545,7 +545,7 @@ function MotionHubCell({
                 <Icon className="size-3.5" />
               </span>
             ))}
-            <span className="flex size-9 items-center justify-center rounded-full bg-blue-500 text-white shadow-[0_12px_30px_-16px_rgba(59,130,246,0.9)]">
+            <span className="flex size-8 items-center justify-center rounded-full bg-blue-500 text-white shadow-[0_12px_30px_-16px_rgba(59,130,246,0.9)]">
               <Plus className="size-4" />
             </span>
           </div>
@@ -554,10 +554,10 @@ function MotionHubCell({
             UI8
           </div>
 
-          <div className="motion-core absolute left-1/2 top-1/2 z-30 flex size-28 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[1.65rem] border border-white/90 bg-white shadow-[0_22px_52px_-32px_rgba(24,24,27,0.78),inset_0_1px_0_rgba(255,255,255,1)] dark:border-white/12 dark:bg-[#25262a] dark:shadow-[0_22px_52px_-34px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.1)]">
+          <div className="motion-core absolute left-1/2 top-1/2 z-30 flex size-24 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[1.45rem] border border-white/90 bg-white shadow-[0_22px_52px_-32px_rgba(24,24,27,0.78),inset_0_1px_0_rgba(255,255,255,1)] dark:border-white/12 dark:bg-[#25262a] dark:shadow-[0_22px_52px_-34px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.1)]">
             <div className="motion-core-ring absolute inset-2 rounded-[1.35rem] bg-[conic-gradient(from_120deg,transparent_0_33%,#60a5fa_42%,#7c3aed_54%,#fb7185_68%,transparent_78%)] opacity-95" />
             <Link
-              className="relative flex size-20 items-center justify-center rounded-full border border-zinc-800 bg-zinc-950 font-mono text-[10px] text-white shadow-inner"
+              className="relative flex size-[4.5rem] items-center justify-center rounded-full border border-zinc-800 bg-zinc-950 font-mono text-[10px] text-white shadow-inner"
               href={textFamily.href}
             >
               thinking...
@@ -565,12 +565,12 @@ function MotionHubCell({
             </Link>
           </div>
 
-          <div className="absolute right-[11%] top-1/2 z-30 flex -translate-y-1/2 flex-col gap-3">
+          <div className="absolute right-[11%] top-1/2 z-30 flex -translate-y-1/2 flex-col gap-2.5">
             {rightNodes.map((node, index) => {
               const Icon = node.icon;
               return (
                 <Link
-                  className="motion-node flex size-12 items-center justify-center rounded-full border border-white/80 bg-white shadow-[0_18px_45px_-32px_rgba(24,24,27,0.74)] transition-transform hover:-translate-y-0.5 dark:border-white/10 dark:bg-zinc-950/88 dark:shadow-[0_18px_45px_-30px_rgba(0,0,0,1)]"
+                  className="motion-node flex size-11 items-center justify-center rounded-full border border-white/80 bg-white shadow-[0_18px_45px_-32px_rgba(24,24,27,0.74)] transition-transform hover:-translate-y-0.5 dark:border-white/10 dark:bg-zinc-950/88 dark:shadow-[0_18px_45px_-30px_rgba(0,0,0,1)]"
                   href={node.href}
                   key={node.label}
                   style={{ animationDelay: `${index * -0.55}s` }}
@@ -584,7 +584,7 @@ function MotionHubCell({
         </div>
       </div>
 
-      <div className="mt-4 grid gap-3 text-[11px] text-muted-foreground sm:grid-cols-2">
+      <div className="mt-3 grid gap-3 text-[11px] text-muted-foreground sm:grid-cols-2">
         <Link
           className="rounded-md border bg-background/45 px-3 py-2 transition-colors hover:border-foreground/20 hover:text-foreground"
           href={textFamily.href}
@@ -703,7 +703,7 @@ function PreviewMatrix() {
     libraryFamilies;
 
   return (
-    <div className="relative grid border-b md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-[246px_246px]">
+    <div className="relative grid border-b md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-[258px_258px]">
       <FlowLayer />
       <InteractionBuilderCell
         buttonsFamily={buttons}
