@@ -309,56 +309,56 @@ function InteractionBuilderCell({
         </span>
       </div>
 
-      <div className="motion-panel relative mt-4 flex min-h-[356px] flex-1 items-center justify-center overflow-hidden rounded-xl border border-zinc-300/75 bg-[#dddddd] text-zinc-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.78)] dark:border-white/10 dark:bg-[#151516] dark:text-zinc-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_34%,rgba(255,255,255,0.86),transparent_43%),linear-gradient(180deg,rgba(255,255,255,0.26),rgba(255,255,255,0.03))] dark:hidden" />
-        <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_48%_36%,rgba(255,255,255,0.11),transparent_42%),linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.01))] dark:block" />
+      <div className="motion-panel relative mt-4 flex min-h-[356px] flex-1 items-center justify-center overflow-hidden rounded-xl border border-zinc-300/75 bg-[#dddddd] text-zinc-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.78)] dark:border-white/10 dark:bg-[#171719] dark:text-zinc-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_34%,rgba(255,255,255,0.9),transparent_44%),linear-gradient(180deg,rgba(255,255,255,0.28),rgba(255,255,255,0.04))] dark:hidden" />
+        <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_50%_34%,rgba(255,255,255,0.13),transparent_44%),linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.015))] dark:block" />
         <span className="absolute inset-x-[-22%] top-1/2 h-px bg-zinc-400/45 dark:bg-white/10" />
 
-        <div className="motion-island relative h-[90%] max-h-[338px] w-[86%] max-w-[430px] overflow-hidden rounded-[2.35rem] border border-white/70 bg-[#f4f4f4] shadow-[0_24px_72px_-42px_rgba(24,24,27,0.72),inset_0_1px_0_rgba(255,255,255,0.9)] dark:border-white/12 dark:bg-[#202123] dark:shadow-[0_24px_72px_-44px_rgba(0,0,0,0.95),inset_0_1px_0_rgba(255,255,255,0.08)]">
+        <div className="motion-island relative h-[91%] max-h-[340px] w-[94%] max-w-[480px] overflow-hidden rounded-[2.35rem] border border-white/75 bg-[#f4f4f4] shadow-[0_24px_72px_-42px_rgba(24,24,27,0.72),inset_0_1px_0_rgba(255,255,255,0.92)] dark:border-white/12 dark:bg-[#202124] dark:shadow-[0_24px_72px_-44px_rgba(0,0,0,0.95),inset_0_1px_0_rgba(255,255,255,0.08)]">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(24,24,27,0.045)_1px,transparent_1px),linear-gradient(to_bottom,rgba(24,24,27,0.03)_1px,transparent_1px)] bg-[size:58px_58px] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.052)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.035)_1px,transparent_1px)]" />
           <div className="absolute inset-y-0 left-1/2 w-px bg-zinc-300/55 dark:bg-white/8" />
           <div className="absolute inset-x-0 top-[30%] h-px bg-zinc-300/45 dark:bg-white/8" />
-          <div className="absolute left-[-12%] top-[38%] h-32 w-20 rounded-r-2xl border border-zinc-300/55 bg-white/34 dark:border-white/8 dark:bg-white/[0.025]" />
-          <div className="absolute right-[-12%] top-[32%] h-28 w-20 rounded-l-2xl border border-zinc-300/55 bg-white/34 dark:border-white/8 dark:bg-white/[0.025]" />
-          <div className="absolute left-1/2 top-[36%] h-24 w-56 -translate-x-1/2 rounded-t-[1.45rem] border border-zinc-300/55 bg-white/32 dark:border-white/8 dark:bg-white/[0.025]" />
-          <div className="absolute bottom-[-12%] left-1/2 h-24 w-32 -translate-x-1/2 rounded-t-[1.7rem] border border-zinc-300/65 bg-white/32 dark:border-white/9 dark:bg-white/[0.025]" />
+          <div className="absolute left-[-8%] top-[42%] h-32 w-20 rounded-r-2xl border border-zinc-300/55 bg-white/38 dark:border-white/8 dark:bg-white/[0.03]" />
+          <div className="absolute right-[-8%] top-[36%] h-28 w-20 rounded-l-2xl border border-zinc-300/55 bg-white/38 dark:border-white/8 dark:bg-white/[0.03]" />
+          <div className="absolute left-1/2 top-[35%] h-24 w-60 -translate-x-1/2 rounded-t-[1.45rem] border border-zinc-300/55 bg-white/36 dark:border-white/8 dark:bg-white/[0.03]" />
+          <div className="absolute bottom-[-10%] left-1/2 h-24 w-32 -translate-x-1/2 rounded-t-[1.7rem] border border-zinc-300/65 bg-white/34 dark:border-white/9 dark:bg-white/[0.03]" />
 
-          <div className="generator-prompt absolute left-1/2 top-[9%] z-30 flex h-11 w-[78%] -translate-x-1/2 items-center gap-2 rounded-full border border-white/90 bg-white/95 px-4 text-[10px] shadow-[0_14px_28px_-22px_rgba(24,24,27,0.78),0_2px_0_rgba(24,24,27,0.08)] dark:border-white/12 dark:bg-zinc-950/82 dark:shadow-[0_16px_36px_-28px_rgba(0,0,0,1)]">
-            <span className="min-w-0 flex-1 truncate font-mono text-[10px] text-zinc-800 dark:text-zinc-100">
+          <div className="generator-prompt absolute inset-x-[12%] top-[8%] z-30 flex h-10 items-center gap-1.5 rounded-full border border-white/95 bg-white/95 py-1 pl-4 pr-1.5 shadow-[0_16px_30px_-22px_rgba(24,24,27,0.78),0_2px_0_rgba(24,24,27,0.08)] dark:border-white/12 dark:bg-zinc-950/84 dark:shadow-[0_16px_36px_-28px_rgba(0,0,0,1)]">
+            <span className="min-w-0 flex-1 overflow-hidden whitespace-nowrap font-mono text-[7.5px] text-zinc-800 dark:text-zinc-100 sm:text-[8.5px]">
               Business gradient landing page
             </span>
             <span className="motion-caret h-3 w-px bg-blue-500" />
             <Link
-              className="ml-auto flex size-8 items-center justify-center rounded-full bg-blue-500 text-white shadow-[0_10px_24px_-14px_rgba(59,130,246,0.9)]"
+              className="flex size-7 shrink-0 items-center justify-center rounded-full bg-blue-500 text-white shadow-[0_10px_24px_-14px_rgba(59,130,246,0.9)]"
               href={buttonsFamily.href}
               title="Generate"
             >
-              <Sparkles className="size-4" />
+              <Sparkles className="size-3.5" />
             </Link>
           </div>
 
-          <div className="generator-browser absolute bottom-[18%] right-[10%] top-[36%] z-10 w-[58%] rounded-[1.45rem] border border-white/85 bg-white/62 shadow-[0_22px_52px_-38px_rgba(24,24,27,0.82),inset_0_1px_0_rgba(255,255,255,0.88)] backdrop-blur-sm dark:border-white/10 dark:bg-zinc-950/34 dark:shadow-[0_22px_52px_-38px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.06)]">
+          <div className="generator-browser absolute bottom-[14%] left-[53%] top-[35%] z-10 w-[69%] -translate-x-1/2 rounded-[1.45rem] border border-white/85 bg-white/64 shadow-[0_22px_52px_-38px_rgba(24,24,27,0.82),inset_0_1px_0_rgba(255,255,255,0.88)] backdrop-blur-sm dark:border-white/10 dark:bg-zinc-950/36 dark:shadow-[0_22px_52px_-38px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.06)]">
             <div className="absolute left-5 top-4 flex gap-1.5">
               <span className="size-2 rounded-full bg-zinc-300 dark:bg-white/15" />
               <span className="size-2 rounded-full bg-zinc-300 dark:bg-white/15" />
               <span className="size-2 rounded-full bg-zinc-300 dark:bg-white/15" />
             </div>
             <Search className="absolute right-5 top-4 size-4 text-zinc-500 dark:text-zinc-500" />
-            <div className="absolute right-5 top-[40%] grid gap-2">
-              <span className="generator-mini block h-9 w-[5.6rem] rounded-lg border border-white/80 bg-white/88 shadow-sm dark:border-white/10 dark:bg-white/[0.055]" />
-              <span className="generator-mini generator-mini-b block h-9 w-[5.6rem] rounded-lg border border-white/80 bg-white/88 shadow-sm dark:border-white/10 dark:bg-white/[0.055]" />
+            <div className="absolute right-5 top-[39%] grid gap-2">
+              <span className="generator-mini block h-9 w-[5.1rem] rounded-lg border border-white/80 bg-white/88 shadow-sm dark:border-white/10 dark:bg-white/[0.055]" />
+              <span className="generator-mini generator-mini-b block h-9 w-[5.1rem] rounded-lg border border-white/80 bg-white/88 shadow-sm dark:border-white/10 dark:bg-white/[0.055]" />
             </div>
           </div>
 
           <Link
-            className="generator-card absolute bottom-[14%] left-[24%] z-30 flex h-[48%] w-[38%] flex-col rounded-[1.35rem] border border-white/90 bg-white/90 p-4 shadow-[0_24px_54px_-36px_rgba(24,24,27,0.85),inset_0_1px_0_rgba(255,255,255,0.94)] backdrop-blur-sm dark:border-white/12 dark:bg-zinc-950/76 dark:shadow-[0_24px_54px_-36px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.08)]"
+            className="generator-card absolute bottom-[10%] left-[29%] z-30 flex h-[52%] w-[39%] flex-col rounded-[1.35rem] border border-white/90 bg-white/90 p-4 shadow-[0_24px_54px_-36px_rgba(24,24,27,0.85),inset_0_1px_0_rgba(255,255,255,0.94)] backdrop-blur-sm dark:border-white/12 dark:bg-zinc-950/76 dark:shadow-[0_24px_54px_-36px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.08)]"
             href={interactiveFamily.href}
           >
             <div className="pointer-events-none absolute inset-0 rounded-[1.35rem] bg-[radial-gradient(circle_at_80%_0%,rgba(96,165,250,0.5),transparent_24%),radial-gradient(circle_at_0%_30%,rgba(251,113,133,0.42),transparent_26%),radial-gradient(circle_at_0%_80%,rgba(251,146,60,0.38),transparent_24%)] opacity-70 dark:opacity-55" />
             <span className="relative ml-auto flex size-8 items-center justify-center rounded-full border border-zinc-200 bg-zinc-100 dark:border-white/10 dark:bg-white/8">
               <span className="size-4 rounded-full border-4 border-zinc-300 border-t-zinc-500 dark:border-white/16 dark:border-t-white/45" />
             </span>
-            <span className="relative mt-1 max-w-[7rem] text-sm font-semibold leading-[0.95] text-zinc-950 dark:text-zinc-50">
+            <span className="relative mt-1 max-w-[7rem] text-[13px] font-semibold leading-[0.95] text-zinc-950 dark:text-zinc-50 sm:text-sm">
               About your project
             </span>
             <div className="relative mt-3 space-y-1.5">
@@ -825,8 +825,8 @@ export default function LandingPageGrid() {
         }
 
         @keyframes generator-prompt {
-          0%, 100% { transform: translateX(-50%) translateY(0); }
-          50% { transform: translateX(-50%) translateY(-2px); }
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-2px); }
         }
 
         @keyframes generator-card {
