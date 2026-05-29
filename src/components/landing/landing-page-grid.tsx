@@ -461,103 +461,104 @@ function MotionHubCell({
         </span>
       </div>
 
-      <div className="motion-panel relative mt-4 flex min-h-[326px] flex-1 items-center justify-center overflow-hidden rounded-xl border border-zinc-300/75 bg-[#dedede] text-zinc-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.78)] dark:border-white/10 dark:bg-[#151516] dark:text-zinc-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_34%,rgba(255,255,255,0.82),transparent_42%),linear-gradient(180deg,rgba(255,255,255,0.22),rgba(255,255,255,0.03))] dark:hidden" />
-        <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_48%_36%,rgba(255,255,255,0.1),transparent_42%),linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.01))] dark:block" />
-        <span className="absolute inset-x-[-22%] top-1/2 h-px bg-zinc-400/45 dark:bg-white/10" />
+      <div className="motion-panel relative mt-4 flex min-h-[342px] flex-1 items-center justify-center overflow-hidden rounded-xl border border-zinc-300/75 bg-[#d9d9d9] text-zinc-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.78)] dark:border-white/10 dark:bg-[#d9d9d9] dark:text-zinc-900 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.72)]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_36%,rgba(255,255,255,0.72),transparent_45%),linear-gradient(180deg,rgba(255,255,255,0.2),rgba(255,255,255,0.02))]" />
+        <span className="absolute inset-x-[-22%] top-1/2 h-px bg-zinc-400/45" />
 
-        <div className="motion-island relative h-[86%] max-h-[306px] w-[88%] max-w-[410px] overflow-hidden rounded-[2.15rem] border border-white/70 bg-[#f2f2f2] shadow-[0_24px_72px_-40px_rgba(24,24,27,0.72),inset_0_1px_0_rgba(255,255,255,0.88)] dark:border-white/12 dark:bg-[#202123] dark:shadow-[0_24px_72px_-44px_rgba(0,0,0,0.95),inset_0_1px_0_rgba(255,255,255,0.08)]">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(24,24,27,0.055)_1px,transparent_1px),linear-gradient(to_bottom,rgba(24,24,27,0.035)_1px,transparent_1px)] bg-[size:58px_58px] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.052)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.035)_1px,transparent_1px)]" />
-          <div className="absolute inset-y-0 left-[20%] w-px bg-zinc-300/75 dark:bg-white/10" />
-          <div className="absolute inset-y-0 left-[36%] w-px bg-zinc-300/60 dark:bg-white/9" />
-          <div className="absolute inset-x-0 top-1/2 h-px bg-zinc-300/80 dark:bg-white/10" />
-          <div className="absolute left-1/2 top-[-10%] h-20 w-28 -translate-x-1/2 rounded-b-[1.7rem] border border-zinc-300/70 bg-white/30 dark:border-white/8 dark:bg-white/[0.025]" />
-          <div className="absolute bottom-[-10%] left-1/2 h-20 w-28 -translate-x-1/2 rounded-t-[1.7rem] border border-zinc-300/70 bg-white/30 dark:border-white/8 dark:bg-white/[0.025]" />
-          <div className="absolute left-1/2 top-[18%] h-24 w-28 -translate-x-1/2 rounded-2xl border border-zinc-300/70 bg-white/34 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)] dark:border-white/9 dark:bg-white/[0.03]">
-            <span className="absolute left-7 top-1/2 h-1 w-9 -translate-y-1/2 rounded-full bg-zinc-300 dark:bg-white/14" />
-            <span className="absolute left-7 top-[58%] h-1 w-16 rounded-full bg-zinc-200 dark:bg-white/8" />
+        <div className="motion-island relative h-[91%] max-h-[330px] w-[92%] max-w-[430px] overflow-hidden rounded-[2.75rem] border border-white/80 bg-[#f3f3f3] shadow-[0_24px_72px_-40px_rgba(24,24,27,0.62),inset_0_1px_0_rgba(255,255,255,0.92)]">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(24,24,27,0.052)_1px,transparent_1px),linear-gradient(to_bottom,rgba(24,24,27,0.034)_1px,transparent_1px)] bg-[size:58px_58px]" />
+          <div className="absolute inset-y-0 left-[20%] w-px bg-zinc-300/70" />
+          <div className="absolute inset-y-0 left-[36%] w-px bg-zinc-300/58" />
+          <div className="absolute inset-x-0 top-1/2 h-px bg-zinc-300/80" />
+          <div className="absolute left-1/2 top-[-10%] h-20 w-28 -translate-x-1/2 rounded-b-[1.7rem] border border-zinc-300/65 bg-white/28" />
+          <div className="absolute bottom-[-10%] left-1/2 h-20 w-28 -translate-x-1/2 rounded-t-[1.7rem] border border-zinc-300/65 bg-white/28" />
+          <div className="absolute left-1/2 top-[16%] h-28 w-32 -translate-x-1/2 rounded-[1.55rem] border border-zinc-300/65 bg-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]">
+            <span className="absolute left-8 top-1/2 h-1.5 w-10 -translate-y-1/2 rounded-full bg-zinc-300" />
+            <span className="absolute left-8 top-[59%] h-1 w-20 rounded-full bg-zinc-200" />
           </div>
-          <div className="absolute bottom-[15%] left-1/2 h-24 w-28 -translate-x-1/2 rounded-2xl border border-zinc-300/70 bg-white/34 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)] dark:border-white/9 dark:bg-white/[0.03]">
-            <span className="absolute left-7 top-[58%] h-1 w-9 rounded-full bg-zinc-300 dark:bg-white/14" />
-            <span className="absolute left-7 top-[66%] h-1 w-16 rounded-full bg-zinc-200 dark:bg-white/8" />
+          <div className="absolute bottom-[13%] left-1/2 h-28 w-32 -translate-x-1/2 rounded-[1.55rem] border border-zinc-300/65 bg-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]">
+            <span className="absolute left-8 top-[58%] h-1.5 w-10 rounded-full bg-zinc-300" />
+            <span className="absolute left-8 top-[67%] h-1 w-20 rounded-full bg-zinc-200" />
           </div>
 
           <svg
             aria-hidden="true"
-            className="absolute inset-0 h-full w-full text-zinc-300/95 dark:text-white/14"
+            className="absolute inset-0 h-full w-full text-zinc-300/95"
             preserveAspectRatio="none"
             viewBox="0 0 100 100"
           >
             <path
               className="motion-path"
-              d="M0 50H48"
+              d="M0 50H40"
               fill="none"
               stroke="currentColor"
               strokeWidth="0.55"
             />
             <path
               className="motion-path motion-path-b"
-              d="M64 50C70 50 69 25 78 25"
+              d="M60 50C69 50 68 23 80 23"
               fill="none"
               stroke="currentColor"
               strokeWidth="0.55"
             />
             <path
               className="motion-path motion-path-c"
-              d="M64 50C70 50 69 38 78 38"
+              d="M60 50C69 50 68 37 80 37"
               fill="none"
               stroke="currentColor"
               strokeWidth="0.55"
             />
             <path
               className="motion-path"
-              d="M64 50H100"
+              d="M60 50H100"
               fill="none"
               stroke="currentColor"
               strokeWidth="0.55"
             />
             <path
               className="motion-path motion-path-b"
-              d="M64 50C70 50 69 62 78 62"
+              d="M60 50C69 50 68 63 80 63"
               fill="none"
               stroke="currentColor"
               strokeWidth="0.55"
             />
             <path
               className="motion-path motion-path-c"
-              d="M64 50C70 50 69 75 78 75"
+              d="M60 50C69 50 68 77 80 77"
               fill="none"
               stroke="currentColor"
               strokeWidth="0.55"
             />
           </svg>
 
-          <div className="motion-rail absolute left-[11%] top-1/2 z-30 flex -translate-y-1/2 flex-col items-center gap-2.5 rounded-full border border-zinc-200 bg-white/86 p-2 shadow-[0_18px_46px_-30px_rgba(24,24,27,0.72)] backdrop-blur-sm dark:border-white/10 dark:bg-zinc-950/80 dark:shadow-[0_18px_46px_-30px_rgba(0,0,0,1)]">
+          <div className="motion-rail absolute left-[21%] top-1/2 z-30 flex -translate-y-1/2 flex-col items-center gap-3 rounded-full border border-zinc-200 bg-white/90 p-2.5 shadow-[0_18px_46px_-30px_rgba(24,24,27,0.72)] backdrop-blur-sm">
             {[Grid3X3, Heart, Timer, Music2].map((Icon, index) => (
               <span
-                className={`flex size-7 items-center justify-center rounded-full text-zinc-500 transition-colors ${
+                className={`flex size-8 items-center justify-center rounded-full text-zinc-500 transition-colors ${
                   index === 2
-                    ? "bg-zinc-200 text-zinc-700 shadow-sm dark:bg-white/12 dark:text-zinc-100"
-                    : "dark:text-zinc-500"
+                    ? "bg-zinc-200 text-zinc-700 shadow-sm"
+                    : ""
                 }`}
                 key={index}
               >
                 <Icon className="size-3.5" />
               </span>
             ))}
-            <span className="flex size-8 items-center justify-center rounded-full bg-blue-500 text-white shadow-[0_12px_30px_-16px_rgba(59,130,246,0.9)]">
+            <span className="flex size-9 items-center justify-center rounded-full bg-blue-500 text-white shadow-[0_12px_30px_-16px_rgba(59,130,246,0.9)]">
               <Plus className="size-4" />
             </span>
           </div>
 
-          <div className="absolute left-[34%] top-[55%] z-30 rounded-md border border-zinc-200 bg-white px-2 py-1 font-mono text-[10px] text-zinc-900 shadow-lg dark:border-white/10 dark:bg-zinc-950 dark:text-zinc-100">
+          <MousePointer2 className="absolute left-[27%] top-[51%] z-40 size-6 fill-zinc-950 text-zinc-950" />
+
+          <div className="absolute left-[33%] top-[55%] z-40 rounded-md border border-zinc-200 bg-white px-2 py-1 font-mono text-[10px] text-zinc-900 shadow-lg">
             UI8
           </div>
 
-          <div className="motion-core absolute left-[58%] top-1/2 z-30 flex size-24 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[1.45rem] border border-white/90 bg-white shadow-[0_22px_52px_-32px_rgba(24,24,27,0.78),inset_0_1px_0_rgba(255,255,255,1)] dark:border-white/12 dark:bg-[#25262a] dark:shadow-[0_22px_52px_-34px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.1)]">
+          <div className="motion-core absolute left-[65%] top-[68%] z-30 flex size-28 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[1.75rem] border border-white/90 bg-white shadow-[0_24px_60px_-34px_rgba(24,24,27,0.8),inset_0_1px_0_rgba(255,255,255,1)]">
             <div className="motion-core-ring absolute inset-2 rounded-[1.35rem] bg-[conic-gradient(from_120deg,transparent_0_33%,#60a5fa_42%,#7c3aed_54%,#fb7185_68%,transparent_78%)] opacity-95" />
             <Link
-              className="relative flex size-[4.5rem] items-center justify-center rounded-full border border-zinc-800 bg-zinc-950 font-mono text-[10px] text-white shadow-inner"
+              className="relative flex size-[5.4rem] items-center justify-center rounded-full border border-zinc-800 bg-zinc-950 font-mono text-[10px] text-white shadow-inner"
               href={textFamily.href}
             >
               thinking...
@@ -565,12 +566,12 @@ function MotionHubCell({
             </Link>
           </div>
 
-          <div className="absolute right-[11%] top-1/2 z-30 flex -translate-y-1/2 flex-col gap-2.5">
+          <div className="absolute right-[18%] top-1/2 z-30 flex -translate-y-1/2 flex-col gap-3">
             {rightNodes.map((node, index) => {
               const Icon = node.icon;
               return (
                 <Link
-                  className="motion-node flex size-11 items-center justify-center rounded-full border border-white/80 bg-white shadow-[0_18px_45px_-32px_rgba(24,24,27,0.74)] transition-transform hover:-translate-y-0.5 dark:border-white/10 dark:bg-zinc-950/88 dark:shadow-[0_18px_45px_-30px_rgba(0,0,0,1)]"
+                  className="motion-node flex size-12 items-center justify-center rounded-full border border-white/80 bg-white shadow-[0_18px_45px_-32px_rgba(24,24,27,0.74)] transition-transform hover:-translate-y-0.5"
                   href={node.href}
                   key={node.label}
                   style={{ animationDelay: `${index * -0.55}s` }}
