@@ -163,33 +163,83 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
   body::-webkit-scrollbar {
     display: none;
   }
 
-  /* GPU-accelerate common animated elements */
-  [class*="animate-"],
-  [class*="transition-"] {
-    will-change: auto;
-  }
-
-  /* Lazy-render off-screen sections for faster initial paint */
-  main > section:not(:first-child) {
+  /* Lazy-render off-screen sections — content-visibility skips layout/paint
+     for sections not in viewport, dramatically reducing CPU during scroll */
+  main > section {
     content-visibility: auto;
-    contain-intrinsic-size: auto 600px;
+    contain-intrinsic-size: auto 700px;
   }
 
   /* Snappier link/button transitions */
   a, button {
-    transition-duration: 120ms;
+    transition-duration: 100ms;
+  }
+
+  /* GPU-composite only the heavy animated containers so they don't
+     repaint surrounding content during scroll */
+  .motion-panel,
+  .motion-island,
+  .motion-core,
+  .system-island,
+  .system-card,
+  .generator-card,
+  .generator-browser {
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
   .line {
     counter-increment: css-counter 1;
     @apply relative pl-7 before:absolute before:text-white/20 before:inset-y-0 before:transition-colors before:duration-200 before:content-[counter(css-counter)] before:text-xs before:left-0 before:my-auto hover:before:text-white
   }
+}
+
+/* ── Global reduced-motion: kills ALL animations for low-power / a11y ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Pause ALL animations inside off-screen sections (set by IntersectionObserver) */
+.paused-section *,
+.paused-section *::before,
+.paused-section *::after {
+  animation-play-state: paused !important;
+}
+
+/* CTA section animations */
+@keyframes cta-float {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0) rotate(-2deg); }
+  50% { transform: translate(-50%, -50%) translateY(-15px) rotate(2deg); }
+}
+@keyframes cta-logo-float {
+  0%, 100% { transform: translate(-50%, -50%) translateY(-10px) scale(1); }
+  50% { transform: translate(-50%, -50%) translateY(-30px) scale(1.05); }
+}
+.cta-float-box {
+  animation: cta-float 5s ease-in-out infinite;
+  will-change: transform;
+}
+.cta-float-logo {
+  animation: cta-logo-float 4s ease-in-out 0.5s infinite;
+  will-change: transform;
+}
+
+/* Testimonial scroll animation */
+@keyframes testimonial-scroll {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
 }
 
 [data-theme="mist"] {
@@ -297,6 +347,19 @@
   100% {
     opacity: var(--opacity, 0);
   }
+}
+
+/* BorderBeam Component Keyframe (moved from inline style jsx) */
+@keyframes border-beam {
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+/* IsometricHeroBox floating animation */
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
 }
 
 /* PerspectiveGrid Component Styles */

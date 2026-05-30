@@ -62,7 +62,7 @@ export default function Hero() {
                     </div>
                 </div>
 
-                <div className="flex flex-col items-center justify-center min-h-[75vh] md:min-h-full relative flex-1 px-4 md:px-8 pb-4 md:py-8 bg-muted dark:bg-muted/60 overflow-hidden">
+                <div className="flex flex-col items-center justify-center min-h-[75vh] md:min-h-full relative flex-1 px-4 md:px-8 pb-4 md:py-8 bg-muted dark:bg-muted/60 overflow-hidden" style={{ contain: 'content', transform: 'translateZ(0)' }}>
                     <div className="absolute inset-0 border m-4 border-neutral-400 dark:border-neutral-600" />
                     <div className="flex flex-col items-center justify-center h-full max-w-[90%] lg:max-w-[70%] w-full relative">
                         <IsometricHeroBox

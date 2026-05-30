@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence, useAnimation, type Variants } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 
 type PreviewPlaceholderProps = {
   children?: React.ReactNode;
@@ -43,17 +43,14 @@ const IsometricHeroBox: React.FC<IsometricCubeBoxProps> = ({
   className = "",
 }) => {
   const uid = React.useId().replace(/:/g, "");
-  const controls = useAnimation();
   
   const [leftIndex, setLeftIndex] = useState(0);
   const [rightIndex, setRightIndex] = useState(1);
+  const [isVisible, setIsVisible] = useState(false);
+  
   useEffect(() => {
-    // Animate sequence
-    const sequence = async () => {
-      await controls.start("visible");
-      controls.start("floating");
-    };
-    sequence();
+    // Trigger initial fade-in
+    const fadeTimer = setTimeout(() => setIsVisible(true), 100);
 
     // Start cycling components after a slight delay
     let interval: ReturnType<typeof setInterval> | undefined;
@@ -65,30 +62,26 @@ const IsometricHeroBox: React.FC<IsometricCubeBoxProps> = ({
     }, 1200);
 
     return () => {
+      clearTimeout(fadeTimer);
       clearTimeout(startDelay);
       if (interval) {
         clearInterval(interval);
       }
     };
-  }, [controls]);
-
-  const boxVariants: Variants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
-    floating: {
-      y: [0, -12, 0],
-      transition: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-    }
-  };
+  }, []);
 
   const componentSpring = { type: "spring" as const, stiffness: 400, damping: 25 };
 
   return (
-    <motion.div 
+    <div 
       className={`relative z-20 inline-block ${className}`}
-      initial="hidden"
-      animate={controls}
-      variants={boxVariants}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translateY(0)' : 'translateY(50px)',
+        transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
+        animation: isVisible ? 'hero-float 4s ease-in-out infinite' : 'none',
+        willChange: 'transform',
+      }}
     >
       <svg
         width={Number(size)}
@@ -240,7 +233,7 @@ const IsometricHeroBox: React.FC<IsometricCubeBoxProps> = ({
           </linearGradient>
         </defs>
       </svg>
-    </motion.div>
+    </div>
   );
 };
 

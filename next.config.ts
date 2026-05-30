@@ -19,6 +19,10 @@ const nextConfig: NextConfig = {
         // Tree-shake barrel-export packages for faster builds & smaller bundles
         optimizePackageImports: [
             'framer-motion',
+            'lucide-react',
+            'gsap',
+            '@gsap/react',
+            'lenis',
             '@phosphor-icons/react',
             '@radix-ui/react-dialog',
             '@radix-ui/react-dropdown-menu',
@@ -31,6 +35,7 @@ const nextConfig: NextConfig = {
             '@radix-ui/react-hover-card',
             'class-variance-authority',
             'prism-react-renderer',
+            'react-icons',
         ],
     },
 };

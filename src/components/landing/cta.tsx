@@ -7,7 +7,6 @@ import SubHeading from "./subheading";
 import { Button } from "./ui/button";
 import { CTALogo } from "./ui/cta-logo";
 import { CTABox } from "./ui/cta-box";
-import { motion } from "framer-motion"
 
 export default function CTA() {
     return <section>
@@ -36,58 +35,47 @@ export default function CTA() {
                         <div className="relative w-full h-full">
 
                             {/* Bottom Base Layer */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20, rotateX: 45, rotateZ: -10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.8, delay: 0.2 }}
-                                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20 dark:opacity-10"
+                            <div
+                                className="absolute top-1/2 left-1/2 opacity-20 dark:opacity-10"
+                                style={{
+                                    transform: 'translate(-50%, -50%)',
+                                }}
                             >
                                 <CTABox size={320} className="text-primary/20" bgClassName="fill-primary/5" />
-                            </motion.div>
+                            </div>
 
                             {/* Middle Layer: Floating Box */}
-                            <motion.div
-                                animate={{
-                                    y: [0, -15, 0],
-                                    rotateZ: [-2, 2, -2]
+                            <div
+                                className="absolute top-[40%] left-1/2 z-20 cta-float-box"
+                                style={{
+                                    transform: 'translate(-50%, -50%)',
                                 }}
-                                transition={{
-                                    repeat: Infinity,
-                                    duration: 5,
-                                    ease: "easeInOut"
-                                }}
-                                className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
                             >
                                 <CTABox
                                     size={260}
                                     className="text-primary"
                                     bgClassName="fill-white dark:fill-neutral-900"
                                 />
-                            </motion.div>
+                            </div>
 
                             {/* Top Layer: The "Core" Logo */}
-                            <motion.div
-                                animate={{
-                                    y: [-10, -30, -10],
-                                    scale: [1, 1.05, 1]
+                            <div
+                                className="absolute top-[30%] left-[50%] z-30 cta-float-logo"
+                                style={{
+                                    transform: 'translate(-50%, -50%)',
                                 }}
-                                transition={{
-                                    repeat: Infinity,
-                                    duration: 4,
-                                    ease: "easeInOut",
-                                    delay: 0.5
-                                }}
-                                className="absolute top-[30%] left-[50%] -translate-x-1/2 -translate-y-1/2 z-30"
                             >
                                     <CTALogo
                                         size={100}
                                         className="text-primary rotate-180"
                                         fillClassName="text-zinc-500"
                                     />
-                            </motion.div>
+                            </div>
 
                             {/* Abstract Decorative Blobs */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/10 rounded-full blur-[80px] -z-10" />
+                            <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-primary/10 rounded-full blur-[80px] -z-10"
+                                style={{ transform: 'translate(-50%, -50%)' }}
+                            />
                         </div>
                     </div>
                 </div>

@@ -3,6 +3,7 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 import Hero from '@/components/landing/hero';
+import { LazySection } from '@/components/landing/lazy-section';
 
 // Below-the-fold sections loaded lazily for faster initial paint
 const TechStack = dynamic(() => import('@/components/landing/tech-stack'), { ssr: false })
@@ -20,10 +21,20 @@ export default function Home(): React.ReactNode {
             <main>
                 <Hero />
                 <TechStack />
-                <ComponentsGrid />
-                <Features />
-                <Testimonial />
-                <CTA />
+                {/* Wrap animation-heavy sections so their CSS animations
+                    are paused when scrolled out of view (saves CPU) */}
+                <LazySection>
+                    <ComponentsGrid />
+                </LazySection>
+                <LazySection>
+                    <Features />
+                </LazySection>
+                <LazySection>
+                    <Testimonial />
+                </LazySection>
+                <LazySection>
+                    <CTA />
+                </LazySection>
                 <Footer />
             </main>
         </SmoothScroll>

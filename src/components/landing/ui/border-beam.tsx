@@ -24,14 +24,6 @@ export const BorderBeam = ({
     delay = 0,
 }: BorderBeamProps) => {
     return (
-        <>
-            <style jsx>{`
-        @keyframes border-beam {
-          100% {
-            offset-distance: 100%;
-          }
-        }
-      `}</style>
             <div
                 style={
                     {
@@ -51,6 +43,5 @@ export const BorderBeam = ({
                     className,
                 )}
             />
-        </>
     );
 };

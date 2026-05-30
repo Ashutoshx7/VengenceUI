@@ -1,7 +1,6 @@
 "use client";
 
 import React, { SVGProps, useId } from 'react';
-import { motion } from "framer-motion";
 
 type ConnectorVariant = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
 
@@ -58,38 +57,36 @@ export const CornerConnector: React.FC<CornerConnectorProps> = ({
         strokeWidth={strokeWidth}
       />
 
-      {/* Animated Light Beam */}
+      {/* Animated Light Beam — uses native SVG animation (no JS) */}
       {animate && (
-        <path
-          d={pathData}
-          stroke={`url(#${gradientId})`}
-          strokeWidth={Number(strokeWidth) + 0.5}
-          strokeLinecap="round"
-        />
+        <>
+          <path
+            d={pathData}
+            stroke={`url(#${gradientId})`}
+            strokeWidth={Number(strokeWidth) + 0.5}
+            strokeLinecap="round"
+          />
+          <defs>
+            <linearGradient
+              id={gradientId}
+              gradientUnits="userSpaceOnUse"
+              x1="-100" y1="-20" x2="0" y2="0"
+            >
+              <stop offset="0%" stopColor={animateColor} stopOpacity="0" />
+              <stop offset="50%" stopColor={animateColor} stopOpacity="1" />
+              <stop offset="100%" stopColor={animateColor} stopOpacity="0" />
+              <animateTransform
+                attributeName="gradientTransform"
+                type="translate"
+                from="-100 0" to={`${width + 100} 0`}
+                dur="3s"
+                begin={`${delay}s`}
+                repeatCount="indefinite"
+              />
+            </linearGradient>
+          </defs>
+        </>
       )}
-
-      <defs>
-        <motion.linearGradient
-          animate={{
-            x1: [-100, 500],
-            x2: [0, 600],
-            y1: [-20, 80],
-            y2: [0, 100]
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "linear",
-            delay: delay
-          }}
-          id={gradientId}
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop offset="0%" stopColor={animateColor} stopOpacity="0" />
-          <stop offset="50%" stopColor={animateColor} stopOpacity="1" />
-          <stop offset="100%" stopColor={animateColor} stopOpacity="0" />
-        </motion.linearGradient>
-      </defs>
     </svg>
   );
 };
@@ -145,38 +142,37 @@ export const ConnectorLine: React.FC<ConnectorLineProps> = ({
         strokeWidth={strokeWidth}
       />
       {animate && (
-        <line
-          x1={isVertical ? strokeWidth / 2 : 0}
-          y1={isVertical ? 0 : strokeWidth / 2}
-          x2={isVertical ? strokeWidth / 2 : length}
-          y2={isVertical ? length : strokeWidth / 2}
-          stroke={`url(#${gradientId})`}
-          strokeWidth={Number(strokeWidth) + 0.5}
-          strokeLinecap="round"
-        />
+        <>
+          <line
+            x1={isVertical ? strokeWidth / 2 : 0}
+            y1={isVertical ? 0 : strokeWidth / 2}
+            x2={isVertical ? strokeWidth / 2 : length}
+            y2={isVertical ? length : strokeWidth / 2}
+            stroke={`url(#${gradientId})`}
+            strokeWidth={Number(strokeWidth) + 0.5}
+            strokeLinecap="round"
+          />
+          <defs>
+            <linearGradient
+              id={gradientId}
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="red" stopOpacity="0" />
+              <stop offset="0.5" stopColor="red" />
+              <stop offset="1" stopColor="red" stopOpacity="0" />
+              <animateTransform
+                attributeName="gradientTransform"
+                type="translate"
+                from={isVertical ? `0 -100` : `-100 0`}
+                to={isVertical ? `0 ${Number(length) + 100}` : `${Number(length) + 100} 0`}
+                dur="3s"
+                begin={`${delay}s`}
+                repeatCount="indefinite"
+              />
+            </linearGradient>
+          </defs>
+        </>
       )}
-      <defs>
-        <motion.linearGradient
-          animate={{
-            x1: isVertical ? 0 : [-100, Number(length) + 100],
-            x2: isVertical ? 0 : [0, Number(length) + 200],
-            y1: isVertical ? [-100, Number(length) + 100] : 0,
-            y2: isVertical ? [0, Number(length) + 200] : 0
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "linear",
-            delay: delay
-          }}
-          id={gradientId}
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stopColor="red" stopOpacity="0" />
-          <stop offset="0.5" stopColor="red" />
-          <stop offset="1" stopColor="red" stopOpacity="0" />
-        </motion.linearGradient>
-      </defs>
     </svg>
   );
 };
