@@ -352,35 +352,35 @@ function MotionHubCell({
             />
             <path
               className="motion-path motion-path-b"
-              d="M60 50C69 50 68 23 80 23"
+              d="M60 50C69 50 68 14 80 14"
               fill="none"
               stroke="currentColor"
               strokeWidth="0.55"
             />
             <path
               className="motion-path motion-path-c"
-              d="M60 50C69 50 68 37 80 37"
+              d="M60 50C69 50 68 32 80 32"
               fill="none"
               stroke="currentColor"
               strokeWidth="0.55"
             />
             <path
               className="motion-path"
-              d="M60 50H100"
+              d="M60 50H80"
               fill="none"
               stroke="currentColor"
               strokeWidth="0.55"
             />
             <path
               className="motion-path motion-path-b"
-              d="M60 50C69 50 68 63 80 63"
+              d="M60 50C69 50 68 68 80 68"
               fill="none"
               stroke="currentColor"
               strokeWidth="0.55"
             />
             <path
               className="motion-path motion-path-c"
-              d="M60 50C69 50 68 77 80 77"
+              d="M60 50C69 50 68 86 80 86"
               fill="none"
               stroke="currentColor"
               strokeWidth="0.55"

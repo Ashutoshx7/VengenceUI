@@ -237,6 +237,24 @@
   will-change: transform;
 }
 
+/* Navbar GitHub CTA */
+.github-star-cta {
+  position: relative;
+  border: 1px solid color-mix(in oklab, currentColor 16%, transparent);
+  background: color-mix(in oklab, currentColor 7%, transparent);
+  box-shadow: inset 0 1px 0 color-mix(in oklab, white 5%, transparent);
+}
+
+.github-star-cta:hover {
+  border-color: color-mix(in oklab, currentColor 28%, transparent);
+  background: color-mix(in oklab, currentColor 10%, transparent);
+}
+
+.github-star-count {
+  background: transparent;
+  color: color-mix(in oklab, currentColor 88%, transparent);
+}
+
 /* Testimonial scroll animation */
 @keyframes testimonial-scroll {
   from { transform: translateY(0); }

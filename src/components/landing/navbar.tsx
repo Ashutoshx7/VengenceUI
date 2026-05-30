@@ -2,16 +2,17 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState, useMemo, memo, useCallback } from 'react'
+import { useState, useMemo, memo, useCallback, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { KitSwitcher } from '@/components/kit-switcher'
 import { cn } from '@/lib/utils'
 import { Separator } from '@/components/ui/separator'
-import { Menu, X } from 'lucide-react'
+import { Menu, Star, X } from 'lucide-react'
 import { Dialog, DialogClose, DialogTitle, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import LogoIcon from '@/assets/logo/logo-icon'
 import { NavbarCommandSearch } from './navbar-command-search'
+import { GITHUB_REPO_URL } from '@/lib/github'
 
 const GitHubIcon = memo(function GitHubIcon() {
     return (
@@ -53,6 +54,70 @@ const XIcon = memo(function XIcon() {
                 </defs>
             </g>
         </svg>
+    )
+})
+
+const starFormatter = new Intl.NumberFormat('en', {
+    notation: 'compact',
+    maximumFractionDigits: 1,
+})
+
+function formatStars(stars: number | null) {
+    if (stars === null) return '...'
+    return starFormatter.format(stars).replace('.0', '')
+}
+
+const GitHubStarLink = memo(function GitHubStarLink({ className }: { className?: string }) {
+    const [stars, setStars] = useState<number | null>(null)
+
+    useEffect(() => {
+        const controller = new AbortController()
+
+        async function loadStars() {
+            try {
+                const response = await fetch('/api/github-stars', { signal: controller.signal })
+                if (!response.ok) return
+
+                const data = (await response.json()) as { stars?: number | null }
+                if (typeof data.stars === 'number') {
+                    setStars(data.stars)
+                }
+            } catch (error) {
+                if (!(error instanceof DOMException && error.name === 'AbortError')) {
+                    setStars(null)
+                }
+            }
+        }
+
+        loadStars()
+
+        return () => controller.abort()
+    }, [])
+
+    const starLabel = formatStars(stars)
+
+    return (
+        <Button
+            asChild
+            variant="ghost"
+            size="sm"
+            className={cn(
+                'github-star-cta h-8 rounded-full px-2.5 text-xs font-medium text-neutral-500 hover:bg-transparent hover:text-neutral-800 dark:text-neutral-500 dark:hover:text-neutral-200',
+                className,
+            )}>
+            <Link
+                href={GITHUB_REPO_URL}
+                target="_blank"
+                aria-label={`Star Vengeance UI on GitHub. Current stars: ${starLabel}`}
+                rel="noreferrer"
+                className="text-sm">
+                <GitHubIcon />
+                <span className="github-star-count inline-flex min-w-8 items-center justify-center gap-1 border-l border-current/15 pl-2 text-[11px] font-medium leading-none">
+                    <Star className="size-3 fill-current opacity-70" />
+                    {starLabel}
+                </span>
+            </Link>
+        </Button>
     )
 })
 
@@ -117,20 +182,7 @@ export const Navbar = memo(function Navbar() {
                             </div>
 
                             <div className="flex items-center gap-2">
-                                <Button
-                                    asChild
-                                    variant="ghost"
-                                    size="sm"
-                                    className="size-8 rounded-full">
-                                    <Link
-                                        href="https://github.com/Ashutoshx7/VengeanceUI"
-                                        target="_blank"
-                                        aria-label="GitHub"
-                                        rel="noreferrer"
-                                        className="text-sm">
-                                        <GitHubIcon />
-                                    </Link>
-                                </Button>
+                                <GitHubStarLink />
                                 <ThemeToggle />
                             </div>
                         </div>
@@ -225,20 +277,7 @@ export const Navbar = memo(function Navbar() {
                                                     <XIcon />
                                                 </Link>
                                             </Button>
-                                            <Button
-                                                asChild
-                                                variant="ghost"
-                                                size="sm"
-                                                className="size-8 rounded-full">
-                                                <Link
-                                                    href="https://github.com/Ashutoshx7/VengeanceUI"
-                                                    target="_blank"
-                                                    aria-label="GitHub"
-                                                    rel="noreferrer"
-                                                    className="text-sm">
-                                                    <GitHubIcon />
-                                                </Link>
-                                            </Button>
+                                            <GitHubStarLink />
                                         </div>
                                     </div>
                                 </DialogContent>
