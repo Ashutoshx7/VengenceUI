@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { motion, AnimatePresence, useAnimation, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 // ============================================
@@ -534,6 +534,16 @@ const KuberaFolder: React.FC<{
     sizes: typeof sizeConfig.md;
     label?: string;
 }> = ({ images, isHovered, colors, sizes, label }) => {
+    const floatingMotions = React.useMemo(
+        () =>
+            images.map((_, i) => ({
+                y: -200 - ((i * 17) % 50),
+                x: ((i * 29) % 50) - 25,
+                rotate: ((i * 19) % 40) - 20,
+            })),
+        [images]
+    );
+
     return (
         <div className="relative">
             <div className="relative cursor-pointer" style={{ perspective: "800px" }}>
@@ -558,9 +568,9 @@ const KuberaFolder: React.FC<{
                                 isHovered
                                     ? {
                                         opacity: [1, 0],
-                                        y: [0, -200 - Math.random() * 50],
-                                        x: Math.random() * 50 - 25,
-                                        rotate: Math.random() * 40 - 20,
+                                        y: [0, floatingMotions[i]?.y ?? -200],
+                                        x: floatingMotions[i]?.x ?? 0,
+                                        rotate: floatingMotions[i]?.rotate ?? 0,
                                     }
                                     : { opacity: 0 }
                             }

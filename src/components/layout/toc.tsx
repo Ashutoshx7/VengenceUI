@@ -37,6 +37,11 @@ function TOCItem({
   const offset = getLineOffset(item.depth);
   const upperOffset = index > 0 ? getLineOffset(items[index - 1].depth) : offset;
   const lowerOffset = index + 1 < items.length ? getLineOffset(items[index + 1].depth) : offset;
+  const lineStyle = {
+    left: offset,
+    top: index === 0 ? "50%" : offset !== upperOffset ? 8 : 0,
+    bottom: index === items.length - 1 ? "50%" : offset !== lowerOffset ? 8 : 0,
+  };
 
   const handleClick = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -76,11 +81,9 @@ function TOCItem({
 
       <div
         className={cn(
-          "absolute inset-y-0 -z-10 w-px bg-neutral-200/80 dark:bg-zinc-800/50",
-          offset !== upperOffset && "top-2",
-          offset !== lowerOffset && "bottom-2"
+          "absolute -z-10 w-px bg-neutral-200/80 dark:bg-zinc-800/50"
         )}
-        style={{ left: offset }}
+        style={lineStyle}
       />
 
       <span className="truncate">{item.title}</span>
@@ -147,23 +150,11 @@ export function TableOfContents() {
     };
   }, [handleScroll]);
 
-  let d = "";
   const positions: [number, number][] = [];
 
   for (let i = 0; i < items.length; i++) {
-    const item = items[i];
-    const x = getLineOffset(item.depth) + 0.5;
     const top = i * 40 + 8;
     const bottom = i * 40 + 32;
-
-    if (i === 0) {
-      d += `M${x} ${top} L${x} ${bottom}`;
-    } else {
-      const upperBottom = positions[i - 1][1];
-      const upperX = getLineOffset(items[i - 1].depth) + 0.5;
-      d += ` C ${upperX} ${top - 5} ${x} ${upperBottom + 5} ${x} ${top} L${x} ${bottom}`;
-    }
-
     positions.push([top, bottom]);
   }
 
@@ -187,19 +178,8 @@ export function TableOfContents() {
             className="absolute left-0 top-0 w-[30px] pointer-events-none text-neutral-900 dark:text-zinc-100"
             style={{ zIndex: 10, height: items.length * 40 }}
           >
-            <motion.path
-              d={d}
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1"
-              animate={{
-                clipPath: `polygon(0px ${trackTop}px, 100% ${trackTop}px, 100% ${trackBottom}px, 0px ${trackBottom}px)`,
-              }}
-              transition={transitionConfig}
-            />
-
             <motion.circle
-              r="1.75"
+              r="3"
               fill="currentColor"
               initial={false}
               animate={{ cx: dotX, cy: dotY }}

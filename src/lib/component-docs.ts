@@ -430,15 +430,26 @@ export function TestimonialsCardDemo() {
 export function FolderPreviewDemo() {
   return (
     <FolderPreview
-      name="My Project"
-      items={["index.tsx", "styles.css", "utils.ts"]}
+      variant="devi"
+      label="Shared Files"
+      size="lg"
+      images={[
+        "/folder-preview/user1.svg",
+        "/folder-preview/user2.svg",
+        "/folder-preview/user3.svg",
+        "/folder-preview/user4.svg",
+      ]}
     />
   )
 }`,
     props: [
-      { prop: "name", type: "string", defaultValue: "-", description: "The folder name to display." },
-      { prop: "items", type: "string[]", defaultValue: "-", description: "Array of file names to show in the folder." },
+      { prop: "variant", type: "'devi' | 'rudras' | 'ardra' | 'shakti' | 'kubera' | 'hari' | 'ravi' | 'durga' | 'nandi'", defaultValue: "'devi'", description: "The folder animation and visual style." },
+      { prop: "images", type: "string[]", defaultValue: "default avatars", description: "Images used by the image-preview folder variants." },
+      { prop: "files", type: "{ name: string; type?: 'txt' | 'gif' | 'mp3' | 'default' }[]", defaultValue: "default files", description: "Files used by the file-list folder variants." },
+      { prop: "label", type: "string", defaultValue: "-", description: "Optional label shown below the folder." },
+      { prop: "size", type: "'sm' | 'md' | 'lg'", defaultValue: "'md'", description: "Folder size." },
       { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes." },
+      { prop: "onClick", type: "() => void", defaultValue: "-", description: "Optional click handler for the folder wrapper." },
     ],
   },
 
