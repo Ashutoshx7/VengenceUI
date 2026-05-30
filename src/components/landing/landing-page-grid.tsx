@@ -266,31 +266,31 @@ function MotionHubCell({
       icon: Type,
       label: "Flip",
       href: textFamily.items[0].href,
-      className: "text-blue-500",
+      className: "text-sky-500 dark:text-cyan-200/75",
     },
     {
       icon: Sparkles,
       label: "Morph",
       href: textFamily.items[2].href,
-      className: "text-fuchsia-500",
+      className: "text-violet-500 dark:text-violet-200/70",
     },
     {
       icon: Layers2,
       label: "Tip",
       href: marqueeFamily.items[1].href,
-      className: "text-orange-500",
+      className: "text-orange-500 dark:text-amber-200/70",
     },
     {
       icon: Zap,
       label: "Cursor",
       href: marqueeFamily.items[2].href,
-      className: "text-cyan-500",
+      className: "text-cyan-500 dark:text-cyan-200/70",
     },
     {
       icon: Music2,
       label: "Slider",
       href: marqueeFamily.items[0].href,
-      className: "text-emerald-500",
+      className: "text-emerald-500 dark:text-emerald-200/70",
     },
   ];
 
@@ -410,9 +410,9 @@ function MotionHubCell({
             VUI
           </div>
 
-          <div className="motion-core absolute left-1/2 top-1/2 z-30 flex size-28 items-center justify-center rounded-[1.75rem] border border-white/90 bg-white shadow-[0_24px_60px_-34px_rgba(24,24,27,0.72),inset_0_1px_0_rgba(255,255,255,0.96)] dark:border-white/[0.08] dark:bg-[#17181b] dark:shadow-[0_24px_60px_-38px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.055)]">
+          <div className="motion-core absolute left-1/2 top-1/2 z-30 flex size-28 items-center justify-center rounded-[1.75rem] border border-white/90 bg-white shadow-[0_24px_60px_-34px_rgba(24,24,27,0.72),inset_0_1px_0_rgba(255,255,255,0.96)] dark:border-white/[0.075] dark:bg-[#141519] dark:shadow-[0_24px_60px_-38px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.05)]">
             <div className="absolute left-1/2 top-1/2 size-[6.35rem] -translate-x-1/2 -translate-y-1/2 rounded-full">
-              <div className="motion-core-ring size-full rounded-full bg-[conic-gradient(from_145deg,transparent_0_24%,#60a5fa_36%,#7c3aed_50%,#fb7185_64%,#fbbf24_72%,transparent_86%)] opacity-90 dark:opacity-72" />
+              <div className="motion-core-ring size-full rounded-full bg-[conic-gradient(from_145deg,transparent_0_24%,#93c5fd_36%,#a5b4fc_50%,#f9a8d4_64%,#fde68a_72%,transparent_86%)] opacity-82 dark:opacity-60" />
             </div>
             <Link
               className="relative flex size-[5.4rem] items-center justify-center rounded-full border border-zinc-800 bg-zinc-950 font-mono text-[10px] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_10px_26px_-18px_rgba(0,0,0,0.75)]"
@@ -643,7 +643,7 @@ function SystemComposerCell({
             className="system-card absolute left-1/2 top-1/2 z-40 flex h-[60%] w-[30%] min-w-[118px] max-w-[142px] flex-col rounded-[1.55rem] border border-white/90 bg-white/92 p-3 shadow-[0_28px_64px_-42px_rgba(24,24,27,0.8),inset_0_1px_0_rgba(255,255,255,0.92)] backdrop-blur-sm dark:border-white/[0.08] dark:bg-[#07080b]/82 dark:shadow-[0_28px_64px_-44px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.045)]"
             href={layoutFamily.href}
           >
-            <span className="system-gradient relative block h-[45%] overflow-hidden rounded-[1.15rem] border border-white/80 bg-[radial-gradient(circle_at_18%_18%,#4f46e5,transparent_36%),radial-gradient(circle_at_86%_16%,#fed7aa,transparent_42%),linear-gradient(135deg,#60a5fa,#fb7185_52%,#fdba74)] shadow-[inset_0_1px_0_rgba(255,255,255,0.35)] dark:border-white/[0.07] dark:opacity-80" />
+            <span className="system-gradient relative block h-[45%] overflow-hidden rounded-[1.15rem] border border-white/80 bg-[radial-gradient(circle_at_18%_18%,#818cf8,transparent_36%),radial-gradient(circle_at_86%_16%,#fed7aa,transparent_42%),linear-gradient(135deg,#7dd3fc,#f9a8d4_52%,#fcd34d)] shadow-[inset_0_1px_0_rgba(255,255,255,0.35)] dark:border-white/[0.07] dark:opacity-65" />
             <span className="mt-4 block h-1.5 w-12 rounded-full bg-zinc-300 dark:bg-white/[0.09]" />
             <span className="mt-2 block h-1.5 w-full rounded-full bg-zinc-200 dark:bg-white/[0.055]" />
             <span className="mt-1.5 block h-1.5 w-[88%] rounded-full bg-zinc-200 dark:bg-white/[0.055]" />

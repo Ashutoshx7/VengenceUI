@@ -5,16 +5,13 @@ import Container from "./container";
 import Heading from "./heading";
 import SubHeading from "./subheading";
 import { Button } from "./ui/button";
-import { motion } from "framer-motion"
 import { BorderBeam } from "./ui/border-beam";
-import IsometricStage from "./ui/isometric-stage";
 import IsometricGrid from "./ui/isometric-grid";
-import { BatmanLogo } from "./ui/batman-logo";
 import IsometricHeroBox from "./ui/isometric-hero-box";
 import IsometricFrame from "./ui/isometric-frame";
 
 export default function Hero() {
-    return <section id="hero">
+    return <section id="hero" className="relative isolate">
         <Container>
             <div className="flex md:divide-x md:border-x border-b flex-col pb-8 md:pb-0 md:flex-row overflow-hidden">
                 <div className="flex flex-col gap-6 min-h-[55vh] md:min-h-[70vh] flex-1 px-4 md:px-8 pt-12 md:py-24">
@@ -82,10 +79,10 @@ export default function Hero() {
                             strokeClassName="text-foreground"
                             circleClassName="text-background"
                             gradientClassName="text-zinc-400 dark:text-zinc-600"
-                            className="absolute md:bottom-5 -bottom-20 sm:-bottom-15 scale-[1.05] z-100"
+                            className="pointer-events-none absolute md:bottom-5 -bottom-20 sm:-bottom-15 scale-[1.05] z-10"
                         />
 
-                        <IsometricGrid className="z-10 scale-[2.5] mask-radial-from-0% opacity-50" />
+                        <IsometricGrid className="z-0 scale-[2.5] mask-radial-from-0% opacity-50" />
 
 
                     </div>

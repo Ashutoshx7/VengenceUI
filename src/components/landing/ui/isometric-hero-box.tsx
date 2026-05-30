@@ -2,13 +2,18 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence, useAnimation, type Variants } from "framer-motion";
-import dynamic from 'next/dynamic'
 
-// Replace dynamically imported components with placeholders
-const CreepyButton = ({ children, className }: any) => <div className={className}>{children}</div>
-const AnimatedButton = ({ children, className }: any) => <div className={className}>{children}</div>
-const FlipText = ({ children, className }: any) => <div className={className}>{children}</div>
-const LiquidText = ({ text, className }: any) => <div className={className}>{text}</div>
+type PreviewPlaceholderProps = {
+  children?: React.ReactNode;
+  className?: string;
+  text?: string;
+};
+
+// Keep the hero cube light by rendering static previews instead of full components.
+const CreepyButton = ({ children, className }: PreviewPlaceholderProps) => <div className={className}>{children}</div>
+const AnimatedButton = ({ children, className }: PreviewPlaceholderProps) => <div className={className}>{children}</div>
+const FlipText = ({ children, className }: PreviewPlaceholderProps) => <div className={className}>{children}</div>
+const LiquidText = ({ text, className }: PreviewPlaceholderProps) => <div className={className}>{text}</div>
 
 const COMPONENT_LIST = [
   <div key="c0" className="w-full h-full flex items-center justify-center p-4"><AnimatedButton className="text-xs px-2 py-1 w-full flex items-center justify-center">Hover</AnimatedButton></div>,
@@ -42,11 +47,7 @@ const IsometricHeroBox: React.FC<IsometricCubeBoxProps> = ({
   
   const [leftIndex, setLeftIndex] = useState(0);
   const [rightIndex, setRightIndex] = useState(1);
-  const [isReady, setIsReady] = useState(false);
-
   useEffect(() => {
-    setIsReady(true);
-    
     // Animate sequence
     const sequence = async () => {
       await controls.start("visible");
@@ -55,15 +56,20 @@ const IsometricHeroBox: React.FC<IsometricCubeBoxProps> = ({
     sequence();
 
     // Start cycling components after a slight delay
+    let interval: ReturnType<typeof setInterval> | undefined;
     const startDelay = setTimeout(() => {
-      const interval = setInterval(() => {
+      interval = setInterval(() => {
         setLeftIndex(prev => (prev + 1) % COMPONENT_LIST.length);
         setRightIndex(prev => (prev + 2) % COMPONENT_LIST.length);
       }, 3000);
-      return () => clearInterval(interval);
     }, 1200);
 
-    return () => clearTimeout(startDelay);
+    return () => {
+      clearTimeout(startDelay);
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
   }, [controls]);
 
   const boxVariants: Variants = {
@@ -79,7 +85,7 @@ const IsometricHeroBox: React.FC<IsometricCubeBoxProps> = ({
 
   return (
     <motion.div 
-      className={`inline-block z-50 ${className}`}
+      className={`relative z-20 inline-block ${className}`}
       initial="hidden"
       animate={controls}
       variants={boxVariants}
@@ -131,20 +137,18 @@ const IsometricHeroBox: React.FC<IsometricCubeBoxProps> = ({
           <foreignObject width="160" height="160">
             <div className="w-[160px] h-[160px] overflow-hidden relative">
               <AnimatePresence mode="wait">
-                {isReady && (
-                  <motion.div
-                    key={leftIndex}
-                    initial={{ opacity: 0, scale: 0.7, y: 15 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.7, y: -15 }}
-                    transition={componentSpring}
-                    className="absolute inset-0 z-10 w-full h-full pointer-events-none"
-                  >
-                    <div className="pointer-events-auto w-full h-full">
-                      {COMPONENT_LIST[leftIndex]}
-                    </div>
-                  </motion.div>
-                )}
+                <motion.div
+                  key={leftIndex}
+                  initial={{ opacity: 0, scale: 0.7, y: 15 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.7, y: -15 }}
+                  transition={componentSpring}
+                  className="absolute inset-0 z-10 w-full h-full pointer-events-none"
+                >
+                  <div className="pointer-events-auto w-full h-full">
+                    {COMPONENT_LIST[leftIndex]}
+                  </div>
+                </motion.div>
               </AnimatePresence>
             </div>
           </foreignObject>
@@ -155,20 +159,18 @@ const IsometricHeroBox: React.FC<IsometricCubeBoxProps> = ({
           <foreignObject width="160" height="160">
             <div className="w-[160px] h-[160px] overflow-hidden relative">
               <AnimatePresence mode="wait">
-                {isReady && (
-                  <motion.div
-                    key={rightIndex}
-                    initial={{ opacity: 0, scale: 0.7, y: 15 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.7, y: -15 }}
-                    transition={componentSpring}
-                    className="absolute inset-0 z-10 w-full h-full pointer-events-none"
-                  >
-                    <div className="pointer-events-auto w-full h-full">
-                       {COMPONENT_LIST[rightIndex]}
-                    </div>
-                  </motion.div>
-                )}
+                <motion.div
+                  key={rightIndex}
+                  initial={{ opacity: 0, scale: 0.7, y: 15 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.7, y: -15 }}
+                  transition={componentSpring}
+                  className="absolute inset-0 z-10 w-full h-full pointer-events-none"
+                >
+                  <div className="pointer-events-auto w-full h-full">
+                     {COMPONENT_LIST[rightIndex]}
+                  </div>
+                </motion.div>
               </AnimatePresence>
             </div>
           </foreignObject>
