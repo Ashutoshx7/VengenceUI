@@ -24,11 +24,17 @@ interface ComputedSVG {
   positions: [top: number, bottom: number, x: number][];
 }
 
+interface ThumbState {
+  startIndex: number;
+  endIndex: number;
+  isUp: boolean;
+}
+
 const DEFAULT_ITEMS: TOCItemDef[] = [
   { id: "overview", title: "Overview", depth: 2 },
   { id: "preview", title: "Preview", depth: 3 },
   { id: "installation", title: "Installation", depth: 2 },
-  { id: "usage", title: "Usage", depth: 2 },
+  { id: "usage", title: "Usage", depth: 3 },
   { id: "props", title: "Props", depth: 2 },
 ];
 
@@ -37,6 +43,11 @@ const rowHeight = 40;
 const rowInset = 8;
 const getLineOffset = (depth: number) => (depth <= 2 ? railOffset : railOffset * 2);
 const getItemOffset = (depth: number) => (depth <= 2 ? 20 : 32);
+const getMotionDuration = (distance: number) => Math.min(900, Math.max(420, distance * 7));
+const getCssNumber = (element: HTMLElement, property: string) => {
+  const value = parseFloat(element.style.getPropertyValue(property));
+  return Number.isFinite(value) ? value : null;
+};
 
 function buildTocPath(items: TOCItemDef[]): ComputedSVG {
   let width = 0;
@@ -110,6 +121,7 @@ function ActiveTocPath({
   computed: ComputedSVG;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const previousRef = useRef<ThumbState | null>(null);
   const itemLineLengthsRef = useRef<[top: number, bottom: number][]>([]);
   const activeStartPosition = computed.positions[activeStartIndex];
   const activeEndPosition = computed.positions[activeEndIndex];
@@ -118,16 +130,48 @@ function ActiveTocPath({
     const element = ref.current;
     const itemLineLengths = itemLineLengthsRef.current;
     const startLength = itemLineLengths[activeStartIndex];
+    const endLength = itemLineLengths[activeEndIndex];
     const start = computed.positions[activeStartIndex];
     const end = computed.positions[activeEndIndex];
 
-    if (!element || !start || !end || !startLength) {
+    if (!element || !start || !end || !startLength || !endLength) {
       return;
     }
 
-    element.style.setProperty("--track-top", `${start[0] + 4}px`);
-    element.style.setProperty("--track-bottom", `${end[1]}px`);
-    element.style.setProperty("--offset-distance", `${startLength[0]}px`);
+    let isUp = activeEndIndex === 0;
+    if (previousRef.current) {
+      const previous = previousRef.current;
+      isUp =
+        previous.startIndex > activeStartIndex ||
+        previous.endIndex > activeEndIndex ||
+        (previous.startIndex === activeStartIndex &&
+          previous.endIndex === activeEndIndex &&
+          previous.isUp);
+    }
+
+    previousRef.current = {
+      endIndex: activeEndIndex,
+      isUp,
+      startIndex: activeStartIndex,
+    };
+
+    const nextTrackTop = start[0];
+    const nextTrackBottom = end[1];
+    const nextOffsetDistance = isUp ? startLength[0] : endLength[1];
+    const previousTrackTop = getCssNumber(element, "--track-top") ?? nextTrackTop;
+    const previousTrackBottom = getCssNumber(element, "--track-bottom") ?? nextTrackBottom;
+    const previousOffsetDistance =
+      getCssNumber(element, "--offset-distance") ?? nextOffsetDistance;
+    const distance = Math.max(
+      Math.abs(previousTrackTop - nextTrackTop),
+      Math.abs(previousTrackBottom - nextTrackBottom),
+      Math.abs(previousOffsetDistance - nextOffsetDistance)
+    );
+
+    element.style.setProperty("--toc-duration", `${getMotionDuration(distance)}ms`);
+    element.style.setProperty("--track-top", `${nextTrackTop}px`);
+    element.style.setProperty("--track-bottom", `${nextTrackBottom}px`);
+    element.style.setProperty("--offset-distance", `${nextOffsetDistance}px`);
     element.style.setProperty("--opacity", "1");
   }, [activeEndIndex, activeStartIndex, computed.positions]);
 
@@ -140,7 +184,7 @@ function ActiveTocPath({
 
     for (let i = 0; i < computed.positions.length; i++) {
       const [top, bottom] = computed.positions[i];
-      let length = i > 0 ? lengths[i - 1][1] + (top - computed.positions[i - 1][1]) : top;
+      let length = i > 0 ? lengths[i - 1][1] + (top - computed.positions[i - 1][1]) : 0;
 
       while (length < pathLength && path.getPointAtLength(length).y < top) {
         length++;
@@ -166,8 +210,9 @@ function ActiveTocPath({
   const initialStyle = {
     "--offset-distance": "0px",
     "--opacity": "0",
+    "--toc-duration": "520ms",
     "--track-bottom": `${bottom}px`,
-    "--track-top": `${top + 4}px`,
+    "--track-top": `${top}px`,
     height: computed.height,
     width: computed.width,
   } as CSSProperties;
@@ -191,18 +236,19 @@ function ActiveTocPath({
           d={computed.d}
           className="stroke-border/80 dark:stroke-border/60"
           fill="none"
-          strokeLinecap="round"
+          strokeLinecap="butt"
           strokeWidth="1.15"
         />
       </svg>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="absolute transition-[clip-path] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+        className="absolute transition-[clip-path] ease-[cubic-bezier(0.16,1,0.3,1)]"
         viewBox={`0 0 ${computed.width} ${computed.height}`}
         style={{
           clipPath:
             "polygon(0 var(--track-top, 0px), 100% var(--track-top, 0px), 100% var(--track-bottom, 0px), 0 var(--track-bottom, 0px))",
           height: computed.height,
+          transitionDuration: "var(--toc-duration)",
           width: computed.width,
         }}
       >
@@ -210,14 +256,15 @@ function ActiveTocPath({
           d={computed.d}
           className="stroke-primary"
           fill="none"
-          strokeLinecap="round"
+          strokeLinecap="butt"
           strokeWidth="1.25"
         />
       </svg>
       <div
-        className="absolute left-0 size-2 rounded-full bg-primary opacity-[var(--opacity,0)] shadow-[0_0_0_4px_var(--background),0_0_18px_color-mix(in_oklab,var(--primary)_26%,transparent)] transition-[opacity,offset-distance] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] [offset-anchor:50%_50%] [offset-distance:var(--offset-distance,0px)] [offset-rotate:0deg]"
+        className="absolute left-0 size-2 rounded-full bg-primary opacity-[var(--opacity,0)] shadow-[0_0_18px_color-mix(in_oklab,var(--primary)_26%,transparent)] transition-[opacity,offset-distance] ease-[cubic-bezier(0.16,1,0.3,1)] [offset-anchor:50%_50%] [offset-distance:var(--offset-distance,0px)] [offset-rotate:0deg]"
         style={{
           offsetPath: `path("${computed.d}")`,
+          transitionDuration: "var(--toc-duration)",
         }}
       />
     </div>
