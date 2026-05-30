@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence, type Variants } from "framer-motion";
 
 type PreviewPlaceholderProps = {
   children?: React.ReactNode;
@@ -65,8 +64,6 @@ const IsometricHeroBox: React.FC<IsometricCubeBoxProps> = ({
     };
   }, []);
 
-  const componentSpring = { type: "spring" as const, stiffness: 400, damping: 25 };
-
   return (
     <div 
       className={`relative z-20 inline-block ${className}`}
@@ -117,46 +114,48 @@ const IsometricHeroBox: React.FC<IsometricCubeBoxProps> = ({
           className={strokeClassName2}
         />
 
-        {/* ── Left Face Content (perspective matched) ── */}
+        {/* ── Left Face Content — CSS crossfade instead of AnimatePresence ── */}
         <g transform="matrix(0.866025 0.5 0 1 36 104)">
           <foreignObject width="160" height="160">
             <div className="w-[160px] h-[160px] overflow-hidden relative">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={leftIndex}
-                  initial={{ opacity: 0, scale: 0.7, y: 15 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.7, y: -15 }}
-                  transition={componentSpring}
-                  className="absolute inset-0 z-10 w-full h-full pointer-events-none"
+              {COMPONENT_LIST.map((comp, i) => (
+                <div
+                  key={i}
+                  className="absolute inset-0 w-full h-full pointer-events-none"
+                  style={{
+                    opacity: i === leftIndex ? 1 : 0,
+                    transform: i === leftIndex ? 'scale(1) translateY(0)' : 'scale(0.7) translateY(15px)',
+                    transition: 'opacity 0.3s ease-out, transform 0.3s ease-out',
+                  }}
                 >
                   <div className="pointer-events-auto w-full h-full">
-                    {COMPONENT_LIST[leftIndex]}
+                    {comp}
                   </div>
-                </motion.div>
-              </AnimatePresence>
+                </div>
+              ))}
             </div>
           </foreignObject>
         </g>
 
-        {/* ── Right Face Content (perspective matched) ── */}
+        {/* ── Right Face Content — CSS crossfade instead of AnimatePresence ── */}
         <g transform="matrix(0.866025 -0.5 0 1 186 184)">
           <foreignObject width="160" height="160">
             <div className="w-[160px] h-[160px] overflow-hidden relative">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={rightIndex}
-                  initial={{ opacity: 0, scale: 0.7, y: 15 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.7, y: -15 }}
-                  transition={componentSpring}
-                  className="absolute inset-0 z-10 w-full h-full pointer-events-none"
+              {COMPONENT_LIST.map((comp, i) => (
+                <div
+                  key={i}
+                  className="absolute inset-0 w-full h-full pointer-events-none"
+                  style={{
+                    opacity: i === rightIndex ? 1 : 0,
+                    transform: i === rightIndex ? 'scale(1) translateY(0)' : 'scale(0.7) translateY(15px)',
+                    transition: 'opacity 0.3s ease-out, transform 0.3s ease-out',
+                  }}
                 >
                   <div className="pointer-events-auto w-full h-full">
-                     {COMPONENT_LIST[rightIndex]}
+                     {comp}
                   </div>
-                </motion.div>
-              </AnimatePresence>
+                </div>
+              ))}
             </div>
           </foreignObject>
         </g>
