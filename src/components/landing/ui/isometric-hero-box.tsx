@@ -46,12 +46,8 @@ const IsometricHeroBox: React.FC<IsometricCubeBoxProps> = ({
   
   const [leftIndex, setLeftIndex] = useState(0);
   const [rightIndex, setRightIndex] = useState(1);
-  const [isVisible, setIsVisible] = useState(false);
   
   useEffect(() => {
-    // Trigger initial fade-in
-    const fadeTimer = setTimeout(() => setIsVisible(true), 100);
-
     // Start cycling components after a slight delay
     let interval: ReturnType<typeof setInterval> | undefined;
     const startDelay = setTimeout(() => {
@@ -62,7 +58,6 @@ const IsometricHeroBox: React.FC<IsometricCubeBoxProps> = ({
     }, 1200);
 
     return () => {
-      clearTimeout(fadeTimer);
       clearTimeout(startDelay);
       if (interval) {
         clearInterval(interval);
@@ -76,10 +71,7 @@ const IsometricHeroBox: React.FC<IsometricCubeBoxProps> = ({
     <div 
       className={`relative z-20 inline-block ${className}`}
       style={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translateY(0)' : 'translateY(50px)',
-        transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
-        animation: isVisible ? 'hero-float 4s ease-in-out infinite' : 'none',
+        animation: 'hero-float 4s ease-in-out infinite',
         willChange: 'transform',
       }}
     >

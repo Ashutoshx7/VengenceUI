@@ -171,8 +171,9 @@
   }
 
   /* Lazy-render off-screen sections — content-visibility skips layout/paint
-     for sections not in viewport, dramatically reducing CPU during scroll */
-  main > section {
+     for sections not in viewport, dramatically reducing CPU during scroll.
+     Exclude the hero (first child) so it paints immediately. */
+  main > section:not(:first-child) {
     content-visibility: auto;
     contain-intrinsic-size: auto 700px;
   }
