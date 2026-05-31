@@ -41,6 +41,7 @@ const DEMO_COMPONENTS: Record<string, React.ComponentType> = {
   "line-hover-link": dynamic(() => import("@/components/docs/line-hover-link").then((m) => ({ default: m.LineHoverLinkDemo })), { ssr: false, loading: LOADING }),
   "interactive-book": dynamic(() => import("@/components/docs/interactive-book").then((m) => ({ default: m.InteractiveBookDemo })), { ssr: false, loading: LOADING }),
   "image-trail": dynamic(() => import("@/components/docs/image-trail").then((m) => ({ default: m.ImageTrailDemo })), { ssr: false, loading: LOADING }),
+  "perspective-carousel": dynamic(() => import("@/components/docs/perspective-carousel").then((m) => ({ default: m.PerspectiveCarouselDemo })), { ssr: false, loading: LOADING }),
   "pixelated-image-trail": dynamic(() => import("@/components/docs/pixelated-image-trail").then((m) => ({ default: m.default })), { ssr: false, loading: LOADING }),
   "interactive-keyboard": dynamic(() => import("@/components/docs/interactive-keyboard-demo").then((m) => ({ default: m.InteractiveKeyboardDemo })), { ssr: false, loading: LOADING }),
   "elastic-stack": dynamic(() => import("@/components/docs/elastic-stack-demo").then((m) => ({ default: m.ElasticStackDemo })), { ssr: false, loading: LOADING }),
