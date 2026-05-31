@@ -245,6 +245,51 @@ export function InteractiveBookDemo() {
     ],
   },
 
+  "image-trail": {
+    dependencies: "npm install framer-motion clsx tailwind-merge",
+    includeUtils: true,
+    manualNotes: [
+      "Wrap the content you want to track with ImageTrail and give the wrapper a height or let it fill its parent.",
+      "The built-in Unsplash images work immediately after installation. Pass local public paths or remote URLs through images to customize them.",
+      "Use threshold and minDelay together to control trail density. Lower values create more images.",
+      "Use imageClassName to size and style the trailing images without editing the component source.",
+    ],
+    usageCode: `import { ImageTrail } from "@/components/ui/image-trail"
+
+export function ImageTrailDemo() {
+  return (
+    <ImageTrail
+      threshold={74}
+      minDelay={45}
+      duration={1100}
+      maxItems={9}
+      rotationRange={34}
+      imageClassName="w-32 rounded-md md:w-40"
+      className="flex h-[500px] items-center justify-center bg-[#ececec]"
+    >
+      <h2 className="pointer-events-none text-5xl font-black">
+        Image trail effect
+      </h2>
+    </ImageTrail>
+  )
+}`,
+    props: [
+      { prop: "images", type: "Array<string | ImageTrailImage>", defaultValue: "DEFAULT_IMAGES", description: "Images cycled through as the cursor moves." },
+      { prop: "children", type: "React.ReactNode", defaultValue: "-", description: "Content rendered beneath the image trail overlay." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional classes for the tracking wrapper." },
+      { prop: "threshold", type: "number", defaultValue: "80", description: "Minimum pointer distance in pixels before another image appears." },
+      { prop: "minDelay", type: "number", defaultValue: "50", description: "Minimum delay in milliseconds between spawned trail images." },
+      { prop: "duration", type: "number", defaultValue: "1000", description: "Time in milliseconds before a trail image is removed." },
+      { prop: "maxItems", type: "number", defaultValue: "8", description: "Maximum number of active trail images kept in the DOM." },
+      { prop: "rotationRange", type: "number", defaultValue: "40", description: "Random rotation range in degrees." },
+      { prop: "imageClassName", type: "string", defaultValue: "-", description: "Additional classes for each trailing image." },
+      { prop: "overlayClassName", type: "string", defaultValue: "-", description: "Additional classes for the absolute overlay layer." },
+      { prop: "transition", type: "Transition", defaultValue: "spring", description: "Framer Motion transition used for image enter animation." },
+      { prop: "exitTransition", type: "Transition", defaultValue: "{ duration: 0.4 }", description: "Framer Motion transition used when images exit." },
+      { prop: "disabled", type: "boolean", defaultValue: "false", description: "Disables spawning new trail images." },
+    ],
+  },
+
   "pixelated-image-trail": {
     dependencies: "npm install clsx tailwind-merge",
     includeUtils: true,

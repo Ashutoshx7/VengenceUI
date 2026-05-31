@@ -492,6 +492,16 @@
     ]
   },
   {
+    "name": "image-trail",
+    "dependencies": [
+      "framer-motion"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/image-trail.json"
+    ]
+  },
+  {
     "name": "input-group",
     "dependencies": [],
     "type": "registry:ui",

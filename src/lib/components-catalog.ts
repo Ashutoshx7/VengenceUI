@@ -53,6 +53,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
     icon: MousePointerClick,
     items: [
       { name: "Interactive Book", slug: "interactive-book", description: "3D page-flip style book", componentName: "interactive-book", isNew: true },
+      { name: "Image Trail", slug: "image-trail", description: "Cursor-following image trail effect", componentName: "image-trail", isNew: true },
       { name: "Pixelated Image Trail", slug: "pixelated-image-trail", description: "Cursor trail image reveal", componentName: "pixelated-image-trail", isNew: true },
       { name: "Interactive Keyboard", slug: "interactive-keyboard", description: "Animated physical keyboard UI", componentName: "interactive-keyboard", isNew: true },
       { name: "Typing Keyboard", slug: "typing-keyboard", description: "3D isometric keyboard with auto-typing screen", componentName: "typing-keyboard", isNew: true },
