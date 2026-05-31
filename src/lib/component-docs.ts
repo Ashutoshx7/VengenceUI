@@ -339,6 +339,57 @@ export function PerspectiveCarouselDemo() {
     ],
   },
 
+  "diagonal-carousel": {
+    dependencies: "npm install framer-motion lucide-react clsx tailwind-merge",
+    includeUtils: true,
+    manualNotes: [
+      "Pass an items array with src and title values. Each title is also used as the default image alt text.",
+      "The carousel fills its parent, so give the wrapper a stable height.",
+      "Tune slideSize, rotationStep, verticalStep, and inactiveScale to control the diagonal stack geometry.",
+      "Set activeIndex and onActiveIndexChange when you need controlled state. Use defaultActiveIndex for a self-contained carousel.",
+      "The controls adapt to dark mode automatically. Style the main surface through className.",
+    ],
+    usageCode: `import { DiagonalCarousel } from "@/components/ui/diagonal-carousel"
+
+const items = [
+  { src: "/images/city.jpg", title: "urban exploration" },
+  { src: "/images/night.jpg", title: "night scene" },
+  { src: "/images/flowers.jpg", title: "yellow wildflowers" },
+  { src: "/images/fuji.jpg", title: "street with mount fuji" },
+]
+
+export function DiagonalCarouselDemo() {
+  return (
+    <DiagonalCarousel
+      items={items}
+      defaultActiveIndex={2}
+      slideSize={250}
+      className="h-[560px] bg-[#ececec] text-neutral-800 dark:bg-neutral-950 dark:text-neutral-100"
+    />
+  )
+}`,
+    props: [
+      { prop: "items", type: "DiagonalCarouselItem[]", defaultValue: "-", description: "Slides with src, title, and optional alt values." },
+      { prop: "activeIndex", type: "number", defaultValue: "-", description: "Controlled active slide index." },
+      { prop: "defaultActiveIndex", type: "number", defaultValue: "0", description: "Initial slide index for uncontrolled usage." },
+      { prop: "onActiveIndexChange", type: "(index: number) => void", defaultValue: "-", description: "Called whenever a slide is selected." },
+      { prop: "loop", type: "boolean", defaultValue: "false", description: "Wraps previous and next navigation at the ends." },
+      { prop: "slideSize", type: "number", defaultValue: "260", description: "Width and height of each image card in pixels." },
+      { prop: "rotationStep", type: "number", defaultValue: "30", description: "Rotation difference in degrees between adjacent slides." },
+      { prop: "verticalStep", type: "number", defaultValue: "120", description: "Vertical offset in pixels between adjacent slides." },
+      { prop: "inactiveScale", type: "number", defaultValue: "0.6", description: "Scale applied to inactive slides." },
+      { prop: "transition", type: "Transition", defaultValue: "spring", description: "Framer Motion transition used for carousel movement." },
+      { prop: "showControls", type: "boolean", defaultValue: "true", description: "Shows the bottom navigation control bar." },
+      { prop: "showDots", type: "boolean", defaultValue: "true", description: "Shows slide position dots inside the controls." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional classes for the carousel root." },
+      { prop: "viewportClassName", type: "string", defaultValue: "-", description: "Additional classes for the clipped viewport." },
+      { prop: "slideClassName", type: "string", defaultValue: "-", description: "Additional classes for each animated slide." },
+      { prop: "imageClassName", type: "string", defaultValue: "-", description: "Additional classes for each image." },
+      { prop: "labelClassName", type: "string", defaultValue: "-", description: "Additional classes for the active slide title." },
+      { prop: "controlsClassName", type: "string", defaultValue: "-", description: "Additional classes for the navigation controls." },
+    ],
+  },
+
   "pixelated-image-trail": {
     dependencies: "npm install clsx tailwind-merge",
     includeUtils: true,
