@@ -26,7 +26,7 @@ const getKitIdFromPathnameInternal = (path: string, availableKits: Array<{ id: s
 export function KitSwitcher() {
     const router = useRouter()
     const pathname = usePathname()
-    const [selectedKitId, setSelectedKitId] = useState<string>(() => {
+    const [storedKitId, setStoredKitId] = useState<string>(() => {
         if (typeof window !== 'undefined') {
             const storedKit = localStorage.getItem(STORAGE_KEY)
             if (storedKit && kits.some((kit) => kit.id === storedKit)) {
@@ -37,58 +37,26 @@ export function KitSwitcher() {
     })
 
     const isDisabled = pathname.startsWith('/snippets') || pathname.startsWith('/docs')
+    const currentKitIdFromPath = getKitIdFromPathnameInternal(pathname, kits, 'vengeance-kit')
+    const selectedKitId = isDisabled || pathname === '/' ? storedKitId : currentKitIdFromPath
 
     useEffect(() => {
-        if (isDisabled) {
-            const storedKit = localStorage.getItem(STORAGE_KEY)
-            if (storedKit && kits.some((k) => k.id === storedKit) && selectedKitId !== storedKit) {
-                setSelectedKitId(storedKit)
-            }
-            return
+        if (localStorage.getItem(STORAGE_KEY) !== selectedKitId) {
+            localStorage.setItem(STORAGE_KEY, selectedKitId)
         }
-
-        const currentKitIdFromPath = getKitIdFromPathnameInternal(pathname, kits, 'vengeance-kit')
-        const storedKitId = localStorage.getItem(STORAGE_KEY)
-
-        let targetKitId: string
-
-        if (pathname === '/') {
-            // On the root path, do not auto-redirect based on stored kit.
-            // Just sync the selected kit state; navigation occurs only on explicit user selection.
-            if (storedKitId && kits.some((kit) => kit.id === storedKitId)) {
-                targetKitId = storedKitId
-            } else {
-                targetKitId = 'vengeance-kit'
-            }
-        } else {
-            targetKitId = currentKitIdFromPath
-        }
-
-        if (!kits.some((kit) => kit.id === targetKitId)) {
-            targetKitId = 'vengeance-kit'
-        }
-
-        if (selectedKitId !== targetKitId) {
-            setSelectedKitId(targetKitId)
-        }
-
-        if (localStorage.getItem(STORAGE_KEY) !== targetKitId) {
-            localStorage.setItem(STORAGE_KEY, targetKitId)
-        }
-    }, [pathname, router, isDisabled, selectedKitId])
+    }, [selectedKitId])
 
     const handleKitChange = (newlySelectedKitId: string) => {
         if (newlySelectedKitId === 'quartz-kit') {
-            window.open('https://vengeance-ui.com/premium', '_parent')
+            window.open('https://vengeance-ui-v2.vercel.app/premium', '_parent')
             return
         }
 
         if (isDisabled) return
 
-        setSelectedKitId(newlySelectedKitId)
+        setStoredKitId(newlySelectedKitId)
         localStorage.setItem(STORAGE_KEY, newlySelectedKitId)
 
-        const currentKitIdFromPath = getKitIdFromPathnameInternal(pathname, kits, 'vengeance-kit')
         const pathSegments = pathname.split('/').filter(Boolean)
         let newPath: string
 

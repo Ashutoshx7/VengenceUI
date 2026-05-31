@@ -1,6 +1,6 @@
 export type PackageManager = "npm" | "pnpm" | "bun" | "yarn";
 
-export const REGISTRY_BASE_URL = "https://vengeance-ui.com/r";
+export const REGISTRY_BASE_URL = "https://vengeance-ui-v2.vercel.app/r";
 
 export const PACKAGE_MANAGER_EXECUTORS: Record<PackageManager, string> = {
   npm: "npx",

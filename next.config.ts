@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
             { protocol: 'https', hostname: 'pbs.twimg.com' },
             { protocol: 'https', hostname: 'res.cloudinary.com' },
             { protocol: 'https', hostname: 'ik.imagekit.io' },
-            { protocol: 'https', hostname: 'vengeance-ui.com' },
+            { protocol: 'https', hostname: 'vengeance-ui-v2.vercel.app' },
         ],
     },
     reactStrictMode: true,

@@ -12,7 +12,7 @@ const orbitron = Orbitron({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vengeance-ui.com"),
+  metadataBase: new URL("https://vengeance-ui-v2.vercel.app"),
   title: "Vengeance UI",
   description: "The ultimate animated component library.",
   openGraph: {
