@@ -12,8 +12,30 @@ const orbitron = Orbitron({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://vengeance-ui.com"),
   title: "Vengeance UI",
   description: "The ultimate animated component library.",
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "Vengeance UI",
+    title: "Vengeance UI",
+    description: "The ultimate animated component library.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1672,
+        height: 941,
+        alt: "Vengeance UI - Next-Gen UI Interactions",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vengeance UI",
+    description: "The ultimate animated component library.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({
