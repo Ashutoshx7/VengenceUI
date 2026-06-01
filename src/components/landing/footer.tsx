@@ -1,7 +1,7 @@
 import LogoIcon from "@/assets/logo/logo-icon";
 import Container from "./container";
 import Link from "next/link";
-import { VercelOSSProgramBadge } from "./hero";
+import { VERCEL_OSS_PROGRAM_URL } from "./hero";
 
 const footerLinks = {
     Product: [
@@ -39,7 +39,7 @@ export default function Footer() {
                             </p>
                             <div className="flex flex-col gap-2">
                                 <span className="text-sm font-medium text-muted-foreground">backed by</span>
-                                <a className="flex h-8 items-center gap-2 rounded-md bg-muted dark:bg-muted/60 border px-4 text-sm font-medium w-fit" target="_blank" rel="noopener"><span>▲ Vercel OSS Program</span></a>
+                                <a href={VERCEL_OSS_PROGRAM_URL} className="flex h-8 items-center gap-2 rounded-md bg-muted dark:bg-muted/60 border px-4 text-sm font-medium w-fit"><span>▲ Vercel OSS Program</span></a>
                             </div>
                         </div>
 

@@ -8,7 +8,8 @@ import { Button } from "./ui/button";
 import { BorderBeam } from "./ui/border-beam";
 import IsometricGrid from "./ui/isometric-grid";
 import IsometricHeroBox from "./ui/isometric-hero-box";
-import IsometricFrame from "./ui/isometric-frame";
+
+export const VERCEL_OSS_PROGRAM_URL = "https://vercel.com/blog/vercel-open-source-program-winter-2026-cohort#vengenceui";
 
 export default function Hero() {
     return <section id="hero" className="relative isolate">
@@ -62,27 +63,22 @@ export default function Hero() {
                     </div>
                 </div>
 
-                <div className="flex flex-col items-center justify-center min-h-[75vh] md:min-h-full relative flex-1 px-4 md:px-8 pb-4 md:py-8 bg-muted dark:bg-muted/60 overflow-hidden" style={{ contain: 'content', transform: 'translateZ(0)' }}>
-                    <div className="absolute inset-0 border m-4 border-neutral-400 dark:border-neutral-600" />
+                <div className="flex flex-col items-center justify-center min-h-[75vh] md:min-h-full relative flex-1 px-4 md:px-8 pb-4 md:py-8 bg-muted dark:bg-[#0b0b0c] overflow-hidden" style={{ contain: 'content', transform: 'translateZ(0)' }}>
+                    <div className="absolute inset-0 border m-4 border-neutral-400 dark:border-white/10" />
+                    <div className="pointer-events-none absolute inset-0 hidden dark:block bg-[radial-gradient(circle_at_50%_34%,rgba(255,255,255,0.08),transparent_28%),radial-gradient(circle_at_50%_72%,rgba(255,255,255,0.06),transparent_30%)]" />
                     <div className="flex flex-col items-center justify-center h-full max-w-[90%] lg:max-w-[70%] w-full relative">
                         <IsometricHeroBox
-                            bgClassName="text-neutral-400 dark:text-neutral-900"
-                            strokeClassName="text-background stroke-foreground"
-                            strokeClassName2="text-background stroke-foreground"
-                            primaryClassName="text-zinc-600 dark:text-zinc-400"
+                            bgClassName="text-neutral-400 dark:text-[#0a0a0b]"
+                            stageClassName="text-zinc-200 dark:text-[#0a0a0b]"
+                            strokeClassName="text-background stroke-foreground dark:text-[#0a0a0b] dark:stroke-zinc-200"
+                            strokeClassName2="text-background stroke-foreground dark:text-[#060607] dark:stroke-zinc-200"
+                            logoShadow="text-zinc-700 dark:text-zinc-600"
+                            primaryClassName="text-zinc-800 dark:text-zinc-300"
                             size={400}
                             className="mb-0 sm:mb-8 md:mb-0"
                         />
 
-                        <IsometricFrame
-                            boxClassName="text-background"
-                            strokeClassName="text-foreground"
-                            circleClassName="text-background"
-                            gradientClassName="text-zinc-400 dark:text-zinc-600"
-                            className="pointer-events-none absolute md:bottom-5 -bottom-20 sm:-bottom-15 scale-[1.05] z-10"
-                        />
-
-                        <IsometricGrid className="z-0 scale-[2.5] mask-radial-from-0% opacity-50" />
+                        <IsometricGrid className="z-0 scale-[2.65] mask-radial-from-0% opacity-50 dark:opacity-40" />
 
 
                     </div>
@@ -94,6 +90,6 @@ export default function Hero() {
 
 export const VercelOSSProgramBadge = () => {
     return (
-        <a className="flex h-8 items-center gap-2 rounded-md bg-muted dark:bg-muted/60 border px-4 text-sm font-medium" target="_blank" rel="noopener"><span className="text-muted-foreground">Backed by</span><span>▲ Vercel OSS Program</span></a>
+        <a href={VERCEL_OSS_PROGRAM_URL} className="flex h-8 items-center gap-2 rounded-md bg-muted dark:bg-muted/60 border px-4 text-sm font-medium"><span className="text-muted-foreground">Backed by</span><span>▲ Vercel OSS Program</span></a>
     )
 }

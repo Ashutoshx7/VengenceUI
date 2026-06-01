@@ -381,6 +381,22 @@
   50% { transform: translateY(-12px); }
 }
 
+.hero-face-preview {
+  animation: hero-face-preview-in 480ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes hero-face-preview-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 /* PerspectiveGrid Component Styles */
 .tile {
   min-width: 1px;
