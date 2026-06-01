@@ -283,6 +283,37 @@ const IsometricHeroBox: React.FC<IsometricCubeBoxProps> = ({
             keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"
           />
 
+        <g
+          className="hidden dark:block text-white"
+          opacity="0.2"
+          filter={`url(#floatingCubeAura_${uid})`}
+        >
+          <rect
+            width="173.205"
+            height="173.205"
+            transform="matrix(0.866025 0.5 -0.866025 0.5 180 7)"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="8"
+          />
+          <rect
+            width="173.205"
+            height="173.21"
+            transform="matrix(0.866025 0.5 0 1 30 93.6025)"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="8"
+          />
+          <rect
+            width="173.205"
+            height="173.21"
+            transform="matrix(0.866025 -0.5 0 1 180 180.205)"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="8"
+          />
+        </g>
+
         <path
           d="M335.385 90.2881V269.711L180 359.423L24.6152 269.711V90.2881L180 0.576172L335.385 90.2881Z"
           fill="none"
@@ -500,6 +531,18 @@ const IsometricHeroBox: React.FC<IsometricCubeBoxProps> = ({
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
+          </filter>
+
+          <filter
+            id={`floatingCubeAura_${uid}`}
+            x="-38"
+            y="-38"
+            width="436"
+            height="450"
+            filterUnits="userSpaceOnUse"
+            colorInterpolationFilters="sRGB"
+          >
+            <feGaussianBlur stdDeviation="7" />
           </filter>
 
           <filter
