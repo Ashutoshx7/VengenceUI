@@ -9,6 +9,8 @@ interface CornerConnectorProps extends Omit<SVGProps<SVGSVGElement>, 'width'> {
   strokeColor?: string;
   strokeWidth?: number | string;
   animateColor?: string;
+  beamOpacity?: number;
+  duration?: number;
   className?: string;
   animate?: boolean;
   width?: number;
@@ -19,7 +21,9 @@ export const CornerConnector: React.FC<CornerConnectorProps> = ({
   variant = "top-left",
   strokeColor = "currentColor",
   strokeWidth = 1,
-  animateColor = "red",
+  animateColor = "var(--foreground)",
+  beamOpacity = 0.42,
+  duration = 4.8,
   className = "",
   animate = false,
   width = 455,
@@ -73,13 +77,14 @@ export const CornerConnector: React.FC<CornerConnectorProps> = ({
               x1="-100" y1="-20" x2="0" y2="0"
             >
               <stop offset="0%" stopColor={animateColor} stopOpacity="0" />
-              <stop offset="50%" stopColor={animateColor} stopOpacity="1" />
+              <stop offset="50%" stopColor={animateColor} stopOpacity={beamOpacity} />
               <stop offset="100%" stopColor={animateColor} stopOpacity="0" />
               <animateTransform
                 attributeName="gradientTransform"
                 type="translate"
-                from="-100 0" to={`${width + 100} 0`}
-                dur="3s"
+                from="-100 0"
+                to={`${width + 100} 0`}
+                dur={`${duration}s`}
                 begin={`${delay}s`}
                 repeatCount="indefinite"
               />
@@ -100,6 +105,9 @@ interface ConnectorLineProps extends SVGProps<SVGSVGElement> {
   length?: string | number; // e.g., 126, "100%", "20rem"
   strokeWidth?: number;
   strokeColor?: string;
+  animateColor?: string;
+  beamOpacity?: number;
+  duration?: number;
   className?: string;
   animate?: boolean;
   delay?: number;
@@ -110,6 +118,9 @@ export const ConnectorLine: React.FC<ConnectorLineProps> = ({
   length = 126,
   strokeWidth = 1,
   strokeColor = "currentColor",
+  animateColor = "var(--foreground)",
+  beamOpacity = 0.38,
+  duration = 4.6,
   className = "",
   delay = 0,
   animate = false,
@@ -118,6 +129,8 @@ export const ConnectorLine: React.FC<ConnectorLineProps> = ({
   const id = useId();
   const isVertical = orientation === 'vertical';
   const gradientId = `line-gradient-${isVertical ? 'v' : 'h'}-${id}`;
+  const numericLength = typeof length === "number" ? length : 126;
+  const beamLength = 110;
 
   const sizeStyles = isVertical
     ? { height: length, width: strokeWidth }
@@ -156,16 +169,20 @@ export const ConnectorLine: React.FC<ConnectorLineProps> = ({
             <linearGradient
               id={gradientId}
               gradientUnits="userSpaceOnUse"
+              x1={isVertical ? 0 : -beamLength}
+              y1={isVertical ? -beamLength : 0}
+              x2={0}
+              y2={0}
             >
-              <stop stopColor="red" stopOpacity="0" />
-              <stop offset="0.5" stopColor="red" />
-              <stop offset="1" stopColor="red" stopOpacity="0" />
+              <stop offset="0%" stopColor={animateColor} stopOpacity="0" />
+              <stop offset="50%" stopColor={animateColor} stopOpacity={beamOpacity} />
+              <stop offset="100%" stopColor={animateColor} stopOpacity="0" />
               <animateTransform
                 attributeName="gradientTransform"
                 type="translate"
-                from={isVertical ? `0 -100` : `-100 0`}
-                to={isVertical ? `0 ${Number(length) + 100}` : `${Number(length) + 100} 0`}
-                dur="3s"
+                from={isVertical ? `0 ${-beamLength}` : `${-beamLength} 0`}
+                to={isVertical ? `0 ${numericLength + beamLength}` : `${numericLength + beamLength} 0`}
+                dur={`${duration}s`}
                 begin={`${delay}s`}
                 repeatCount="indefinite"
               />

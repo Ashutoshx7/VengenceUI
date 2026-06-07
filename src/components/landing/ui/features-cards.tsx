@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Layers, MousePointer2, Sparkles, SlidersHorizontal, Copy, Share2, Trash2, ArrowRight, Bell, Palette } from "lucide-react";
 import LogoIcon from "@/assets/logo/logo-icon";
@@ -243,7 +243,23 @@ export function FeatureCard2() {
 }
 
 export function FeatureCard3() {
-    return <div className="h-full w-full relative p-4 md:p-8 flex flex-col gap-4 md:gap-8 justify-between overflow-hidden">
+    const ref = useRef<HTMLDivElement>(null);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const element = ref.current;
+        if (!element) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => setIsVisible(entry.isIntersecting),
+            { rootMargin: "160px 0px", threshold: 0.1 }
+        );
+
+        observer.observe(element);
+        return () => observer.disconnect();
+    }, []);
+
+    return <div ref={ref} className="h-full w-full relative p-4 md:p-8 flex flex-col gap-4 md:gap-8 justify-between overflow-hidden">
         <div className="flex items-center justify-between">
             <Avatar image="/avatars/aizen.jpg" />
             <Avatar image="/avatars/pinky-aizen.jpg" />
@@ -255,38 +271,38 @@ export function FeatureCard3() {
             <Avatar image="/avatars/batmaaanji.jpg" />
         </div>
 
-        <ConnectorLine className="text-neutral-200 -z-10 dark:text-neutral-800 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" strokeWidth={3} length={340} animate={false} delay={0.2} />
+        <ConnectorLine className="text-neutral-200 -z-10 dark:text-neutral-800 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" strokeWidth={3} length={340} animate={isVisible} delay={0.2} />
 
 
-        <ConnectorLine className="hidden lg:block text-neutral-200 -z-10 dark:text-neutral-800 absolute left-20 bottom-19" strokeWidth={3} length={300} orientation="horizontal" animate={false} delay={0.9} />
+        <ConnectorLine className="hidden lg:block text-neutral-200 -z-10 dark:text-neutral-800 absolute left-20 bottom-19" strokeWidth={3} length={300} orientation="horizontal" animate={isVisible} delay={0.9} />
 
-        <ConnectorLine className="hidden lg:block text-neutral-200 -z-10 dark:text-neutral-800 absolute right-20 bottom-19 rotate-180" strokeWidth={3} length={300} orientation="horizontal" animate={false} />
-
-
-        <ConnectorLine className="hidden md:block lg:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute left-20 bottom-16" strokeWidth={3} length={200} orientation="horizontal" animate={false} delay={0.9} />
-
-        <ConnectorLine className="hidden md:block lg:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute right-20 bottom-16 rotate-180" strokeWidth={3} length={200} orientation="horizontal" animate={false} />
+        <ConnectorLine className="hidden lg:block text-neutral-200 -z-10 dark:text-neutral-800 absolute right-20 bottom-19 rotate-180" strokeWidth={3} length={300} orientation="horizontal" animate={isVisible} />
 
 
-        <ConnectorLine className="hidden sm:block md:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute left-15 bottom-12" strokeWidth={3} length={280} orientation="horizontal" animate={false} delay={0.9} />
+        <ConnectorLine className="hidden md:block lg:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute left-20 bottom-16" strokeWidth={3} length={200} orientation="horizontal" animate={isVisible} delay={0.9} />
 
-        <ConnectorLine className="hidden sm:block md:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute right-15 bottom-12 rotate-180" strokeWidth={3} length={280} orientation="horizontal" animate={false} />
-
-
-        <ConnectorLine className="sm:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute left-15 bottom-12" strokeWidth={3} length={165} orientation="horizontal" animate={false} delay={0.9} />
-
-        <ConnectorLine className="sm:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute right-15 bottom-12 rotate-180" strokeWidth={3} length={165} orientation="horizontal" animate={false} />
+        <ConnectorLine className="hidden md:block lg:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute right-20 bottom-16 rotate-180" strokeWidth={3} length={200} orientation="horizontal" animate={isVisible} />
 
 
+        <ConnectorLine className="hidden sm:block md:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute left-15 bottom-12" strokeWidth={3} length={280} orientation="horizontal" animate={isVisible} delay={0.9} />
+
+        <ConnectorLine className="hidden sm:block md:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute right-15 bottom-12 rotate-180" strokeWidth={3} length={280} orientation="horizontal" animate={isVisible} />
 
 
-        <CornerConnector className="hidden lg:block text-neutral-200 -z-10 dark:text-neutral-800 absolute left-16 top-25" strokeWidth={3} width={325} animate={false} delay={0.4} />
+        <ConnectorLine className="sm:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute left-15 bottom-12" strokeWidth={3} length={165} orientation="horizontal" animate={isVisible} delay={0.9} />
 
-        <CornerConnector className="hidden lg:block text-neutral-200 -z-10 dark:text-neutral-800 absolute right-16 top-25 transform-[scaleX(-1)]" strokeWidth={3} width={325} animate={false} delay={1} />
+        <ConnectorLine className="sm:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute right-15 bottom-12 rotate-180" strokeWidth={3} length={165} orientation="horizontal" animate={isVisible} />
 
-        <CornerConnector className="hidden md:block lg:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute left-16 top-25" strokeWidth={3} width={200} animate={false} delay={0.4} />
 
-        <CornerConnector className="hidden md:block lg:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute right-16 top-25 transform-[scaleX(-1)]" strokeWidth={3} width={200} animate={false} delay={1} />
+
+
+        <CornerConnector className="hidden lg:block text-neutral-200 -z-10 dark:text-neutral-800 absolute left-16 top-25" strokeWidth={3} width={325} animate={isVisible} delay={0.4} />
+
+        <CornerConnector className="hidden lg:block text-neutral-200 -z-10 dark:text-neutral-800 absolute right-16 top-25 transform-[scaleX(-1)]" strokeWidth={3} width={325} animate={isVisible} delay={1} />
+
+        <CornerConnector className="hidden md:block lg:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute left-16 top-25" strokeWidth={3} width={200} animate={isVisible} delay={0.4} />
+
+        <CornerConnector className="hidden md:block lg:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute right-16 top-25 transform-[scaleX(-1)]" strokeWidth={3} width={200} animate={isVisible} delay={1} />
 
 
 

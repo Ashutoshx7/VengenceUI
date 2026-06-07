@@ -232,11 +232,11 @@
 .cta-float-logo {
   will-change: auto;
 }
-.cta-art:hover .cta-float-box {
+.cta-art.is-animating .cta-float-box {
   animation: cta-float 5s ease-in-out infinite;
   will-change: transform;
 }
-.cta-art:hover .cta-float-logo {
+.cta-art.is-animating .cta-float-logo {
   animation: cta-logo-float 4s ease-in-out 0.5s infinite;
   will-change: transform;
 }
