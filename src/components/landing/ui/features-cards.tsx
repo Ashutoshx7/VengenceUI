@@ -296,13 +296,13 @@ export function FeatureCard3() {
 
 
 
-        <CornerConnector className="hidden lg:block text-neutral-200 -z-10 dark:text-neutral-800 absolute left-16 top-25" strokeWidth={3} width={325} animate={isVisible} delay={0.4} />
+        <CornerConnector className="hidden lg:block text-neutral-200 -z-10 dark:text-neutral-800 absolute left-16 top-25" style={{ width: "calc(50% - 3.25rem)" }} strokeWidth={3} width={325} animate={isVisible} delay={0.4} />
 
-        <CornerConnector className="hidden lg:block text-neutral-200 -z-10 dark:text-neutral-800 absolute right-16 top-25 transform-[scaleX(-1)]" strokeWidth={3} width={325} animate={isVisible} delay={1} />
+        <CornerConnector className="hidden lg:block text-neutral-200 -z-10 dark:text-neutral-800 absolute right-16 top-25 transform-[scaleX(-1)]" style={{ width: "calc(50% - 3.25rem)" }} strokeWidth={3} width={325} animate={isVisible} delay={1} />
 
-        <CornerConnector className="hidden md:block lg:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute left-16 top-25" strokeWidth={3} width={200} animate={isVisible} delay={0.4} />
+        <CornerConnector className="hidden md:block lg:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute left-16 top-25" style={{ width: "calc(50% - 3.25rem)" }} strokeWidth={3} width={200} animate={isVisible} delay={0.4} />
 
-        <CornerConnector className="hidden md:block lg:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute right-16 top-25 transform-[scaleX(-1)]" strokeWidth={3} width={200} animate={isVisible} delay={1} />
+        <CornerConnector className="hidden md:block lg:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute right-16 top-25 transform-[scaleX(-1)]" style={{ width: "calc(50% - 3.25rem)" }} strokeWidth={3} width={200} animate={isVisible} delay={1} />
 
 
 
