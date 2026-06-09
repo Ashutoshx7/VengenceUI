@@ -99,7 +99,7 @@ const sampleLogos = [
 
 export function LogoSliderDemo() {
     return (
-        <div className="w-full h-full flex flex-col justify-center py-12 rounded-xl min-h-[200px]">
+        <div className="w-full h-full flex flex-col justify-center py-12 bg-neutral-50 dark:bg-black rounded-xl min-h-[200px] border border-neutral-200 dark:border-neutral-800">
             <div className="text-center mb-8">
                 <span className="text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
                     Trusted by leading companies
@@ -116,7 +116,7 @@ export function LogoSliderDemo() {
 
 export function LogoSliderRight() {
     return (
-        <div className="w-full py-12 rounded-xl min-h-[200px]">
+        <div className="w-full py-12 bg-neutral-50 dark:bg-black rounded-xl min-h-[200px] border border-neutral-200 dark:border-neutral-800">
             <LogoSlider logos={sampleLogos} speed={50} direction="right" />
         </div>
     );
@@ -128,7 +128,7 @@ export function LogoSliderRight() {
 
 export function LogoSliderFast() {
     return (
-        <div className="w-full py-12 rounded-xl min-h-[200px]">
+        <div className="w-full py-12 bg-neutral-50 dark:bg-black rounded-xl min-h-[200px] border border-neutral-200 dark:border-neutral-800">
             <LogoSlider logos={sampleLogos} speed={30} direction="left" />
         </div>
     );
@@ -140,7 +140,7 @@ export function LogoSliderFast() {
 
 export function LogoSliderSlow() {
     return (
-        <div className="w-full py-12 rounded-xl min-h-[200px]">
+        <div className="w-full py-12 bg-neutral-50 dark:bg-black rounded-xl min-h-[200px] border border-neutral-200 dark:border-neutral-800">
             <div className="text-center mb-6">
                 <span className="text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
                     Hover to pause
@@ -157,7 +157,7 @@ export function LogoSliderSlow() {
 
 export function LogoSliderNoBlur() {
     return (
-        <div className="w-full py-12 rounded-xl min-h-[200px]">
+        <div className="w-full py-12 bg-neutral-50 dark:bg-black rounded-xl min-h-[200px] border border-neutral-200 dark:border-neutral-800">
             <LogoSlider logos={sampleLogos} speed={45} direction="left" showBlur={false} />
         </div>
     );
@@ -169,7 +169,7 @@ export function LogoSliderNoBlur() {
 
 export function LogoSliderDouble() {
     return (
-        <div className="w-full py-8 rounded-xl space-y-4 min-h-[280px]">
+        <div className="w-full py-8 bg-neutral-50 dark:bg-black rounded-xl space-y-4 min-h-[280px] border border-neutral-200 dark:border-neutral-800">
             <LogoSlider logos={sampleLogos} speed={50} direction="left" />
             <LogoSlider logos={sampleLogos} speed={50} direction="right" />
         </div>

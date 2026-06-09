@@ -1,319 +1,285 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { cn } from "@/lib/utils";
 
+/**
+ * Configuration options for the pixelated image trail effect
+ */
 interface TrailConfig {
-  imageLifespan: number;
-  inDuration: number;
-  outDuration: number;
-  staggerIn: number;
-  staggerOut: number;
-  slideDuration: number;
-  slideEasing: string;
-  easing: string;
+    /** Duration (ms) before an image starts fading out */
+    imageLifespan: number;
+    /** Duration (ms) of the reveal animation */
+    inDuration: number;
+    /** Duration (ms) of the hide animation */
+    outDuration: number;
+    /** Stagger delay (ms) for slices during reveal */
+    staggerIn: number;
+    /** Stagger delay (ms) for slices during hide */
+    staggerOut: number;
+    /** Duration (ms) of the slide animation */
+    slideDuration: number;
+    /** CSS easing function for slide animation */
+    slideEasing: string;
+    /** CSS easing function for mask animations */
+    easing: string;
 }
 
+/**
+ * Props for the PixelatedImageTrail component
+ */
 export interface PixelatedImageTrailProps {
-  className?: string;
-  images?: string[];
-  config?: Partial<TrailConfig>;
-  slices?: number;
-  spawnThreshold?: number;
-  smoothing?: number;
-  imageSize?: number;
+    /** Additional CSS classes for the trail container */
+    className?: string;
+    /** Array of image URLs to cycle through */
+    images?: string[];
+    /** Override partial configuration options */
+    config?: Partial<TrailConfig>;
+    /** Number of horizontal slices (affects pixelation effect) */
+    slices?: number;
+    /** Distance threshold for spawning new trail images */
+    spawnThreshold?: number;
+    /** Interpolation factor for mouse smoothing (0-1) */
+    smoothing?: number;
 }
 
-const DEFAULT_CONFIG: TrailConfig = {
-  imageLifespan: 1500,
-  inDuration: 280,
-  outDuration: 620,
-  staggerIn: 12,
-  staggerOut: 9,
-  slideDuration: 1300,
-  slideEasing: "cubic-bezier(0.16, 1, 0.3, 1)",
-  easing: "cubic-bezier(0.16, 1, 0.3, 1)",
-};
-
-const DEFAULT_IMAGES = ["/trail-images/image1.jpg", "/trail-images/image4.jpg", "/trail-images/image5.jpg"];
-const MAX_ACTIVE_IMAGES = 14;
-
-const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
-
+/**
+ * PixelatedImageTrail - A stunning hover effect that creates a trail of pixelated images
+ * following the cursor. Images reveal with a slice-based animation creating a 
+ * premium, dynamic visual effect.
+ * 
+ * @example
+ * ```tsx
+ * <PixelatedImageTrail
+ *   images={['/image1.jpg', '/image2.jpg', '/image3.jpg']}
+ *   config={{ imageLifespan: 1200, staggerIn: 40 }}
+ * />
+ * ```
+ */
 export function PixelatedImageTrail({
-  className,
-  images,
-  config: configOverride = {},
-  slices = 5,
-  spawnThreshold = 32,
-  smoothing = 0.32,
-  imageSize = 220,
+    className,
+    images = [],
+    config: configOverride = {},
+    slices = 4,
+    spawnThreshold = 100,
+    smoothing = 0.1,
 }: PixelatedImageTrailProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const animationFrameRef = useRef<number | null>(null);
-  const currentImageIndexRef = useRef(0);
-  const validImagesRef = useRef<string[]>([]);
-  const timeoutsRef = useRef<number[]>([]);
-  const activeImagesRef = useRef<HTMLDivElement[]>([]);
-  const pointerActiveRef = useRef(false);
-  const pointerPosRef = useRef({ x: 0, y: 0 });
-  const lastSpawnPosRef = useRef({ x: 0, y: 0 });
-  const interpolatedPointerPosRef = useRef({ x: 0, y: 0 });
+    const [mounted, setMounted] = useState(false);
+    const trailContainerRef = useRef<HTMLDivElement>(null);
+    const currentImageIndexRef = useRef(0);
+    const mousePosRef = useRef({ x: 0, y: 0 });
+    const lastMousePosRef = useRef({ x: 0, y: 0 });
+    const interpolatedMousePosRef = useRef({ x: 0, y: 0 });
+    const animationFrameRef = useRef<number | null>(null);
+    const validImagesRef = useRef<string[]>([]);
 
-  const finalImages = useMemo(() => (images?.length ? images : DEFAULT_IMAGES), [images]);
-  const finalImagesKey = finalImages.join("|");
-  const config = useMemo(() => ({ ...DEFAULT_CONFIG, ...configOverride }), [configOverride]);
+    const trailImageCount = 3;
+    const finalImages = images.length > 0 ? images : Array.from(
+        { length: trailImageCount },
+        (_, i) => `/trail-images/image${i + 1}.jpg`
+    );
 
-  useEffect(() => {
-    let isActive = true;
-    validImagesRef.current = [];
-
-    finalImages.forEach((src) => {
-      const image = new Image();
-
-      image.onload = () => {
-        if (!isActive || validImagesRef.current.includes(src)) {
-          return;
-        }
-
-        validImagesRef.current.push(src);
-      };
-
-      image.src = src;
-    });
-
-    return () => {
-      isActive = false;
-    };
-  }, [finalImagesKey, finalImages]);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const safeSlices = Math.max(1, Math.floor(slices));
-    const safeSmoothing = clamp(smoothing, 0.01, 1);
-    const safeSpawnThreshold = Math.max(1, spawnThreshold);
-    const safeImageSize = Math.max(40, imageSize);
-    const getSliceDelay = (index: number, stagger: number) =>
-      Math.abs(index - (safeSlices - 1) / 2) * stagger;
-    const getMaxSliceDelay = (stagger: number) => ((safeSlices - 1) / 2) * stagger;
-
-    const schedule = (callback: () => void, delay: number) => {
-      const timeout = window.setTimeout(() => {
-        timeoutsRef.current = timeoutsRef.current.filter((id) => id !== timeout);
-        callback();
-      }, delay);
-
-      timeoutsRef.current.push(timeout);
-      return timeout;
-    };
-
-    const updatePointer = (event: PointerEvent) => {
-      const rect = container.getBoundingClientRect();
-      const nextPosition = {
-        x: event.clientX - rect.left,
-        y: event.clientY - rect.top,
-      };
-
-      pointerPosRef.current = nextPosition;
-
-      if (!pointerActiveRef.current) {
-        pointerActiveRef.current = true;
-        interpolatedPointerPosRef.current = nextPosition;
-        lastSpawnPosRef.current = nextPosition;
-      }
-    };
-
-    const handlePointerLeave = () => {
-      pointerActiveRef.current = false;
-    };
-
-    const distanceFromLastSpawn = () => {
-      const dx = interpolatedPointerPosRef.current.x - lastSpawnPosRef.current.x;
-      const dy = interpolatedPointerPosRef.current.y - lastSpawnPosRef.current.y;
-
-      return Math.hypot(dx, dy);
-    };
-
-    const createTrailImage = () => {
-      if (!validImagesRef.current.length) return;
-
-      const imageSource = validImagesRef.current[currentImageIndexRef.current % validImagesRef.current.length];
-      currentImageIndexRef.current = (currentImageIndexRef.current + 1) % validImagesRef.current.length;
-
-      const startX = interpolatedPointerPosRef.current.x - safeImageSize / 2;
-      const startY = interpolatedPointerPosRef.current.y - safeImageSize / 2;
-      const targetX = startX + (pointerPosRef.current.x - interpolatedPointerPosRef.current.x) * 0.45;
-      const targetY = startY + (pointerPosRef.current.y - interpolatedPointerPosRef.current.y) * 0.45;
-      const imageElement = document.createElement("div");
-      const layerFragment = document.createDocumentFragment();
-
-      Object.assign(imageElement.style, {
-        position: "absolute",
-        left: `${startX}px`,
-        top: `${startY}px`,
-        width: `${safeImageSize}px`,
-        height: `${safeImageSize}px`,
-        pointerEvents: "none",
-        overflow: "hidden",
-        borderRadius: "12px",
-        opacity: "1",
-        transform: "translate3d(0, 0, 0) scale(1)",
-        transition: [
-          `left ${config.slideDuration}ms ${config.slideEasing}`,
-          `top ${config.slideDuration}ms ${config.slideEasing}`,
-          `opacity ${config.outDuration}ms ${config.easing}`,
-          `transform ${config.outDuration}ms ${config.easing}`,
-        ].join(", "),
-        willChange: "left, top, opacity, transform",
-        zIndex: "1",
-        filter: "drop-shadow(0 16px 24px rgb(0 0 0 / 0.22))",
-        contain: "layout style paint",
-        backfaceVisibility: "hidden",
-      });
-
-      const layers: HTMLDivElement[] = [];
-
-      for (let index = 0; index < safeSlices; index += 1) {
-        const sliceSize = 100 / safeSlices;
-        const startClipY = index * sliceSize;
-        const endClipY = (index + 1) * sliceSize;
-        const layer = document.createElement("div");
-        const imageLayer = document.createElement("div");
-
-        Object.assign(layer.style, {
-          position: "absolute",
-          inset: "0",
-          overflow: "hidden",
-          clipPath: `polygon(50% ${startClipY}%, 50% ${startClipY}%, 50% ${endClipY}%, 50% ${endClipY}%)`,
-          transition: `clip-path ${config.inDuration}ms ${config.easing}`,
-          transitionDelay: `${getSliceDelay(index, config.staggerIn)}ms`,
-          transform: "translateZ(0)",
-          backfaceVisibility: "hidden",
-          willChange: "clip-path",
-          contain: "layout style",
+    // Preload images and only use them once loaded
+    useEffect(() => {
+        validImagesRef.current = [];
+        finalImages.forEach(src => {
+            const img = new Image();
+            img.src = src;
+            img.onload = () => {
+                validImagesRef.current.push(src);
+            };
         });
+    }, [JSON.stringify(finalImages)]);
 
-        Object.assign(imageLayer.style, {
-          position: "absolute",
-          inset: "0",
-          backgroundImage: `url("${imageSource}")`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          borderRadius: "12px",
-          transform: "translateZ(0)",
-          backfaceVisibility: "hidden",
-          boxShadow: "inset 0 0 0 1px rgb(255 255 255 / 0.08)",
-        });
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
-        layer.appendChild(imageLayer);
-        layerFragment.appendChild(layer);
-        layers.push(layer);
-      }
+    useEffect(() => {
+        if (!mounted) return;
 
-      imageElement.appendChild(layerFragment);
-      container.appendChild(imageElement);
-      activeImagesRef.current.push(imageElement);
-
-      while (activeImagesRef.current.length > MAX_ACTIVE_IMAGES) {
-        activeImagesRef.current.shift()?.remove();
-      }
-
-      requestAnimationFrame(() => {
-        if (imageElement.parentElement !== container) return;
-
-        imageElement.style.left = `${targetX}px`;
-        imageElement.style.top = `${targetY}px`;
-
-        layers.forEach((layer, index) => {
-          const sliceSize = 100 / safeSlices;
-          const startClipY = index * sliceSize;
-          const endClipY = (index + 1) * sliceSize;
-
-          layer.style.clipPath = `polygon(0% ${startClipY}%, 100% ${startClipY}%, 100% ${endClipY}%, 0% ${endClipY}%)`;
-        });
-      });
-
-      schedule(() => {
-        imageElement.style.opacity = "0";
-        imageElement.style.transform = "translate3d(0, 0, 0) scale(0.24)";
-
-        layers.forEach((layer, index) => {
-          const sliceSize = 100 / safeSlices;
-          const startClipY = index * sliceSize;
-          const endClipY = (index + 1) * sliceSize;
-
-          layer.style.transition = `clip-path ${config.outDuration}ms ${config.easing}`;
-          layer.style.transitionDelay = `${getSliceDelay(index, config.staggerOut)}ms`;
-          layer.style.clipPath = `polygon(50% ${startClipY}%, 50% ${startClipY}%, 50% ${endClipY}%, 50% ${endClipY}%)`;
-        });
-
-        schedule(() => {
-          activeImagesRef.current = activeImagesRef.current.filter((element) => element !== imageElement);
-          imageElement.remove();
-        }, config.outDuration + getMaxSliceDelay(config.staggerOut));
-      }, config.imageLifespan);
-    };
-
-    const render = () => {
-      if (pointerActiveRef.current) {
-        interpolatedPointerPosRef.current = {
-          x: interpolatedPointerPosRef.current.x + (pointerPosRef.current.x - interpolatedPointerPosRef.current.x) * safeSmoothing,
-          y: interpolatedPointerPosRef.current.y + (pointerPosRef.current.y - interpolatedPointerPosRef.current.y) * safeSmoothing,
+        // Default configuration - Codrops-optimized timing
+        const defaultConfig: TrailConfig = {
+            imageLifespan: 400,
+            inDuration: 150,
+            outDuration: 300,
+            staggerIn: 6,
+            staggerOut: 4,
+            slideDuration: 900,
+            slideEasing: "cubic-bezier(0.16, 1, 0.3, 1)", // Expo.easeOut
+            easing: "cubic-bezier(0.16, 1, 0.3, 1)",
         };
 
-        if (distanceFromLastSpawn() > safeSpawnThreshold) {
-          lastSpawnPosRef.current = { ...interpolatedPointerPosRef.current };
-          createTrailImage();
+        const config = { ...defaultConfig, ...configOverride };
+
+        const trailContainer = trailContainerRef.current;
+        if (!trailContainer) return;
+
+        // Math utilities for smooth interpolation
+        const MathUtils = {
+            lerp: (a: number, b: number, n: number) => (1 - n) * a + n * b,
+            distance: (x1: number, y1: number, x2: number, y2: number) =>
+                Math.hypot(x2 - x1, y2 - y1),
+        };
+
+        const getMouseDistance = () =>
+            MathUtils.distance(
+                interpolatedMousePosRef.current.x,
+                interpolatedMousePosRef.current.y,
+                lastMousePosRef.current.x,
+                lastMousePosRef.current.y
+            );
+
+        /**
+         * Creates a trail image element with pixelated slice animation
+         */
+        const createTrailImage = () => {
+            // Skip if no images are loaded yet to prevent glitches
+            if (validImagesRef.current.length === 0) return;
+
+            const imgContainer = document.createElement("div");
+            imgContainer.classList.add("pixelated-trail-img");
+
+            // Use only valid loaded images
+            const imgSrc = validImagesRef.current[currentImageIndexRef.current % validImagesRef.current.length];
+            currentImageIndexRef.current = (currentImageIndexRef.current + 1) % validImagesRef.current.length;
+
+            const rect = trailContainer.getBoundingClientRect();
+            // ... rest of function ...
+            const startX = interpolatedMousePosRef.current.x - rect.left - 87.5;
+            const startY = interpolatedMousePosRef.current.y - rect.top - 87.5;
+
+            const dx = mousePosRef.current.x - interpolatedMousePosRef.current.x;
+            const dy = mousePosRef.current.y - interpolatedMousePosRef.current.y;
+
+            const targetX = startX + dx * 0.5;
+            const targetY = startY + dy * 0.5;
+
+            // Codrops doesn't use specific rotation, just proper placement
+            // We keep it simple: translate only, no rotation or scale-in
+            imgContainer.style.transform = `translate3d(0, 0, 0)`;
+
+            imgContainer.style.left = `${startX}px`;
+            imgContainer.style.top = `${startY}px`;
+            imgContainer.style.transition = `left ${config.slideDuration}ms ${config.slideEasing}, top ${config.slideDuration}ms ${config.slideEasing}`;
+
+            const maskLayers: HTMLDivElement[] = [];
+
+            // Create sliced layers for pixelation effect
+            for (let i = 0; i < slices; i++) {
+                const layer = document.createElement("div");
+                layer.classList.add("pixelated-mask-layer");
+
+                const imageLayer = document.createElement("div");
+                imageLayer.classList.add("pixelated-image-layer");
+                imageLayer.style.backgroundImage = `url(${imgSrc})`;
+
+                const sliceSize = 100 / slices;
+                const startClipY = i * sliceSize;
+                const endClipY = (i + 1) * sliceSize;
+
+                // Initial collapsed clip-path (hidden)
+                layer.style.clipPath = `polygon(50% ${startClipY}%, 50% ${startClipY}%, 50% ${endClipY}%, 50% ${endClipY}%)`;
+                layer.style.transition = `clip-path ${config.inDuration}ms ${config.easing}`;
+                layer.style.transform = "translateZ(0)";
+                layer.style.backfaceVisibility = "hidden";
+
+                layer.appendChild(imageLayer);
+                imgContainer.appendChild(layer);
+                maskLayers.push(layer);
+            }
+
+            trailContainer.appendChild(imgContainer);
+
+            // Animate in with staggered slice reveal + scale pop
+            requestAnimationFrame(() => {
+                imgContainer.style.left = `${targetX}px`;
+                imgContainer.style.top = `${targetY}px`;
+                // No rotation or scale change on enter - just position
+                imgContainer.style.transform = `translate3d(0, 0, 0)`;
+
+                maskLayers.forEach((layer, i) => {
+                    const sliceSize = 100 / slices;
+                    const startClipY = i * sliceSize;
+                    const endClipY = (i + 1) * sliceSize;
+
+                    // Ripple stagger from center outwards
+                    const distanceFromMiddle = Math.abs(i - (slices - 1) / 2);
+                    const delay = distanceFromMiddle * config.staggerIn;
+
+                    setTimeout(() => {
+                        layer.style.clipPath = `polygon(0% ${startClipY}%, 100% ${startClipY}%, 100% ${endClipY}%, 0% ${endClipY}%)`;
+                    }, delay);
+                });
+            });
+
+            // Animate out - Codrops style fade + scale down
+            setTimeout(() => {
+                // Use CSS class for reliable exit transition
+                imgContainer.classList.add("animate-out");
+
+                // Remove from DOM after fade completes
+                setTimeout(() => {
+                    if (imgContainer.parentElement === trailContainer) {
+                        trailContainer.removeChild(imgContainer);
+                    }
+                }, config.outDuration);
+            }, config.imageLifespan);
+        };
+
+        const handleMouseMove = (e: MouseEvent) => {
+            mousePosRef.current = { x: e.clientX, y: e.clientY };
+        };
+
+        /**
+         * Animation loop with smooth mouse interpolation
+         */
+        const render = () => {
+            interpolatedMousePosRef.current.x = MathUtils.lerp(
+                interpolatedMousePosRef.current.x,
+                mousePosRef.current.x,
+                smoothing
+            );
+            interpolatedMousePosRef.current.y = MathUtils.lerp(
+                interpolatedMousePosRef.current.y,
+                mousePosRef.current.y,
+                smoothing
+            );
+
+            if (getMouseDistance() > spawnThreshold) {
+                lastMousePosRef.current = { ...interpolatedMousePosRef.current };
+                createTrailImage();
+            }
+
+            animationFrameRef.current = requestAnimationFrame(render);
+        };
+
+        window.addEventListener("mousemove", handleMouseMove);
+        animationFrameRef.current = requestAnimationFrame(render);
+
+        // Initialize mouse position on first move
+        const initMouse = (e: MouseEvent) => {
+            mousePosRef.current = { x: e.clientX, y: e.clientY };
+            interpolatedMousePosRef.current = { x: e.clientX, y: e.clientY };
+            lastMousePosRef.current = { x: e.clientX, y: e.clientY };
+            window.removeEventListener("mousemove", initMouse);
         }
-      }
+        window.addEventListener("mousemove", initMouse, { once: true });
 
-      animationFrameRef.current = requestAnimationFrame(render);
-    };
 
-    container.addEventListener("pointerenter", updatePointer);
-    container.addEventListener("pointermove", updatePointer);
-    container.addEventListener("pointerleave", handlePointerLeave);
-    animationFrameRef.current = requestAnimationFrame(render);
+        return () => {
+            window.removeEventListener("mousemove", handleMouseMove);
+            if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+        };
+    }, [mounted, configOverride, slices, spawnThreshold, smoothing, JSON.stringify(images)]);
 
-    return () => {
-      container.removeEventListener("pointerenter", updatePointer);
-      container.removeEventListener("pointermove", updatePointer);
-      container.removeEventListener("pointerleave", handlePointerLeave);
+    if (!mounted) return null;
 
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-
-      timeoutsRef.current.forEach((timeout) => clearTimeout(timeout));
-      timeoutsRef.current = [];
-      activeImagesRef.current = [];
-      container.replaceChildren();
-      pointerActiveRef.current = false;
-    };
-  }, [
-    config.easing,
-    config.imageLifespan,
-    config.inDuration,
-    config.outDuration,
-    config.slideDuration,
-    config.slideEasing,
-    config.staggerIn,
-    config.staggerOut,
-    imageSize,
-    slices,
-    smoothing,
-    spawnThreshold,
-  ]);
-
-  return (
-    <div
-      ref={containerRef}
-      aria-hidden="true"
-      className={cn("absolute inset-0 overflow-hidden pointer-events-auto touch-none", className)}
-    />
-  );
+    return createPortal(
+        <div className={cn("pixelated-trail-container", className)} ref={trailContainerRef}></div>,
+        document.body
+    );
 }
 
 export default PixelatedImageTrail;

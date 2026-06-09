@@ -1,0 +1,411 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import { FlipText } from '@/components/ui/flip-text'
+
+# Flip Text
+
+A 3D flip text animation component that creates a mesmerizing character-by-character flip effect. Each character rotates on the X-axis with staggered timing for a smooth, wave-like animation.
+
+<ComponentPreview
+  component={
+    <div className="flex items-center justify-center min-h-[200px]">
+      <FlipText 
+        className="text-4xl font-bold text-foreground"
+        duration={2.2}
+        delay={0}
+      >
+        Build beautiful interfaces
+      </FlipText>
+    </div>
+  }
+  code={`import { FlipText } from "@/components/ui/flip-text";
+
+export default function FlipTextDemo() {
+  return (
+    <div className="flex items-center justify-center min-h-[200px]">
+      <FlipText 
+        className="text-4xl font-bold text-foreground"
+        duration={2.2}
+        delay={0}
+      >
+        Build beautiful interfaces
+      </FlipText>
+    </div>
+  );
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="flip-text" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock 
+        code="npm install framer-motion" 
+    />
+</Dependencies>
+
+<Dependencies step={2} title="Add the CSS to your global stylesheet">
+    Add the following CSS to your <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md">app/globals.css</code> file
+    <CodeBlock
+        language="css"
+        expandable={true}
+        code={`/* FlipText Component Animations */
+.flip-char {
+  color: inherit;
+  -webkit-text-fill-color: transparent;
+  height: 1.2em;
+  line-height: 1.2em;
+  vertical-align: middle;
+  animation: flip var(--flip-duration, 2.2s) var(--flip-delay, 0s) infinite ease;
+}
+
+.flip-char::before,
+.flip-char::after {
+  color: inherit;
+  -webkit-text-fill-color: currentColor;
+  content: attr(data-char);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  animation: fade var(--flip-duration, 2.2s) var(--flip-delay, 0s) infinite ease;
+}
+
+/* Front Face (Initial) */
+.flip-char::after {
+  transform: translate(-50%, -50%) translateZ(0.6em);
+}
+
+/* Bottom Face (Rotates in) */
+.flip-char::before {
+  transform: translate(-50%, -50%) rotateX(-90deg) translateZ(0.6em);
+  opacity: 0;
+  --opacity: 1;
+}`}
+    />
+</Dependencies>
+
+<Dependencies step={3} title="Copy the source code">
+    Copy the code below and paste it into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md mx-1">components/ui/flip-text.tsx</code>
+    <CodeBlock
+        language="tsx"
+        title="components/ui/flip-text.tsx"
+        expandable={true}
+        code={`"use client";
+
+import React, { useMemo } from "react";
+import { cn } from "@/lib/utils";
+
+interface FlipTextProps {
+    /**
+     * Additional CSS classes for the wrapper
+     */
+    className?: string;
+
+    /**
+     * The text content to animate (will be split by spaces)
+     */
+    children: string;
+
+    /**
+     * Duration of the flip animation in seconds
+     * @default 2.2
+     */
+    duration?: number;
+
+    /**
+     * Initial delay before animation starts in seconds
+     * @default 0
+     */
+    delay?: number;
+
+    /**
+     * Whether the animation should loop infinitely
+     * @default true
+     */
+    loop?: boolean;
+
+    /**
+     * Custom separator for splitting text (default is space)
+     * @default " "
+     */
+    separator?: string;
+}
+
+export function FlipText({
+    className,
+    children,
+    duration = 2.2,
+    delay = 0,
+    loop = true,
+    separator = " ",
+}: FlipTextProps) {
+    const words = useMemo(() => children.split(separator), [children, separator]);
+    const totalChars = children.length;
+
+    // Calculate character index for each position
+    const getCharIndex = (wordIndex: number, charIndex: number) => {
+        let index = 0;
+        for (let i = 0; i < wordIndex; i++) {
+            index += words[i].length + (separator === " " ? 1 : separator.length);
+        }
+        return index + charIndex;
+    };
+
+    return (
+        <div
+            className={cn(
+                "flip-text-wrapper inline-block leading-none",
+                className
+            )}
+            style={{ perspective: "1000px" }}
+        >
+            {words.map((word, wordIndex) => {
+                const chars = word.split("");
+
+                return (
+                    <span
+                        key={wordIndex}
+                        className="word inline-block whitespace-nowrap"
+                        style={{ transformStyle: "preserve-3d" }}
+                    >
+                        {chars.map((char, charIndex) => {
+                            const currentGlobalIndex = getCharIndex(wordIndex, charIndex);
+
+                            // Calculate delay based on character position
+                            const normalizedIndex = currentGlobalIndex / totalChars;
+                            const sineValue = Math.sin(normalizedIndex * (Math.PI / 2));
+                            const calculatedDelay = sineValue * (duration * 0.25) + delay;
+
+                            return (
+                                <span
+                                    key={charIndex}
+                                    className="flip-char inline-block relative"
+                                    data-char={char}
+                                    style={
+                                        {
+                                            "--flip-duration": \`\${duration}s\`,
+                                            "--flip-delay": \`\${calculatedDelay}s\`,
+                                            "--flip-iteration": loop ? "infinite" : "1",
+                                            transformStyle: "preserve-3d",
+                                        } as React.CSSProperties
+                                    }
+                                >
+                                    {char}
+                                </span>
+                            );
+                        })}
+                        {separator === " " && wordIndex < words.length - 1 && (
+                            <span className="whitespace inline-block">&nbsp;</span>
+                        )}
+                        {separator !== " " && wordIndex < words.length - 1 && (
+                            <span className="separator inline-block">{separator}</span>
+                        )}
+                    </span>
+                );
+            })}
+        </div>
+    );
+}
+
+export default FlipText;`}
+    />
+</Dependencies>
+
+## Usage
+
+```tsx
+import { FlipText } from "@/components/ui/flip-text";
+
+export default function Example() {
+  return (
+    <FlipText className="text-4xl font-bold">
+      Your amazing text here
+    </FlipText>
+  );
+}
+```
+
+## Examples
+
+### Custom Duration
+
+<ComponentPreview
+  component={
+    <div className="flex flex-col gap-8 items-center">
+      <FlipText 
+        className="text-2xl font-semibold"
+        duration={1.5}
+      >
+        Fast Animation
+      </FlipText>
+      
+      <FlipText 
+        className="text-2xl font-semibold"
+        duration={3.5}
+      >
+        Slow Animation
+      </FlipText>
+    </div>
+  }
+  code={`import { FlipText } from "@/components/ui/flip-text";
+
+export default function FlipTextDuration() {
+  return (
+    <div className="flex flex-col gap-8 items-center">
+      <FlipText 
+        className="text-2xl font-semibold"
+        duration={1.5}
+      >
+        Fast Animation
+      </FlipText>
+      
+      <FlipText 
+        className="text-2xl font-semibold"
+        duration={3.5}
+      >
+        Slow Animation
+      </FlipText>
+    </div>
+  );
+}`}
+/>
+
+### With Delay
+
+<ComponentPreview
+  component={
+    <div className="flex items-center justify-center min-h-[200px]">
+      <FlipText 
+        className="text-3xl font-bold"
+        duration={2.2}
+        delay={0.5}
+      >
+        Delayed Start
+      </FlipText>
+    </div>
+  }
+  code={`import { FlipText } from "@/components/ui/flip-text";
+
+export default function FlipTextDelay() {
+  return (
+    <FlipText 
+      className="text-3xl font-bold"
+      duration={2.2}
+      delay={0.5}
+    >
+      Delayed Start
+    </FlipText>
+  );
+}`}
+/>
+
+### Different Styles
+
+<ComponentPreview
+  component={
+    <div className="flex flex-col gap-8 items-center">
+      <FlipText className="text-5xl font-black text-blue-600 dark:text-blue-400">
+        Bold & Colorful
+      </FlipText>
+      
+      <FlipText className="text-3xl font-light italic text-muted-foreground">
+        Light & Italic
+      </FlipText>
+      
+      <FlipText className="text-2xl font-mono tracking-wider">
+        Monospace Text
+      </FlipText>
+    </div>
+  }
+  code={`import { FlipText } from "@/components/ui/flip-text";
+
+export default function FlipTextStyles() {
+  return (
+    <div className="flex flex-col gap-8 items-center">
+      <FlipText className="text-5xl font-black text-blue-600 dark:text-blue-400">
+        Bold & Colorful
+      </FlipText>
+      
+      <FlipText className="text-3xl font-light italic text-muted-foreground">
+        Light & Italic
+      </FlipText>
+      
+      <FlipText className="text-2xl font-mono tracking-wider">
+        Monospace Text
+      </FlipText>
+    </div>
+  );
+}`}
+/>
+
+## Props
+
+<PropsTable
+  data={[
+    {
+      prop: "children",
+      type: "string",
+      default: "-",
+      description: "The text content to animate. Must be a string.",
+    },
+    {
+      prop: "className",
+      type: "string",
+      default: "-",
+      description: "Additional CSS classes to apply to the wrapper element.",
+    },
+    {
+      prop: "duration",
+      type: "number",
+      default: "2.2",
+      description: "Duration of the flip animation in seconds.",
+    },
+    {
+      prop: "delay",
+      type: "number",
+      default: "0",
+      description: "Initial delay before animation starts in seconds.",
+    },
+    {
+      prop: "loop",
+      type: "boolean",
+      default: "true",
+      description: "Whether the animation should loop infinitely or play once.",
+    },
+    {
+      prop: "separator",
+      type: "string",
+      default: '" "',
+      description: "Custom separator for splitting text. Default is space.",
+    },
+    {
+      prop: "onAnimationComplete",
+      type: "() => void",
+      default: "-",
+      description: "Callback function triggered when animation completes one cycle.",
+    },
+  ]}
+/>
+
+## How It Works
+
+The FlipText component creates a 3D flip animation using:
+
+1. **Character Splitting**: Text is split into individual characters
+2. **Staggered Delays**: Each character gets a calculated delay using a sine wave function for smooth progression
+3. **3D Transforms**: Characters flip along the X-axis using CSS `rotateX()`
+4. **Dual Faces**: Each character has two faces (front and back) created with `::before` and `::after` pseudo-elements
+5. **CSS Variables**: Animation timing is controlled via CSS custom properties (`--flip-duration`, `--flip-delay`)
+
+The sine wave delay calculation creates a natural wave effect across the text, making the animation more visually appealing than a linear delay progression.

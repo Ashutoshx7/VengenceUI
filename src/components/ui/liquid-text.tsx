@@ -109,22 +109,9 @@ export function LiquidText({
         camera.position.set(0, -10, 5);
         camera.lookAt(0, 0, 0);
 
-        let renderer: THREE.WebGLRenderer;
-        try {
-            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        } catch {
-            const fallback = document.createElement("div");
-            fallback.className = "flex h-full w-full items-center justify-center text-5xl font-bold text-neutral-950 dark:text-white md:text-7xl";
-            fallback.textContent = text;
-            container.appendChild(fallback);
-
-            return () => {
-                fallback.remove();
-            };
-        }
-
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setClearColor(0x000000, 0);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(width, height, false);
         renderer.domElement.style.width = "100%";
         renderer.domElement.style.height = "100%";
@@ -152,9 +139,10 @@ export function LiquidText({
         plane.rotation.z = Math.PI / 4;
         scene.add(plane);
 
-        const hitPlaneGeometry = new THREE.PlaneGeometry(500, 500);
-        const hitPlaneMaterial = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0 });
-        const hitPlane = new THREE.Mesh(hitPlaneGeometry, hitPlaneMaterial);
+        const hitPlane = new THREE.Mesh(
+            new THREE.PlaneGeometry(500, 500),
+            new THREE.MeshBasicMaterial({ transparent: true, opacity: 0 })
+        );
         scene.add(hitPlane);
 
         const raycaster = new THREE.Raycaster();
@@ -208,13 +196,9 @@ export function LiquidText({
             cancelAnimationFrame(animationId);
             observer.disconnect();
             if (renderer.domElement.parentNode === container) container.removeChild(renderer.domElement);
-            renderer.renderLists.dispose();
             renderer.dispose();
-            renderer.forceContextLoss();
             textTexture.dispose();
             geometry.dispose();
-            hitPlaneGeometry.dispose();
-            hitPlaneMaterial.dispose();
             shaderMaterial.dispose();
         };
     }, [text, fontSize, font, color, lightColor, darkColor]);

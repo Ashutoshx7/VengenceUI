@@ -1,0 +1,458 @@
+import {
+  CodeBlock,
+  Dependencies,
+} from "@/components/docs/component-installation";
+import { CLICommand } from "@/components/docs/cli-command";
+import { PropsTable } from "@/components/docs/props-table";
+import {
+  AnimatedNumberDemo,
+  AnimatedScoreDemo,
+} from "@/components/docs/animated-number";
+import { ComponentPreview } from "@/components/docs/component-preview";
+
+# Animated Number
+
+An animated number component that smoothly transitions between values, featuring both slot-machine and score-style animations.
+
+## Slot Machine Style
+
+<ComponentPreview
+  component={<AnimatedNumberDemo />}
+  code={`import { AnimatedNumber } from "@/components/ui/animated-number";
+import { useState } from "react";
+
+export function AnimatedNumberDemo() {
+  const [value, setValue] = useState(100);
+
+return (
+
+<div className="flex items-center justify-center">
+<AnimatedNumber value={value} className="text-5xl font-mono" />
+</div>
+);
+}`}
+/>
+
+## Score Style
+
+<ComponentPreview
+  component={<AnimatedScoreDemo />}
+  code={`import { AnimatedScore } from "@/components/ui/animated-number";
+import { useState } from "react";
+
+export function AnimatedScoreDemo() {
+  const [value, setValue] = useState(1000);
+
+return (
+
+<div className="flex items-center justify-center">
+<AnimatedScore value={value} />
+</div>
+);
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="animated-number" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+  <CodeBlock code="npm install framer-motion lucide-react clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Add util file">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">
+        <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md">lib/utils.ts</code>
+    </p>
+    <CodeBlock 
+        language="tsx"
+        code={`import { ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}`}
+    />
+</Dependencies>
+
+<Dependencies step={3} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy the code below and paste it into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md mx-1">components/ui/animated-number.tsx</code></p>
+    <CodeBlock
+        language="tsx"
+        title="components/ui/animated-number.tsx"
+        expandable={true}
+        code={`"use client";
+
+import React, { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
+
+function AnimatedNumber({ value, className }: { value: number, className?: string }) {
+return (
+
+<div className={cn("flex items-center", className)}>
+<div className="flex relative items-center">
+{value.toString().split("").map((digit, index) => (
+<SingleNumberHolder key={index} value={digit} index={index} />
+))}
+</div>
+</div>
+)
+}
+
+function SingleNumberHolder({ value, index }: { value: string, index: number }) {
+const [height, setHeight] = useState<string | null>(null)
+const containerRef = useRef<HTMLDivElement>(null)
+let notANumber = false
+
+    useEffect(() => {
+        if (containerRef.current) {
+            setHeight(getComputedStyle(containerRef.current).height)
+        }
+    }, [])
+
+    if (index === 0) {
+        notANumber = isNaN(Number.parseInt(value))
+    }
+
+    const vars = {
+        init: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0 },
+    }
+
+    return (
+        <div
+            className="relative"
+            style={{ height: height || "auto", overflowY: "hidden", overflowX: "clip" }}
+            ref={containerRef}
+        >
+            {notANumber && (
+                <motion.span
+                    initial="init"
+                    animate="animate"
+                    exit="exit"
+                    variants={vars}
+                    key={value}
+                    layout="size"
+                >
+                    {value}
+                </motion.span>
+            )}
+            {!notANumber && <RenderStrip value={value} eleHeight={height} />}
+        </div>
+    )
+
+}
+
+const zeroToNine = Array.from({ length: 10 }, (\_, k) => k)
+
+function RenderStrip({ eleHeight, value }: { eleHeight: string | null, value: string }) {
+const heightInNumber = Number.parseInt(eleHeight?.replace("px", "") || "48")
+const negative = heightInNumber \* -1
+const pos = heightInNumber
+const prev = useRef(value)
+
+    // Convert string values to numbers for comparison
+    const currentVal = parseInt(value)
+    const prevVal = parseInt(prev.current)
+
+    // Calculate direction based on value change
+    const diff = prevVal - currentVal
+    const dir = currentVal > prevVal ? pos * diff * -1 : negative * diff
+
+    // Update ref after calculation
+    useEffect(() => {
+        prev.current = value
+    }, [value])
+
+    return (
+        <AnimatePresence mode='wait'>
+            <motion.div
+                key={value}
+                initial={{ y: dir }}
+                animate={{ y: 0 }}
+                exit={{ y: 0, transition: { duration: 0.1 } }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className='flex relative flex-col'
+            >
+                {/* Numbers smaller than current */}
+                <motion.span
+                    layout
+                    key={\`negative-\${value}\`}
+                    className={cn('flex flex-col items-center absolute bottom-full left-0')}
+                >
+                    {zeroToNine.filter(val => val < currentVal).map((val, idx) => (
+                        <span key={\`\${val}_\${idx}\`}>{val}</span>
+                    ))}
+                </motion.span>
+
+                {/* Current Number */}
+                <span key={\`current-\${value}\`}>{value}</span>
+
+                {/* Numbers larger than current */}
+                <motion.span
+                    layout
+                    key={\`positive-\${value}\`}
+                    className={cn('flex flex-col items-center absolute top-full left-0')}
+                >
+                    {zeroToNine.filter(val => val > currentVal).map((val, idx) => (
+                        <span key={\`\${val}_\${idx}\`}>{val}</span>
+                    ))}
+                </motion.span>
+            </motion.div>
+        </AnimatePresence>
+    )
+
+}
+
+// Score-style animated number with color feedback
+function AnimatedScore({ value, duration = 0.2, className }: { value: number, duration?: number, className?: string }) {
+const prevValueRef = useRef(value)
+
+    useEffect(() => {
+        prevValueRef.current = value
+    }, [value])
+
+    const colors = {
+        negative: "#37ff1a",
+        positive: "#ff1a4b",
+        neutral: "#fff"
+    }
+
+    const transforVal = 80
+    const forwards = {
+        init: { y: transforVal * -1, opacity: 0, scale: 0.5, color: colors.negative },
+        animate: {
+            y: 0,
+            opacity: 1,
+            scale: [1.7, 1],
+            color: [colors.negative, colors.negative, colors.neutral],
+            transition: { duration: 0.4, times: [0, 0.7, 1], color: { times: [0, 0.75, 0.9] } },
+        },
+        exit: {
+            y: transforVal,
+            opacity: 0,
+            scale: 0.5,
+            color: colors.positive
+        },
+    }
+
+    const backwards = {
+        init: { y: transforVal, opacity: 0, scale: 0.5, color: colors.positive },
+        animate: {
+            y: 0,
+            opacity: 1,
+            scale: [1.7, 1],
+            color: [colors.positive, colors.positive, colors.neutral],
+            transition: { duration: 0.4, times: [0, 0.7, 1], color: { times: [0, 0.75, 0.9] } },
+        },
+        exit: {
+            y: transforVal * -1,
+            opacity: 0,
+            scale: 0.5,
+            color: colors.negative
+        }
+    }
+
+    const variants = value >= prevValueRef.current ? forwards : backwards
+    const direction = value >= prevValueRef.current ? "forwards" : "backwards"
+
+    return (
+        <div className={cn("relative flex justify-center items-center py-1 px-2 w-full rounded-md", className)}>
+            <motion.div layout="size" className='w-fit flex justify-center items-center'>
+                {value.toString().split("").map((number, index) => (
+                    <ScoreContainer
+                        direction={direction}
+                        duration={duration}
+                        variants={variants}
+                        number={number}
+                        key={index}
+                    />
+                ))}
+            </motion.div>
+        </div>
+    )
+
+}
+
+function ScoreContainer({ number, variants, duration = 0.7, direction }: {
+number: string,
+variants: any,
+duration?: number,
+direction: string
+}) {
+const cached = React.useMemo(() => (
+
+<div className="relative">
+  <AnimatePresence mode="popLayout">
+    <motion.div
+      animate="animate"
+      className="flex justify-center items-center"
+      initial="init"
+      exit="exit"
+      variants={variants}
+      key={number.toString()}
+      layout="size"
+      transition={{ duration, ease: "backInOut" }}
+    >
+      {number}
+    </motion.div>
+  </AnimatePresence>
+</div>
+), [number, direction, variants, duration])
+
+    return <React.Fragment>{cached}</React.Fragment>
+
+}
+
+export { AnimatedNumber, AnimatedScore }`}
+    />
+</Dependencies>
+
+## Usage
+
+<CodeBlock 
+    language="tsx" 
+    code={`
+"use client";
+import { useState } from "react";
+import { Minus, Plus } from "lucide-react";
+import { motion } from "framer-motion";
+import { AnimatedNumber, AnimatedScore } from "@/components/ui/animated-number"
+
+export function UsageExample() {
+  return (
+    <div className="flex flex-col gap-4">
+      {/* Slot machine style */}
+      <AnimatedScoreDemo />
+
+      {/* Score style with color feedback */}
+      <AnimatedNumberDemo />
+    </div>
+
+);
+}
+
+function AnimatedNumberDemo() {
+const [num, setNum] = useState(100);
+
+    function minus() {
+        setNum(prev => prev - 10);
+    }
+    function add() {
+        setNum(prev => prev + 10);
+    }
+
+    return (
+        <div className="flex bg-zinc-950 py-2.5 px-5 rounded-full items-center justify-center border border-zinc-800">
+            <motion.button
+                whileTap={{ scale: 0.9 }}
+                onClick={minus}
+                style={{ cursor: "pointer", backgroundColor: "#27272a " }}
+                className="bg-zinc-800 text-zinc-400 hover:text-white h-11 w-11 flex justify-center items-center rounded-full transition-colors"
+            >
+                <Minus className="h-6 w-6" />
+            </motion.button>
+            <div className="flex relative px-6 text-5xl items-center font-mono text-white">
+                <AnimatedNumber value={num} />
+            </div>
+            <motion.button
+                whileTap={{ scale: 0.9 }}
+                onClick={add}
+                style={{ cursor: "pointer", backgroundColor: "#27272a " }}
+                className="bg-zinc-800 text-zinc-400 hover:text-white h-11 w-11 flex justify-center items-center rounded-full transition-colors"
+            >
+                <Plus className="h-6 w-6" />
+            </motion.button>
+        </div>
+    );
+
+}
+
+function AnimatedScoreDemo() {
+const [score, setScore] = useState(100);
+
+    function decrease() {
+        setScore(prev => prev - 10);
+    }
+    function increase() {
+        setScore(prev => prev + 10);
+    }
+
+    return (
+        <div className="flex bg-zinc-950 py-2.5 px-5 rounded-full items-center justify-center border border-zinc-800">
+            <motion.button
+                whileTap={{ scale: 0.9 }}
+                style={{ cursor: "pointer", backgroundColor: "#27272a " }}
+                onClick={decrease}
+                className="bg-zinc-800 text-zinc-400 hover:text-white h-11 w-11 flex justify-center items-center rounded-full transition-colors"
+            >
+                <Minus className="h-6 w-6" />
+            </motion.button>
+            <div className="flex relative px-6 text-5xl items-center font-mono">
+                <AnimatedScore value={score} />
+            </div>
+            <motion.button
+                whileTap={{ scale: 0.9 }}
+                onClick={increase}
+                style={{ cursor: "pointer", backgroundColor: "#27272a " }}
+                className="bg-zinc-800 text-zinc-400 hover:text-white h-11 w-11 flex justify-center items-center rounded-full transition-colors"
+            >
+                <Plus className="h-6 w-6" />
+            </motion.button>
+        </div>
+    );
+
+}
+
+`}
+/>
+
+## Props
+
+### AnimatedNumber
+
+<PropsTable
+  data={[
+    {
+      prop: "value",
+      type: "number",
+      defaultValue: "-",
+      description: "The numeric value to animate to.",
+    },
+    {
+      prop: "className",
+      type: "string",
+      defaultValue: "-",
+      description: "Additional CSS classes for styling.",
+    },
+  ]}
+/>
+
+### AnimatedScore
+
+<PropsTable
+  data={[
+    {
+      prop: "value",
+      type: "number",
+      defaultValue: "-",
+      description: "The numeric value to animate to.",
+    },
+    {
+      prop: "duration",
+      type: "number",
+      defaultValue: "0.2",
+      description: "Duration of the animation in seconds.",
+    },
+    {
+      prop: "className",
+      type: "string",
+      defaultValue: "-",
+      description: "Additional CSS classes for styling.",
+    },
+  ]}
+/>

@@ -34,7 +34,7 @@ export function ComponentContainer({
             )}
 
             {/* Background Overlay */}
-            <div className="absolute inset-0/50 dark:bg-background/30 pointer-events-none" />
+            <div className="absolute inset-0 bg-background/50 dark:bg-background/30 pointer-events-none" />
 
             {/* Content */}
             <div

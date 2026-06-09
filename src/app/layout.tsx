@@ -1,54 +1,112 @@
 import type { Metadata } from "next";
-import { Inter, Orbitron } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
+import { Inter_Tight, Pixelify_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/landing/navbar";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import { CommandMenuProvider } from "@/components/command-menu";
+import Footer from "@/components/mine/landing-page/footer";
+import Navbar from "@/components/mine/landing-page/navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+// Default font
+const interTight = Inter_Tight({
+  variable: "--font-inter-tight",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+});
 
-const orbitron = Orbitron({
-  variable: '--font-orbitron',
-  subsets: ['latin'],
-})
+// Special font for headings
+const pixelify = Pixelify_Sans({
+  variable: "--font-pixelify",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
+
+// Font for elegant serif headings
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vengeance-ui-v2.vercel.app"),
-  title: "Vengeance UI",
-  description: "The ultimate animated component library.",
+  title: "VengeanceUI - Premium React Components",
+  description:
+    "Beautiful, modern, and customizable React components. Build stunning interfaces with VengeanceUI - a premium component library for React and Next.js.",
+  keywords: [
+    "React",
+    "Next.js",
+    "UI Components",
+    "Component Library",
+    "Tailwind CSS",
+    "Three.js",
+    "Animation",
+    "Web Development",
+    "Frontend",
+    "VengeanceUI",
+  ],
+  authors: [{ name: "VengeanceUI" }],
+  icons: {
+    icon: "/logo/bg-less.png",
+    apple: "/logo/bg-less.png",
+  },
   openGraph: {
     type: "website",
-    url: "/",
-    siteName: "Vengeance UI",
-    title: "Vengeance UI",
-    description: "The ultimate animated component library.",
+    url: "https://www.vengenceui.com",
+    title: "VengeanceUI - Premium React Components",
+    description:
+      "Beautiful, modern, and customizable React components. Build stunning interfaces with VengeanceUI - a premium component library for React and Next.js.",
+    siteName: "VengeanceUI",
     images: [
       {
-        url: "/og-image.png",
-        width: 1672,
-        height: 941,
-        alt: "Vengeance UI - Next-Gen UI Interactions",
+        url: "https://www.vengenceui.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "VengeanceUI - Premium React Components",
       },
     ],
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vengeance UI",
-    description: "The ultimate animated component library.",
-    images: ["/og-image.png"],
+    title: "VengeanceUI - Premium React Components",
+    description:
+      "Beautiful, modern, and customizable React components. Build stunning interfaces with VengeanceUI.",
+    images: ["https://www.vengenceui.com/og-image.png"],
   },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  metadataBase: new URL("https://www.vengenceui.com"),
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning className={`${inter.className} ${orbitron.variable} antialiased selection:bg-foreground selection:text-background min-h-screen flex flex-col`}>
+      <head>
+        {/* Preconnect for faster external resource loading */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://vercel.live" />
+      </head>
+      <body
+        className={`${interTight.variable} ${pixelify.variable} ${playfair.variable} antialiased`}
+        suppressHydrationWarning
+      >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <Navbar />
-          {children}
+          <CommandMenuProvider>
+            {children}
+            <Footer />
+          </CommandMenuProvider>
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>

@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 
-// Dynamically import to keep the pointer-driven DOM animation client-side.
+// Dynamically import to avoid SSR issues with portal
 const PixelatedImageTrail = dynamic(
     () => import("@/components/ui/pixelated-image-trail").then(mod => mod.PixelatedImageTrail),
     { ssr: false }
@@ -14,29 +14,24 @@ const PixelatedImageTrail = dynamic(
  */
 export function PixelatedImageTrailDemo() {
     return (
-        <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-xl bg-black">
+        <div className="relative w-full h-[400px] bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900 rounded-xl overflow-hidden flex items-center justify-center">
             <PixelatedImageTrail
                 images={[
                     "/trail-images/image1.jpg",
                     "/trail-images/image4.jpg",
                     "/trail-images/image5.jpg",
                 ]}
-                slices={5}
-                smoothing={0.32}
-                spawnThreshold={32}
-                imageSize={220}
+                slices={4}
+                smoothing={0.1}
+                spawnThreshold={100}
                 config={{
-                    imageLifespan: 1500,
-                    inDuration: 280,
-                    outDuration: 620,
-                    staggerIn: 12,
-                    staggerOut: 9,
-                    slideDuration: 1300,
+                    staggerIn: 6,
+                    inDuration: 150,
                 }}
             />
-            <div className="pointer-events-none z-10 text-center">
-                <h2 className="mb-2 text-4xl font-bold text-white">Pixel Trail</h2>
-                <p className="text-zinc-400">Smooth sliced cursor trail</p>
+            <div className="text-center z-10 pointer-events-none">
+                <h2 className="text-4xl font-bold text-white mb-2">Move Your Mouse</h2>
+                <p className="text-zinc-400">Watch the magic unfold</p>
             </div>
         </div>
     );
@@ -47,7 +42,7 @@ export function PixelatedImageTrailDemo() {
  */
 export function PixelatedImageTrailFastDemo() {
     return (
-        <div className="relative w-full h-full bg-gradient-to-br from-purple-900 via-violet-800 to-indigo-900 rounded-xl overflow-hidden flex items-center justify-center">
+        <div className="relative w-full h-[400px] bg-gradient-to-br from-purple-900 via-violet-800 to-indigo-900 rounded-xl overflow-hidden flex items-center justify-center">
             <PixelatedImageTrail
                 images={[
                     "/trail-images/image8.jpg",
@@ -55,16 +50,14 @@ export function PixelatedImageTrailFastDemo() {
                     "/trail-images/image10.jpg",
                 ]}
                 config={{
-                    imageLifespan: 820,
-                    inDuration: 160,
-                    outDuration: 320,
-                    staggerIn: 7,
-                    staggerOut: 5,
-                    slideDuration: 760,
+                    imageLifespan: 600,
+                    inDuration: 300,
+                    outDuration: 350,
+                    staggerIn: 12,
+                    staggerOut: 8,
                 }}
-                spawnThreshold={26}
-                smoothing={0.38}
-                imageSize={205}
+                spawnThreshold={50}
+                smoothing={0.15}
             />
             <div className="text-center z-10 pointer-events-none">
                 <h2 className="text-4xl font-bold text-white mb-2">Fast Mode</h2>
@@ -79,7 +72,7 @@ export function PixelatedImageTrailFastDemo() {
  */
 export function PixelatedImageTrailFineDemo() {
     return (
-        <div className="relative w-full h-full bg-gradient-to-br from-emerald-900 via-teal-800 to-cyan-900 rounded-xl overflow-hidden flex items-center justify-center">
+        <div className="relative w-full h-[400px] bg-gradient-to-br from-emerald-900 via-teal-800 to-cyan-900 rounded-xl overflow-hidden flex items-center justify-center">
             <PixelatedImageTrail
                 images={[
                     "/trail-images/image11.jpg",
@@ -87,15 +80,12 @@ export function PixelatedImageTrailFineDemo() {
                     "/trail-images/image1.jpg",
                 ]}
                 slices={20}
-                smoothing={0.3}
-                spawnThreshold={34}
-                imageSize={210}
+                smoothing={0.12}
+                spawnThreshold={55}
                 config={{
-                    imageLifespan: 1100,
-                    staggerIn: 7,
-                    staggerOut: 5,
-                    inDuration: 200,
-                    outDuration: 420,
+                    staggerIn: 10,
+                    staggerOut: 6,
+                    inDuration: 380,
                 }}
             />
             <div className="text-center z-10 pointer-events-none">
@@ -111,7 +101,7 @@ export function PixelatedImageTrailFineDemo() {
  */
 export function PixelatedImageTrailCoarseDemo() {
     return (
-        <div className="relative w-full h-full bg-gradient-to-br from-orange-900 via-red-800 to-rose-900 rounded-xl overflow-hidden flex items-center justify-center">
+        <div className="relative w-full h-[400px] bg-gradient-to-br from-orange-900 via-red-800 to-rose-900 rounded-xl overflow-hidden flex items-center justify-center">
             <PixelatedImageTrail
                 images={[
                     "/trail-images/image2.jpg",
@@ -119,15 +109,12 @@ export function PixelatedImageTrailCoarseDemo() {
                     "/trail-images/image4.jpg",
                 ]}
                 slices={5}
-                smoothing={0.3}
-                spawnThreshold={36}
-                imageSize={240}
+                smoothing={0.18}
+                spawnThreshold={70}
                 config={{
-                    imageLifespan: 1250,
-                    staggerIn: 12,
-                    staggerOut: 8,
-                    inDuration: 240,
-                    outDuration: 480,
+                    staggerIn: 40,
+                    staggerOut: 30,
+                    inDuration: 450,
                 }}
             />
             <div className="text-center z-10 pointer-events-none">

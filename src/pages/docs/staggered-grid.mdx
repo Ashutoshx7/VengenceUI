@@ -1,0 +1,608 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { StaggeredGridDemo } from '@/components/docs/staggered-grid'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import { Callout } from 'nextra/components'
+
+# Staggered Grid
+
+A stunning scroll-animated grid layout with staggered column animations and expandable bento cards. Perfect for showcasing products, services, or portfolio items with smooth GSAP-powered animations.
+
+<Callout type="info">
+**Full-Page Component**: This component is designed to be used in a full-page scrollable context. The scroll animations require actual scrolling to trigger.
+</Callout>
+
+<div className="flex gap-3 my-6">
+  <a 
+    href="/demo/staggered-grid" 
+    target="_blank"
+    className="inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium text-neutral-600 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-xl hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white transition-all duration-200 no-underline"
+  >
+    View Live Demo
+  </a>
+</div>
+
+
+<ComponentPreview
+  component={<StaggeredGridDemo />}
+  code={`"use client";
+
+import { StaggeredGrid, BentoItem } from "@/components/ui/staggered-grid";
+import { SmoothScroll } from "@/components/ui/smooth-scroll";
+import { Github, Slack, Twitter } from "lucide-react";
+
+export default function Page() {
+  const images = [
+    "/img/1.jpg",
+    "/img/2.jpg",
+    "/img/3.jpg",
+    "/img/4.jpg",
+    "/img/5.jpg",
+  ];
+
+  const bentoItems: BentoItem[] = [
+    {
+      id: 1,
+      title: "Repository",
+      subtitle: "Version Control",
+      description: "Secure, scalable code management.",
+      icon: <Github className="w-4 h-4" />,
+      image: "/img/1.jpg"
+    },
+    {
+      id: 2,
+      title: "Connect",
+      subtitle: "Team Communication",
+      description: "Real-time messaging and collaboration.",
+      icon: <Slack className="w-4 h-4" />,
+      image: "/img/5.jpg"
+    },
+    {
+      id: 3,
+      title: "Reach",
+      subtitle: "Audience Engagement",
+      description: "Connect with your community globally.",
+      icon: <Twitter className="w-4 h-4" />,
+      image: "/img/3.jpg"
+    },
+  ];
+
+  return (
+    <SmoothScroll>
+      <main className="min-h-screen bg-black">
+        <StaggeredGrid
+          images={images}
+          bentoItems={bentoItems}
+          centerText="HALCYON"
+        />
+      </main>
+    </SmoothScroll>
+  );
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="staggered-grid" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock 
+        code="npm install gsap imagesloaded lenis clsx tailwind-merge" 
+    />
+</Dependencies>
+
+<Dependencies step={2} title="Add TypeScript types">
+    <CodeBlock 
+        code="npm install -D @types/imagesloaded" 
+    />
+</Dependencies>
+
+<Dependencies step={3} title="Add util file">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">
+        <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md">lib/utils.ts</code>
+    </p>
+    <CodeBlock 
+        language="tsx"
+        code={`import { ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}`}
+    />
+</Dependencies>
+
+<Dependencies step={4} title="Copy the SmoothScroll component">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">This component uses Lenis for smooth scrolling which is essential for the scroll animations. Copy it to <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md mx-1">components/ui/smooth-scroll.tsx</code></p>
+    <CodeBlock
+        language="tsx"
+        title="components/ui/smooth-scroll.tsx"
+        code={`'use client'
+import { ReactNode, useEffect } from 'react'
+import Lenis from 'lenis'
+
+export function SmoothScroll({ children }: { children: ReactNode }) {
+    useEffect(() => {
+        const lenis = new Lenis()
+        function raf(time: number) {
+            lenis.raf(time)
+            requestAnimationFrame(raf)
+        }
+        requestAnimationFrame(raf)
+        document.body.classList.remove('loading');
+        return () => lenis.destroy()
+    }, [])
+    return <>{children}</>
+}
+
+export default SmoothScroll`}
+    />
+</Dependencies>
+
+<Dependencies step={5} title="Copy the StaggeredGrid component">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy the code below and paste it into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md mx-1">components/ui/staggered-grid.tsx</code></p>
+    <CodeBlock
+        language="tsx"
+        title="components/ui/staggered-grid.tsx"
+        expandable={true}
+        code={`'use client'
+import React, { useEffect, useRef, useState } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import imagesLoaded from 'imagesloaded'
+import { cn } from '@/lib/utils'
+import { Github, Slack, Twitter } from 'lucide-react'
+
+gsap.registerPlugin(ScrollTrigger)
+
+export interface BentoItem {
+    id: number | string
+    title: string
+    subtitle: string
+    description: string
+    icon: React.ReactNode
+    content?: React.ReactNode
+    image?: string
+}
+
+export interface StaggeredGridProps {
+    images: string[]
+    bentoItems: BentoItem[]
+    centerText?: string
+    credits?: {
+        madeBy: { text: string; href: string }
+        moreDemos: { text: string; href: string }
+    }
+    className?: string
+    showFooter?: boolean
+}
+
+export function StaggeredGrid({
+    images,
+    bentoItems,
+    centerText = "Halcyon",
+    credits = {
+        madeBy: { text: "@codrops", href: "https://x.com/codrops" },
+        moreDemos: { text: "More demos", href: "https://tympanus.net/codrops/demos" }
+    },
+    className,
+    showFooter = true
+}: StaggeredGridProps) {
+    const [isLoaded, setIsLoaded] = useState(false)
+    const gridFullRef = useRef<HTMLDivElement>(null)
+    const textRef = useRef<HTMLDivElement>(null)
+    const [activeBento, setActiveBento] = useState<number>(0);
+
+    const splitText = (text: string) => {
+        return text.split('').map((char, i) => (
+            <span key={i} className="char inline-block" style={{ willChange: 'transform' }}>
+                {char === ' ' ? '\\u00A0' : char}
+            </span>
+        ))
+    }
+
+    useEffect(() => {
+        const handleLoad = () => {
+            document.body.classList.remove('loading')
+            setIsLoaded(true)
+        }
+        const imgLoad = imagesLoaded(
+            document.querySelectorAll('.grid__item-img'),
+            { background: true },
+            handleLoad
+        )
+        return () => { /* Cleanup */ }
+    }, [])
+
+    useEffect(() => {
+        if (!isLoaded) return
+
+        // Animate Text Element
+        if (textRef.current) {
+            const chars = textRef.current.querySelectorAll('.char')
+            gsap.timeline({
+                scrollTrigger: {
+                    trigger: textRef.current,
+                    start: 'top bottom',
+                    end: 'center center-=25%',
+                    scrub: 1,
+                }
+            }).from(chars, {
+                ease: 'sine.out',
+                yPercent: 300,
+                autoAlpha: 0,
+                stagger: { each: 0.05, from: 'center' }
+            })
+        }
+
+        // Animate Full Grid
+        if (gridFullRef.current) {
+            const gridFullItems = gridFullRef.current.querySelectorAll('.grid__item')
+            const numColumns = getComputedStyle(gridFullRef.current)
+                .getPropertyValue('grid-template-columns').split(' ').length
+            const middleColumnIndex = Math.floor(numColumns / 2)
+
+            const columns: Element[][] = Array.from({ length: numColumns }, () => [])
+            gridFullItems.forEach((item: any, index: number) => {
+                columns[index % numColumns].push(item)
+            })
+
+            columns.forEach((columnItems, columnIndex) => {
+                const delayFactor = Math.abs(columnIndex - middleColumnIndex) * 0.2
+                gsap.timeline({
+                    scrollTrigger: {
+                        trigger: gridFullRef.current,
+                        start: 'top bottom',
+                        end: 'center center',
+                        scrub: 1.5,
+                    }
+                })
+                .from(columnItems, {
+                    yPercent: 450,
+                    autoAlpha: 0,
+                    delay: delayFactor,
+                    ease: 'sine.out',
+                })
+                .from(columnItems.map(item => item.querySelector('.grid__item-img')), {
+                    transformOrigin: '50% 0%',
+                    ease: 'sine.out',
+                }, 0)
+            })
+
+            // Bento Container Animation
+            const bentoContainer = gridFullRef.current.querySelector('.bento-container')
+            if (bentoContainer) {
+                gsap.timeline({
+                    scrollTrigger: {
+                        trigger: gridFullRef.current,
+                        start: 'top top+=15%',
+                        end: 'bottom center',
+                        scrub: 1,
+                        invalidateOnRefresh: true,
+                    }
+                }).to(bentoContainer, {
+                    y: window.innerHeight * 0.1,
+                    scale: 1.5,
+                    zIndex: 1000,
+                    ease: 'power2.out',
+                    duration: 1,
+                    force3D: true
+                }, 0)
+            }
+        }
+    }, [isLoaded])
+
+    const mixedGridItems: (string | 'BENTO_GROUP')[] = 
+        [...images, ...images, images[0]].slice(0, 35);
+    mixedGridItems[16] = 'BENTO_GROUP';
+
+    return (
+        <div
+            className={cn("shadow relative overflow-hidden w-full", className)}
+            style={{ '--grid-item-translate': '0px' } as React.CSSProperties}
+        >
+            <section className="grid place-items-center w-full relative mt-[10vh]">
+                <div ref={textRef} className="text font-alt uppercase flex content-center text-[clamp(3rem,14vw,10rem)] leading-[0.7] text-neutral-900 dark:text-white">
+                    {splitText(centerText)}
+                </div>
+            </section>
+
+            <section className="grid place-items-center w-full relative">
+                <div ref={gridFullRef} className="grid--full relative w-full my-[10vh] h-auto aspect-[1.1] max-w-none p-4 grid gap-4 grid-cols-7 grid-rows-5">
+                    <div className="grid-overlay absolute inset-0 z-[15] pointer-events-none opacity-0 bg-white/80 dark:bg-black/80 rounded-lg transition-opacity duration-500" />
+                    {mixedGridItems.map((item, i) => {
+                        if (item === 'BENTO_GROUP') {
+                            if (!bentoItems || bentoItems.length === 0) return null;
+                            return (
+                                <div key="bento-group" className="grid__item bento-container col-span-3 row-span-1 relative z-20 flex items-center justify-center gap-2 h-full w-full will-change-transform">
+                                    {bentoItems.map((bentoItem, index) => {
+                                        const isActive = activeBento === index;
+                                        return (
+                                            <div
+                                                key={bentoItem.id}
+                                                className={cn(
+                                                    "relative cursor-pointer overflow-hidden rounded-2xl h-full transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]",
+                                                    isActive ? "bg-zinc-900/10 shadow-2xl" : "bg-zinc-950"
+                                                )}
+                                                style={{ width: isActive ? "60%" : "20%" }}
+                                                onMouseEnter={() => setActiveBento(index)}
+                                                onClick={() => setActiveBento(index)}
+                                            >
+                                                <div className={cn(
+                                                    "absolute inset-0 rounded-2xl border z-50 pointer-events-none transition-colors duration-700",
+                                                    isActive ? "border-zinc-500/50" : "border-zinc-800/50"
+                                                )} />
+                                                <div className="relative z-10 w-full h-full flex flex-col p-0">
+                                                    <div className={cn(
+                                                        "absolute inset-0 flex flex-col transition-all duration-500 ease-in-out",
+                                                        isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
+                                                    )}>
+                                                        <div className="absolute inset-0 bg-zinc-900 overflow-hidden z-0 group/img">
+                                                            {bentoItem.image && (
+                                                                <>
+                                                                    <img src={bentoItem.image} alt={bentoItem.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 opacity-90" />
+                                                                    <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black via-black/50 to-transparent pointer-events-none" />
+                                                                </>
+                                                            )}
+                                                        </div>
+                                                        <div className="absolute bottom-0 left-0 w-full h-20 flex items-center justify-between px-5 z-20">
+                                                            <h3 className="text-sm font-bold text-white drop-shadow-md">{bentoItem.title}</h3>
+                                                            <div className="text-white/90">{bentoItem.icon}</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className={cn(
+                                                    "absolute inset-0 flex flex-col items-center justify-center gap-2 transition-all duration-500",
+                                                    isActive ? "opacity-0 scale-90 pointer-events-none" : "opacity-100 scale-100"
+                                                )}>
+                                                    <div className="text-white/50">{bentoItem.icon}</div>
+                                                    <span className="text-[10px] font-medium text-zinc-500 uppercase tracking-wider">{bentoItem.title}</span>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            )
+                        }
+                        if (i === 17 || i === 18) return null;
+                        if (typeof item === 'string') {
+                            const Icon = i % 3 === 0 ? Github : i % 3 === 1 ? Slack : Twitter;
+                            const label = i % 3 === 0 ? "Github" : i % 3 === 1 ? "Slack" : "Twitter";
+                            return (
+                                <figure key={\`img-\${i}\`} className="grid__item m-0 relative z-10 [perspective:800px] will-change-[transform,opacity] group cursor-pointer">
+                                    <div className="grid__item-img w-full h-full [backface-visibility:hidden] will-change-transform rounded-xl overflow-hidden shadow-sm border border-zinc-200 dark:border-zinc-900 bg-zinc-100 dark:bg-zinc-950 flex items-center justify-center transition-all duration-500 ease-out group-hover:scale-105 group-hover:shadow-xl">
+                                        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/80 to-black backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
+                                        <div className="relative z-10 flex flex-col items-center justify-center gap-3">
+                                            <Icon className="w-8 h-8 text-zinc-400 dark:text-zinc-500 transition-all duration-300 group-hover:text-white group-hover:scale-110" />
+                                            <div className="text-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 delay-75">
+                                                <span className="block text-[10px] font-medium text-white/90 uppercase tracking-wider mb-0.5">Build with</span>
+                                                <span className="block text-sm font-bold text-white tracking-tight">{label}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </figure>
+                            )
+                        }
+                        return null;
+                    })}
+                </div>
+            </section>
+
+            {showFooter && (
+                <footer className="frame__footer w-full p-8 flex justify-between items-center relative z-50 text-neutral-900 dark:text-white uppercase font-medium text-xs tracking-wider">
+                    <a href={credits.madeBy.href} className="hover:opacity-60 transition-opacity">{credits.madeBy.text}</a>
+                    <a href={credits.moreDemos.href} className="hover:opacity-60 transition-opacity">{credits.moreDemos.text}</a>
+                </footer>
+            )}
+        </div>
+    )
+}
+
+export default StaggeredGrid`}
+    />
+</Dependencies>
+
+<Dependencies step={6} title="Add required CSS">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Add these styles to your <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md mx-1">app/globals.css</code></p>
+    <CodeBlock
+        language="css"
+        code={`:root {
+  --color-text: #fff;
+  --color-bg: #000;
+}
+
+body {
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.font-alt {
+  font-family: system-ui, sans-serif;
+  font-weight: 700;
+}
+
+/* Loader animation */
+.loading::before,
+.loading::after {
+  content: '';
+  position: fixed;
+  z-index: 10000;
+}
+
+.loading::before {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-bg);
+}
+
+.loading::after {
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  margin: -30px 0 0 -30px;
+  border-radius: 50%;
+  opacity: 0.4;
+  background: #fff;
+  animation: loaderAnim 0.7s linear infinite alternate;
+}
+
+@keyframes loaderAnim {
+  to {
+    opacity: 1;
+    transform: scale3d(0.5, 0.5, 1);
+  }
+}`}
+    />
+</Dependencies>
+
+## Usage
+
+<CodeBlock 
+    language="tsx" 
+    code={`import { StaggeredGrid, BentoItem } from "@/components/ui/staggered-grid"
+import { SmoothScroll } from "@/components/ui/smooth-scroll"
+import { Github, Slack, Twitter } from "lucide-react"
+
+export default function Page() {
+  const images = Array.from({ length: 20 }, (_, i) => \`/img/\${i + 1}.jpg\`);
+
+  const bentoItems: BentoItem[] = [
+    {
+      id: 1,
+      title: "Repository",
+      subtitle: "Version Control",
+      description: "Secure, scalable code management.",
+      icon: <Github className="w-4 h-4" />,
+      image: "/img/1.jpg"
+    },
+    // ... more items
+  ];
+
+  return (
+    <SmoothScroll>
+      <main className="min-h-screen bg-black">
+        <StaggeredGrid
+          images={images}
+          bentoItems={bentoItems}
+          centerText="HALCYON"
+        />
+      </main>
+    </SmoothScroll>
+  );
+}`} 
+/>
+
+## Props
+
+### StaggeredGridProps
+
+<PropsTable
+  data={[
+    {
+      prop: "images",
+      type: "string[]",
+      defaultValue: "-",
+      description: "Array of image URLs to display in the grid cells."
+    },
+    {
+      prop: "bentoItems",
+      type: "BentoItem[]",
+      defaultValue: "-",
+      description: "Array of bento items for the expandable cards section."
+    },
+    {
+      prop: "centerText",
+      type: "string",
+      defaultValue: "\"Halcyon\"",
+      description: "Large centered text displayed above the grid with character animation."
+    },
+    {
+      prop: "credits",
+      type: "object",
+      defaultValue: "-",
+      description: "Footer credits configuration with 'madeBy' and 'moreDemos' links."
+    },
+    {
+      prop: "className",
+      type: "string",
+      defaultValue: "-",
+      description: "Additional CSS classes for the container."
+    },
+    {
+      prop: "showFooter",
+      type: "boolean",
+      defaultValue: "true",
+      description: "Whether to show the footer credits section."
+    },
+  ]}
+/>
+
+### BentoItem
+
+<PropsTable
+  data={[
+    {
+      prop: "id",
+      type: "number | string",
+      defaultValue: "-",
+      description: "Unique identifier for the bento item."
+    },
+    {
+      prop: "title",
+      type: "string",
+      defaultValue: "-",
+      description: "Title displayed in the card footer."
+    },
+    {
+      prop: "subtitle",
+      type: "string",
+      defaultValue: "-",
+      description: "Subtitle for the bento item."
+    },
+    {
+      prop: "description",
+      type: "string",
+      defaultValue: "-",
+      description: "Description text for the bento item."
+    },
+    {
+      prop: "icon",
+      type: "React.ReactNode",
+      defaultValue: "-",
+      description: "Icon component displayed in the card."
+    },
+    {
+      prop: "image",
+      type: "string",
+      defaultValue: "-",
+      description: "Background image URL for the expanded card."
+    },
+  ]}
+/>
+
+## Features
+
+**Staggered Column Animation**: Grid items animate in with staggered delays based on their column position, creating a wave-like effect from the center outward as you scroll.
+
+**Expandable Bento Cards**: Interactive cards that expand on hover to reveal full-width images with smooth transitions and text protection gradients.
+
+**Scroll-Triggered Animations**: All animations are tied to scroll position using GSAP ScrollTrigger for a smooth, performant experience.
+
+**Text Character Animation**: The centered text animates character-by-character as you scroll, with letters appearing from the center outward.
+
+**Grid Icons with Hover Reveal**: Each grid cell shows icons (Github, Slack, Twitter) with text reveal on hover.
+
+**Dark Mode Optimized**: Designed with a dark theme in mind with zinc color palette.
+
+**Smooth Scrolling**: Uses Lenis for buttery-smooth scroll experience.
+
+**GPU Acceleration**: Uses `will-change` and `force3D` for hardware-accelerated animations.
+
+**Responsive Grid**: 7-column, 5-row grid layout that maintains aspect ratio.
