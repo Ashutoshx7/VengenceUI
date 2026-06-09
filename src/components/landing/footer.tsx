@@ -2,6 +2,7 @@ import LogoIcon from "@/assets/logo/logo-icon";
 import Container from "./container";
 import Link from "next/link";
 import { VERCEL_OSS_PROGRAM_URL } from "./hero";
+import { GITHUB_REPO_URL } from "@/lib/github";
 
 const footerLinks = {
     Product: [
@@ -12,7 +13,7 @@ const footerLinks = {
     ],
     Resources: [
         { label: "Documentation", href: "/docs" },
-        { label: "GitHub", href: "https://github.com" },
+        { label: "GitHub", href: GITHUB_REPO_URL },
         { label: "Releases", href: "/releases" },
         { label: "Status", href: "/status" },
     ],
@@ -23,12 +24,27 @@ const footerLinks = {
     ],
 };
 
+function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
+    const isExternal = href.startsWith("http");
+
+    return (
+        <Link
+            href={href}
+            target={isExternal ? "_blank" : undefined}
+            rel={isExternal ? "noreferrer" : undefined}
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+            {children}
+        </Link>
+    );
+}
+
 export default function Footer() {
     return (
         <section className="border-t">
             <Container>
                 <div className="md:border-x flex flex-col">
-                    <div className="flex flex-col md:flex-row gap-12 md:gap-8 px-4 md:px-8 py-12 md:py-16 border-b">
+                    <div className="grid gap-10 px-4 py-10 border-b md:grid-cols-[minmax(0,360px)_minmax(0,1fr)] md:px-8 md:py-12 lg:gap-16">
                         <div className="flex flex-col gap-4 md:max-w-xs w-full">
                             <div className="flex items-center gap-2">
                                 <LogoIcon className="h-7 w-7 text-foreground rotate-180" />
@@ -43,19 +59,14 @@ export default function Footer() {
                             </div>
                         </div>
 
-                        <div className="flex-1 grid grid-cols-2 md:grid-cols-3 gap-8 md:pl-8">
+                        <div className="grid grid-cols-2 gap-8 md:grid-cols-3">
                             {Object.entries(footerLinks).map(([category, links]) => (
                                 <div key={category} className="flex flex-col gap-3">
                                     <span className="text-sm font-semibold">{category}</span>
                                     <ul className="flex flex-col gap-2">
                                         {links.map((link) => (
                                             <li key={link.label}>
-                                                <Link
-                                                    href={link.href}
-                                                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                                                >
-                                                    {link.label}
-                                                </Link>
+                                                <FooterLink href={link.href}>{link.label}</FooterLink>
                                             </li>
                                         ))}
                                     </ul>
@@ -64,7 +75,6 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    {/* Bottom bar */}
                     <div className="flex flex-col md:flex-row items-center justify-between gap-4 px-4 md:px-8 py-5 text-sm text-muted-foreground">
                         <span>© 2026 Vengeance UI. All rights reserved.</span>
                         <div className="flex items-center gap-6">
