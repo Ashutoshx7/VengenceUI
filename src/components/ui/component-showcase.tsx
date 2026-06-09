@@ -2,11 +2,9 @@ import * as React from "react";
 import fs from "fs";
 import path from "path";
 import { CodeBlock } from "@/components/ui/code-block";
-import { CopyButton } from "@/components/ui/copy-button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Terminal, TerminalSquare, PictureInPicture2 } from "lucide-react";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { ComponentDocsSections } from "@/components/docs/component-docs-sections";
-import { FullscreenPreview } from "@/components/ui/fullscreen-preview";
+import { ComponentPreviewPanel } from "@/components/ui/component-preview-panel";
 import { getShadcnAddCommand } from "@/lib/registry";
 
 interface ComponentShowcaseProps {
@@ -67,43 +65,9 @@ export function ComponentShowcase({
 
       {/* The Showcase Toggle */}
       <Tabs defaultValue="preview" className="space-y-4">
-        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-          <TabsList className="mb-0">
-            <TabsTrigger value="preview" className="gap-2 px-3 py-1.5 text-sm h-8 font-medium">
-              <PictureInPicture2 className="h-4 w-4" />
-              Preview
-            </TabsTrigger>
-            <TabsTrigger value="code" className="gap-2 px-3 py-1.5 text-sm h-8 font-medium text-neutral-500 dark:text-zinc-400 hover:text-neutral-700 dark:hover:text-zinc-300">
-              <TerminalSquare className="h-4 w-4" />
-              Code
-            </TabsTrigger>
-          </TabsList>
-
-          <div className="flex w-full items-center gap-2 rounded-xl border border-neutral-200 dark:border-white/10 bg-neutral-50 dark:bg-black px-1.5 py-1.5 text-xs text-neutral-600 dark:text-zinc-300 shadow-sm dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] lg:w-auto">
-            <div className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-neutral-100 dark:bg-zinc-800 text-neutral-400 dark:text-zinc-500">
-              <Terminal className="h-3.5 w-3.5" />
-            </div>
-            <span className="max-w-[42vw] truncate font-mono text-neutral-500 dark:text-zinc-400 lg:max-w-[500px]">{installCommand}</span>
-            <CopyButton code={installCommand} className="ml-auto h-7 w-7 border-neutral-200 dark:border-white/10 bg-transparent hover:bg-neutral-100 dark:hover:bg-white/10" />
-            <FullscreenPreview>{children}</FullscreenPreview>
-          </div>
-        </div>
-
-        {/* Live Preview */}
-        <TabsContent value="preview">
-          <div className="w-full">
-            <div id="preview" className="w-full scroll-mt-24 rounded-2xl border border-neutral-200 dark:border-[#222] bg-neutral-100 dark:bg-zinc-900 p-2.5 shadow-lg dark:shadow-[0_20px_60px_rgba(0,0,0,0.45)] sm:p-4">
-              <div className="relative flex h-[680px] items-stretch overflow-hidden rounded-xl border border-neutral-200 dark:border-[#222] bg-white dark:bg-black">
-                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-black/5 dark:bg-white/10" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(0,0,0,0.03),transparent_32%),radial-gradient(circle_at_80%_100%,rgba(0,0,0,0.02),transparent_34%)] dark:bg-[radial-gradient(circle_at_20%_0%,rgba(255,255,255,0.08),transparent_32%),radial-gradient(circle_at_80%_100%,rgba(255,255,255,0.04),transparent_34%)]" />
-
-                <div className="relative z-10 w-full h-full flex justify-center items-center">
-                  {children}
-                </div>
-              </div>
-            </div>
-          </div>
-        </TabsContent>
+        <ComponentPreviewPanel installCommand={installCommand}>
+          {children}
+        </ComponentPreviewPanel>
 
         {/* Code Block */}
         <TabsContent value="code">
