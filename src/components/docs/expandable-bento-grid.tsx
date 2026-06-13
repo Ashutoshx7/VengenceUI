@@ -2,8 +2,7 @@
 
 import React from 'react'
 import ExpandableBentoGrid from "@/components/ui/expandable-bento-grid"
-import { Layout } from 'lucide-react'
-import { FaGithub, FaSlack, FaTwitter } from 'react-icons/fa'
+import { Github, Slack, Twitter, Layout } from 'lucide-react'
 
 const items = [
     {
@@ -11,7 +10,7 @@ const items = [
         title: "Repository",
         subtitle: "Version Control",
         description: "Secure, scalable, and collaborative code management for modern teams.",
-        icon: <FaGithub className="w-6 h-6" />,
+        icon: <Github className="w-6 h-6" />,
         content: (
             <div className="space-y-4">
                 <p>Collaborate on code with your team in a secure environment.</p>
@@ -26,7 +25,7 @@ const items = [
         title: "Connect",
         subtitle: "Team Communication",
         description: "Real-time messaging, file sharing, and powerful search for instant collaboration.",
-        icon: <FaSlack className="w-6 h-6" />,
+        icon: <Slack className="w-6 h-6" />,
         content: (
             <div className="space-y-4">
                 <p>Stay connected with your team wherever you are.</p>
@@ -43,7 +42,7 @@ const items = [
         title: "Reach",
         subtitle: "Audience Engagement",
         description: "Amplify your voice and connect with your community globally in real-time.",
-        icon: <FaTwitter className="w-6 h-6" />,
+        icon: <Twitter className="w-6 h-6" />,
         content: (
             <div className="space-y-4">
                 <p>Engage with your audience on social media platforms.</p>
@@ -71,7 +70,7 @@ const items = [
 
 export function ExpandableBentoGridDemo() {
     return (
-        <div className="w-full h-full h-full flex items-center justify-center p-4 relative overflow-hidden">
+        <div className="w-full h-full min-h-[500px] flex items-center justify-center bg-white dark:bg-black p-4 relative overflow-hidden">
             <div className="absolute inset-0 bg-grid-black/[0.1] dark:bg-grid-white/[0.1] -z-10" />
             <ExpandableBentoGrid items={items} />
         </div>

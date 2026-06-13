@@ -1,317 +1,504 @@
-@import 'tailwindcss';
-@source "../components";
+@import "tailwindcss";
+@import "tw-animate-css";
 
-@plugin "../../node_modules/tailwindcss-animate";
+@custom-variant dark (&:where(.dark, .dark *));
 
-@custom-variant dark (&:is(.dark *));
+:root {
+  --font-inter-tight: "Inter Tight", sans-serif;
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+
+  /* AnimatedHero Component */
+  --rainbow-blue: 217 91% 60%;
+  --rainbow-pink: 330 81% 60%;
+  --rainbow-cyan: 180 77% 50%;
+  --stripe-color: rgba(255, 255, 255, 0.1);
+
+  /* morphing-disclosure component */
+  --jump-distance: 1.5rem;
+  --duration: 260ms;
+  --bounce: linear(0 0%,
+      0.5571 7.53%,
+      0.8252 11.98%,
+      0.9337 14.38%,
+      1.0166 16.8%,
+      1.0765 19.31%,
+      1.1146 21.97%,
+      1.1263 23.47%,
+      1.1325 25.06%,
+      1.133 26.76%,
+      1.128 28.62%,
+      1.1094 31.9%,
+      1.0484 39.77%,
+      1.0218 43.85%,
+      1.0011 48.42%,
+      0.9895 53.23%,
+      0.9861 59.8%,
+      1 81.27% 100%);
+}
+
+html,
+body,
+#__next {
+  font-family: var(--font-inter-tight);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Performance optimizations */
+  text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* GPU acceleration for smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Content containment for better performance */
+main,
+section,
+article {
+  contain: layout style;
+}
+
+.font-pixelify {
+  font-family: var(--font-pixelify);
+}
 
 @theme inline {
-
-  --font-mono: 'Geist Mono', 'Fira Code', monospace;
-  --font-orbitron: var(--font-orbitron);
-
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
   --color-chart-5: var(--chart-5);
-
-  --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 2px);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
   --radius-sm: calc(var(--radius) - 4px);
-
-  --animate-accordion-down: accordion-down 0.2s ease-out;
-  --animate-accordion-up: accordion-up 0.2s ease-out;
-
-  --breakpoint-sm: 640px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1200px;
-  --breakpoint-xl: 1440px;
-  --breakpoint-2xl: 1600px;
-
-  @keyframes accordion-down {
-    from {
-      height: 0;
-    }
-
-    to {
-      height: var(--radix-accordion-content-height);
-    }
-  }
-
-  @keyframes accordion-up {
-    from {
-      height: var(--radix-accordion-content-height);
-    }
-
-    to {
-      height: 0;
-    }
-  }
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
+:root {
+  --radius: 0.625rem;
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+}
 
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
+.dark {
+  --background: #000000;
+  --foreground: oklch(0.985 0 0);
+  --card: #000000;
+  --card-foreground: oklch(0.985 0 0);
+  --popover: #000000;
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: #000000;
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: #000000;
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: #000000;
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: #1a1a1a;
+  --input: #1a1a1a;
+  --ring: #1a1a1a;
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: #000000;
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: #000000;
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: #1a1a1a;
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
 @layer base {
-
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
-  }
-
-  :root {
-    --background: var(--color-white);
-    --foreground: var(--color-zinc-950);
-    --card: var(--color-white);
-    --card-foreground: var(--color-zinc-950);
-    --popover: var(--color-white);
-    --popover-foreground: var(--color-zinc-950);
-    --primary: var(--color-zinc-950);
-    --primary-foreground: var(--color-white);
-    --secondary: var(--color-zinc-100);
-    --secondary-foreground: var(--color-zinc-950);
-    --muted: var(--color-zinc-100);
-    --muted-foreground: var(--color-zinc-500);
-    --accent: var(--color-zinc-100);
-    --accent-foreground: var(--color-zinc-950);
-    --destructive: var(--color-red-600);
-    --destructive-foreground: var(--color-white);
-    --border: var(--color-zinc-200);
-    --input: var(--color-zinc-200);
-    --ring: var(--color-zinc-950);
-    --chart-1: var(--color-blue-500);
-    --chart-2: var(--color-indigo-500);
-    --chart-3: var(--color-purple-500);
-    --chart-4: var(--color-indigo-400);
-    --chart-5: var(--color-red-500);
-    --radius: 0.5rem
-  }
-
-  .dark {
-    --background: var(--color-zinc-950);
-    --foreground: var(--color-white);
-    --card: var(--color-zinc-950);
-    --card-foreground: var(--color-white);
-    --popover: var(--color-zinc-950);
-    --popover-foreground: var(--color-white);
-    --primary: var(--color-white);
-    --primary-foreground: var(--color-zinc-950);
-    --secondary: var(--color-zinc-800);
-    --secondary-foreground: var(--color-white);
-    --muted: var(--color-zinc-800);
-    --muted-foreground: var(--color-zinc-400);
-    --accent: var(--color-zinc-800);
-    --accent-foreground: var(--color-white);
-    --destructive: var(--color-red-600);
-    --destructive-foreground: var(--color-white);
-    --border: var(--color-zinc-800);
-    --input: var(--color-zinc-800);
-    --ring: var(--color-white);
-  }
-
-  * {
-    @apply border-border outline-ring/50;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
-  *::-webkit-scrollbar {
-    display: none;
-  }
-
   body {
     @apply bg-background text-foreground;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
-  }
-
-  body::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Skip layout/paint work for landing sections once they leave the viewport. */
-  main[data-landing-page] > section {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 820px;
-  }
-
-  /* Snappier link/button transitions */
-  a, button {
-    transition-duration: 100ms;
-  }
-
-  /* GPU-composite only the heavy animated containers so they don't
-     repaint surrounding content during scroll */
-  .motion-panel,
-  .motion-island,
-  .motion-core,
-  .system-island,
-  .system-card,
-  .generator-card,
-  .generator-browser {
-    transform: translateZ(0);
-    backface-visibility: hidden;
-  }
-
-  .line {
-    counter-increment: css-counter 1;
-    @apply relative pl-7 before:absolute before:text-white/20 before:inset-y-0 before:transition-colors before:duration-200 before:content-[counter(css-counter)] before:text-xs before:left-0 before:my-auto hover:before:text-white
   }
 }
 
-/* ── Global reduced-motion: kills ALL animations for low-power / a11y ── */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+/* Glass Component Borders */
+.glass-border {
+  border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-/* Pause ALL animations inside off-screen sections (set by IntersectionObserver) */
-.paused-section *,
-.paused-section *::before,
-.paused-section *::after {
-  animation-play-state: paused !important;
+.dark .glass-border {
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* CTA section animations */
-@keyframes cta-float {
-  0%, 100% { transform: translate(-50%, -50%) translateY(0) rotate(-2deg); }
-  50% { transform: translate(-50%, -50%) translateY(-15px) rotate(2deg); }
-}
-@keyframes cta-logo-float {
-  0%, 100% { transform: translate(-50%, -50%) translateY(-10px) scale(1); }
-  50% { transform: translate(-50%, -50%) translateY(-30px) scale(1.05); }
-}
-.cta-float-box {
-  will-change: auto;
-}
-.cta-float-logo {
-  will-change: auto;
-}
-.cta-art.is-animating .cta-float-box {
-  animation: cta-float 5s ease-in-out infinite;
-  will-change: transform;
-}
-.cta-art.is-animating .cta-float-logo {
-  animation: cta-logo-float 4s ease-in-out 0.5s infinite;
-  will-change: transform;
+.spotlight-nav-bg {
+  background-color: rgb(250, 250, 250);
 }
 
-/* Navbar GitHub CTA */
-.github-star-cta {
+.dark .spotlight-nav-bg {
+  background-color: rgb(10, 10, 10);
+}
+
+.spotlight-nav-shadow {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.dark .spotlight-nav-shadow {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5),
+    0 4px 6px -4px rgba(0, 0, 0, 0.5);
+}
+
+/* Hide all scrollbars (visual only) across browsers) */
+.noScrollbar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+/* Sidebar & Layout: ANIMATE-UI STYLE */
+
+/* 1. Target the container wrapping the sidebar */
+div:has(> aside),
+.nextra-container,
+.mx-auto {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  max-width: 100% !important;
+}
+
+/* 2. Target the sidebar element itself */
+aside,
+.nextra-sidebar-container,
+div[data-nextra-sidebar="true"] {
+  padding-left: 0.5rem !important;
+  margin-left: 0 !important;
+  padding-top: 4 !important;
+  left: 0 !important;
+}
+
+/* 3. Keep sidebar items flat */
+.nextra-sidebar-container ul,
+.nextra-sidebar-container li {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+  border: none !important;
+}
+
+/* 4. Sidebar Links - Animate UI Style */
+.nextra-sidebar-container a,
+.nextra-sidebar-container button:not([aria-label]) {
   position: relative;
-  border: 1px solid color-mix(in oklab, currentColor 16%, transparent);
-  background: color-mix(in oklab, currentColor 7%, transparent);
-  box-shadow: inset 0 1px 0 color-mix(in oklab, white 5%, transparent);
+  padding-left: 1.25rem !important;
+  padding-right: 0.75rem !important;
+  margin-left: 0.5rem !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 6px;
+  color: var(--muted-foreground);
 }
 
-.github-star-cta:hover {
-  border-color: color-mix(in oklab, currentColor 28%, transparent);
-  background: color-mix(in oklab, currentColor 10%, transparent);
+/* Vertical Line - runs along the left of all items */
+.nextra-sidebar-container a::before,
+.nextra-sidebar-container button:not([aria-label])::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: var(--border);
+  transition: background-color 0.3s ease;
 }
 
-.github-star-count {
-  background: transparent;
-  color: color-mix(in oklab, currentColor 88%, transparent);
+/* Active/Hover Indicator Bar - Now handled by SidebarHoverIndicator component */
+/* Remove CSS ::after indicators in favor of JS-based moving indicator */
+.nextra-sidebar-container a::after,
+.nextra-sidebar-container button:not([aria-label])::after {
+  display: none !important;
 }
 
-/* Testimonial scroll animation */
-@keyframes testimonial-scroll {
-  from { transform: translateY(0); }
-  to { transform: translateY(-50%); }
+/* HOVER EFFECT - Text slide effect */
+.nextra-sidebar-container a:hover,
+.nextra-sidebar-container button:not([aria-label]):hover {
+  color: var(--foreground) !important;
+  background-color: transparent !important;
+  /* Smooth text slide */
+  padding-left: 1.5rem !important;
+  transition: padding-left 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    color 0.2s ease;
 }
 
-[data-theme="mist"] {
-  --radius: 0.625rem;
-  --background: var(--color-white);
-  --foreground: var(--color-zinc-950);
-  --card: var(--color-white);
-  --card-foreground: var(--color-zinc-950);
-  --popover: var(--color-white);
-  --popover-foreground: var(--color-zinc-950);
-  --primary: var(--color-indigo-500);
-  --primary-foreground: var(--color-white);
-  --secondary: var(--color-indigo-100);
-  --secondary-foreground: var(--color-indigo-600);
-  --muted: var(--color-zinc-100);
-  --muted-foreground: var(--color-zinc-600);
-  --accent: var(--color-zinc-700);
-  --accent-foreground: var(--color-white);
-  --destructive: var(--color-red-600);
-  --border: var(--color-zinc-200);
-  --input: var(--color-zinc-200);
-  --ring: var(--color-indigo-500);
+/* ACTIVE STATE - Text styling */
+.nextra-sidebar-container li.active>a,
+.nextra-sidebar-container a.active,
+.nextra-sidebar-container a[aria-current="page"] {
+  color: var(--foreground) !important;
+  font-weight: 500 !important;
+  background-color: transparent !important;
+  padding-left: 1.5rem !important;
+}
 
-  @variant dark {
-    --radius: 0.625rem;
-    --background: var(--color-white);
-    --foreground: var(--color-zinc-950);
-    --card: var(--color-white);
-    --card-foreground: black;
-    --popover: var(--color-white);
-    --popover-foreground: var(--color-zinc-950);
-    --primary: var(--color-indigo-500);
-    --primary-foreground: var(--color-white);
-    --secondary: var(--color-indigo-100);
-    --secondary-foreground: var(--color-indigo-600);
-    --muted: var(--color-zinc-100);
-    --muted-foreground: var(--color-zinc-600);
-    --accent: var(--color-zinc-700);
-    --accent-foreground: var(--color-white);
-    --destructive: var(--color-red-600);
-    --border: var(--color-zinc-200);
-    --input: var(--color-zinc-200);
-    --ring: var(--color-indigo-500);
+/* Separator Headings */
+.nextra-sidebar-container li>span,
+.nextra-sidebar-container .nx-font-semibold {
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: var(--muted-foreground) !important;
+  padding-left: 0.5rem !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* First separator shouldn't have large top margin */
+.nextra-sidebar-container li:first-child>span {
+  margin-top: 0.5rem !important;
+}
+
+/* Hide tree expanders */
+svg.lucide-chevron-right {
+  display: none !important;
+}
+
+/* FORCE PURE BLACK MODE */
+html.dark,
+.dark body,
+.dark .nextra-container,
+.dark aside,
+.dark .nextra-sidebar-container,
+.dark div[data-nextra-sidebar="true"],
+.dark article,
+.dark main {
+  background-color: #000000 !important;
+  background: #000000 !important;
+}
+
+/* FORCE PURE WHITE MODE */
+html:not(.dark),
+html:not(.dark) body,
+html:not(.dark) .nextra-container,
+html:not(.dark) aside,
+html:not(.dark) .nextra-sidebar-container,
+html:not(.dark) div[data-nextra-sidebar="true"],
+html:not(.dark) article,
+html:not(.dark) main {
+  background: #ffffff !important;
+}
+
+/* FORCE NAVBAR/HEADER TO BLACK IN DARK MODE */
+.dark nav:not(.spotlight-nav),
+.dark header,
+.dark .nextra-nav-container,
+.dark .nextra-nav-container-blur,
+.dark [class*="nav-container"] {
+  background-color: #000000 !important;
+  background: #000000 !important;
+  border: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+/* NAVBAR IN LIGHT MODE */
+html:not(.dark) nav:not(.spotlight-nav),
+html:not(.dark) header,
+html:not(.dark) .nextra-nav-container,
+html:not(.dark) .nextra-nav-container-blur,
+html:not(.dark) [class*="nav-container"] {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  border: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+/* Serif Elegant Font for Footer */
+.font-serif-elegant {
+  font-family: var(--font-playfair), serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* Wordmark Gradient for Footer */
+.wordmark-gradient {
+  background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 0.85) 0%,
+      rgba(255, 255, 255, 0.35) 35%,
+      rgba(255, 255, 255, 0) 85%);
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.vengeanceUI-text {
+  font-weight: bold;
+  text-transform: uppercase;
+  position: relative;
+  animation: melt 6s infinite ease-in-out;
+  color: hsl(var(--foreground));
+  text-shadow: 0 0 40px hsl(var(--foreground) / 0.1);
+}
+
+.vengeanceUI-text::before,
+.vengeanceUI-text::after {
+  content: "vengeanceUI";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: hsl(var(--foreground) / 0.15);
+  z-index: -1;
+  transform: scaleY(1);
+  animation: drip 6s infinite ease-in-out;
+}
+
+.vengeanceUI-text::after {
+  filter: blur(20px);
+  color: hsl(var(--foreground) / 0.1);
+}
+
+/* effect for vengeanceUI-text melting */
+@keyframes melt {
+
+  0%,
+  100% {
+    transform: translateY(0);
   }
 
-  @apply *:text-foreground
+  50% {
+    transform: translateY(10px);
+  }
 }
 
-/* FlipText Component Styles */
+@keyframes drip {
+
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+
+  50% {
+    transform: scaleY(1.15);
+    opacity: 0.3;
+  }
+}
+
+/* FORCE LOGO TO WHITE IN DARK MODE */
+.dark nav img,
+.dark header img,
+.dark .nextra-nav-container img {
+  filter: brightness(0) invert(1) !important;
+}
+
+/* FORCE LOGO TEXT TO WHITE IN DARK MODE */
+.dark nav span,
+.dark header span,
+.dark .nextra-nav-container span {
+  color: #ffffff !important;
+}
+
+/* FORCE HEADER STYLING OVERRIDES */
+#installation,
+.nextra-container h2 {
+  font-weight: 700 !important;
+  font-size: 1.875rem !important;
+  letter-spacing: -0.025em !important;
+}
+
+/* ============================================
+   FlipText Component Animations
+   ============================================ */
+
 .flip-char {
   color: inherit;
   -webkit-text-fill-color: transparent;
@@ -338,7 +525,7 @@
   animation: fade var(--flip-duration, 2.2s) var(--flip-delay, 0s) var(--flip-iteration, infinite) ease;
 }
 
-/* Front Face (Initial) */
+/*Front Face (Initial) */
 .flip-char::after {
   transform: translate(-50%, -50%) translateZ(0.6em);
 }
@@ -372,48 +559,23 @@
   }
 }
 
-/* BorderBeam Component Keyframe (moved from inline style jsx) */
-@keyframes border-beam {
-  100% {
-    offset-distance: 100%;
-  }
-}
+/* ============================================
+   PerspectiveGrid Component Styles
+   ============================================ */
 
-/* IsometricHeroBox floating animation */
-@keyframes hero-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
-}
-
-.hero-face-preview {
-  animation: hero-face-preview-in 480ms cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-@keyframes hero-face-preview-in {
-  from {
-    opacity: 0;
-    transform: translateY(18px) scale(0.92);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* PerspectiveGrid Component Styles */
+/* Base tile styles - ensure visibility */
 .tile {
   min-width: 1px;
   min-height: 1px;
   border-width: 1px;
   border-style: solid;
-  border-color: rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.2);
   background-color: transparent;
   box-sizing: border-box;
 }
 
 .dark .tile {
-  border-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .tile:nth-child(4n):hover {
@@ -432,20 +594,104 @@
   background-color: rgb(253 224 71);
 }
 
-/* GlowBorderCard Animation Utilities */
+.tile:nth-child(7n):hover {
+  background-color: rgb(56 189 248);
+}
+
+.tile:nth-child(7n + 3):hover {
+  background-color: rgb(74 222 128);
+}
+
+.tile:nth-child(7n + 5):hover {
+  background-color: rgb(253 224 71);
+}
+
+.tile:nth-child(7n + 6):hover {
+  background-color: rgb(248 113 113);
+}
+
+.tile:nth-child(11n + 1):hover {
+  background-color: rgb(248 113 113);
+}
+
+.tile:nth-child(11n + 4):hover {
+  background-color: rgb(56 189 248);
+}
+
+.tile:nth-child(11n + 7):hover {
+  background-color: rgb(74 222 128);
+}
+
+.tile:nth-child(11n + 10):hover {
+  background-color: rgb(253 224 71);
+}
+
+/* ============================================
+   AnimatedHero Component Styles
+   ============================================ */
+
+.dark {
+  --stripe-color: rgba(0, 0, 0, 0.3);
+}
+
+@keyframes aurora-bg {
+  0% {
+    background-position: 0% 50%, 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%, 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%, 0% 50%;
+  }
+}
+
+@keyframes aurora-blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.animate-aurora-bg {
+  animation: aurora-bg 15s ease infinite;
+}
+
+.animate-aurora-blink {
+  animation: aurora-blink 2s ease-in-out infinite;
+}
+
+/* ============================================
+   GlowBorderCard Animation Utilities
+   ============================================ */
+
+/* Register --glow-angle for animation */
 @property --glow-angle {
   syntax: "<angle>";
   initial-value: 0deg;
   inherits: false;
 }
 
+/* Rotation Animation Keyframes */
 @keyframes glow-angle-rotate {
   to {
     --glow-angle: 1turn;
   }
 }
 
+/*
+ * Utility class for the glowing conic gradient
+ * keeping this in CSS because the gradient syntax is too complex for Tailwind arbitrary values
+ */
 .glow-conic {
+  /* The animated gradient */
   border-image: conic-gradient(from var(--glow-angle),
       var(--glow-color-1, #669900),
       var(--glow-color-2, #99cc33),
@@ -458,135 +704,474 @@
       var(--glow-color-9, #ff9900),
       var(--glow-color-10, #ffcc00),
       var(--glow-color-1, #669900)) 1;
+
+  /* Animation */
   animation: glow-angle-rotate var(--glow-animation-duration, 4s) linear infinite;
 }
 
-/* Aurora Hero Component Styles */
-:root {
-  --rainbow-blue: 217 91% 60%;
-  --rainbow-pink: 330 81% 60%;
-  --rainbow-cyan: 180 77% 50%;
-  --stripe-color: #fff;
-}
-
-.dark {
-  --stripe-color: #000;
-}
-
-@keyframes aurora-smooth-bg {
-  from {
-    background-position: 50% 50%, 50% 50%;
-  }
-  to {
-    background-position: 350% 50%, 350% 50%;
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .glow-conic {
+    animation: none;
   }
 }
 
-@keyframes aurora-blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.3;
-  }
-}
+/* ============================================
+   Line Hover Link Component Styles
+   ============================================ */
 
-.animate-aurora-bg {
-  animation: aurora-smooth-bg 60s linear infinite;
-}
-
-.animate-aurora-blink {
-  animation: aurora-blink 2s ease-in-out infinite;
-}
-
-/* Spotlight Navbar Component Styles */
-.spotlight-nav {
-  --spotlight-color: rgba(0, 0, 0, 0.08);
-  --ambience-color: rgba(0, 0, 0, 0.8);
-}
-
-.dark .spotlight-nav {
-  --spotlight-color: rgba(255, 255, 255, 0.15);
-  --ambience-color: rgba(255, 255, 255, 1);
-}
-
-.spotlight-nav-bg {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
-}
-
-.dark .spotlight-nav-bg {
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(12px);
-}
-
-.spotlight-nav-shadow {
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-}
-
-.dark .spotlight-nav-shadow {
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
-}
-
-/* Glass Dock Component Styles */
-.glass-dock {
-  --tab-bar-home-scale: 0.7;
-  --tab-bar-home-opacity: 1;
-  --tab-bar-blog-scale: 0.7;
-  --tab-bar-blog-opacity: 1;
-  --tab-bar-marker-scale: 0.7;
-  --tab-bar-marker-opacity: 1;
-  --tab-bar-email-scale: 0.7;
-  --tab-bar-email-opacity: 1;
-  --tab-bar-linkedin-scale: 0.7;
-  --tab-bar-linkedin-opacity: 1;
-  --tab-bar-x-scale: 0.7;
-  --tab-bar-x-opacity: 1;
-  --tab-bar-github-scale: 0.7;
-  --tab-bar-github-opacity: 1;
-}
-
-.glass-dock button {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  border: none;
-  background: none;
+.link-hover {
   cursor: pointer;
-  color: #737373;
-  transition: color 0.1s;
+  position: relative;
+  white-space: nowrap;
+  color: currentColor;
+  text-decoration: none;
 }
 
-.dark .glass-dock button {
-  color: #a3a3a3;
-}
-
-.glass-dock button.active,
-.glass-dock button:hover {
-  color: #000;
-}
-
-.dark .glass-dock button.active,
-.dark .glass-dock button:hover {
-  color: #fff;
-}
-
-.glass-dock button svg {
-  width: 22px;
-  height: 22px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.link-hover::before,
+.link-hover::after {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  top: 100%;
+  left: 0;
   pointer-events: none;
 }
 
-/* StackedLogos - CSS Variables & Animations */
+.link-hover::before {
+  content: "";
+}
+
+/* Slide - Simple slide from right to left */
+.link-hover--slide::before {
+  transform-origin: 100% 50%;
+  transform: scale3d(0, 1, 1);
+  transition: transform 0.3s;
+}
+
+.link-hover--slide:hover::before {
+  transform-origin: 0% 50%;
+  transform: scale3d(1, 1, 1);
+}
+
+/* Double - Double line slide with different timings */
+.link-hover--double::before {
+  transform-origin: 100% 50%;
+  transform: scale3d(0, 1, 1);
+  transition: transform 0.3s cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+.link-hover--double:hover::before {
+  transform-origin: 0% 50%;
+  transform: scale3d(1, 1, 1);
+  transition-timing-function: cubic-bezier(0.4, 1, 0.8, 1);
+}
+
+.link-hover--double::after {
+  content: "";
+  top: calc(100% + 4px);
+  transform-origin: 0% 50%;
+  transform: scale3d(0, 1, 1);
+  transition: transform 0.3s cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+.link-hover--double:hover::after {
+  transform-origin: 100% 50%;
+  transform: scale3d(1, 1, 1);
+  transition-timing-function: cubic-bezier(0.4, 1, 0.8, 1);
+}
+
+/* Grow - Line with thickness change + second line */
+.link-hover--grow::before {
+  transform-origin: 100% 50%;
+  transform: scale3d(0, 1, 1);
+  transition: transform 0.3s cubic-bezier(0.2, 1, 0.8, 1);
+}
+
+.link-hover--grow:hover::before {
+  transform-origin: 0% 50%;
+  transform: scale3d(1, 2, 1);
+  transition-timing-function: cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+.link-hover--grow::after {
+  content: "";
+  top: calc(100% + 4px);
+  transform-origin: 100% 50%;
+  transform: scale3d(0, 1, 1);
+  transition: transform 0.4s 0.1s cubic-bezier(0.2, 1, 0.8, 1);
+}
+
+.link-hover--grow:hover::after {
+  transform-origin: 0% 50%;
+  transform: scale3d(1, 1, 1);
+  transition-timing-function: cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+/* Strike - Strikethrough with text scale */
+.link-hover--strike {
+  padding: 0 10px;
+}
+
+.link-hover--strike::before {
+  top: 50%;
+  height: 2px;
+  transform-origin: 100% 50%;
+  transform: scale3d(0, 1, 1);
+  transition: transform 0.3s cubic-bezier(0.4, 1, 0.8, 1);
+}
+
+.link-hover--strike:hover::before {
+  transform-origin: 0% 50%;
+  transform: scale3d(1, 1, 1);
+}
+
+.link-hover--strike span {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.4, 1, 0.8, 1);
+}
+
+.link-hover--strike:hover span {
+  transform: scale3d(1.1, 1.1, 1.1);
+}
+
+/* Fade - Double lines with staggered fade-up */
+.link-hover--fade::before,
+.link-hover--fade::after {
+  opacity: 0;
+  transform-origin: 50% 0%;
+  transform: translate3d(0, 3px, 0);
+  transition-property: transform, opacity;
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0.2, 1, 0.8, 1);
+}
+
+.link-hover--fade:hover::before,
+.link-hover--fade:hover::after {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition-timing-function: cubic-bezier(0.2, 0, 0.3, 1);
+}
+
+.link-hover--fade::after {
+  content: "";
+  top: calc(100% + 4px);
+  width: 70%;
+  left: 15%;
+}
+
+.link-hover--fade::before,
+.link-hover--fade:hover::after {
+  transition-delay: 0.1s;
+}
+
+.link-hover--fade:hover::before {
+  transition-delay: 0s;
+}
+
+/* Pulse - Animated line that expands and contracts */
+.link-hover--pulse::before {
+  height: 10px;
+  top: 100%;
+  opacity: 0;
+}
+
+.link-hover--pulse:hover::before {
+  opacity: 1;
+  animation: lineUp 0.3s ease forwards;
+}
+
+@keyframes lineUp {
+  0% {
+    transform-origin: 50% 100%;
+    transform: scale3d(1, 0.045, 1);
+  }
+
+  50% {
+    transform-origin: 50% 100%;
+    transform: scale3d(1, 1, 1);
+  }
+
+  51% {
+    transform-origin: 50% 0%;
+    transform: scale3d(1, 1, 1);
+  }
+
+  100% {
+    transform-origin: 50% 0%;
+    transform: scale3d(1, 0.045, 1);
+  }
+}
+
+.link-hover--pulse::after {
+  content: "";
+  transition: opacity 0.3s;
+  opacity: 0;
+  transition-delay: 0s;
+}
+
+.link-hover--pulse:hover::after {
+  opacity: 1;
+  transition-delay: 0.3s;
+}
+
+/* Swap - Two lines going opposite directions */
+.link-hover--swap::before {
+  transform-origin: 0% 50%;
+  transform: scale3d(0, 1, 1);
+  transition: transform 0.3s;
+}
+
+.link-hover--swap:hover::before {
+  transform: scale3d(1, 1, 1);
+}
+
+.link-hover--swap::after {
+  content: "";
+  top: calc(100% + 4px);
+  transition: transform 0.3s;
+  transform-origin: 100% 50%;
+}
+
+.link-hover--swap:hover::after {
+  transform: scale3d(0, 1, 1);
+}
+
+/* Sweep - Cover sweep animation */
+.link-hover--sweep::before {
+  height: 100%;
+  top: 0;
+  opacity: 0;
+}
+
+.link-hover--sweep:hover::before {
+  opacity: 1;
+  animation: coverUp 0.3s ease forwards;
+}
+
+@keyframes coverUp {
+  0% {
+    transform-origin: 50% 100%;
+    transform: scale3d(1, 0.045, 1);
+  }
+
+  50% {
+    transform-origin: 50% 100%;
+    transform: scale3d(1, 1, 1);
+  }
+
+  51% {
+    transform-origin: 50% 0%;
+    transform: scale3d(1, 1, 1);
+  }
+
+  100% {
+    transform-origin: 50% 0%;
+    transform: scale3d(1, 0.045, 1);
+  }
+}
+
+.link-hover--sweep::after {
+  content: "";
+  transition: opacity 0.3s;
+}
+
+.link-hover--sweep:hover::after {
+  opacity: 0;
+}
+
+/* Bounce - Bouncy squish effect */
+.link-hover--bounce::before {
+  height: 7px;
+  border-radius: 20px;
+  transform: scale3d(1, 1, 1);
+  transition: transform 0.2s, opacity 0.2s;
+  transition-timing-function: cubic-bezier(0.2, 0.57, 0.67, 1.53);
+}
+
+.link-hover--bounce:hover::before {
+  transition-timing-function: cubic-bezier(0.8, 0, 0.1, 1);
+  transition-duration: 0.4s;
+  opacity: 1;
+  transform: scale3d(1.2, 0.1, 1);
+}
+
+.link-hover--bounce span {
+  transform: translate3d(0, -4px, 0);
+  display: inline-block;
+  transition: transform 0.2s 0.05s cubic-bezier(0.2, 0.57, 0.67, 1.53);
+}
+
+.link-hover--bounce:hover span {
+  transform: translate3d(0, 0, 0);
+  transition-timing-function: cubic-bezier(0.8, 0, 0.1, 1);
+  transition-duration: 0.4s;
+  transition-delay: 0s;
+}
+
+/* SVG Graphics Base */
+.link-hover__graphic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1px;
+}
+
+.link-hover__graphic--stroke path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.link-hover:hover .link-hover__graphic--stroke path {
+  stroke-dashoffset: 0;
+}
+
+/* Arc - SVG arc stroke draw */
+.link-hover--arc::before {
+  display: none;
+}
+
+.link-hover__graphic--arc {
+  top: 73%;
+  left: -23%;
+}
+
+.link-hover__graphic--arc path {
+  transition: stroke-dashoffset 0.4s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.link-hover:hover .link-hover__graphic--arc path {
+  transition-timing-function: cubic-bezier(0.8, 1, 0.7, 1);
+  transition-duration: 0.3s;
+}
+
+/* Scribble - SVG scribble stroke draw */
+.link-hover--scribble::before {
+  display: none;
+}
+
+.link-hover__graphic--scribble {
+  top: 100%;
+}
+
+.link-hover__graphic--scribble path {
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.link-hover:hover .link-hover__graphic--scribble path {
+  transition-timing-function: cubic-bezier(0.8, 1, 0.7, 1);
+  transition-duration: 0.3s;
+}
+
+/* ============================================
+   LogoSlider / Marquee Component Styles
+   
+   Only CSS that Tailwind cannot handle:
+   - CSS variables for animation calculations
+   - Complex masks for edge fade and blur
+   - Keyframe animations
+   ============================================ */
+
+/* CSS Variables (can't be done in Tailwind) */
+.logo-slider {
+  --speed: 60;
+  --count: 8;
+  --blurs: 8;
+  --blur: 1;
+}
+
+/* Edge fade mask (complex gradient mask) */
+.logo-slider__container {
+  mask: linear-gradient(90deg, transparent, black 15% 85%, transparent);
+  -webkit-mask: linear-gradient(90deg, transparent, black 15% 85%, transparent);
+}
+
+/* Progressive blur layers (complex calculated mask) */
+.logo-slider__blur>div {
+  z-index: var(--blur-index);
+  mask: linear-gradient(90deg,
+      transparent calc(var(--blur-index) * calc((100 / var(--blurs)) * 1%)),
+      black calc((var(--blur-index) + 1) * calc((100 / var(--blurs)) * 1%)),
+      black calc((var(--blur-index) + 2) * calc((100 / var(--blurs)) * 1%)),
+      transparent calc((var(--blur-index) + 3) * calc((100 / var(--blurs)) * 1%)));
+  -webkit-mask: linear-gradient(90deg,
+      transparent calc(var(--blur-index) * calc((100 / var(--blurs)) * 1%)),
+      black calc((var(--blur-index) + 1) * calc((100 / var(--blurs)) * 1%)),
+      black calc((var(--blur-index) + 2) * calc((100 / var(--blurs)) * 1%)),
+      transparent calc((var(--blur-index) + 3) * calc((100 / var(--blurs)) * 1%)));
+  backdrop-filter: blur(calc((var(--blur-index, 0) * var(--blur, 0)) * 1px));
+  -webkit-backdrop-filter: blur(calc((var(--blur-index, 0) * var(--blur, 0)) * 1px));
+}
+
+/* Per-Item Animation (keyframes and calc-based animation) */
+@media (prefers-reduced-motion: no-preference) {
+  .logo-slider__track {
+    gap: 0;
+  }
+
+  .logo-slider__item {
+    --duration: calc(var(--speed) * 1s);
+    --delay: calc((var(--duration) / var(--count)) * (var(--item-index, 0) * -1));
+    --origin-x: calc(((var(--count) - var(--item-index)) + var(--inset, 0)) * 100%);
+    --destination-x: calc((var(--item-index) + 1 + var(--outset, 0)) * -100%);
+
+    animation: logo-slider-slide var(--duration) var(--delay) infinite linear;
+    translate: var(--origin-x) 0;
+  }
+
+  @keyframes logo-slider-slide {
+    100% {
+      translate: var(--destination-x) 0;
+    }
+  }
+}
+
+/* Direction Control */
+.logo-slider__container[data-direction="right"] .logo-slider__item {
+  animation-direction: reverse;
+}
+
+/* Pause on Hover */
+.logo-slider__container[data-pause-on-hover="true"]:hover .logo-slider__item {
+  animation-play-state: paused;
+}
+
+/* Reduced Motion Fallback */
+@media (prefers-reduced-motion: reduce) {
+  .logo-slider__item {
+    animation: none;
+    translate: none;
+  }
+
+  .logo-slider__track {
+    animation: logo-slider-fallback 120s linear infinite;
+  }
+
+  @keyframes logo-slider-fallback {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+/* ============================================
+   StackedLogos Component Styles
+   
+   Only CSS that Tailwind cannot handle:
+   - CSS variables for animation calculations
+   - Keyframe animations with complex timing
+   - Mouse-following glow effect
+   ============================================ */
+
+/* CSS Variables */
 .stacked-logos {
   --duration: 30;
   --items: 4;
@@ -597,18 +1182,22 @@
   --mouse-y: 0px;
 }
 
+/* Show glow on hover */
 .stacked-logos:hover .stacked-logos__glow {
   opacity: 1;
 }
 
+/* Show border glow on hover */
 .stacked-logos:hover .stacked-logos__border-glow {
   opacity: 1;
 }
 
+/* Stagger delay calculation for each cell */
 .stacked-logos__cell {
   --base-delay: calc(sin((var(--index) / var(--lists)) * 45deg) * var(--stagger));
 }
 
+/* Logo animation */
 .stacked-logos__logo {
   animation-name: stacked-logos-appear;
   animation-duration: calc(var(--duration) * 1s);
@@ -617,6 +1206,7 @@
   animation-delay: calc((var(--duration) / var(--items)) * (var(--items) - var(--i)) * -1s + (var(--base-delay, 0) * 1s));
 }
 
+/* Appear/disappear keyframe animation */
 @keyframes stacked-logos-appear {
 
   0%,
@@ -638,27 +1228,428 @@
   }
 }
 
-/* Glass Component Borders */
-.glass-border {
-  border: 1px solid rgba(0, 0, 0, 0.15);
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .stacked-logos__logo {
+    animation: none;
+    opacity: 1;
+    filter: none;
+  }
+
+  .stacked-logos__item:not(:first-child) {
+    display: none;
+  }
 }
 
-.dark .glass-border {
-  border: 1px solid rgba(255, 255, 255, 0.2);
+/* ============================================
+   ScrollEffect Component Styles
+   
+   Only CSS that Tailwind cannot handle:
+   - CSS variables for animation calculations
+   - clip animation
+   - grid size calculatin
+   ============================================ */
+
+@property --k {
+  syntax: "<number>";
+  initial-value: 0;
+  inherits: true;
 }
 
-.spotlight-nav-bg {
-  background-color: rgb(250, 250, 250);
+.clip-root {
+  --g: 1rem;
+  --n: 2;
+
+  position: sticky;
+  top: 0;
+  height: 110dvh;
+  padding: var(--g);
+
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  grid-auto-rows: 1fr;
+  gap: var(--g);
+  overflow: hidden;
 }
 
-.dark .spotlight-nav-bg {
-  background-color: rgb(10, 10, 10);
+/* image clip effect support */
+.clip-img {
+  --_j: var(--j, 0);
+  --p: calc(2 * var(--_j) + 1);
+  --s: sign(var(--_j) - 0.5);
+
+  grid-area: 2 / var(--p);
+
+  justify-self: var(--j, end);
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--g);
+  contain: size;
+
+  &:nth-child(n + 3) {
+    --j: 1;
+  }
 }
 
-.spotlight-nav-shadow {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+/* featured (main) image clip calculation */
+.feat {
+  grid-area: 1 / 1 / -1 / -1;
+  /* grid-column: 1/ -1;
+    grid-row: 1; */
+  height: 200%;
+  border-radius: 2px;
+
+  clip-path: inset(0 calc(min(1, 2 * var(--k)) * (100% + var(--g)) / 3) round var(--g));
+  z-index: 1;
 }
 
-.dark .spotlight-nav-shadow {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+.clip-img:not(.feat) {
+  --d: calc(clamp(0, var(--i) + (1-2 * var(--k)) * (var(--n) - 1), 1) * 33cqw);
+
+  transform: translate(calc(var(--s) * var(--d)), calc(0.5 * var(--d)));
+  z-index: 0;
+}
+
+.mid {
+  --j: 1;
+  grid-column: var(--p);
+  grid-row: calc(var(--i) + 1);
+
+  &:nth-child(5) {
+    width: 80%;
+    height: 150px;
+  }
+
+  &:nth-child(4) {
+    margin-top: -200px;
+
+    width: 40%;
+    height: 200px;
+  }
+}
+
+/* end images grid calculations */
+.end {
+  /* grid-area: var(--p) / var(--p); */
+
+  grid-column: var(--p);
+  grid-row: calc(var(--i) + 1);
+
+  --j: 1;
+
+  &:nth-child(1) {
+    width: 80%;
+    height: 200px;
+    justify-self: end;
+  }
+
+  &:nth-child(2) {
+    width: 40%;
+    height: 200px;
+    justify-self: end;
+  }
+}
+
+/* ============================================
+   Pixelated Image Trail Component Styles
+   Premium, buttery-smooth 60fps animations
+   ============================================ */
+
+.pixelated-trail-container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+  /* Force GPU compositing layer */
+  transform: translate3d(0, 0, 0);
+  /* Isolate from main thread repaints */
+  contain: strict;
+  /* 3D perspective for depth */
+  perspective: 1000px;
+}
+
+/* Base state */
+.pixelated-trail-img {
+  position: absolute;
+  width: 175px;
+  height: 175px;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  contain: layout style paint;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.1));
+  opacity: 1;
+  /* Default slide transition */
+  transition: left 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    top 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Exit state - triggered by JS */
+.pixelated-trail-img.animate-out {
+  opacity: 0 !important;
+  transform: translate3d(0, 0, 0) scale(0.2) !important;
+  /* Snappy 300ms exit */
+  transition: opacity 300ms ease-out, transform 300ms ease-out !important;
+}
+
+.pixelated-mask-layer {
+  position: absolute;
+  inset: 0;
+  /* GPU acceleration for clip-path */
+  transform: translate3d(0, 0, 0);
+  will-change: clip-path;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* Isolate paint operations */
+  isolation: isolate;
+  contain: layout style;
+}
+
+.pixelated-image-layer {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  /* GPU compositing */
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  /* High-quality image rendering */
+  image-rendering: auto;
+  image-rendering: -webkit-optimize-contrast;
+  /* Subtle inner shadow for depth */
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+/* Reduced motion support for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .pixelated-trail-container {
+    display: none;
+  }
+}
+
+/* ============================================
+   AnimatedTabBar & GlassDock Component Styles
+   ============================================ */
+
+/* Container for AnimatedTabBar specifically */
+.tab-bar {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 24px 36px 36px 36px;
+  background-color: #151519;
+  box-shadow: inset 0 1.5px 0 0 #212126;
+  border-radius: 31px 31px 41px 41px;
+}
+
+/* Shared Button Styles */
+.tab-bar button,
+.glass-dock button {
+  cursor: pointer;
+  display: block;
+  position: relative;
+  background-color: transparent;
+  border: 0;
+  padding: 12px;
+  margin: 0;
+  color: #656472;
+  transition: color 0.35s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.glass-dock button {
+  /* Adjust padding for glass dock if needed, or inherit */
+  color: inherit;
+  /* Allow glass dock to control base color */
+}
+
+.glass-dock button.active {
+  color: #7ee9f2;
+}
+
+/* Dark mode adjustment for base icon color in glass dock if not active */
+.dark .glass-dock button:not(.active) {
+  color: #a1a1aa;
+}
+
+.tab-bar button.active {
+  color: #7ee9f2;
+}
+
+.tab-bar button.home,
+.glass-dock button.home {
+  --tab-bar-home-scale: 0.7;
+  --tab-bar-home-opacity: 1;
+}
+
+.tab-bar button.home:before,
+.glass-dock button.home:before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 2px currentColor;
+  transform: translateX(-50%) scale(var(--tab-bar-home-scale)) translateZ(0);
+  opacity: var(--tab-bar-home-opacity);
+  position: absolute;
+  left: 50%;
+  top: 42.5%;
+}
+
+.tab-bar button.chart,
+.glass-dock button.chart {
+  --tab-bar-chart-1-offset: 6px;
+  --tab-bar-chart-2-offset: 18px;
+  --tab-bar-chart-3-offset: 10px;
+  --tab-bar-chart-4-offset: 17px;
+}
+
+/* Marker Button Animation Styles */
+.tab-bar button.marker,
+.glass-dock button.marker {
+  --tab-bar-marker-scale: 0.7;
+  --tab-bar-marker-opacity: 1;
+}
+
+.tab-bar button.marker:before,
+.glass-dock button.marker:before {
+  content: "";
+  width: 11px;
+  height: 11px;
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 2px currentColor;
+  transform: translateX(-50%) scale(var(--tab-bar-marker-scale)) translateZ(0);
+  opacity: var(--tab-bar-marker-opacity);
+  position: absolute;
+  left: 50%;
+  top: 34.5%;
+}
+
+/* Blog Button Animation Styles */
+.tab-bar button.blog,
+.glass-dock button.blog {
+  --tab-bar-blog-scale: 0.7;
+  --tab-bar-blog-opacity: 1;
+}
+
+/* Email Button Animation Styles */
+.tab-bar button.email,
+.glass-dock button.email {
+  --tab-bar-email-scale: 0.7;
+  --tab-bar-email-opacity: 1;
+}
+
+/* LinkedIn Button Animation Styles */
+.tab-bar button.linkedin,
+.glass-dock button.linkedin {
+  --tab-bar-linkedin-scale: 0.7;
+  --tab-bar-linkedin-opacity: 1;
+}
+
+/* X Button Animation Styles */
+.tab-bar button.x,
+.glass-dock button.x {
+  --tab-bar-x-scale: 0.7;
+  --tab-bar-x-opacity: 1;
+}
+
+/* Github Button Animation Styles */
+.tab-bar button.github,
+.glass-dock button.github {
+  --tab-bar-github-scale: 0.7;
+  --tab-bar-github-opacity: 1;
+}
+
+.tab-bar button svg,
+.glass-dock button svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  display: block;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke: currentColor;
+  will-change: transform;
+}
+
+/* Phone Container */
+.phone {
+  position: relative;
+  max-width: 390px;
+  width: 100%;
+  display: flex;
+  background-color: #111113;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.1),
+    0 8px 24px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 41px 41px;
+  min-height: 100px;
+}
+
+.phone:before {
+  content: "";
+  height: 4px;
+  bottom: 8px;
+  width: 88px;
+  left: 50%;
+  transform: translateX(-50%) scaleY(0.75);
+  position: absolute;
+  background-color: #2d2d34;
+  border-radius: 2px;
+  z-index: 1;
+}
+
+@keyframes background-shine {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.animate-background-shine {
+  animation: background-shine 2s linear infinite;
+}
+
+/* ============================================
+   Morphing disclosure Component Styles
+   ============================================ */
+
+.details {
+  transition: margin var(--duration) var(--bounce),
+    transform var(--duration) var(--bounce);
+}
+
+.details[open] {
+  margin-block: var(--jump-distance);
+}
+
+
+
+
+
+/* .details:last-child {
+  border-radius: 0px 0px 10px 10px;
+} */
+
+/* Safely hide Nextra Sidebar Footer */
+.nextra-sidebar-footer,
+.nx-sidebar-footer {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  pointer-events: none !important;
 }

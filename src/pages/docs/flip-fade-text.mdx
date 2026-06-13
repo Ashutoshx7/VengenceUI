@@ -1,0 +1,505 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { FlipFadeText } from '@/components/ui/flip-fade-text'
+import { ComponentPreview } from '@/components/docs/component-preview'
+
+# Flip Fade Text
+
+A stunning 3D animated text component that cycles through customizable words with elegant letter-by-letter flip animations. Perfect for loading states, splash screens, and hero sections.
+
+<ComponentPreview
+  component={<FlipFadeText />}
+  code={`"use client"
+
+import { useEffect, useState, useMemo, useCallback, memo } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { cn } from "@/lib/utils"
+
+interface FlipFadeTextProps {
+  words?: string[]
+  interval?: number
+  className?: string
+  textClassName?: string
+  letterDuration?: number
+  staggerDelay?: number
+  exitStaggerDelay?: number
+}
+
+const defaultWords = ["LOADING", "COMPUTING", "SEARCHING", "RETRIEVING", "ASSEMBLING"]
+
+const Letter = memo(function Letter({ 
+  char, 
+  letterDuration 
+}: { 
+  char: string
+  letterDuration: number 
+}) {
+  return (
+    <motion.span
+      style={{ transformStyle: "preserve-3d" }}
+      variants={{
+        initial: {
+          rotateX: 90,
+          y: 20,
+          opacity: 0,
+          filter: "blur(8px)",
+        },
+        animate: {
+          rotateX: 0,
+          y: 0,
+          opacity: 1,
+          filter: "blur(0px)",
+          transition: {
+            duration: letterDuration,
+            ease: [0.2, 0.65, 0.3, 0.9],
+          },
+        },
+        exit: {
+          rotateX: -90,
+          y: -20,
+          opacity: 0,
+          filter: "blur(8px)",
+          transition: {
+            duration: letterDuration * 0.67,
+            ease: "easeIn",
+          },
+        },
+      }}
+      className="inline-block"
+    >
+      {char}
+    </motion.span>
+  )
+})
+
+const Word = memo(function Word({ 
+  text, 
+  staggerDelay, 
+  exitStaggerDelay, 
+  letterDuration,
+  textClassName
+}: { 
+  text: string
+  staggerDelay: number
+  exitStaggerDelay: number
+  letterDuration: number
+  textClassName?: string
+}) {
+  const letters = useMemo(() => text.split(""), [text])
+  
+  return (
+    <motion.div
+      className={cn(
+        "flex gap-[0.1em] text-4xl md:text-6xl font-bold uppercase tracking-wider text-neutral-800 dark:text-neutral-100",
+        textClassName
+      )}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      variants={{
+        initial: { opacity: 1 },
+        animate: {
+          opacity: 1,
+          transition: {
+            staggerChildren: staggerDelay,
+          },
+        },
+        exit: {
+          opacity: 1,
+          transition: {
+            staggerChildren: exitStaggerDelay,
+          },
+        },
+      }}
+    >
+      {letters.map((char, i) => (
+        <Letter 
+          key={\`\${char}-\${i}\`} 
+          char={char} 
+          letterDuration={letterDuration} 
+        />
+      ))}
+    </motion.div>
+  )
+})
+
+export function FlipFadeText({
+  words = defaultWords,
+  interval = 2500,
+  className,
+  textClassName,
+  letterDuration = 0.6,
+  staggerDelay = 0.1,
+  exitStaggerDelay = 0.05,
+}: FlipFadeTextProps) {
+  const [index, setIndex] = useState(0)
+
+  const updateIndex = useCallback(() => {
+    setIndex((prev) => (prev + 1) % words.length)
+  }, [words.length])
+
+  useEffect(() => {
+    const timer = setInterval(updateIndex, interval)
+    return () => clearInterval(timer)
+  }, [updateIndex, interval])
+
+  const currentWord = useMemo(() => words[index], [words, index])
+
+  return (
+    <div className={cn("flex items-center justify-center min-h-[200px]", className)}>
+      <div className="relative flex items-center justify-center" style={{ perspective: "1000px" }}>
+        <AnimatePresence mode="wait">
+          <Word 
+            key={currentWord} 
+            text={currentWord} 
+            staggerDelay={staggerDelay}
+            exitStaggerDelay={exitStaggerDelay}
+            letterDuration={letterDuration}
+            textClassName={textClassName}
+          />
+        </AnimatePresence>
+      </div>
+    </div>
+  )
+}
+
+export default FlipFadeText`}
+/>
+
+
+## Install using CLI
+
+<CLICommand componentName="flip-fade-text" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock 
+        code="npm install framer-motion clsx tailwind-merge" 
+    />
+</Dependencies>
+
+<Dependencies step={2} title="Add util file">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">
+        <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md">lib/utils.ts</code>
+    </p>
+    <CodeBlock 
+        language="tsx"
+        code={`import { ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}`}
+    />
+</Dependencies>
+
+<Dependencies step={3} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy the code below and paste it into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md mx-1">components/ui/flip-fade-text.tsx</code></p>
+    <CodeBlock
+        language="tsx"
+        title="components/ui/flip-fade-text.tsx"
+        expandable={true}
+        code={`"use client"
+
+import { useEffect, useState, useMemo, useCallback, memo } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { cn } from "@/lib/utils"
+
+interface FlipFadeTextProps {
+  words?: string[]
+  interval?: number
+  className?: string
+  textClassName?: string
+  letterDuration?: number
+  staggerDelay?: number
+  exitStaggerDelay?: number
+}
+
+const defaultWords = ["LOADING", "COMPUTING", "SEARCHING", "RETRIEVING", "ASSEMBLING"]
+
+const Letter = memo(function Letter({ 
+  char, 
+  letterDuration 
+}: { 
+  char: string
+  letterDuration: number 
+}) {
+  return (
+    <motion.span
+      style={{ transformStyle: "preserve-3d" }}
+      variants={{
+        initial: {
+          rotateX: 90,
+          y: 20,
+          opacity: 0,
+          filter: "blur(8px)",
+        },
+        animate: {
+          rotateX: 0,
+          y: 0,
+          opacity: 1,
+          filter: "blur(0px)",
+          transition: {
+            duration: letterDuration,
+            ease: [0.2, 0.65, 0.3, 0.9],
+          },
+        },
+        exit: {
+          rotateX: -90,
+          y: -20,
+          opacity: 0,
+          filter: "blur(8px)",
+          transition: {
+            duration: letterDuration * 0.67,
+            ease: "easeIn",
+          },
+        },
+      }}
+      className="inline-block"
+    >
+      {char}
+    </motion.span>
+  )
+})
+
+const Word = memo(function Word({ 
+  text, 
+  staggerDelay, 
+  exitStaggerDelay, 
+  letterDuration,
+  textClassName
+}: { 
+  text: string
+  staggerDelay: number
+  exitStaggerDelay: number
+  letterDuration: number
+  textClassName?: string
+}) {
+  const letters = useMemo(() => text.split(""), [text])
+  
+  return (
+    <motion.div
+      className={cn(
+        "flex gap-[0.1em] text-4xl md:text-6xl font-bold uppercase tracking-wider text-neutral-800 dark:text-neutral-100",
+        textClassName
+      )}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      variants={{
+        initial: { opacity: 1 },
+        animate: {
+          opacity: 1,
+          transition: {
+            staggerChildren: staggerDelay,
+          },
+        },
+        exit: {
+          opacity: 1,
+          transition: {
+            staggerChildren: exitStaggerDelay,
+          },
+        },
+      }}
+    >
+      {letters.map((char, i) => (
+        <Letter 
+          key={\`\${char}-\${i}\`} 
+          char={char} 
+          letterDuration={letterDuration} 
+        />
+      ))}
+    </motion.div>
+  )
+})
+
+export function FlipFadeText({
+  words = defaultWords,
+  interval = 2500,
+  className,
+  textClassName,
+  letterDuration = 0.6,
+  staggerDelay = 0.1,
+  exitStaggerDelay = 0.05,
+}: FlipFadeTextProps) {
+  const [index, setIndex] = useState(0)
+
+  const updateIndex = useCallback(() => {
+    setIndex((prev) => (prev + 1) % words.length)
+  }, [words.length])
+
+  useEffect(() => {
+    const timer = setInterval(updateIndex, interval)
+    return () => clearInterval(timer)
+  }, [updateIndex, interval])
+
+  const currentWord = useMemo(() => words[index], [words, index])
+
+  return (
+    <div className={cn("flex items-center justify-center min-h-[200px]", className)}>
+      <div className="relative flex items-center justify-center" style={{ perspective: "1000px" }}>
+        <AnimatePresence mode="wait">
+          <Word 
+            key={currentWord} 
+            text={currentWord} 
+            staggerDelay={staggerDelay}
+            exitStaggerDelay={exitStaggerDelay}
+            letterDuration={letterDuration}
+            textClassName={textClassName}
+          />
+        </AnimatePresence>
+      </div>
+    </div>
+  )
+}
+
+export default FlipFadeText`}
+    />
+</Dependencies>
+
+## Usage
+
+<CodeBlock 
+    language="tsx" 
+    code={`import { FlipFadeText } from "@/components/ui/flip-fade-text"
+
+export function MyLoadingState() {
+  return (
+    <FlipFadeText />
+  )
+}`} 
+/>
+
+## Examples
+
+### Custom Words
+
+<ComponentPreview
+  component={
+    <FlipFadeText 
+      words={["SYNCING", "PROCESSING", "ANALYZING", "OPTIMIZING"]}
+      interval={2000}
+    />
+  }
+  code={`<FlipFadeText 
+  words={["SYNCING", "PROCESSING", "ANALYZING", "OPTIMIZING"]}
+  interval={2000}
+/>`}
+/>
+
+### Fast Animation
+
+<ComponentPreview
+  component={
+    <FlipFadeText 
+      words={["FAST", "QUICK", "RAPID", "SWIFT"]}
+      interval={1500}
+      letterDuration={0.3}
+      staggerDelay={0.05}
+      exitStaggerDelay={0.02}
+    />
+  }
+  code={`<FlipFadeText 
+  words={["FAST", "QUICK", "RAPID", "SWIFT"]}
+  interval={1500}
+  letterDuration={0.3}
+  staggerDelay={0.05}
+  exitStaggerDelay={0.02}
+/>`}
+/>
+
+### Custom Styling
+
+<ComponentPreview
+  component={
+    <FlipFadeText 
+      words={["HELLO", "WORLD"]}
+      textClassName="text-5xl md:text-7xl text-blue-600 dark:text-blue-400"
+    />
+  }
+  code={`<FlipFadeText 
+  words={["HELLO", "WORLD"]}
+  textClassName="text-5xl md:text-7xl text-blue-600 dark:text-blue-400"
+/>`}
+/>
+
+## Props
+
+<PropsTable
+  data={[
+    {
+      prop: "words",
+      type: "string[]",
+      defaultValue: '["LOADING", "COMPUTING", ...]',
+      description: "Array of words to cycle through in the animation."
+    },
+    {
+      prop: "interval",
+      type: "number",
+      defaultValue: "2500",
+      description: "Time in milliseconds between word transitions."
+    },
+    {
+      prop: "className",
+      type: "string",
+      defaultValue: "undefined",
+      description: "Additional CSS classes for the container element."
+    },
+    {
+      prop: "textClassName",
+      type: "string",
+      defaultValue: "undefined",
+      description: "Additional CSS classes for the text/word element."
+    },
+    {
+      prop: "letterDuration",
+      type: "number",
+      defaultValue: "0.6",
+      description: "Duration in seconds for each letter's animation."
+    },
+    {
+      prop: "staggerDelay",
+      type: "number",
+      defaultValue: "0.1",
+      description: "Delay in seconds between each letter's entrance animation."
+    },
+    {
+      prop: "exitStaggerDelay",
+      type: "number",
+      defaultValue: "0.05",
+      description: "Delay in seconds between each letter's exit animation."
+    }
+  ]}
+/>
+
+## Features
+
+- 🎭 **3D Flip Animation** - Letters rotate in 3D space with blur and transform effects
+- ⚡ **Performance Optimized** - Memoized components prevent unnecessary re-renders
+- 🎨 **Fully Customizable** - Control words, timing, colors, and animation speeds
+- 🌙 **Dark Mode Ready** - Automatic theme adaptation
+- 📱 **Responsive** - Scales beautifully across all screen sizes
+- ♿ **Accessible** - Preserves 3D transforms for visual appeal while maintaining readability
+
+## Performance Considerations
+
+The `FlipFadeText` component is optimized for performance:
+
+- **Memoized Components**: Both `Letter` and `Word` sub-components are wrapped with `React.memo()` to prevent unnecessary re-renders
+- **Callback Optimization**: The interval update function is memoized with `useCallback`
+- **Value Memoization**: Current word and letter arrays are memoized with `useMemo`
+- **CSS Hardware Acceleration**: 3D transforms trigger GPU acceleration for smooth animations
+- **Proper Cleanup**: Interval is properly cleared on unmount to prevent memory leaks
+
+## Accessibility
+
+For production use with loading states, consider adding:
+
+```tsx
+<div role="status" aria-live="polite">
+  <FlipFadeText />
+  <span className="sr-only">Loading content...</span>
+</div>
+```

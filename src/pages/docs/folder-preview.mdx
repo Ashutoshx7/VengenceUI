@@ -1,0 +1,183 @@
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import FolderPreviewDemo, { FolderPreviewSingle, FolderPreviewCustom, FolderPreviewFiles, FolderPreviewSizes } from '@/components/docs/folder-preview'
+
+# Folder Preview
+
+Interactive folder components with stunning hover animations. Inspired by [Codrops Folder Preview Ideas](https://tympanus.net/Development/FolderPreviewIdeas/).
+
+<ComponentPreview
+  component={<FolderPreviewSingle />}
+  code={`import { FolderPreview } from "@/components/ui/folder-preview"
+
+export function FolderPreviewDemo() {
+  return (
+    <FolderPreview 
+      variant="devi" 
+      label="Shared Files" 
+      size="lg"
+    />
+  )
+}`}
+/>
+
+## Features
+
+- **9 Animation Variants**: Devi, Rudras, Ardra, Shakti, Kubera, Hari, Ravi, Durga, and Nandi
+- **Framer Motion Animations**: Smooth, physics-based hover effects
+- **Image & File Previews**: Support for both image thumbnails and file lists
+- **Tailwind CSS Styling**: Fully styled with Tailwind, including dark mode support
+- **Customizable Sizes**: Small, medium, and large size options
+- **Theme Aware**: Adapts to light and dark themes automatically
+
+## Installation
+
+<CLICommand componentName="folder-preview" />
+
+## Usage
+
+### Basic Usage
+
+<ComponentPreview
+  component={<FolderPreviewSingle />}
+  code={`import { FolderPreview } from "@/components/ui/folder-preview"
+
+export function MyComponent() {
+  return (
+    <FolderPreview 
+      variant="devi" 
+      label="Shared Files" 
+      size="lg"
+    />
+  )
+}`}
+/>
+
+### With Custom Images
+
+<ComponentPreview
+  component={<FolderPreviewCustom />}
+  code={`import { FolderPreview } from "@/components/ui/folder-preview"
+
+export function PhotosFolder() {
+  return (
+    <FolderPreview 
+      variant="ardra" 
+      label="Photos"
+      size="lg"
+      images={[
+        "/images/photo1.jpg",
+        "/images/photo2.jpg",
+        "/images/photo3.jpg",
+        "/images/photo4.jpg",
+      ]}
+    />
+  )
+}`}
+/>
+
+### With File List (Durga/Nandi variants)
+
+<ComponentPreview
+  component={<FolderPreviewFiles />}
+  code={`import { FolderPreview } from "@/components/ui/folder-preview"
+
+export function ProjectFolder() {
+  return (
+    <FolderPreview 
+      variant="durga" 
+      label="Project"
+      size="lg"
+      files={[
+        { name: "docs" },
+        { name: "readme.md", type: "txt" },
+        { name: "app.js", type: "txt" },
+        { name: "package.json", type: "txt" },
+      ]}
+    />
+  )
+}`}
+/>
+
+## All Variants
+
+<ComponentPreview
+  component={<FolderPreviewDemo />}
+  code={`import { FolderPreview } from "@/components/ui/folder-preview"
+
+const variants = ["devi", "rudras", "ardra", "shakti", "kubera", "hari", "ravi", "durga", "nandi"];
+
+export function AllVariantsDemo() {
+  return (
+    <div className="grid grid-cols-3 gap-8">
+      {variants.map((variant) => (
+        <FolderPreview key={variant} variant={variant} label={variant} size="lg" />
+      ))}
+    </div>
+  )
+}`}
+/>
+
+## Props
+
+<PropsTable
+  data={[
+    {
+      prop: "variant",
+      type: "'devi' | 'rudras' | 'ardra' | 'shakti' | 'kubera' | 'hari' | 'ravi' | 'durga' | 'nandi'",
+      defaultValue: "'devi'",
+      description: "The animation variant to use for the folder preview effect."
+    },
+    {
+      prop: "images",
+      type: "string[]",
+      defaultValue: "[]",
+      description: "Array of image URLs to display in the folder preview."
+    },
+    {
+      prop: "files",
+      type: "{ name: string; type?: 'txt' | 'gif' | 'mp3' | 'default' }[]",
+      defaultValue: "[]",
+      description: "Array of file objects for file-based variants (durga, nandi)."
+    },
+    {
+      prop: "label",
+      type: "string",
+      defaultValue: "undefined",
+      description: "The label to display below the folder."
+    },
+    {
+      prop: "size",
+      type: "'sm' | 'md' | 'lg'",
+      defaultValue: "'md'",
+      description: "The size of the folder component."
+    },
+    {
+      prop: "className",
+      type: "string",
+      defaultValue: "undefined",
+      description: "Additional CSS classes to apply."
+    },
+    {
+      prop: "onClick",
+      type: "() => void",
+      defaultValue: "undefined",
+      description: "Optional click handler for the folder."
+    }
+  ]}
+/>
+
+## Animation Variants Guide
+
+| Variant | Effect | Best For |
+|---------|--------|----------|
+| **devi** | Arc expansion with user avatars | Shared folders, team files |
+| **rudras** | Semi-circle with cover rotation | Collaborative projects |
+| **ardra** | Explosive scatter with scale | Photo galleries, media |
+| **shakti** | Fan rotation effect | Document stacks |
+| **kubera** | Continuous floating animation | Cloud storage, uploads |
+| **hari** | Bounce jump effect | Interactive collections |
+| **ravi** | Card spread layout | Portfolio, galleries |
+| **durga** | Text list reveal | Code projects, text files |
+| **nandi** | Magnifier circle preview | File managers, downloads |

@@ -1,0 +1,217 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { CyberGlitchText } from '@/components/ui/cyber-glitch-text'
+import { ComponentPreview } from '@/components/docs/component-preview'
+
+# Cyber Glitch Text
+
+A highly stylized text block that appears to be hacked or decoded into existence with chromatic aberration effects.
+
+<ComponentPreview
+  component={<div className="flex items-center justify-center p-20"><CyberGlitchText text="SYSTEM COMPROMISED" className="text-4xl font-black dark:text-white" /></div>}
+  code={`"use client";
+
+import React, { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
+
+const CHARS = "!<>-_\\\\/[]{}\u2014=+*^?#_";
+
+interface CyberGlitchTextProps {
+  text: string;
+  className?: string;
+  scrambleOnMount?: boolean;
+  scrambleDuration?: number;
+}
+
+export function CyberGlitchText({
+  text,
+  className,
+  scrambleOnMount = true,
+  scrambleDuration = 40,
+}: CyberGlitchTextProps) {
+  const [displayText, setDisplayText] = useState(text);
+  const [isHovered, setIsHovered] = useState(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  const scramble = () => {
+    let iteration = 0;
+    clearInterval(intervalRef.current as NodeJS.Timeout);
+
+    intervalRef.current = setInterval(() => {
+      setDisplayText((currentText) =>
+        text
+          .split("")
+          .map((letter, index) => {
+            if (index < iteration) {
+              return text[index];
+            }
+            return CHARS[Math.floor(Math.random() * CHARS.length)];
+          })
+          .join("")
+      );
+
+      if (iteration >= text.length) {
+        clearInterval(intervalRef.current as NodeJS.Timeout);
+      }
+
+      iteration += 1 / 3;
+    }, scrambleDuration);
+  };
+
+  useEffect(() => {
+    if (scrambleOnMount) {
+      scramble();
+    }
+    return () => clearInterval(intervalRef.current as NodeJS.Timeout);
+  }, [text, scrambleOnMount]);
+
+  return (
+    <div
+      className={cn("relative inline-block group", className)}
+      onMouseEnter={() => {
+        setIsHovered(true);
+        scramble();
+      }}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <span className="relative z-10">{displayText}</span>
+
+      {isHovered && (
+        <>
+          <motion.span
+            className="absolute top-0 left-[-2px] z-0 text-red-500 opacity-70 mix-blend-screen"
+            initial={{ x: 0, opacity: 0 }}
+            animate={{ x: [-2, 2, -1, 3, 0], opacity: [0, 0.8, 0.4, 0.9, 0] }}
+            transition={{ duration: 0.2, repeat: Infinity, repeatType: "mirror" }}
+            aria-hidden="true"
+          >
+            {displayText}
+          </motion.span>
+          <motion.span
+            className="absolute top-0 left-[2px] z-0 text-blue-500 opacity-70 mix-blend-screen"
+            initial={{ x: 0, opacity: 0 }}
+            animate={{ x: [2, -2, 1, -3, 0], opacity: [0, 0.8, 0.4, 0.9, 0] }}
+            transition={{ duration: 0.2, repeat: Infinity, repeatType: "mirror", delay: 0.05 }}
+            aria-hidden="true"
+          >
+            {displayText}
+          </motion.span>
+          
+          <motion.div
+            className="absolute inset-0 bg-white/10 dark:bg-black/10 z-20 pointer-events-none mix-blend-overlay"
+            initial={{ top: "0%", height: "0%" }}
+            animate={{ top: ["0%", "40%", "80%", "0%"], height: ["2px", "5px", "1px", "0px"] }}
+            transition={{ duration: 0.3, repeat: Infinity }}
+          />
+        </>
+      )}
+    </div>
+  );
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="cyber-glitch-text" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock 
+        code="npm install framer-motion clsx tailwind-merge" 
+    />
+</Dependencies>
+
+<Dependencies step={2} title="Add util file">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">
+        <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md">lib/utils.ts</code>
+    </p>
+    <CodeBlock 
+        language="tsx"
+        code={`import { ClassValue, clsx } from \"clsx\";
+import { twMerge } from \"tailwind-merge\";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}`}
+    />
+</Dependencies>
+
+<Dependencies step={3} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy the code below and paste it into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md mx-1">components/ui/cyber-glitch-text.tsx</code></p>
+    <CodeBlock
+        language="tsx"
+        title="components/ui/cyber-glitch-text.tsx"
+        expandable={true}
+        code={`"use client";
+
+import React, { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
+
+const CHARS = "!<>-_\\\\/[]{}\u2014=+*^?#_";
+
+interface CyberGlitchTextProps {
+  text: string;
+  className?: string;
+  scrambleOnMount?: boolean;
+  scrambleDuration?: number;
+}
+
+export function CyberGlitchText({
+  text,
+  className,
+  scrambleOnMount = true,
+  scrambleDuration = 40,
+}: CyberGlitchTextProps) {
+  /* Implementation from above */
+  return <div>{text}</div>;
+}`}
+    />
+</Dependencies>
+
+## Usage
+
+<CodeBlock 
+    language="tsx" 
+    code={`import { CyberGlitchText } from \"@/components/ui/cyber-glitch-text\"
+
+export function CyberGlitchDemo() {
+  return (
+    <CyberGlitchText text="DECRYPTING..." className="text-2xl font-bold" />
+  )
+}`} 
+/>
+
+## Props
+
+<PropsTable
+  data={[
+    {
+      prop: "text",
+      type: "string",
+      defaultValue: "-",
+      description: "The base text to display and scramble."
+    },
+    {
+      prop: "className",
+      type: "string",
+      defaultValue: "-",
+      description: "Additional CSS classes."
+    },
+     {
+      prop: "scrambleOnMount",
+      type: "boolean",
+      defaultValue: "true",
+      description: "Whether to run the scramble effect when the component first mounts."
+    },
+    {
+      prop: "scrambleDuration",
+      type: "number",
+      defaultValue: "40",
+      description: "The time (in ms) between each scramble interval iteration."
+    },
+  ]}
+/>

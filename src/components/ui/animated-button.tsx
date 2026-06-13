@@ -26,17 +26,22 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
   return (
     <Component
       {...rest}
-      whileHover={{ scale: 1.01 }}
       whileTap={{ scale: 0.97 }}
       transition={{
-        type: "spring",
-        stiffness: 500,
-        damping: 30,
-        mass: 0.5,
+        stiffness: 20,
+        damping: 15,
+        mass: 2,
+        scale: {
+          type: "spring",
+          stiffness: 10,
+          damping: 5,
+          mass: 0.1,
+        },
       }}
       // Set a CSS variable `--shine` that we override for dark mode via Tailwind.
+      // Tailwind JIT allows arbitrary properties like `dark:[--shine:...]` if enabled.
       className={cn(
-        "group inline-flex items-center justify-center px-6 py-2 rounded-md relative overflow-hidden bg-neutral-50 dark:bg-black border border-neutral-200 dark:border-[#222]",
+        "group inline-flex items-center justify-center px-6 py-6 rounded-md relative overflow-hidden bg-neutral-50 dark:bg-black border border-neutral-200 dark:border-neutral-800",
         "text-neutral-900 dark:text-neutral-100 font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50",
         "[--shine:rgba(0,0,0,.66)] dark:[--shine:rgba(255,255,255,.66)]",
         className,
@@ -44,7 +49,7 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
     >
       {/* Text with shine mask */}
       <motion.span
-        className="tracking-wide font-light flex items-center justify-center h-full w-full relative z-10"
+        className="tracking-wide font-light p-3 flex items-center justify-center h-full w-full relative z-10"
         style={{
           WebkitMaskImage:
             "linear-gradient(-75deg, white calc(var(--mask-x) + 20%), transparent calc(var(--mask-x) + 30%), white calc(var(--mask-x) + 100%))",

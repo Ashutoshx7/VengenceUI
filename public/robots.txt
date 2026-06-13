@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.vengenceui.com
+
+# Sitemaps
+Sitemap: https://www.vengenceui.com/sitemap.xml
