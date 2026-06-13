@@ -51,7 +51,7 @@ const config: DocsThemeConfig = {
         const { frontMatter, title } = useConfig()
         const pageTitle = title ? `${title} – VengeanceUI` : 'VengeanceUI - Premium React Components'
         const description = frontMatter.description || 'Beautiful, modern, and customizable React components. Build stunning interfaces with VengeanceUI - a premium component library for React and Next.js.'
-        const ogImage = `${siteUrl}/og-image.png`
+        const ogImage = `${siteUrl}/og-image-v2-2026.png`
         const url = `${siteUrl}${asPath}`
 
         return (
