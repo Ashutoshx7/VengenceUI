@@ -23,7 +23,7 @@ const variants: { variant: LineHoverVariant; label: string }[] = [
 
 export function LineHoverLinkDemo() {
     return (
-        <div className="flex flex-col items-center justify-center w-full h-full gap-8 p-12 bg-neutral-50 dark:bg-black rounded-xl min-h-[350px] border border-neutral-200 dark:border-neutral-800 shadow-sm">
+        <div className="flex flex-col items-center justify-center w-full h-full gap-8 p-12 rounded-xl min-h-[350px] shadow-sm">
             <div className="grid grid-cols-3 md:grid-cols-4 gap-x-16 gap-y-12">
                 {variants.map(({ variant, label }) => (
                     <div key={variant} className="text-center">
@@ -47,7 +47,7 @@ export function LineHoverLinkDemo() {
 
 export function LineHoverLinkSingle() {
     return (
-        <div className="flex items-center justify-center gap-8 p-12 bg-white dark:bg-black rounded-xl min-h-[200px] border border-neutral-200 dark:border-neutral-800">
+        <div className="flex items-center justify-center gap-8 p-12 rounded-xl min-h-[200px]">
             <LineHoverLink
                 variant="slide"
                 href="#"
@@ -65,7 +65,7 @@ export function LineHoverLinkSingle() {
 
 export function LineHoverLinkNavigation() {
     return (
-        <div className="flex items-center justify-center p-12 bg-white dark:bg-black rounded-xl min-h-[200px] border border-neutral-200 dark:border-neutral-800">
+        <div className="flex items-center justify-center p-12 rounded-xl min-h-[200px]">
             <nav className="flex gap-8">
                 <LineHoverLink variant="slide" href="#" className="text-neutral-600 dark:text-white/80">
                     Home
@@ -90,7 +90,7 @@ export function LineHoverLinkNavigation() {
 
 export function LineHoverLinkSVG() {
     return (
-        <div className="flex items-center justify-center gap-12 p-12 bg-white dark:bg-black rounded-xl min-h-[200px] border border-neutral-200 dark:border-neutral-800">
+        <div className="flex items-center justify-center gap-12 p-12 rounded-xl min-h-[200px]">
             <LineHoverLink
                 variant="arc"
                 href="#"

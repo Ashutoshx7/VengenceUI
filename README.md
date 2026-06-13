@@ -1,79 +1,36 @@
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-<p align="center">
-  <!-- Repo stats -->
-  <img src="https://img.shields.io/github/stars/Ashutoshx7/VengeanceUI?style=social" />
-  <img src="https://img.shields.io/github/forks/Ashutoshx7/VengeanceUI?style=social" />
-  <img src="https://img.shields.io/github/issues/Ashutoshx7/VengeanceUI?style=social" />
-</p>
+## Getting Started
 
-<p align="center">
-  <!-- Tech stack -->
-  <img src="https://img.shields.io/badge/Next.js-black?style=social&logo=nextdotjs" />
-  <img src="https://img.shields.io/badge/React-blue?style=social&logo=react" />
-  <img src="https://img.shields.io/badge/TypeScript-blue?style=social&logo=typescript" />
-  <img src="https://img.shields.io/badge/TailwindCSS-06B6D4?style=social&logo=tailwindcss" />
-  <img src="https://img.shields.io/badge/Framer%20Motion-black?style=social&logo=framer" />
-</p>
+First, run the development server:
 
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-<a href="https://vercel.com/oss">
-  <img alt="Vercel OSS Program" src="https://vercel.com/oss/program-badge-2026.svg" />
-</a>
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-https://github.com/user-attachments/assets/05b58add-f66e-4a4c-a04b-5dc3fba8c88b
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
----
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-# VengeanceUI
+## Learn More
 
-**VengeanceUI** is a modern, animated UI component library designed to help developers build beautiful landing pages and interfaces faster. It provides ready-to-use, copy-paste friendly components with smooth animations and clean design.
+To learn more about Next.js, take a look at the following resources:
 
----
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-## 🚀 Features
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-- Prebuilt UI components for landing pages
-- Smooth and modern animations
-- Copy & paste friendly components
-- Fully customizable styling
-- Clean, minimal, and modern design
-- Developer-focused DX (easy to integrate)
+## Deploy on Vercel
 
----
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-## 🛠️ Tech Stack
-
-VengeanceUI is built using modern frontend technologies:
-
-- **React** – Component-based UI development  
-- **TypeScript** – Type safety and better developer experience  
-- **Tailwind CSS** – Utility-first styling for rapid UI development  
-- **Framer Motion** – Animations and transitions  
-- **Vite** – Fast development server and build tool  
-- **ESLint & Prettier** – Code quality and formatting  
-
-
----
-## Star History
-
-<a href="https://star-history.com/#Ashutoshx7/VengeanceUI&Date">
-  <picture>
-    <source
-      media="(prefers-color-scheme: dark)"
-      srcset="https://api.star-history.com/svg?repos=Ashutoshx7/VengeanceUI&type=Date&theme=dark&legend=top-left"
-    />
-    <source
-      media="(prefers-color-scheme: light)"
-      srcset="https://api.star-history.com/svg?repos=Ashutoshx7/VengeanceUI&type=Date&legend=top-left"
-    />
-    <img
-      alt="Star History Chart"
-      src="https://api.star-history.com/svg?repos=Ashutoshx7/VengeanceUI&type=Date&legend=top-left"
-    />
-  </picture>
-</a>
-a
-
-
-
-
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

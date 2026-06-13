@@ -98,7 +98,7 @@ export function RevealLoaderDemo() {
                 value={text} 
                 onChange={(e) => setText(e.target.value.toUpperCase())}
                 placeholder="ENTER TEXT"
-                className="font-mono uppercase tracking-wider bg-background"
+                className="font-mono uppercase tracking-wider"
               />
             </div>
             <div className="space-y-3">
@@ -128,7 +128,7 @@ export function RevealLoaderDemo() {
                 key={theme.id}
                 onClick={() => setActiveTheme(theme)}
                 className={cn(
-                  "group relative flex items-center gap-3 p-2 rounded-lg border text-left transition-all hover:bg-accent bg-background",
+                  "group relative flex items-center gap-3 p-2 text-left transition-all hover:bg-accent",
                   activeTheme.id === theme.id ? "border-primary ring-1 ring-primary/20 bg-accent" : "border-border"
                 )}
               >

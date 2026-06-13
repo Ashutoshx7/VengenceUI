@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { Github, Star } from 'lucide-react';
+import { FaGithub } from 'react-icons/fa';
 import { Liquid ,Colors} from './liquid-gradient';
 
 const COLORS: Colors = {
@@ -63,7 +63,7 @@ export function GithubButton(){
           onMouseLeave={() => setIsHovered(false)}
         >
           <span className=' flex items-center justify-center px-2 gap-2 rounded-lg group-hover:text-yellow-400 text-white text-xl font-semibold tracking-wide whitespace-nowrap'>
-            <Github className='inline-block group-hover:fill-yellow-400 fill-white size-4 shrink-0' />
+            <FaGithub className='inline-block size-4 shrink-0' />
           </span>
         </button>
       </a>

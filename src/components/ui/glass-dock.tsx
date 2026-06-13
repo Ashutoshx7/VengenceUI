@@ -1,14 +1,15 @@
 'use client';
 
 import React, { useRef, useState, useEffect } from 'react';
-import { LucideIcon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import gsap from "gsap";
 
+type DockIcon = React.ComponentType<{ className?: string }>;
+
 export interface DockItem {
     title: string;
-    icon: LucideIcon;
+    icon: DockIcon;
     onClick?: () => void;
     href?: string;
 }
@@ -489,10 +490,8 @@ export const GlassDock = React.forwardRef<HTMLDivElement, GlassDockProps>(
                                         />
                                     ) : (
                                         <Icon
-                                            size={22}
-                                            strokeWidth={2}
                                             className={cn(
-                                                'transition-colors duration-200',
+                                                'h-[22px] w-[22px] transition-colors duration-200',
                                                 isHovered
                                                     ? 'text-neutral-900 dark:text-white'
                                                     : 'text-neutral-500 dark:text-neutral-400'

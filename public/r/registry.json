@@ -1,5 +1,26 @@
 [
   {
+    "name": "accordion",
+    "dependencies": [
+      "lucide-react",
+      "@radix-ui/react-accordion"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/accordion.json"
+    ]
+  },
+  {
+    "name": "agent-bento-grid",
+    "dependencies": [
+      "framer-motion"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/agent-bento-grid.json"
+    ]
+  },
+  {
     "name": "alert",
     "dependencies": [],
     "type": "registry:ui",
@@ -18,17 +39,6 @@
     ]
   },
   {
-    "name": "animated-hero",
-    "dependencies": [
-      "framer-motion",
-      "lucide-react"
-    ],
-    "type": "registry:ui",
-    "files": [
-      "public/r/animated-hero.json"
-    ]
-  },
-  {
     "name": "animated-number",
     "dependencies": [
       "framer-motion"
@@ -36,6 +46,32 @@
     "type": "registry:ui",
     "files": [
       "public/r/animated-number.json"
+    ]
+  },
+  {
+    "name": "animated-rays",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/animated-rays.json"
+    ]
+  },
+  {
+    "name": "aspect-ratio",
+    "dependencies": [
+      "@radix-ui/react-aspect-ratio"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/aspect-ratio.json"
+    ]
+  },
+  {
+    "name": "aurora-hero",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/aurora-hero.json"
     ]
   },
   {
@@ -109,6 +145,14 @@
     ]
   },
   {
+    "name": "candy-button",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/candy-button.json"
+    ]
+  },
+  {
     "name": "card",
     "dependencies": [],
     "type": "registry:ui",
@@ -147,6 +191,14 @@
     ]
   },
   {
+    "name": "code-block",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/code-block.json"
+    ]
+  },
+  {
     "name": "collapsible",
     "dependencies": [
       "@radix-ui/react-collapsible"
@@ -168,6 +220,16 @@
     ]
   },
   {
+    "name": "component-showcase",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/component-showcase.json"
+    ]
+  },
+  {
     "name": "context-menu",
     "dependencies": [
       "lucide-react",
@@ -179,6 +241,24 @@
     ]
   },
   {
+    "name": "copy-button",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/copy-button.json"
+    ]
+  },
+  {
+    "name": "corner-button",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/corner-button.json"
+    ]
+  },
+  {
     "name": "creepy-button",
     "dependencies": [
       "framer-motion"
@@ -186,6 +266,16 @@
     "type": "registry:ui",
     "files": [
       "public/r/creepy-button.json"
+    ]
+  },
+  {
+    "name": "cursor-card",
+    "dependencies": [
+      "framer-motion"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/cursor-card.json"
     ]
   },
   {
@@ -201,7 +291,6 @@
   {
     "name": "dialog",
     "dependencies": [
-      "lucide-react",
       "@radix-ui/react-dialog"
     ],
     "type": "registry:ui",
@@ -231,6 +320,14 @@
     ]
   },
   {
+    "name": "elastic-stack",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/elastic-stack.json"
+    ]
+  },
+  {
     "name": "empty",
     "dependencies": [],
     "type": "registry:ui",
@@ -247,6 +344,14 @@
     "type": "registry:ui",
     "files": [
       "public/r/expandable-bento-grid.json"
+    ]
+  },
+  {
+    "name": "faq-accordion",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/faq-accordion.json"
     ]
   },
   {
@@ -273,6 +378,16 @@
     "type": "registry:ui",
     "files": [
       "public/r/flip-text.json"
+    ]
+  },
+  {
+    "name": "fluid-morph-bg",
+    "dependencies": [
+      "framer-motion"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/fluid-morph-bg.json"
     ]
   },
   {
@@ -306,10 +421,24 @@
     ]
   },
   {
+    "name": "fullscreen-preview",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/fullscreen-preview.json"
+    ]
+  },
+  {
+    "name": "generate-button",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/generate-button.json"
+    ]
+  },
+  {
     "name": "github-button",
-    "dependencies": [
-      "lucide-react"
-    ],
+    "dependencies": [],
     "type": "registry:ui",
     "files": [
       "public/r/github-button.json"
@@ -319,7 +448,6 @@
     "name": "glass-dock",
     "dependencies": [
       "framer-motion",
-      "lucide-react",
       "gsap"
     ],
     "type": "registry:ui",
@@ -343,6 +471,34 @@
     "type": "registry:ui",
     "files": [
       "public/r/hover-card.json"
+    ]
+  },
+  {
+    "name": "image-reveal-list",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/image-reveal-list.json"
+    ]
+  },
+  {
+    "name": "image-scatter",
+    "dependencies": [
+      "gsap"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/image-scatter.json"
+    ]
+  },
+  {
+    "name": "image-trail",
+    "dependencies": [
+      "framer-motion"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/image-trail.json"
     ]
   },
   {
@@ -394,6 +550,14 @@
     ]
   },
   {
+    "name": "interactive-keyboard",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/interactive-keyboard.json"
+    ]
+  },
+  {
     "name": "item",
     "dependencies": [
       "@radix-ui/react-slot"
@@ -409,6 +573,14 @@
     "type": "registry:ui",
     "files": [
       "public/r/kbd.json"
+    ]
+  },
+  {
+    "name": "kinetic-text-loader",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/kinetic-text-loader.json"
     ]
   },
   {
@@ -503,6 +675,14 @@
     ]
   },
   {
+    "name": "morph-text",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/morph-text.json"
+    ]
+  },
+  {
     "name": "morphing-disclosure",
     "dependencies": [
       "framer-motion",
@@ -525,6 +705,18 @@
     ]
   },
   {
+    "name": "notch-navbar",
+    "dependencies": [
+      "framer-motion",
+      "lucide-react",
+      "next-themes"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/notch-navbar.json"
+    ]
+  },
+  {
     "name": "pagination",
     "dependencies": [
       "lucide-react"
@@ -543,11 +735,41 @@
     ]
   },
   {
+    "name": "perspective-carousel",
+    "dependencies": [
+      "framer-motion",
+      "lucide-react"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/perspective-carousel.json"
+    ]
+  },
+  {
+    "name": "diagonal-carousel",
+    "dependencies": [
+      "framer-motion",
+      "lucide-react"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/diagonal-carousel.json"
+    ]
+  },
+  {
     "name": "pixelated-image-trail",
     "dependencies": [],
     "type": "registry:ui",
     "files": [
       "public/r/pixelated-image-trail.json"
+    ]
+  },
+  {
+    "name": "pop-button",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/pop-button.json"
     ]
   },
   {
@@ -568,6 +790,14 @@
     "type": "registry:ui",
     "files": [
       "public/r/progress.json"
+    ]
+  },
+  {
+    "name": "radial-glow-button",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/radial-glow-button.json"
     ]
   },
   {
@@ -631,6 +861,16 @@
     "type": "registry:ui",
     "files": [
       "public/r/separator.json"
+    ]
+  },
+  {
+    "name": "shared-tooltip-avatars",
+    "dependencies": [
+      "framer-motion"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/shared-tooltip-avatars.json"
     ]
   },
   {
@@ -734,7 +974,6 @@
   {
     "name": "staggered-grid",
     "dependencies": [
-      "lucide-react",
       "gsap"
     ],
     "type": "registry:ui",
@@ -762,9 +1001,7 @@
   },
   {
     "name": "tabs",
-    "dependencies": [
-      "@radix-ui/react-tabs"
-    ],
+    "dependencies": [],
     "type": "registry:ui",
     "files": [
       "public/r/tabs.json"
@@ -825,6 +1062,22 @@
     "type": "registry:ui",
     "files": [
       "public/r/tooltip.json"
+    ]
+  },
+  {
+    "name": "twisting-ribbon",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/twisting-ribbon.json"
+    ]
+  },
+  {
+    "name": "typing-keyboard",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/typing-keyboard.json"
     ]
   }
 ]

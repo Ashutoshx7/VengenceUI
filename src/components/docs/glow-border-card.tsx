@@ -8,7 +8,7 @@ import { GlowBorderCard } from '@/components/ui/glow-border-card';
  */
 export function GlowBorderCardDemo() {
     return (
-        <div className="relative flex min-h-[400px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-neutral-50 dark:bg-black p-8">
+        <div className="relative flex min-h-full w-full flex-col items-center justify-center overflow-hidden p-8">
             <GlowBorderCard
                 width="280px"
                 aspectRatio="1"
@@ -31,7 +31,7 @@ export function GlowBorderCardPresets() {
     ];
 
     return (
-        <div className="relative flex flex-wrap gap-6 w-full items-center justify-center overflow-hidden rounded-lg border bg-neutral-50 dark:bg-black p-8">
+        <div className="relative flex flex-wrap gap-6 w-full items-center justify-center overflow-hidden p-8">
             {presets.map(({ preset, label }) => (
                 <GlowBorderCard
                     key={preset}
@@ -50,7 +50,7 @@ export function GlowBorderCardPresets() {
  */
 export function GlowBorderCardAspects() {
     return (
-        <div className="relative flex flex-wrap gap-6 w-full items-center justify-center overflow-hidden rounded-lg border bg-neutral-50 dark:bg-black p-8">
+        <div className="relative flex flex-wrap gap-6 w-full items-center justify-center overflow-hidden p-8">
             <GlowBorderCard
                 width="200px"
                 aspectRatio="1"
@@ -80,7 +80,7 @@ export function GlowBorderCardAspects() {
  */
 export function GlowBorderCardCustom() {
     return (
-        <div className="relative flex flex-wrap gap-6 w-full items-center justify-center overflow-hidden rounded-lg border bg-neutral-50 dark:bg-black p-8">
+        <div className="relative flex flex-wrap gap-6 w-full items-center justify-center overflow-hidden p-8">
             <GlowBorderCard
                 width="220px"
                 aspectRatio="1"

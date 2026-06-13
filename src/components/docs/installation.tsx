@@ -3,6 +3,7 @@
 import React from "react";
 import { Check, Copy, Terminal } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { getShadcnAddCommand } from "@/lib/registry";
 
 interface InstallationProps {
     children: React.ReactNode;
@@ -24,7 +25,7 @@ interface ManualStepProps {
 // Clean CLI Installation Block
 export function CLIInstall({ componentName, className }: CLIInstallProps) {
     const [copied, setCopied] = React.useState(false);
-    const command = `npx shadcn@latest add https://www.vengenceui.com/r/${componentName}.json`;
+    const command = getShadcnAddCommand(componentName);
 
     const copyToClipboard = async () => {
         await navigator.clipboard.writeText(command);

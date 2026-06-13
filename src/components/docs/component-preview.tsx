@@ -42,37 +42,74 @@ export function ComponentPreview({
 
     const vibrantDarkTheme = {
         plain: {
-            color: "#22c55e", // green-500
+            color: "#a1a1aa",
             backgroundColor: "transparent",
         },
         styles: [
             {
                 types: ["comment", "prolog", "doctype", "cdata"],
-                style: { color: "#525252" },
+                style: { color: "#3f3f46", fontStyle: "italic" as const },
             },
             {
                 types: ["punctuation", "operator"],
-                style: { color: "#737373" },
+                style: { color: "#52525b" },
             },
             {
                 types: ["property", "tag", "boolean", "number", "constant", "symbol", "deleted"],
-                style: { color: "#38bdf8" }, // sky-400
+                style: { color: "#8bb8d0" },
             },
             {
                 types: ["selector", "attr-name", "string", "char", "builtin", "inserted"],
-                style: { color: "#fbbf24" }, // amber-400
+                style: { color: "#c9a87c" },
             },
             {
                 types: ["url", "variable", "function", "class-name"],
-                style: { color: "#38bdf8" }, // sky-400
+                style: { color: "#8ec8b0" },
             },
             {
                 types: ["atrule", "attr-value", "keyword"],
-                style: { color: "#e879f9" }, // fuchsia-400
+                style: { color: "#a0a0cc" },
             },
             {
                 types: ["regex", "important"],
-                style: { color: "#f87171" }, // red-400
+                style: { color: "#c4908a" },
+            },
+        ],
+    };
+
+    const vibrantLightTheme = {
+        plain: {
+            color: "#52525b",
+            backgroundColor: "transparent",
+        },
+        styles: [
+            {
+                types: ["comment", "prolog", "doctype", "cdata"],
+                style: { color: "#a1a1aa", fontStyle: "italic" as const },
+            },
+            {
+                types: ["punctuation", "operator"],
+                style: { color: "#71717a" },
+            },
+            {
+                types: ["property", "tag", "boolean", "number", "constant", "symbol", "deleted"],
+                style: { color: "#4a7f94" },
+            },
+            {
+                types: ["selector", "attr-name", "string", "char", "builtin", "inserted"],
+                style: { color: "#8a6d3b" },
+            },
+            {
+                types: ["url", "variable", "function", "class-name"],
+                style: { color: "#3d7a5f" },
+            },
+            {
+                types: ["atrule", "attr-value", "keyword"],
+                style: { color: "#6b6b99" },
+            },
+            {
+                types: ["regex", "important"],
+                style: { color: "#996b6b" },
             },
         ],
     };
@@ -107,8 +144,8 @@ export function ComponentPreview({
                 {description && <p className="text-muted-foreground text-sm leading-relaxed max-w-2xl">{description}</p>}
             </div>
 
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="relative w-full !border-[1px] !border-neutral-200 dark:!border-neutral-700 rounded-xl overflow-hidden bg-neutral-100 dark:bg-black border-b border-neutral-200 dark:border-neutral-900">
-                <div className="flex items-center justify-between px-3 py-2.5 border-b border-neutral-300 dark:border-neutral-800 bg-white dark:bg-black">
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="relative w-full rounded-sm overflow-hidden border border-neutral-200 dark:border-[#222] bg-neutral-50 dark:bg-zinc-950">
+                <div className="flex items-center justify-between px-3 py-2.5 border-b border-neutral-200 dark:border-[#222] bg-white dark:bg-zinc-900/80">
                     <TabsList className="justify-start gap-6 bg-transparent p-0">
                         {['preview', 'code'].map((tab) => {
                             const isActive = activeTab === tab;
@@ -145,7 +182,7 @@ export function ComponentPreview({
                     </TabsList>
                     <button
                         onClick={onCopy}
-                        className="flex items-center justify-center w-8 h-8 rounded-md bg-neutral-100 dark:bg-black border border-neutral-200 dark:border-neutral-800 text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-200 transition-all active:scale-95 hover:bg-neutral-200 dark:hover:bg-neutral-900"
+                        className="flex items-center justify-center w-8 h-8 rounded-md bg-neutral-100 dark:bg-black border border-neutral-200 dark:border-[#222] text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-200 transition-all active:scale-95 hover:bg-neutral-200 dark:hover:bg-neutral-900"
                         aria-label="Copy code"
                     >
                         {hasCopied ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
@@ -153,11 +190,10 @@ export function ComponentPreview({
                 </div>
 
                 <motion.div
-                    className="relative bg-neutral-100 dark:bg-black overflow-hidden"
+                    className="relative bg-neutral-50 dark:bg-zinc-950 overflow-hidden"
                 >
-                    <TabsContent value="preview" className="m-0 min-h-[350px] flex items-center justify-center bg-white dark:bg-black">
-                        {/* Optional: Add a subtle overlay so the grid isn't too harsh */}
-                        <div className="absolute inset-0 bg-white/30 dark:bg-neutral-950/30 pointer-events-none" />
+                    <TabsContent value="preview" className="m-0 min-h-[350px] flex items-center justify-center bg-white dark:bg-zinc-950">
+                        <div className="absolute inset-0 bg-white/30 dark:bg-zinc-950/30 pointer-events-none" />
 
                         <div className="preview relative z-10 flex min-h-[350px] w-full items-center justify-center p-10">
                             {isVisible ? component : (
@@ -169,11 +205,11 @@ export function ComponentPreview({
                         </div>
                     </TabsContent>
 
-                    <TabsContent value="code" className="m-0 bg-neutral-100 dark:bg-[#161616]">
+                    <TabsContent value="code" className="m-0 bg-neutral-50 dark:bg-zinc-950">
                         <div className="relative group/code">
                             <div className="relative text-base font-mono overflow-x-auto max-h-[400px]">
                                 <Highlight
-                                    theme={resolvedTheme === 'dark' ? vibrantDarkTheme as any : themes.vsLight}
+                                    theme={resolvedTheme === 'dark' ? vibrantDarkTheme as any : vibrantLightTheme as any}
                                     code={code}
                                     language="tsx"
                                 >

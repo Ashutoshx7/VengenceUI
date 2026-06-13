@@ -4,7 +4,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import imagesLoaded from 'imagesloaded'
 import { cn } from '@/lib/utils'
-import { Github, Slack, Twitter } from 'lucide-react'
+import { FaGithub, FaSlack, FaTwitter } from 'react-icons/fa'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -28,6 +28,7 @@ export interface StaggeredGridProps {
     }
     className?: string
     showFooter?: boolean
+    scroller?: string | Element | Window | null
 }
 
 export function StaggeredGrid({
@@ -39,7 +40,8 @@ export function StaggeredGrid({
         moreDemos: { text: "More demos", href: "https://tympanus.net/codrops/demos" }
     },
     className,
-    showFooter = true
+    showFooter = true,
+    scroller
 }: StaggeredGridProps) {
     const [isLoaded, setIsLoaded] = useState(false)
     const gridFullRef = useRef<HTMLDivElement>(null)
@@ -78,6 +80,7 @@ export function StaggeredGrid({
             gsap.timeline({
                 scrollTrigger: {
                     trigger: textRef.current,
+                    scroller: scroller || undefined,
                     start: 'top bottom',
                     end: 'center center-=25%',
                     scrub: 1,
@@ -101,9 +104,13 @@ export function StaggeredGrid({
             const middleColumnIndex = Math.floor(numColumns / 2)
 
             const columns: Element[][] = Array.from({ length: numColumns }, () => [])
-            gridFullItems.forEach((item: any, index: number) => {
-                const columnIndex = index % numColumns
-                columns[columnIndex].push(item)
+            gridFullItems.forEach((item: any) => {
+                const colAttr = item.getAttribute('data-col');
+                // Use data-col if available, fallback to a safe index calculation
+                const columnIndex = colAttr !== null ? parseInt(colAttr, 10) : 0;
+                if (columns[columnIndex]) {
+                    columns[columnIndex].push(item)
+                }
             })
 
             columns.forEach((columnItems, columnIndex) => {
@@ -112,6 +119,7 @@ export function StaggeredGrid({
                 gsap.timeline({
                     scrollTrigger: {
                         trigger: gridFullRef.current,
+                        scroller: scroller || undefined,
                         start: 'top bottom',
                         end: 'center center',
                         scrub: 1.5,
@@ -136,6 +144,7 @@ export function StaggeredGrid({
                 const tl = gsap.timeline({
                     scrollTrigger: {
                         trigger: gridFullRef.current,
+                        scroller: scroller || undefined,
                         start: 'top top+=15%',
                         end: 'bottom center',
                         scrub: 1,
@@ -156,10 +165,9 @@ export function StaggeredGrid({
         }
     }, [isLoaded])
 
-    // Prepare grid items: mix images and bento items
-    // We want to fill up to index 20 (end of row 3) but not necessarily the rows below
-    // [...images, ...images] gives 20 items (indices 0-19). We need one more for index 20.
-    const mixedGridItems: (string | 'BENTO_GROUP')[] = [...images, ...images, images[0]].slice(0, 35);
+    // Prepare grid items: fill up to the end of Row 3 (21 slots)
+    // This perfectly balances the 3rd row with 2 cards on each side of the bento container.
+    const mixedGridItems: (string | 'BENTO_GROUP')[] = Array.from({ length: 21 }, (_, i) => images[i % images.length]);
 
     // Replace the slot where we want the bento group
     // Position at index 16 = Row 3 (middle row), spanning columns 3-5 (center)
@@ -187,7 +195,7 @@ export function StaggeredGrid({
                             if (!bentoItems || bentoItems.length === 0) return null;
 
                             return (
-                                <div key="bento-group" className="grid__item bento-container col-span-3 row-span-1 relative z-20 flex items-center justify-center gap-2 h-full w-full will-change-transform">
+                                <div key="bento-group" data-col={2} className="grid__item bento-container col-span-3 row-span-1 relative z-20 flex items-center justify-center gap-2 h-full w-full will-change-transform">
                                     {bentoItems.map((bentoItem, index) => {
                                         const isActive = activeBento === index;
                                         return (
@@ -269,11 +277,11 @@ export function StaggeredGrid({
                         if (i === 17 || i === 18) return null;
 
                         if (typeof item === 'string') {
-                            const Icon = i % 3 === 0 ? Github : i % 3 === 1 ? Slack : Twitter;
+                            const Icon = i % 3 === 0 ? FaGithub : i % 3 === 1 ? FaSlack : FaTwitter;
                             const label = i % 3 === 0 ? "Github" : i % 3 === 1 ? "Slack" : "Twitter";
 
                             return (
-                                <figure key={`img-${i}`} className="grid__item m-0 relative z-10 [perspective:800px] will-change-[transform,opacity] group cursor-pointer">
+                                <figure key={`img-${i}`} data-col={i % 7} className="grid__item m-0 relative z-10 [perspective:800px] will-change-[transform,opacity] group cursor-pointer">
                                     <div className="grid__item-img w-full h-full [backface-visibility:hidden] will-change-transform rounded-xl overflow-hidden shadow-sm border border-zinc-200 dark:border-zinc-900 bg-zinc-100 dark:bg-zinc-950 flex items-center justify-center transition-all duration-500 ease-out group-hover:scale-105 group-hover:shadow-xl group-hover:border-transparent">
 
                                         {/* Gradient Overlay for Hover */}
