@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ComponentShowcase } from "@/components/ui/component-showcase";
 import { DemoRenderer } from "@/components/docs/demo-renderer";
@@ -10,6 +11,42 @@ export function generateStaticParams() {
   return COMPONENT_CATEGORIES.flatMap((category) =>
     category.items.map((item) => ({ slug: item.slug }))
   );
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const component = COMPONENT_BY_SLUG.get(slug);
+
+  if (!component) {
+    return {};
+  }
+
+  const title = component.name;
+  const description = `${component.description}. Preview the component and install it in your React or Next.js project.`;
+  const path = `/components/${component.slug}`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: path,
+    },
+    openGraph: {
+      type: "website",
+      url: path,
+      title: `${title} | Vengeance UI`,
+      description,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} | Vengeance UI`,
+      description,
+    },
+  };
 }
 
 export default async function ComponentPage({
@@ -35,4 +72,3 @@ export default async function ComponentPage({
     </ComponentShowcase>
   );
 }
-

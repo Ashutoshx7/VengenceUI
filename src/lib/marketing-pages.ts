@@ -22,6 +22,7 @@ import {
   Zap,
 } from "lucide-react";
 import { GITHUB_REPO_URL } from "@/lib/github";
+import { SITE_NAME } from "@/lib/site";
 
 export type MarketingAction = {
   label: string;
@@ -538,11 +539,40 @@ export const marketingPages = {
 
 export type MarketingPageKey = keyof typeof marketingPages;
 
+const marketingPagePaths: Record<MarketingPageKey, string> = {
+  about: "/about",
+  blocks: "/blocks",
+  blog: "/blog",
+  changelog: "/changelog",
+  contact: "/contact",
+  privacy: "/privacy",
+  releases: "/releases",
+  showcase: "/showcase",
+  status: "/status",
+  terms: "/terms",
+};
+
 export function marketingPageMetadata(key: MarketingPageKey): Metadata {
   const page = marketingPages[key];
+  const title = page.title.split(".")[0];
+  const path = marketingPagePaths[key];
 
   return {
-    title: `${page.eyebrow === "Company" ? page.title.split(".")[0] : page.title.split(".")[0]} | Vengeance UI`,
+    title,
     description: page.description,
+    alternates: {
+      canonical: path,
+    },
+    openGraph: {
+      type: "website",
+      url: path,
+      title: `${title} | ${SITE_NAME}`,
+      description: page.description,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} | ${SITE_NAME}`,
+      description: page.description,
+    },
   };
 }

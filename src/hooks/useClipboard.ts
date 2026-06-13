@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { sendGAEvent } from '@next/third-parties/google'
+import { track } from '@vercel/analytics';
 
 type EventName = 'block_copy' | 'block_cli_copy' | 'snippet_copy' | 'block_registry_copy';
 
@@ -21,7 +21,7 @@ export const useCopyToClipboard = (block:BlockProps) => {
         navigator.clipboard.writeText(code);
         setCopied(true);
 
-        sendGAEvent('event', eventName, {
+        track(eventName, {
             block_title: title,
             block_category: category,
         })

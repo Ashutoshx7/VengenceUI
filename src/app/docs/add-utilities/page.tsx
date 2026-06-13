@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   DocsArticle,
   DocsCodeBlock,
@@ -7,6 +8,14 @@ import {
   DocsSubsection,
   InlineCode,
 } from "@/components/docs/static-docs";
+
+export const metadata: Metadata = {
+  title: "Add Utilities",
+  description: "Add the shared class and motion utilities used by Vengeance UI components.",
+  alternates: {
+    canonical: "/docs/add-utilities",
+  },
+};
 
 export default function AddUtilitiesPage() {
   return (

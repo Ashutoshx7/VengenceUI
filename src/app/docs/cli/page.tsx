@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   DocsArticle,
   DocsCodeBlock,
@@ -10,6 +11,14 @@ import { PackageCommand } from "@/components/docs/package-command";
 import { getShadcnAddCommand } from "@/lib/registry";
 
 const addAnimatedRaysCommand = getShadcnAddCommand("animated-rays");
+
+export const metadata: Metadata = {
+  title: "CLI Installation",
+  description: "Install Vengeance UI components with the shadcn CLI and registry.",
+  alternates: {
+    canonical: "/docs/cli",
+  },
+};
 
 export default function CliPage() {
   return (
@@ -80,10 +89,10 @@ Options:
         </DocsParagraph>
         <PackageCommand
           commands={{
-            npm: "npx shadcn@latest add https://vengeance-ui-v2.vercel.app/r/animated-rays.json -c ./apps/web",
-            pnpm: "pnpm dlx shadcn@latest add https://vengeance-ui-v2.vercel.app/r/animated-rays.json -c ./apps/web",
-            yarn: "yarn dlx shadcn@latest add https://vengeance-ui-v2.vercel.app/r/animated-rays.json -c ./apps/web",
-            bun: "bunx shadcn@latest add https://vengeance-ui-v2.vercel.app/r/animated-rays.json -c ./apps/web",
+            npm: "npx shadcn@latest add https://www.vengenceui.com/r/animated-rays.json -c ./apps/web",
+            pnpm: "pnpm dlx shadcn@latest add https://www.vengenceui.com/r/animated-rays.json -c ./apps/web",
+            yarn: "yarn dlx shadcn@latest add https://www.vengenceui.com/r/animated-rays.json -c ./apps/web",
+            bun: "bunx shadcn@latest add https://www.vengenceui.com/r/animated-rays.json -c ./apps/web",
           }}
         />
       </DocsSection>
@@ -97,7 +106,7 @@ Options:
           title="components.json"
           code={`{
   "registries": {
-    "@vengeanceui": "https://vengeance-ui-v2.vercel.app/r/{name}.json"
+    "@vengeanceui": "https://www.vengenceui.com/r/{name}.json"
   }
 }`}
         />

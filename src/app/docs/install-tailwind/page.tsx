@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   DocsArticle,
   DocsCodeBlock,
@@ -7,6 +8,14 @@ import {
   DocsSubsection,
   InlineCode,
 } from "@/components/docs/static-docs";
+
+export const metadata: Metadata = {
+  title: "Install Tailwind CSS",
+  description: "Configure Tailwind CSS for Vengeance UI components in a Next.js project.",
+  alternates: {
+    canonical: "/docs/install-tailwind",
+  },
+};
 
 export default function InstallTailwindPage() {
   return (

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   DocsArticle,
   DocsCodeBlock,
@@ -6,6 +7,14 @@ import {
   DocsSection,
   DocsSubsection,
 } from "@/components/docs/static-docs";
+
+export const metadata: Metadata = {
+  title: "Install Next.js",
+  description: "Create a Next.js project configured for Vengeance UI components.",
+  alternates: {
+    canonical: "/docs/install-nextjs",
+  },
+};
 
 export default function InstallNextjsPage() {
   return (

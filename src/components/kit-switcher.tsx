@@ -48,7 +48,7 @@ export function KitSwitcher() {
 
     const handleKitChange = (newlySelectedKitId: string) => {
         if (newlySelectedKitId === 'quartz-kit') {
-            window.open('https://vengeance-ui-v2.vercel.app/premium', '_parent')
+            window.open('https://www.vengenceui.com/premium', '_parent')
             return
         }
 

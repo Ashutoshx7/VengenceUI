@@ -7,8 +7,16 @@ import { COMPONENT_CATEGORIES } from "@/lib/components-catalog";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Components | Vengeance UI",
+  title: "Animated React Components",
   description: "Browse the animated component catalog for Vengeance UI.",
+  alternates: {
+    canonical: "/components",
+  },
+  openGraph: {
+    url: "/components",
+    title: "Animated React Components | Vengeance UI",
+    description: "Browse the animated component catalog for Vengeance UI.",
+  },
 };
 
 const componentCount = COMPONENT_CATEGORIES.reduce((total, category) => total + category.items.length, 0);

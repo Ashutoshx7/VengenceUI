@@ -19,8 +19,16 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-    title: "Templates | Vengeance UI",
+    title: "Templates",
     description: "Portfolio templates built with the Vengeance UI design language.",
+    alternates: {
+        canonical: "/templates",
+    },
+    openGraph: {
+        url: "/templates",
+        title: "Templates | Vengeance UI",
+        description: "Portfolio templates built with the Vengeance UI design language.",
+    },
 };
 
 type TemplateScreenshot = {
