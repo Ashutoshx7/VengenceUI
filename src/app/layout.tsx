@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Inter_Tight, Pixelify_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
@@ -58,7 +59,7 @@ export const metadata: Metadata = {
     siteName: "VengeanceUI",
     images: [
       {
-        url: "https://www.vengenceui.com/og-image.png",
+        url: "https://www.vengenceui.com/og-image-v2-2026.png",
         width: 1200,
         height: 630,
         alt: "VengeanceUI - Premium React Components",
@@ -71,7 +72,7 @@ export const metadata: Metadata = {
     title: "VengeanceUI - Premium React Components",
     description:
       "Beautiful, modern, and customizable React components. Build stunning interfaces with VengeanceUI.",
-    images: ["https://www.vengenceui.com/og-image.png"],
+    images: ["https://www.vengenceui.com/og-image-v2-2026.png"],
   },
   robots: {
     index: true,
@@ -107,6 +108,7 @@ export default function RootLayout({
             <Footer />
           </CommandMenuProvider>
           <Analytics />
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>
