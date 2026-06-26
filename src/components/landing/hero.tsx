@@ -27,6 +27,7 @@ function CustomVideoPlayer() {
     const [progress, setProgress] = useState(0);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [showControls, setShowControls] = useState(false);
+    const [isDragging, setIsDragging] = useState(false);
 
     useEffect(() => {
         const handleFullscreenChange = () => {
@@ -37,6 +38,32 @@ function CustomVideoPlayer() {
             document.removeEventListener("fullscreenchange", handleFullscreenChange);
         };
     }, []);
+
+    useEffect(() => {
+        if (!isDragging) return;
+
+        const handleMouseMove = (e: MouseEvent) => {
+            if (!progressBarRef.current || !videoRef.current || duration === 0) return;
+            const rect = progressBarRef.current.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const width = rect.width;
+            const newProgress = Math.max(0, Math.min(1, clickX / width));
+            videoRef.current.currentTime = newProgress * duration;
+            setProgress(newProgress * 100);
+            setCurrentTime(newProgress * duration);
+        };
+
+        const handleMouseUp = () => {
+            setIsDragging(false);
+        };
+
+        document.addEventListener("mousemove", handleMouseMove);
+        document.addEventListener("mouseup", handleMouseUp);
+        return () => {
+            document.removeEventListener("mousemove", handleMouseMove);
+            document.removeEventListener("mouseup", handleMouseUp);
+        };
+    }, [isDragging, duration]);
 
     const togglePlay = (e?: React.MouseEvent) => {
         e?.stopPropagation();
@@ -68,7 +95,7 @@ function CustomVideoPlayer() {
     };
 
     const handleTimeUpdate = () => {
-        if (!videoRef.current) return;
+        if (!videoRef.current || isDragging) return;
         const current = videoRef.current.currentTime;
         const total = videoRef.current.duration || 0;
         setCurrentTime(current);
@@ -80,8 +107,9 @@ function CustomVideoPlayer() {
         setDuration(videoRef.current.duration);
     };
 
-    const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
+    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
         e.stopPropagation();
+        setIsDragging(true);
         if (!progressBarRef.current || !videoRef.current || duration === 0) return;
         const rect = progressBarRef.current.getBoundingClientRect();
         const clickX = e.clientX - rect.left;
@@ -132,14 +160,14 @@ function CustomVideoPlayer() {
             {/* Custom controls overlay */}
             <div
                 className={`absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-4 pt-12 flex flex-col gap-3 transition-opacity duration-300 z-20 ${
-                    showControls || !isPlaying ? "opacity-100" : "opacity-0 pointer-events-none"
+                    showControls || !isPlaying || isDragging ? "opacity-100" : "opacity-0 pointer-events-none"
                 }`}
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Custom timeline bar */}
                 <div
                     ref={progressBarRef}
-                    onClick={handleSeek}
+                    onMouseDown={handleMouseDown}
                     className="h-1.5 w-full bg-white/10 hover:bg-white/20 transition-all rounded-full cursor-pointer relative flex items-center group/timeline"
                 >
                     <div
