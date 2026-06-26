@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/aed60929-0f1c-4d1b-b413-b71a92d968d4" alt="VengeanceUI Preview" width="100%" />
-</p>
+
 
 <h1 align="center">VengeanceUI</h1>
 
