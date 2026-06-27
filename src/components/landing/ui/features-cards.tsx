@@ -430,7 +430,7 @@ export function FeatureCard4() {
                     initial={{ opacity: 0, x: -10 }}
                     animate={isHovered ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
                     transition={{ delay: 1.0, duration: 0.4 }}
-                    className="absolute top-1/2 right-1/2 translate-x-0 -translate-y-[150px] mr-[160px] md:mr-[180px] flex items-center justify-end"
+                    className="absolute left-[max(1rem,calc(50%_-_22.75rem))] top-1/2 -translate-y-[150px] flex items-center justify-start"
                 >
                     <div className="bg-background text-foreground text-xs font-bold px-3 py-1.5 rounded-lg shadow-xl border whitespace-nowrap">Navbar Component</div>
                     <svg width="40" height="2" className="overflow-visible mx-2">
@@ -443,7 +443,7 @@ export function FeatureCard4() {
                     initial={{ opacity: 0, x: 10 }}
                     animate={isHovered ? { opacity: 1, x: 0 } : { opacity: 0, x: 10 }}
                     transition={{ delay: 1.3, duration: 0.4 }}
-                    className="absolute top-1/2 left-1/2 -translate-y-[10px] ml-[160px] md:ml-[180px] flex items-center"
+                    className="absolute left-[min(calc(50%_+_11.25rem),calc(100%_-_11rem))] top-1/2 -translate-y-[10px] flex items-center"
                 >
                     <svg width="40" height="2" className="overflow-visible mx-2">
                         <line x1="40" y1="1" x2="0" y2="1" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 4" className="text-foreground/30" />
