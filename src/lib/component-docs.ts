@@ -273,6 +273,41 @@ export function InteractiveBookDemo() {
       { prop: "height", type: "number", defaultValue: "500", description: "Height of the book in pixels." },
     ],
   },
+  
+  "image-collage": {
+    dependencies: "npm install framer-motion clsx tailwind-merge",
+    includeUtils: true,
+    usageCode: `import { ImageCollage } from "@/components/ui/image-collage"
+
+const IMAGES = [
+  { src: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=2000&auto=format&fit=crop', x: 20, y: -25, rotate: 12 },
+  { src: 'https://images.unsplash.com/photo-1620002130389-9db8a5e3782d?q=80&w=2000&auto=format&fit=crop', x: 0, y: 15, rotate: -15 },
+]
+
+export function ImageCollageDemo() {
+  return (
+    <ImageCollage images={IMAGES} />
+  )
+}`,
+    props: [
+      { prop: "images", type: "CollageImage[]", defaultValue: "-", description: "Array of images with specific coordinates and rotation." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional classes for the outer wrapper." },
+      { prop: "containerClassName", type: "string", defaultValue: "-", description: "Additional classes for the image container." },
+      { prop: "imageClassName", type: "string", defaultValue: "-", description: "Additional classes for the individual images." },
+    ],
+    additionalPropSections: [
+      {
+        title: "CollageImage",
+        data: [
+          { prop: "src", type: "string", defaultValue: "-", description: "Image URL." },
+          { prop: "x", type: "number", defaultValue: "-", description: "X offset in scattered state." },
+          { prop: "y", type: "number", defaultValue: "-", description: "Y offset in scattered state." },
+          { prop: "rotate", type: "number", defaultValue: "-", description: "Rotation in degrees." },
+          { prop: "alt", type: "string", defaultValue: "-", description: "Optional alt text." },
+        ],
+      },
+    ],
+  },
 
   "image-trail": {
     dependencies: "npm install framer-motion clsx tailwind-merge",

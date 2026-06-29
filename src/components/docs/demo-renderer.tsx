@@ -66,7 +66,10 @@ const DEMO_COMPONENTS: Record<string, React.ComponentType> = {
   "logo-slider": dynamic(() => import("@/components/docs/logo-slider").then((m) => ({ default: m.LogoSliderDemo })), { ssr: false, loading: LOADING }),
   "stacked-logos": dynamic(() => import("@/components/docs/stacked-logos").then((m) => ({ default: m.StackedLogosDemo })), { ssr: false, loading: LOADING }),
   "image-reveal-list": dynamic(() => import("@/components/docs/image-reveal-list-demo").then((m) => ({ default: m.ImageRevealListDemo })), { ssr: false, loading: LOADING }),
+  "image-collage": dynamic(() => import("@/components/docs/image-collage-demo").then((m) => ({ default: m.ImageCollageDemo })), { ssr: false, loading: LOADING }),
   "faq-accordion": dynamic(() => import("@/components/docs/faq-accordion-demo").then((m) => ({ default: m.FaqAccordionDemo })), { ssr: false, loading: LOADING }),
+
+
 
   "light-lines": dynamic(() => import("@/components/docs/light-lines").then((m) => ({ default: m.LightLinesDemo })), { ssr: false, loading: LOADING }),
   "liquid-ocean": dynamic(() => import("@/components/docs/liquid-ocean").then((m) => ({ default: m.LiquidOceanDemo })), { ssr: false, loading: LOADING }),

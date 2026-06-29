@@ -53,6 +53,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
     name: "Interactive",
     icon: MousePointerClick,
     items: [
+      { name: "Image Collage", slug: "image-collage", description: "Interactive scattered image collage toggle", componentName: "image-collage", isNew: true },
       { name: "Interactive Book", slug: "interactive-book", description: "3D page-flip style book", componentName: "interactive-book" },
       { name: "Image Trail", slug: "image-trail", description: "Cursor-following image trail effect", componentName: "image-trail", isNew: true },
       { name: "Perspective Carousel", slug: "perspective-carousel", description: "Spring-driven 3D image carousel", componentName: "perspective-carousel", isNew: true },
