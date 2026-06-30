@@ -69,7 +69,7 @@ const DEMO_COMPONENTS: Record<string, React.ComponentType> = {
   "image-reveal-list": dynamic(() => import("@/components/docs/image-reveal-list-demo").then((m) => ({ default: m.ImageRevealListDemo })), { ssr: false, loading: LOADING }),
   "image-collage": dynamic(() => import("@/components/docs/image-collage-demo").then((m) => ({ default: m.ImageCollageDemo })), { ssr: false, loading: LOADING }),
   "faq-accordion": dynamic(() => import("@/components/docs/faq-accordion-demo").then((m) => ({ default: m.FaqAccordionDemo })), { ssr: false, loading: LOADING }),
-
+  "magnetic-spotlight-marquee": dynamic(() => import("@/components/docs/magnetic-spotlight-marquee-demo").then((m) => ({ default: m.default })), { ssr: false, loading: LOADING }),
 
 
   "light-lines": dynamic(() => import("@/components/docs/light-lines").then((m) => ({ default: m.LightLinesDemo })), { ssr: false, loading: LOADING }),

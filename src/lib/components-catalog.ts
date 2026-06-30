@@ -88,6 +88,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
       { name: "Image Reveal List", slug: "image-reveal-list", description: "Hover-based image reveal tooltip list", componentName: "image-reveal-list", isNew: true },
       { name: "FAQ Accordion", slug: "faq-accordion", description: "Animated expanding FAQ list", componentName: "faq-accordion", isNew: true },
       { name: "Shared Tooltip Avatars", slug: "shared-tooltip-avatars", description: "Avatar stack with a sliding shared tooltip", componentName: "shared-tooltip-avatars", isNew: true },
+      { name: "Magnetic Spotlight Marquee", slug: "magnetic-spotlight-marquee", description: "Interactive full-screen marquee with spotlight cursor effect", componentName: "magnetic-spotlight-marquee", isNew: true },
     ],
   },
   {

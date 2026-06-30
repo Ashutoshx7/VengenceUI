@@ -789,6 +789,33 @@ export function MaskedAvatarsDemo() {
     ],
   },
 
+  "magnetic-spotlight-marquee": {
+    dependencies: "npm install gsap clsx tailwind-merge",
+    includeUtils: true,
+    manualNotes: [
+      "The component uses GSAP for high-performance marquee scrolling and pointer-tracking physics.",
+      "Requires parent container to be relatively or absolutely positioned.",
+      "Since it relies on 'mix-blend-difference', the text colors are automatically inverted based on the background color.",
+    ],
+    usageCode: `import { MagneticSpotlightMarquee } from "@/components/ui/magnetic-spotlight-marquee"
+
+export function SpotlightMarqueeDemo() {
+  return (
+    <MagneticSpotlightMarquee />
+  )
+}`,
+    props: [
+      { prop: "images", type: "string[]", defaultValue: "DEFAULT_IMAGES", description: "Array of image URLs to use in the infinite marquee track." },
+      { prop: "title", type: "string[]", defaultValue: "['VengeanceUI']", description: "Array representing lines of the main title. Each element is rendered on its own line." },
+      { prop: "subtitle", type: "string[]", defaultValue: "['BUILD FASTER', 'SHIP BETTER']", description: "Array representing lines of the subtitle." },
+      { prop: "paragraphs", type: "string[][]", defaultValue: "-", description: "Array of paragraph blocks. Each paragraph block is an array of strings representing individual text lines for the 'wake effect'." },
+      { prop: "navEmail", type: "string", defaultValue: "'hello@vengeance.ui'", description: "The email address displayed in the top navigation bar." },
+      { prop: "navLinks", type: "string", defaultValue: "'Documentation, Components, GitHub'", description: "Links displayed in the top navigation bar." },
+      { prop: "footerText", type: "string", defaultValue: "-", description: "Text displayed at the bottom of the component." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes." },
+    ],
+  },
+
   "logo-slider": {
     dependencies: "npm install framer-motion clsx tailwind-merge",
     includeUtils: true,
