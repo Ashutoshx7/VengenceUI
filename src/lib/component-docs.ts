@@ -1472,4 +1472,53 @@ export function ScrollDissolveRevealDemo() {
       { prop: "containerClassName", type: "string", defaultValue: "-", description: "Additional CSS classes for the outer scroll container." },
     ],
   },
+
+  "solar-system": {
+    dependencies: "npm install framer-motion lucide-react clsx tailwind-merge",
+    includeUtils: true,
+    usageCode: `import { SolarSystem } from "@/components/ui/solar-system"
+
+export function SolarSystemDemo() {
+  return (
+    <SolarSystem
+      title="Interactive Orbit Component"
+      description="Showcase your integrations or technology ecosystem with our highly interactive 3D solar system component."
+    />
+  )
+}`,
+    props: [
+      { prop: "centerLogo", type: "string | React.ReactNode", defaultValue: "OrbitIcon", description: "Logo element rendered in the center core. If not provided, renders a spinning Orbit icon." },
+      { prop: "centerLogoAlt", type: "string", defaultValue: "\"Core Engine\"", description: "Alternate text description for screen readers." },
+      { prop: "title", type: "string", defaultValue: "\"Compatible with your stack\"", description: "Headline text displayed in the header information section." },
+      { prop: "description", type: "string", defaultValue: "\"Connect from any framework...\"", description: "Sub-headline text displayed in the header information section." },
+      { prop: "orbits", type: "OrbitConfig[]", defaultValue: "DEFAULT_ORBITS", description: "Array of orbit configurations mapping items, radius classes, and speeds." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes to override the outer container." },
+    ],
+    additionalPropSections: [
+      {
+        title: "OrbitConfig Interface",
+        data: [
+          { prop: "id", type: "string", defaultValue: "-", description: "Unique identifier for the orbit ring (e.g. 'inner', 'mid')." },
+          { prop: "name", type: "string", defaultValue: "-", description: "Display name for the ring in filter options." },
+          { prop: "radiusClass", type: "string", defaultValue: "-", description: "CSS variable representing orbit size (e.g. 'var(--radius-inner)')." },
+          { prop: "radiusPx", type: "number", defaultValue: "-", description: "Absolute radius in pixels for positioning calculations." },
+          { prop: "speed", type: "number", defaultValue: "-", description: "Standard rotation duration in seconds for one full loop." },
+          { prop: "items", type: "SolarSystemItem[]", defaultValue: "-", description: "Collection of technology node items orbiting on this ring." },
+        ]
+      },
+      {
+        title: "SolarSystemItem Interface",
+        data: [
+          { prop: "id", type: "string", defaultValue: "-", description: "Unique identifier for the technology node." },
+          { prop: "label", type: "string", defaultValue: "-", description: "Display label for the node." },
+          { prop: "type", type: "string", defaultValue: "-", description: "Classification category label (e.g. 'Frontend Library')." },
+          { prop: "badge", type: "string", defaultValue: "-", description: "Highlight badge text (e.g. 'Official SDK')." },
+          { prop: "desc", type: "string", defaultValue: "-", description: "Detailed summary description of the technology." },
+          { prop: "color", type: "string", defaultValue: "-", description: "Hex value of theme highlight color (e.g. '#61DAFB' for React)." },
+          { prop: "svg", type: "React.ReactNode", defaultValue: "-", description: "Inline SVG element/icon to render inside the node." },
+          { prop: "code", type: "string", defaultValue: "-", description: "Sample code snippet to display in the editor sidebar." },
+        ]
+      }
+    ]
+  },
 };

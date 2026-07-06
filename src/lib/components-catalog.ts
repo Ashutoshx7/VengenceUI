@@ -65,6 +65,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
 
       { name: "Interactive Keyboard", slug: "interactive-keyboard", description: "Animated physical keyboard UI", componentName: "interactive-keyboard", isNew: true },
       { name: "Typing Keyboard", slug: "typing-keyboard", description: "3D isometric keyboard with auto-typing screen", componentName: "typing-keyboard", isNew: true },
+      { name: "Solar System", slug: "solar-system", description: "Interactive 3D technology ecosystem orbit animation", componentName: "solar-system", isNew: true },
     ],
   },
   {

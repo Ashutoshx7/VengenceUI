@@ -49,6 +49,7 @@ const DEMO_COMPONENTS: Record<string, React.ComponentType> = {
   "pixelated-image-trail": dynamic(() => import("@/components/docs/pixelated-image-trail").then((m) => ({ default: m.default })), { ssr: false, loading: LOADING }),
   "interactive-keyboard": dynamic(() => import("@/components/docs/interactive-keyboard-demo").then((m) => ({ default: m.InteractiveKeyboardDemo })), { ssr: false, loading: LOADING }),
   "elastic-stack": dynamic(() => import("@/components/docs/elastic-stack-demo").then((m) => ({ default: m.ElasticStackDemo })), { ssr: false, loading: LOADING }),
+  "solar-system": dynamic(() => import("@/components/docs/solar-system-demo").then((m) => ({ default: m.SolarSystemDemo })), { ssr: false, loading: LOADING }),
 
   "expandable-bento-grid": dynamic(() => import("@/components/docs/expandable-bento-grid").then((m) => ({ default: m.ExpandableBentoGridDemo })), { ssr: false, loading: LOADING }),
   "staggered-grid": dynamic(() => import("@/components/docs/staggered-grid").then((m) => ({ default: m.StaggeredGridDemo })), { ssr: false, loading: LOADING }),
