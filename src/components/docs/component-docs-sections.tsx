@@ -174,34 +174,36 @@ export function ComponentDocsSections({ componentName, slug, sourceCode }: Compo
       )}
       {/* ─── Credits Section ─── */}
       {docs.credits && (
-        <section id="credits" className="scroll-mt-24 border-t border-neutral-200 dark:border-zinc-800/80 pt-8">
-          <div className="relative overflow-hidden rounded-2xl border border-neutral-200 dark:border-zinc-800 bg-neutral-50/50 dark:bg-zinc-900/30 p-6 backdrop-blur-xs">
-            {/* Ambient Background Glow */}
-            <div className="absolute -right-12 -top-12 size-36 rounded-full bg-teal-500/10 blur-3xl dark:bg-teal-500/5 pointer-events-none" />
+        <section id="credits" className="scroll-mt-24">
+          <h2 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-zinc-100 mb-6">Credits</h2>
+          
+          <div className="relative overflow-hidden rounded-xl border border-neutral-200 dark:border-[#222] bg-neutral-50/50 dark:bg-[#07080a] p-6">
+            {/* Subtle ambient mesh background glow */}
+            <div className="absolute right-0 top-0 -z-10 size-48 bg-radial from-neutral-200/40 via-transparent to-transparent dark:from-zinc-800/5 pointer-events-none" />
             
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              <div className="space-y-1.5">
-                <div className="inline-flex items-center gap-1.5 rounded-full bg-teal-500/10 px-2.5 py-0.5 text-[11px] font-semibold text-teal-600 dark:text-teal-400">
-                  Contributor Spotlight
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+              <div className="space-y-2">
+                <div className="inline-flex items-center gap-1.5 rounded-md bg-neutral-100 dark:bg-zinc-800/80 px-2.5 py-0.5 font-mono text-[11px] font-medium text-neutral-600 dark:text-zinc-400 border border-neutral-200/50 dark:border-zinc-700/50">
+                  contributor
                 </div>
-                <h3 className="text-lg font-bold tracking-tight text-neutral-900 dark:text-zinc-100">
-                  Created by {docs.credits.author}
+                <h3 className="font-orbitron text-xl font-bold tracking-tight text-neutral-900 dark:text-white">
+                  {docs.credits.author}
                 </h3>
-                <p className="text-xs text-neutral-500 dark:text-zinc-400 max-w-md">
-                  This component was built and contributed to Vengeance UI. Show some support by connecting on their socials!
+                <p className="text-sm text-neutral-500 dark:text-zinc-400 max-w-md leading-relaxed">
+                  Designed and contributed the interactive 3D Solar System component to the Vengeance UI catalog.
                 </p>
               </div>
 
-              <div className="flex items-center gap-2.5 sm:self-center">
+              <div className="flex items-center gap-3">
                 {docs.credits.github && (
                   <a
                     href={docs.credits.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 rounded-xl border border-neutral-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-4 py-2.5 text-xs font-semibold text-neutral-700 dark:text-zinc-300 shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-all hover:border-neutral-300 dark:hover:border-zinc-700 hover:bg-neutral-50 dark:hover:bg-zinc-900"
+                    className="group inline-flex items-center gap-2 rounded-lg border border-neutral-200 dark:border-[#222] bg-white dark:bg-[#0b0c10] px-4 py-2.5 text-xs font-semibold text-neutral-700 dark:text-zinc-300 transition-all hover:bg-neutral-50 dark:hover:bg-[#12141a] hover:text-neutral-900 dark:hover:text-white"
                   >
                     <svg
-                      className="size-4 text-neutral-900 dark:text-zinc-100"
+                      className="size-4 text-neutral-900 dark:text-zinc-100 transition-transform group-hover:scale-110"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
@@ -219,10 +221,10 @@ export function ComponentDocsSections({ componentName, slug, sourceCode }: Compo
                     href={docs.credits.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 rounded-xl border border-neutral-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-4 py-2.5 text-xs font-semibold text-neutral-700 dark:text-zinc-300 shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-all hover:border-neutral-300 dark:hover:border-zinc-700 hover:bg-neutral-50 dark:hover:bg-zinc-900"
+                    className="group inline-flex items-center gap-2 rounded-lg border border-[#0A66C2]/20 dark:border-[#0A66C2]/30 bg-white dark:bg-[#0b0c10] px-4 py-2.5 text-xs font-semibold text-neutral-700 dark:text-zinc-300 transition-all hover:bg-[#0A66C2]/5 dark:hover:bg-[#0A66C2]/10 hover:border-[#0A66C2]/50 hover:text-neutral-900 dark:hover:text-white"
                   >
                     <svg
-                      className="size-4 text-[#0A66C2]"
+                      className="size-4 text-[#0A66C2] transition-transform group-hover:scale-110"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                     >
