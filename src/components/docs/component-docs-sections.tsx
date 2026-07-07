@@ -7,6 +7,7 @@ import { CLICommand } from "@/components/docs/cli-command";
 import { CodeBlock as DocCodeBlock } from "@/components/docs/component-installation";
 import { PropsTable } from "@/components/docs/props-table";
 import { COMPONENT_DOCS } from "@/lib/component-docs";
+// Inline SVG icons used below instead of brand imports
 
 const UTILS_CODE = `import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -169,6 +170,70 @@ export function ComponentDocsSections({ componentName, slug, sourceCode }: Compo
               <PropsTable data={section.data} />
             </div>
           ))}
+        </section>
+      )}
+      {/* ─── Credits Section ─── */}
+      {docs.credits && (
+        <section id="credits" className="scroll-mt-24 border-t border-neutral-200 dark:border-zinc-800/80 pt-8">
+          <div className="relative overflow-hidden rounded-2xl border border-neutral-200 dark:border-zinc-800 bg-neutral-50/50 dark:bg-zinc-900/30 p-6 backdrop-blur-xs">
+            {/* Ambient Background Glow */}
+            <div className="absolute -right-12 -top-12 size-36 rounded-full bg-teal-500/10 blur-3xl dark:bg-teal-500/5 pointer-events-none" />
+            
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div className="space-y-1.5">
+                <div className="inline-flex items-center gap-1.5 rounded-full bg-teal-500/10 px-2.5 py-0.5 text-[11px] font-semibold text-teal-600 dark:text-teal-400">
+                  Contributor Spotlight
+                </div>
+                <h3 className="text-lg font-bold tracking-tight text-neutral-900 dark:text-zinc-100">
+                  Created by {docs.credits.author}
+                </h3>
+                <p className="text-xs text-neutral-500 dark:text-zinc-400 max-w-md">
+                  This component was built and contributed to Vengeance UI. Show some support by connecting on their socials!
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2.5 sm:self-center">
+                {docs.credits.github && (
+                  <a
+                    href={docs.credits.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 rounded-xl border border-neutral-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-4 py-2.5 text-xs font-semibold text-neutral-700 dark:text-zinc-300 shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-all hover:border-neutral-300 dark:hover:border-zinc-700 hover:bg-neutral-50 dark:hover:bg-zinc-900"
+                  >
+                    <svg
+                      className="size-4 text-neutral-900 dark:text-zinc-100"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.06c3-.36 6-2 6-5.24a4.31 4.31 0 0 0-1.2-3.08 4 4 0 0 0-.08-3.2s-1-.3-3.3 1.2a11.5 11.5 0 0 0-6 0C5.3 2 4.3 2 4.3 2a4 4 0 0 0-.08 3.2A4.31 4.31 0 0 0 3 8.24c0 3.24 3 4.88 6 5.24A4.8 4.8 0 0 0 8 18v4" />
+                    </svg>
+                    GitHub
+                  </a>
+                )}
+                {docs.credits.linkedin && (
+                  <a
+                    href={docs.credits.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 rounded-xl border border-neutral-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-4 py-2.5 text-xs font-semibold text-neutral-700 dark:text-zinc-300 shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-all hover:border-neutral-300 dark:hover:border-zinc-700 hover:bg-neutral-50 dark:hover:bg-zinc-900"
+                  >
+                    <svg
+                      className="size-4 text-[#0A66C2]"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                    </svg>
+                    LinkedIn
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
         </section>
       )}
     </div>

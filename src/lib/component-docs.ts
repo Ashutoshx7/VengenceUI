@@ -13,6 +13,13 @@ export interface ComponentDocData {
   props: PropDef[];
   /** Additional props sections (e.g. nested configs like metalConfig) */
   additionalPropSections?: { title: string; data: PropDef[] }[];
+  /** Optional credit section for the component author */
+  credits?: {
+    author: string;
+    github?: string;
+    twitter?: string;
+    linkedin?: string;
+  };
 }
 
 /**
@@ -1519,6 +1526,11 @@ export function SolarSystemDemo() {
           { prop: "code", type: "string", defaultValue: "-", description: "Sample code snippet to display in the editor sidebar." },
         ]
       }
-    ]
+    ],
+    credits: {
+      author: "Siddh2024",
+      github: "https://github.com/Siddh2024",
+      linkedin: "https://www.linkedin.com/in/siddh-sharma-b0164430b/"
+    }
   },
 };
