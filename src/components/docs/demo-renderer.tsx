@@ -63,6 +63,7 @@ const DEMO_COMPONENTS: Record<string, React.ComponentType> = {
   "gooey-search": dynamic(() => import("@/components/docs/gooey-search-demo").then((m) => ({ default: m.GooeySearchDemo })), { ssr: false, loading: LOADING }),
   "animated-tooltip": dynamic(() => import("@/components/docs/animated-tooltip-demo").then((m) => ({ default: m.AnimatedTooltipDemo })), { ssr: false, loading: LOADING }),
   "wave-grid-background": dynamic(() => import("@/components/docs/wave-grid-background-demo").then((m) => ({ default: m.WaveGridBackgroundDemo })), { ssr: false, loading: LOADING }),
+  "interactive-particles": dynamic(() => import("@/components/docs/interactive-particles-demo").then((m) => ({ default: m.InteractiveParticlesDemo })), { ssr: false, loading: LOADING }),
   "masked-avatars": dynamic(() => import("@/components/docs/masked-avatars").then((m) => ({ default: m.MaskedAvatarsDemo })), { ssr: false, loading: LOADING }),
   "agent-bento-grid": dynamic(() => import("@/components/docs/agent-bento-grid-demo").then((m) => ({ default: m.AgentBentoGridDemo })), { ssr: false, loading: LOADING }),
   "kinetic-text-loader": dynamic(() => import("@/components/docs/kinetic-text-loader-demo").then((m) => ({ default: m.KineticTextLoaderDemo })), { ssr: false, loading: LOADING }),

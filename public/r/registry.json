@@ -1117,5 +1117,16 @@
     "files": [
       "public/r/wave-grid-background.json"
     ]
+  },
+  {
+    "name": "interactive-particles",
+    "dependencies": [
+      "three",
+      "gsap"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/interactive-particles.json"
+    ]
   }
 ]

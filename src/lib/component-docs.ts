@@ -1325,6 +1325,36 @@ export function WaveGridBackgroundDemo() {
     ],
   },
 
+  "interactive-particles": {
+    dependencies: "npm install three gsap clsx tailwind-merge",
+    includeUtils: true,
+    manualNotes: [
+      "Provide an image via `src`. Bright pixels become particles and dark ones are discarded (tune the cutoff with `threshold`); high-contrast images (light shapes on black) look best.",
+      "Point count equals the image's visible pixels, so keep source images small (the demo uses ~512×320). Very large images create a lot of particles.",
+      "The image must be same-origin or CORS-enabled — the component reads its pixels via a canvas to decide which particles to keep.",
+      "Built on raw Three.js + GSAP (no React Three Fiber). It fills its parent, so give the wrapper an explicit height. Everything is disposed on unmount.",
+    ],
+    usageCode: `import { InteractiveParticles } from "@/components/ui/interactive-particles"
+
+export function InteractiveParticlesDemo() {
+  return (
+    <div className="relative h-[520px] w-full overflow-hidden rounded-xl bg-black">
+      <InteractiveParticles src="/particles.png" background="#000000" />
+    </div>
+  )
+}`,
+    props: [
+      { prop: "src", type: "string", defaultValue: "-", description: "Image URL to sample particles from. Bright pixels become particles." },
+      { prop: "background", type: "string", defaultValue: "'#000000'", description: "Wrapper background color." },
+      { prop: "size", type: "number", defaultValue: "1.5", description: "Steady-state particle size multiplier." },
+      { prop: "randomness", type: "number", defaultValue: "2", description: "Steady-state random spread of the particles." },
+      { prop: "depth", type: "number", defaultValue: "4", description: "Steady-state depth (z displacement)." },
+      { prop: "touchRadius", type: "number", defaultValue: "0.15", description: "Cursor touch radius (0–1)." },
+      { prop: "threshold", type: "number", defaultValue: "34", description: "Brightness cutoff (0–255) below which pixels are discarded." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional classes for the wrapper element." },
+    ],
+  },
+
   "faq-accordion": {
     dependencies: "npm install clsx tailwind-merge",
     includeUtils: true,
