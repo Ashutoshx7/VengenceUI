@@ -1329,22 +1329,29 @@ export function WaveGridBackgroundDemo() {
     dependencies: "npm install three gsap clsx tailwind-merge",
     includeUtils: true,
     manualNotes: [
-      "Provide an image via `src`. Bright pixels become particles and dark ones are discarded (tune the cutoff with `threshold`); high-contrast images (light shapes on black) look best.",
-      "Point count equals the image's visible pixels, so keep source images small (the demo uses ~512×320). Very large images create a lot of particles.",
-      "The image must be same-origin or CORS-enabled — the component reads its pixels via a canvas to decide which particles to keep.",
-      "Built on raw Three.js + GSAP (no React Three Fiber). It fills its parent, so give the wrapper an explicit height. Everything is disposed on unmount.",
+      "Provide a starting image via `src`, and/or let visitors supply their own with the built-in upload control (`allowUpload`, on by default). The uploaded image immediately regenerates the particle pattern.",
+      "Bright pixels become particles and dark ones are discarded (tune the cutoff with `threshold`); high-contrast images (light shapes on black) look best.",
+      "Uploaded images are downscaled to `maxDimension` (default 480px) before sampling, so any size stays performant — one kept pixel becomes one particle.",
+      "External `src` images must be same-origin or CORS-enabled (the component reads pixels via a canvas). Uploaded files are read locally as object URLs, so no CORS applies.",
+      "Built on raw Three.js + GSAP (no React Three Fiber). It fills its parent, so give the wrapper an explicit height. Everything — including the WebGL context — is disposed on unmount.",
     ],
     usageCode: `import { InteractiveParticles } from "@/components/ui/interactive-particles"
 
 export function InteractiveParticlesDemo() {
   return (
     <div className="relative h-[520px] w-full overflow-hidden rounded-xl bg-black">
-      <InteractiveParticles src="/particles.png" background="#000000" />
+      {/* allowUpload adds an "Upload image" button; drop in any image
+          and the particle pattern regenerates from it. */}
+      <InteractiveParticles src="/particles.png" background="#000000" allowUpload />
     </div>
   )
 }`,
     props: [
-      { prop: "src", type: "string", defaultValue: "-", description: "Image URL to sample particles from. Bright pixels become particles." },
+      { prop: "src", type: "string", defaultValue: "-", description: "Initial image URL to sample particles from. Optional when uploads are allowed." },
+      { prop: "allowUpload", type: "boolean", defaultValue: "true", description: "Show an 'Upload image' control so users can supply their own image." },
+      { prop: "uploadLabel", type: "string", defaultValue: "'Upload image'", description: "Label for the upload control." },
+      { prop: "onUpload", type: "(file: File) => void", defaultValue: "-", description: "Fired with the uploaded File whenever the user picks an image." },
+      { prop: "maxDimension", type: "number", defaultValue: "480", description: "Longest edge the source is downscaled to before sampling (caps particle count)." },
       { prop: "background", type: "string", defaultValue: "'#000000'", description: "Wrapper background color." },
       { prop: "size", type: "number", defaultValue: "1.5", description: "Steady-state particle size multiplier." },
       { prop: "randomness", type: "number", defaultValue: "2", description: "Steady-state random spread of the particles." },

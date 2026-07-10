@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import gsap from "gsap";
 import { cn } from "@/lib/utils";
@@ -209,8 +209,16 @@ class TouchTexture {
 }
 
 export interface InteractiveParticlesProps {
-  /** Image URL to sample particles from. Bright pixels become particles. */
-  src: string;
+  /** Initial image URL to sample particles from. Bright pixels become particles. Optional if uploads are allowed. */
+  src?: string;
+  /** Show an "Upload image" control so the user can supply their own image. Defaults to true. */
+  allowUpload?: boolean;
+  /** Label for the upload control. Defaults to "Upload image". */
+  uploadLabel?: string;
+  /** Fired with the uploaded File whenever the user picks an image. */
+  onUpload?: (file: File) => void;
+  /** Longest edge the source is downscaled to before sampling (caps the particle count). Defaults to 480. */
+  maxDimension?: number;
   /** Extra classes for the wrapper element. */
   className?: string;
   /** Wrapper background color. Defaults to black. */
@@ -229,6 +237,10 @@ export interface InteractiveParticlesProps {
 
 export function InteractiveParticles({
   src,
+  allowUpload = true,
+  uploadLabel = "Upload image",
+  onUpload,
+  maxDimension = 480,
   className,
   background = "#000000",
   size = 1.5,
@@ -239,11 +251,33 @@ export function InteractiveParticles({
 }: InteractiveParticlesProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const objectUrlRef = useRef<string | null>(null);
+
+  // An uploaded image (as an object URL) takes precedence over `src`.
+  const [uploadedSrc, setUploadedSrc] = useState<string | null>(null);
+  const effectiveSrc = uploadedSrc ?? src ?? null;
+
+  const handleFile = (file: File | undefined) => {
+    if (!file || !file.type.startsWith("image/")) return;
+    if (objectUrlRef.current) URL.revokeObjectURL(objectUrlRef.current);
+    const url = URL.createObjectURL(file);
+    objectUrlRef.current = url;
+    setUploadedSrc(url);
+    onUpload?.(file);
+  };
+
+  // Revoke the last object URL on unmount.
+  useEffect(() => {
+    return () => {
+      if (objectUrlRef.current) URL.revokeObjectURL(objectUrlRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     const container = containerRef.current;
     const canvas = canvasRef.current;
-    if (!container || !canvas) return;
+    if (!container || !canvas || !effectiveSrc) return;
 
     let disposed = false;
     const getSize = () => ({
@@ -294,7 +328,7 @@ export function InteractiveParticles({
     // ── build particles from the image ───────────────────────────────────────
     const loader = new THREE.TextureLoader();
     loader.setCrossOrigin("anonymous");
-    loader.load(src, (texture) => {
+    loader.load(effectiveSrc, (texture) => {
       if (disposed) {
         texture.dispose();
         return;
@@ -303,8 +337,14 @@ export function InteractiveParticles({
       texture.magFilter = THREE.LinearFilter;
 
       const image = texture.image as HTMLImageElement;
-      imgWidth = image.width;
-      imgHeight = image.height;
+
+      // Downscale the sampling grid so uploads of any size stay performant.
+      // One kept pixel becomes one particle. The full-res texture is still
+      // sampled with normalised UVs, so color detail is preserved.
+      const longest = Math.max(image.width, image.height);
+      const scaleDown = longest > maxDimension ? maxDimension / longest : 1;
+      imgWidth = Math.max(1, Math.round(image.width * scaleDown));
+      imgHeight = Math.max(1, Math.round(image.height * scaleDown));
       const numPoints = imgWidth * imgHeight;
 
       // Read pixels (flipped vertically) to discard dark ones.
@@ -439,9 +479,11 @@ export function InteractiveParticles({
         (hitArea.material as THREE.Material).dispose();
       }
       if (touch) touch.texture.dispose();
+      // Dispose GL resources but keep the context — the same canvas reuses its
+      // single WebGL context when the effect re-runs (e.g. after an upload).
       renderer.dispose();
     };
-  }, [src, background, size, randomness, depth, touchRadius, threshold]);
+  }, [effectiveSrc, size, randomness, depth, touchRadius, threshold, maxDimension]);
 
   return (
     <div
@@ -450,6 +492,33 @@ export function InteractiveParticles({
       style={{ background }}
     >
       <canvas ref={canvasRef} className="block h-full w-full" />
+
+      {allowUpload && (
+        <>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={(e) => {
+              handleFile(e.target.files?.[0]);
+              e.target.value = "";
+            }}
+          />
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            className="absolute right-3 top-3 z-10 inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/40 px-3 py-1.5 text-xs font-medium text-white/90 backdrop-blur transition-colors hover:bg-black/60"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="17 8 12 3 7 8" />
+              <line x1="12" y1="3" x2="12" y2="15" />
+            </svg>
+            {uploadLabel}
+          </button>
+        </>
+      )}
     </div>
   );
 }
