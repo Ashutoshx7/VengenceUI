@@ -45,8 +45,8 @@ const EASE_IN: [number, number, number, number] = [0.55, 0, 1, 0.45];
 const VARIANTS: Record<AnimatedTooltipVariant, VariantConfig> = {
   // Blobby heart — scales up while un-rotating.
   cora: {
-    width: 260,
-    height: 190,
+    width: 232,
+    height: 174,
     bottom: "calc(100% + 0.5rem)",
     transformOrigin: "50% 100%",
     shape: (fill) => (
@@ -70,8 +70,8 @@ const VARIANTS: Record<AnimatedTooltipVariant, VariantConfig> = {
 
   // Rounded pill with a downward pointer — tips in with a slide.
   smaug: {
-    width: 280,
-    height: 170,
+    width: 240,
+    height: 180,
     bottom: "calc(100% - 0.25rem)",
     transformOrigin: "50% 100%",
     shape: (fill) => (
@@ -94,7 +94,7 @@ const VARIANTS: Record<AnimatedTooltipVariant, VariantConfig> = {
 
   // Banner ribbon with a pointer — drops in with elastic bounce.
   dori: {
-    width: 300,
+    width: 240,
     height: 180,
     bottom: "calc(100% - 0.25rem)",
     transformOrigin: "50% 0%",
@@ -119,8 +119,8 @@ const VARIANTS: Record<AnimatedTooltipVariant, VariantConfig> = {
 
   // Wavy blob — squashes horizontally on entry.
   gram: {
-    width: 290,
-    height: 175,
+    width: 240,
+    height: 180,
     bottom: "calc(100% - 0.25rem)",
     transformOrigin: "50% 100%",
     shape: (fill) => (
@@ -143,8 +143,8 @@ const VARIANTS: Record<AnimatedTooltipVariant, VariantConfig> = {
 
   // Rounded rectangle — rises from below with a spring.
   indis: {
-    width: 280,
-    height: 190,
+    width: 240,
+    height: 180,
     bottom: "calc(100% + 0.25rem)",
     transformOrigin: "50% 100%",
     shape: (fill) => (
@@ -168,7 +168,7 @@ const VARIANTS: Record<AnimatedTooltipVariant, VariantConfig> = {
   // Spiky starburst — pops in with a jiggle.
   malva: {
     width: 220,
-    height: 190,
+    height: 165,
     bottom: "calc(100% + 0.25rem)",
     transformOrigin: "50% 100%",
     shape: (fill) => (
@@ -192,8 +192,8 @@ const VARIANTS: Record<AnimatedTooltipVariant, VariantConfig> = {
 
   // Outlined speech bubble — springs up from the trigger.
   sadoc: {
-    width: 300,
-    height: 190,
+    width: 240,
+    height: 180,
     bottom: "calc(100% + 0.5rem)",
     transformOrigin: "50% 100%",
     shape: (fill) => (
@@ -304,7 +304,7 @@ export function AnimatedTooltip({
             >
               <svg
                 viewBox="0 0 400 300"
-                preserveAspectRatio="none"
+                preserveAspectRatio="xMidYMid meet"
                 style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
                 aria-hidden="true"
               >
