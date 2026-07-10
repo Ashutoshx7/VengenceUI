@@ -1252,6 +1252,38 @@ export function GooeySearchDemo() {
     ],
   },
 
+  "animated-tooltip": {
+    dependencies: "npm install framer-motion clsx tailwind-merge",
+    includeUtils: true,
+    manualNotes: [
+      "Each tooltip picks a shape + animation via the `variant` prop: cora, smaug, dori, gram, indis, malva, or sadoc.",
+      "Colors use the --foreground and --background CSS variables (standard shadcn tokens), so the bubble and text adapt to light and dark themes automatically.",
+      "The tooltip opens on hover and keyboard focus, and is positioned above the trigger. Give it room above in tight layouts.",
+    ],
+    usageCode: `import { AnimatedTooltip } from "@/components/ui/animated-tooltip"
+
+export function AnimatedTooltipDemo() {
+  return (
+    <p className="text-lg">
+      Not all those who{" "}
+      <AnimatedTooltip variant="cora" content="Be yourself; everyone else is already taken.">
+        wander
+      </AnimatedTooltip>{" "}
+      are lost.
+    </p>
+  )
+}`,
+    props: [
+      { prop: "children", type: "React.ReactNode", defaultValue: "-", description: "The trigger label shown inline (usually a word or short phrase)." },
+      { prop: "content", type: "React.ReactNode", defaultValue: "-", description: "The tooltip body revealed on hover or focus." },
+      { prop: "variant", type: '"cora" | "smaug" | "dori" | "gram" | "indis" | "malva" | "sadoc"', defaultValue: "'cora'", description: "Which shape and animation style to use." },
+      { prop: "accentColor", type: "string", defaultValue: "'#6fbb95'", description: "Trigger text color while the tooltip is open." },
+      { prop: "shapeColor", type: "string", defaultValue: "'var(--foreground)'", description: "Fill color of the tooltip bubble." },
+      { prop: "textColor", type: "string", defaultValue: "'var(--background)'", description: "Color of the tooltip text." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the inline wrapper." },
+    ],
+  },
+
   "faq-accordion": {
     dependencies: "npm install clsx tailwind-merge",
     includeUtils: true,

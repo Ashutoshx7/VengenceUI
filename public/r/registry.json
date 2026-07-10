@@ -1097,5 +1097,15 @@
     "files": [
       "public/r/gooey-search.json"
     ]
+  },
+  {
+    "name": "animated-tooltip",
+    "dependencies": [
+      "framer-motion"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/animated-tooltip.json"
+    ]
   }
 ]

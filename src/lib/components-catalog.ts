@@ -118,6 +118,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
     items: [
       { name: "Line Hover Link", slug: "line-hover-link", description: "Animated hover underline styles", componentName: "line-hover-link" },
       { name: "Folder Preview", slug: "folder-preview", description: "Folder stack visual preview", componentName: "folder-preview" },
+      { name: "Animated Tooltip", slug: "animated-tooltip", description: "Bouncy SVG-shaped tooltips with spring animations", componentName: "animated-tooltip", isNew: true },
     ],
   },
   {
