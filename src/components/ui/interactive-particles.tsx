@@ -111,28 +111,30 @@ const FRAG = /* glsl */ `
 precision highp float;
 
 uniform sampler2D uTexture;
+uniform vec3 uColor;
 
 varying vec2 vPUv;
 varying vec2 vUv;
 
 void main() {
-  vec4 color = vec4(0.0);
   vec2 uv = vUv;
   vec2 puv = vPUv;
 
   vec4 colA = texture2D(uTexture, puv);
   float grey = colA.r * 0.21 + colA.g * 0.71 + colA.b * 0.07;
-  vec4 colB = vec4(grey, grey, grey, 1.0);
 
-  float border = 0.3;
+  // Soft, feathered dot instead of a hard-edged circle.
   float radius = 0.5;
+  float border = 0.45;
   float dist = radius - distance(uv, vec2(0.5));
   float t = smoothstep(0.0, border, dist);
 
-  color = colB;
-  color.a = t;
+  // Tint the greyscale value and let dimmer particles fade so tonal images
+  // read as an airy field rather than a solid mass.
+  vec3 rgb = vec3(grey) * uColor;
+  float alpha = t * (0.35 + 0.65 * grey);
 
-  gl_FragColor = color;
+  gl_FragColor = vec4(rgb, alpha);
 }
 `;
 
@@ -223,11 +225,13 @@ export interface InteractiveParticlesProps {
   className?: string;
   /** Wrapper background color. Defaults to black. */
   background?: string;
-  /** Steady-state particle size multiplier. Defaults to 1.5. */
+  /** Particle tint. Defaults to white (keeps the image's greyscale tones). */
+  color?: string;
+  /** Steady-state particle size multiplier. Defaults to 1.2. */
   size?: number;
-  /** Steady-state random spread. Defaults to 2. */
+  /** Steady-state random spread. Defaults to 1.8. */
   randomness?: number;
-  /** Steady-state depth (z displacement). Defaults to 4. */
+  /** Steady-state depth (z displacement). Defaults to 3. */
   depth?: number;
   /** Cursor touch radius (0–1). Defaults to 0.15. */
   touchRadius?: number;
@@ -243,9 +247,10 @@ export function InteractiveParticles({
   maxDimension = 480,
   className,
   background = "#000000",
-  size = 1.5,
-  randomness = 2.0,
-  depth = 4.0,
+  color = "#ffffff",
+  size = 1.2,
+  randomness = 1.8,
+  depth = 3.0,
   touchRadius = 0.15,
   threshold = 34,
 }: InteractiveParticlesProps) {
@@ -369,6 +374,7 @@ export function InteractiveParticles({
         uTextureSize: { value: new THREE.Vector2(imgWidth, imgHeight) },
         uTexture: { value: texture },
         uTouch: { value: null },
+        uColor: { value: new THREE.Color(color) },
       };
 
       const material = new THREE.RawShaderMaterial({
@@ -483,7 +489,7 @@ export function InteractiveParticles({
       // single WebGL context when the effect re-runs (e.g. after an upload).
       renderer.dispose();
     };
-  }, [effectiveSrc, size, randomness, depth, touchRadius, threshold, maxDimension]);
+  }, [effectiveSrc, color, size, randomness, depth, touchRadius, threshold, maxDimension]);
 
   return (
     <div
@@ -508,9 +514,9 @@ export function InteractiveParticles({
           <button
             type="button"
             onClick={() => fileInputRef.current?.click()}
-            className="absolute right-3 top-3 z-10 inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/40 px-3 py-1.5 text-xs font-medium text-white/90 backdrop-blur transition-colors hover:bg-black/60"
+            className="group absolute right-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] font-medium text-white/60 backdrop-blur-sm transition-all duration-200 hover:border-white/20 hover:bg-white/10 hover:text-white/90"
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
               <polyline points="17 8 12 3 7 8" />
               <line x1="12" y1="3" x2="12" y2="15" />
