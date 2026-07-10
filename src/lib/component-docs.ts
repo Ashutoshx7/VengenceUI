@@ -1217,6 +1217,41 @@ export function NotchNavbarDemo() {
     ],
   },
 
+  "gooey-search": {
+    dependencies: "npm install framer-motion clsx tailwind-merge",
+    includeUtils: true,
+    manualNotes: [
+      "The gooey blob effect is created by an inline SVG <filter> (feGaussianBlur + feColorMatrix). The component injects it automatically with a unique id per instance, so you can render multiple search bars on one page without conflicts.",
+      "Colors are driven by the --foreground and --background CSS variables (standard shadcn tokens), so the component adapts to light and dark themes out of the box.",
+      "Safari and Chrome-on-iOS don't render the SVG goo filter reliably, so the component auto-detects them and falls back to a clean, non-gooey layout.",
+    ],
+    usageCode: `import { GooeySearch } from "@/components/ui/gooey-search"
+
+const FRAMEWORKS = ["React", "Vue", "Svelte", "Next.js", "Solid", "Astro"]
+
+export function GooeySearchDemo() {
+  return (
+    <GooeySearch
+      items={FRAMEWORKS}
+      placeholder="Search frameworks..."
+      buttonLabel="Search"
+      maxResults={4}
+      onSelect={(item) => console.log("Selected:", item)}
+    />
+  )
+}`,
+    props: [
+      { prop: "items", type: "string[]", defaultValue: "[]", description: "Strings to search through locally (case-insensitive substring match). Ignored when onSearch is provided." },
+      { prop: "onSearch", type: "(query: string) => Promise<string[]> | string[]", defaultValue: "-", description: "Custom search function for external/async data sources. Overrides the local items filter when supplied." },
+      { prop: "onSelect", type: "(item: string) => void", defaultValue: "-", description: "Called when a result item is clicked or activated with Enter." },
+      { prop: "placeholder", type: "string", defaultValue: "'Type to search...'", description: "Placeholder text shown inside the expanded search input." },
+      { prop: "buttonLabel", type: "string", defaultValue: "'Search'", description: "Label shown on the collapsed pill button before it expands." },
+      { prop: "debounceMs", type: "number", defaultValue: "500", description: "Delay in milliseconds before the search runs after the last keystroke." },
+      { prop: "maxResults", type: "number", defaultValue: "5", description: "Maximum number of result pills to render." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the outermost wrapper." },
+    ],
+  },
+
   "faq-accordion": {
     dependencies: "npm install clsx tailwind-merge",
     includeUtils: true,

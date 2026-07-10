@@ -109,6 +109,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
       { name: "Glass Dock", slug: "glass-dock", description: "Mac-style floating dock", componentName: "glass-dock" },
       { name: "Spotlight Navbar", slug: "spotlight-navbar", description: "Navbar with animated spotlight effect", componentName: "spotlight-navbar" },
       { name: "Notch Navbar", slug: "notch-navbar", description: "Responsive navbar with a sleek cutout notch design", componentName: "notch-navbar", isNew: true },
+      { name: "Gooey Search", slug: "gooey-search", description: "Morphing gooey blob search button with animated results", componentName: "gooey-search", isNew: true },
     ],
   },
   {

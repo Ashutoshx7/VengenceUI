@@ -1087,5 +1087,15 @@
     "files": [
       "public/r/typing-keyboard.json"
     ]
+  },
+  {
+    "name": "gooey-search",
+    "dependencies": [
+      "framer-motion"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/gooey-search.json"
+    ]
   }
 ]
