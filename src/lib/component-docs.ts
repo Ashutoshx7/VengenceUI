@@ -1284,6 +1284,47 @@ export function AnimatedTooltipDemo() {
     ],
   },
 
+  "wave-grid-background": {
+    dependencies: "npm install three clsx tailwind-merge",
+    includeUtils: true,
+    manualNotes: [
+      "Built on raw Three.js (no React Three Fiber needed). It fills its parent, so wrap it in a positioned container with an explicit height.",
+      "The ripples follow the cursor over the canvas; when the pointer is idle it emits gentle random ripples (toggle with `autoAnimate`).",
+      "The wave motion and peak coloring run in a custom GLSL vertex/fragment shader injected via onBeforeCompile, with a vignette + RGB-shift post-processing pass.",
+      "Everything is disposed on unmount (renderer, geometries, materials, textures, listeners), so it is safe to mount and unmount.",
+    ],
+    usageCode: `import { WaveGridBackground } from "@/components/ui/wave-grid-background"
+
+export function WaveGridBackgroundDemo() {
+  return (
+    <div className="relative h-[520px] w-full overflow-hidden rounded-xl">
+      <WaveGridBackground colorBase="#ffffff" colorHigh="#0055ff">
+        <div className="flex h-full w-full items-center justify-center">
+          <h2 className="text-6xl font-bold text-white drop-shadow-lg">
+            Wave Grid
+          </h2>
+        </div>
+      </WaveGridBackground>
+    </div>
+  )
+}`,
+    props: [
+      { prop: "children", type: "React.ReactNode", defaultValue: "-", description: "Content rendered on top of the animated background." },
+      { prop: "gridSize", type: "number", defaultValue: "40", description: "Grid resolution (N×N cubes)." },
+      { prop: "colorBase", type: "string", defaultValue: "'#ffffff'", description: "Base cube color and scene tint." },
+      { prop: "colorHigh", type: "string", defaultValue: "'#0055ff'", description: "Color of the wave peaks." },
+      { prop: "waveAmplitude", type: "number", defaultValue: "0.4", description: "Peak displacement multiplier." },
+      { prop: "waveSpeed", type: "number", defaultValue: "6.0", description: "Wavefront expansion speed (world units/sec)." },
+      { prop: "waveFrequency", type: "number", defaultValue: "1.2", description: "Spatial oscillation frequency." },
+      { prop: "waveWidth", type: "number", defaultValue: "3.0", description: "Gaussian half-width of the wave ring." },
+      { prop: "waveMaxHeight", type: "number", defaultValue: "0.4", description: "Hard clamp on displacement height." },
+      { prop: "waveJitter", type: "number", defaultValue: "0.2", description: "Per-cube positional jitter." },
+      { prop: "autoAnimate", type: "boolean", defaultValue: "true", description: "Emit gentle random ripples while the cursor is idle." },
+      { prop: "vignette", type: "boolean", defaultValue: "true", description: "Apply the vignette + RGB-shift post-processing pass." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional classes for the wrapper element." },
+    ],
+  },
+
   "faq-accordion": {
     dependencies: "npm install clsx tailwind-merge",
     includeUtils: true,

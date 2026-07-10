@@ -1107,5 +1107,15 @@
     "files": [
       "public/r/animated-tooltip.json"
     ]
+  },
+  {
+    "name": "wave-grid-background",
+    "dependencies": [
+      "three"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/wave-grid-background.json"
+    ]
   }
 ]

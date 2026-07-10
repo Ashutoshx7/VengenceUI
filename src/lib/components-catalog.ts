@@ -125,6 +125,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
     name: "Backgrounds",
     icon: Image,
     items: [
+      { name: "Wave Grid", slug: "wave-grid-background", description: "Interactive 3D grid of cubes rippling with cursor-driven waves", componentName: "wave-grid-background", isNew: true },
       { name: "Aurora Hero", slug: "aurora-hero", description: "Fluted glass dynamic hero with interactive switch", componentName: "aurora-hero", isNew: true },
       { name: "Fluid Morph Background", slug: "fluid-morph-bg", description: "Organic fluid shape morphing animation", componentName: "fluid-morph-bg", isNew: true },
       { name: "Twisting Ribbon", slug: "twisting-ribbon", description: "3D waving neon ribbon animation", componentName: "twisting-ribbon", isNew: true },
