@@ -264,7 +264,7 @@ export default function Hero() {
                                 variant={"default"}
                                 size="lg"
                                 className="rounded-md w-fit font-medium text-base">
-                                <Link href="/docs">
+                                <Link href="/components">
                                     Explore blocks
                                 </Link>
                             </Button>

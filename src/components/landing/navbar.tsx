@@ -173,7 +173,7 @@ export const Navbar = memo(function Navbar() {
                                     variant="ghost"
                                     className={cn('text-foreground/75 rounded-full', activeStates.docs && 'text-foreground')}>
                                     <Link
-                                        href="/docs"
+                                        href="/docs/install-nextjs"
                                         prefetch={true}
                                         className="text-sm!">
                                         Docs
@@ -252,7 +252,7 @@ export const Navbar = memo(function Navbar() {
                                                 variant="ghost"
                                                 className={cn('justify-start', activeStates.docs && 'bg-accent')}>
                                                 <Link
-                                                    href="/docs"
+                                                    href="/docs/install-nextjs"
                                                     className="text-sm!"
                                                     onClick={closeMenu}>
                                                     Docs
