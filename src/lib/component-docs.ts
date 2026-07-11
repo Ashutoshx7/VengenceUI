@@ -761,8 +761,8 @@ export function GlassDockDemo() {
   return (
     <GlassDock
       items={[
-        { icon: "home", label: "Home", href: "/" },
-        { icon: "settings", label: "Settings", href: "/settings" },
+        { icon: "home", title: "Home", href: "/" },
+        { icon: "settings", title: "Settings", href: "/settings" },
       ]}
     />
   )
