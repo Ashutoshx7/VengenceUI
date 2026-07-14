@@ -86,6 +86,7 @@ const DEMO_COMPONENTS: Record<string, React.ComponentType> = {
   "typing-keyboard": dynamic(() => import("@/components/docs/typing-keyboard-demo").then((m) => ({ default: m.TypingKeyboardDemo })), { ssr: false, loading: LOADING }),
   "notch-navbar": dynamic(() => import("@/components/docs/notch-navbar-demo").then((m) => ({ default: m.NotchNavbarDemo })), { ssr: false, loading: LOADING }),
   "scroll-dissolve-reveal": dynamic(() => import("@/components/docs/scroll-dissolve-reveal-demo").then((m) => ({ default: m.default })), { ssr: false, loading: LOADING }),
+  "animated-footer": dynamic(() => import("@/components/docs/animated-footer-demo").then((m) => ({ default: m.AnimatedFooterDemo })), { ssr: false, loading: LOADING }),
 };
 
 export function DemoRenderer({ slug }: { slug: string }) {

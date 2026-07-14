@@ -1363,6 +1363,52 @@ export function InteractiveParticlesDemo() {
     ],
   },
 
+  "animated-footer": {
+    dependencies: "npm install gsap next-themes clsx tailwind-merge",
+    includeUtils: true,
+    manualNotes: [
+      "Built on raw canvas + GSAP (no React Three Fiber or the SplitText plugin). It fills its parent, so wrap it in a positioned container with an explicit height.",
+      "Each image is re-drawn as live ASCII art: bright pixels become glyphs, dark ones are dropped. High-contrast images (a light subject on black) look best. Tune the look with `asciiChars`, `charColor`, `columns` and `cellSize`.",
+      "Cursor movement lights up little clusters of cells and softly parallaxes the artwork; set `parallaxStrength={0}` to disable the drift.",
+      "By default the reveal (headings unmasking, links/copy sliding up, hands gliding in) fires via an IntersectionObserver when the footer scrolls into view — set `revealOnScroll={false}` to show it immediately.",
+      "For the classic \"revealed from behind\" entrance, pin the footer behind your page content and drive the `revealed` prop yourself (e.g. flip it when a spacer crosses mid-viewport). See the demo source for the pinned-footer + revealer pattern.",
+      "Images are read pixel-by-pixel through a canvas, so `leftImage`/`rightImage` must be same-origin or served with CORS enabled. The demo images live in `public/animated-footer/` — swap in your own.",
+      "Everything is cleaned up on unmount (animation frame, listeners, tweens, observer), so it is safe to mount and unmount.",
+    ],
+    usageCode: `import { AnimatedFooter } from "@/components/ui/animated-footer"
+
+export function AnimatedFooterDemo() {
+  return (
+    <div className="relative h-[600px] w-full overflow-hidden rounded-xl">
+      <AnimatedFooter
+        headingLines={["VengeanceUI"]}
+        leftImage="/animated-footer/hand-left.jpg"
+        rightImage="/animated-footer/hand-right.jpg"
+      />
+    </div>
+  )
+}`,
+    props: [
+      { prop: "headingLines", type: "string[]", defaultValue: '["VengeanceUI"]', description: "The large display words along the bottom edge." },
+      { prop: "leftImage", type: "string", defaultValue: "'/animated-footer/hand-left.jpg'", description: "Left image URL, sampled into ASCII art. Same-origin or CORS-enabled." },
+      { prop: "rightImage", type: "string", defaultValue: "'/animated-footer/hand-right.jpg'", description: "Right image URL, sampled into ASCII art. Same-origin or CORS-enabled." },
+      { prop: "background", type: "string", defaultValue: "undefined", description: "Footer background color. Defaults to tailwind classes." },
+      { prop: "textColor", type: "string", defaultValue: "undefined", description: "Text color for headings. Defaults to tailwind classes." },
+      { prop: "asciiChars", type: "string", defaultValue: "'........:::=+xX#0369'", description: "Character ramp, ordered dark → light, used to render the ASCII art." },
+      { prop: "charColor", type: "string", defaultValue: "Adaptive", description: "Color of the ASCII glyphs. Adapts to dark/light mode by default." },
+      { prop: "hoverColor", type: "string", defaultValue: "'#ff6a00'", description: "Fill color of a highlighted (hovered) cell." },
+      { prop: "hoverCharColor", type: "string", defaultValue: "Adaptive", description: "Glyph color inside a highlighted cell. Adapts to dark/light mode by default." },
+      { prop: "columns", type: "number", defaultValue: "80", description: "Number of columns each image is sampled to." },
+      { prop: "cellSize", type: "number", defaultValue: "20", description: "Pixel size of each ASCII cell." },
+      { prop: "fontSize", type: "number", defaultValue: "18", description: "Font size (px) of the ASCII glyphs." },
+      { prop: "parallaxStrength", type: "number", defaultValue: "20", description: "Pointer parallax strength in px; set to 0 to disable." },
+      { prop: "hoverRadius", type: "number", defaultValue: "8", description: "Cursor influence radius, in cells, for the hover highlight." },
+      { prop: "revealOnScroll", type: "boolean", defaultValue: "true", description: "Play the reveal when the footer scrolls into view (else show immediately)." },
+      { prop: "revealed", type: "boolean", defaultValue: "-", description: "Controlled reveal. When set, ignores the built-in observer and plays in (true) / out (false) to match — drive it from your own scroll trigger to reveal the footer from behind other content." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional classes for the root element." },
+    ],
+  },
+
   "faq-accordion": {
     dependencies: "npm install clsx tailwind-merge",
     includeUtils: true,

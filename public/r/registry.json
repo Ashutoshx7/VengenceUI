@@ -1128,5 +1128,16 @@
     "files": [
       "public/r/interactive-particles.json"
     ]
+  },
+  {
+    "name": "animated-footer",
+    "dependencies": [
+      "gsap",
+      "next-themes"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/animated-footer.json"
+    ]
   }
 ]
