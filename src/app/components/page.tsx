@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight, Boxes, Sparkles } from "lucide-react";
+import { ArrowUpRight, Boxes, MessageSquarePlus, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { COMPONENT_CATEGORIES } from "@/lib/components-catalog";
+import { GITHUB_COMPONENT_REQUEST_URL } from "@/lib/github";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -59,6 +60,16 @@ export default function ComponentsIndexPage() {
                 className="border-foreground/10 bg-transparent text-foreground/85 shadow-none hover:border-foreground/20 hover:bg-foreground/[0.045] dark:border-white/10 dark:hover:bg-white/[0.055]"
               >
                 <Link href="/docs/cli">CLI install</Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                className="border-foreground/10 bg-transparent text-foreground/85 shadow-none hover:border-foreground/20 hover:bg-foreground/[0.045] dark:border-white/10 dark:hover:bg-white/[0.055]"
+              >
+                <Link href={GITHUB_COMPONENT_REQUEST_URL} target="_blank" rel="noopener noreferrer">
+                  <MessageSquarePlus className="size-4" />
+                  Request a component
+                </Link>
               </Button>
             </div>
           </div>
@@ -131,6 +142,26 @@ export default function ComponentsIndexPage() {
             </div>
           );
         })}
+      </section>
+
+      <section className="border-b border-border/70 py-8">
+        <div className="flex flex-col items-start justify-between gap-4 border border-foreground/10 bg-foreground/[0.035] p-6 sm:flex-row sm:items-center dark:bg-white/[0.035]">
+          <div className="max-w-xl">
+            <h2 className="font-orbitron text-lg font-semibold">Can&apos;t find what you need?</h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Request a component and describe the animation you want. You can drag & drop images or a screen recording straight into the issue for reference.
+            </p>
+          </div>
+          <Button
+            asChild
+            className="shrink-0"
+          >
+            <Link href={GITHUB_COMPONENT_REQUEST_URL} target="_blank" rel="noopener noreferrer">
+              <MessageSquarePlus className="size-4" />
+              Request a component
+            </Link>
+          </Button>
+        </div>
       </section>
     </div>
   );
