@@ -1,0 +1,45 @@
+name: "🧩 Request a component"
+description: "Suggest a new animated component or interaction for Vengeance UI."
+title: "[Component request]: "
+labels: ["component request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping shape Vengeance UI! Fill in the details below.
+        The more references you add — screenshots, screen recordings, links —
+        the easier it is to build exactly what you have in mind.
+  - type: input
+    id: name
+    attributes:
+      label: Component name
+      description: What would you call it?
+      placeholder: e.g. Magnetic Cursor Button
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What should it do?
+      description: Describe the component and the animation / interaction you want.
+      placeholder: Explain the behaviour, states, and how a user interacts with it.
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: References (images, video, links)
+      description: |
+        Add anything that shows what you mean. You can **drag & drop images or a screen recording**
+        directly into this box, or paste links to sites / dribbble / codepen for inspiration.
+      placeholder: Drop screenshots or a short screen recording here, and paste any reference links.
+    validations:
+      required: false
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Where would you use it?
+      description: Optional — the use case or page this component fits.
+      placeholder: e.g. Hero CTA on a SaaS landing page.
+    validations:
+      required: false
