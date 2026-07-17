@@ -493,6 +493,14 @@
     ]
   },
   {
+    "name": "highlight-grid",
+    "dependencies": [],
+    "type": "registry:ui",
+    "files": [
+      "public/r/highlight-grid.json"
+    ]
+  },
+  {
     "name": "hover-card",
     "dependencies": [
       "@radix-ui/react-hover-card"

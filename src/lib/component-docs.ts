@@ -1597,6 +1597,37 @@ export function CircularGalleryDemo() {
     ],
   },
 
+  "highlight-grid": {
+    dependencies: "npm install clsx tailwind-merge",
+    includeUtils: true,
+    manualNotes: [
+      "No animation library — the highlight is a single absolutely-positioned element that transitions its transform, size and background-color as the cursor moves between cells.",
+      "Pass `rows` as an array of rows, and each row an array of `{ label, color? }`. Rows can hold different numbers of cells; the grid stretches them evenly.",
+      "Each cell gets an accent colour from its own `color`, or from the cycled `colors` palette. The label of the highlighted cell turns white so it stays legible over the colour.",
+      "It fills its parent, so give it a height. The highlight re-aligns on resize, and `highlightFirst` parks it on the first cell on mount.",
+      "The surface is transparent so it sits on whatever background you place it over, with borders and labels that adapt to light and dark mode (the hovered cell's label turns white to stay legible over its colour). Set a background via `className` if you want a solid field. Hover-driven, so on touch devices the highlight simply stays put.",
+    ],
+    usageCode: `import { HighlightGrid } from "@/components/ui/highlight-grid"
+
+export function HighlightGridDemo() {
+  return (
+    <HighlightGrid
+      rows={[
+        [{ label: "html" }, { label: "css" }, { label: "javascript" }],
+        [{ label: "react" }, { label: "next.js" }, { label: "three.js" }],
+      ]}
+    />
+  )
+}`,
+    props: [
+      { prop: "rows", type: "HighlightItem[][]", defaultValue: "Sample set", description: "Rows of cells; each row can hold a different number of { label, color? } cells. Labels render wrapped in parentheses." },
+      { prop: "colors", type: "string[]", defaultValue: "8-colour palette", description: "Palette cycled for cells without an explicit color." },
+      { prop: "transitionDuration", type: "number", defaultValue: "250", description: "Highlight transition duration in ms." },
+      { prop: "highlightFirst", type: "boolean", defaultValue: "true", description: "Park the highlight on the first cell on mount." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional classes for the root element." },
+    ],
+  },
+
   "faq-accordion": {
     dependencies: "npm install clsx tailwind-merge",
     includeUtils: true,
