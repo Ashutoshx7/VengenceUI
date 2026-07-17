@@ -1476,6 +1476,41 @@ export function AwwwardsNavDemo() {
     ],
   },
 
+  "verse-cards": {
+    dependencies: "npm install gsap lucide-react clsx tailwind-merge",
+    includeUtils: true,
+    manualNotes: [
+      "Opening the deck fans the cards up from below with a staggered `power4.inOut` sweep, pops in the close button, and fades up the footer. Once open, it behaves like a stack you flip through: clicking the front card flings it away and the next card slides forward. The close button (or re-triggering) sends the stack back down and resets it.",
+      "It fills its parent (`h-full w-full`) rather than the viewport, so wrap it in a sized, positioned container. The deck is an absolutely-positioned overlay inside that box.",
+      "Icons are passed as nodes via `navItems`, so bring your own icon set. Mark exactly one item with `isTrigger` to open the deck; other items fire their own `onClick`.",
+      "Cards can be plain strings (used as labels) or `{ label, className }` objects — pass `className` to give a card its own background or accent. Only the front card is clickable; use `onDeal` to react as each one is flicked away.",
+      "Everything adapts to light and dark mode and is fully state-driven, so it is safe to mount and unmount.",
+    ],
+    usageCode: `import { Layers } from "lucide-react"
+import { VerseCards } from "@/components/ui/verse-cards"
+
+export function VerseCardsDemo() {
+  return (
+    <div className="relative h-[600px] w-full overflow-hidden rounded-xl">
+      <VerseCards
+        navItems={[
+          { label: "Work", icon: <Layers className="h-5 w-5" />, badge: true, isTrigger: true },
+        ]}
+        cards={["Sonyverse", "Nota", "Blinder", "Cinovas", "Uito"]}
+      />
+    </div>
+  )
+}`,
+    props: [
+      { prop: "navItems", type: "VerseNavItem[]", defaultValue: "Single 'Work' trigger", description: "Nav tiles. Mark one with isTrigger to open the deck; each item is { label, icon, badge?, isTrigger?, onClick? }." },
+      { prop: "cards", type: "(VerseCard | string)[]", defaultValue: "Sample set", description: "Cards in the deck. Strings are used as labels; objects are { label, className }." },
+      { prop: "footerText", type: "string", defaultValue: "'Click the front card to deal it away.'", description: "Caption shown under the open deck." },
+      { prop: "onOpenChange", type: "(open: boolean) => void", defaultValue: "-", description: "Called whenever the deck opens (true) or closes (false)." },
+      { prop: "onDeal", type: "(index: number) => void", defaultValue: "-", description: "Called when the front card is flicked away, with its index in the deck." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional classes for the root element." },
+    ],
+  },
+
   "faq-accordion": {
     dependencies: "npm install clsx tailwind-merge",
     includeUtils: true,

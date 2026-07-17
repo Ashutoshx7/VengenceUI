@@ -1130,6 +1130,17 @@
     ]
   },
   {
+    "name": "verse-cards",
+    "dependencies": [
+      "gsap",
+      "lucide-react"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/verse-cards.json"
+    ]
+  },
+  {
     "name": "wave-grid-background",
     "dependencies": [
       "three"

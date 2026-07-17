@@ -89,6 +89,7 @@ const DEMO_COMPONENTS: Record<string, React.ComponentType> = {
   "animated-footer": dynamic(() => import("@/components/docs/animated-footer-demo").then((m) => ({ default: m.AnimatedFooterDemo })), { ssr: false, loading: LOADING }),
   "music-player": dynamic(() => import("@/components/docs/music-player-demo").then((m) => ({ default: m.MusicPlayerDemo })), { ssr: false, loading: LOADING }),
   "awwwards-nav": dynamic(() => import("@/components/docs/awwwards-nav-demo").then((m) => ({ default: m.AwwwardsNavDemo })), { ssr: false, loading: LOADING }),
+  "verse-cards": dynamic(() => import("@/components/docs/verse-cards-demo").then((m) => ({ default: m.VerseCardsDemo })), { ssr: false, loading: LOADING }),
 };
 
 export function DemoRenderer({ slug }: { slug: string }) {

@@ -68,6 +68,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
       { name: "Solar System", slug: "solar-system", description: "Interactive 3D technology ecosystem orbit animation", componentName: "solar-system", isNew: true },
       { name: "Interactive Particles", slug: "interactive-particles", description: "Image-sampled particles that scatter around the cursor", componentName: "interactive-particles", isNew: true },
       { name: "Music Player", slug: "music-player", description: "Collapsible glass music player with equalizer and seekable progress", componentName: "music-player", isNew: true },
+      { name: "Verse Cards", slug: "verse-cards", description: "Nav trigger that fans a deck of cards up with a GSAP reveal", componentName: "verse-cards", isNew: true },
     ],
   },
   {
