@@ -6,9 +6,11 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for helping shape Vengeance UI! Fill in the details below.
-        The more references you add — screenshots, screen recordings, links —
-        the easier it is to build exactly what you have in mind.
+        ## Thanks for helping shape Vengeance UI! 🙌
+
+        The more you show us, the closer we can build it to what's in your head.
+        **Screenshots and short screen recordings help a ton** — you can drag & drop
+        images or a video straight into any of the boxes below.
   - type: input
     id: name
     attributes:
@@ -17,22 +19,62 @@ body:
       placeholder: e.g. Magnetic Cursor Button
     validations:
       required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: Where does this best fit?
+      options:
+        - Buttons
+        - Text & Motion
+        - Interactive
+        - Layout & Cards
+        - Tooltip & Marquee
+        - Loaders
+        - Backgrounds
+        - Other / not sure
+      default: 7
+    validations:
+      required: true
   - type: textarea
     id: description
     attributes:
       label: What should it do?
       description: Describe the component and the animation / interaction you want.
-      placeholder: Explain the behaviour, states, and how a user interacts with it.
+      placeholder: |
+        - What does it look like?
+        - How does it animate (on hover, on scroll, on click…)?
+        - What states does it have (default, active, disabled…)?
     validations:
       required: true
   - type: textarea
+    id: screenshots
+    attributes:
+      label: "📸 Screenshots / images"
+      description: |
+        Show us what you mean. **Drag & drop images here**, or paste them directly.
+        A rough sketch or a screenshot of something similar is perfect.
+      placeholder: Drop or paste your images here…
+    validations:
+      required: false
+  - type: textarea
+    id: video
+    attributes:
+      label: "🎥 Screen recording / video"
+      description: |
+        Animations are hard to describe in words! If you have a screen recording
+        of the effect (or something like it), **drag & drop the video file here**.
+      placeholder: Drop your screen recording here…
+    validations:
+      required: false
+  - type: textarea
     id: references
     attributes:
-      label: References (images, video, links)
-      description: |
-        Add anything that shows what you mean. You can **drag & drop images or a screen recording**
-        directly into this box, or paste links to sites / dribbble / codepen for inspiration.
-      placeholder: Drop screenshots or a short screen recording here, and paste any reference links.
+      label: "🔗 Reference links"
+      description: Sites, Dribbble shots, CodePens, tweets — anything that inspired this.
+      placeholder: |
+        https://…
+        https://…
     validations:
       required: false
   - type: textarea
@@ -43,3 +85,12 @@ body:
       placeholder: e.g. Hero CTA on a SaaS landing page.
     validations:
       required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you submit
+      options:
+        - label: I searched existing issues and this component hasn't been requested yet.
+          required: true
+        - label: I added screenshots, a recording, or reference links (if I had any).
+          required: false
