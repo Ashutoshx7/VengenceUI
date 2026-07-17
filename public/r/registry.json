@@ -702,6 +702,16 @@
     ]
   },
   {
+    "name": "music-player",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/music-player.json"
+    ]
+  },
+  {
     "name": "navigation-menu",
     "dependencies": [
       "lucide-react",

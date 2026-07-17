@@ -87,6 +87,7 @@ const DEMO_COMPONENTS: Record<string, React.ComponentType> = {
   "notch-navbar": dynamic(() => import("@/components/docs/notch-navbar-demo").then((m) => ({ default: m.NotchNavbarDemo })), { ssr: false, loading: LOADING }),
   "scroll-dissolve-reveal": dynamic(() => import("@/components/docs/scroll-dissolve-reveal-demo").then((m) => ({ default: m.default })), { ssr: false, loading: LOADING }),
   "animated-footer": dynamic(() => import("@/components/docs/animated-footer-demo").then((m) => ({ default: m.AnimatedFooterDemo })), { ssr: false, loading: LOADING }),
+  "music-player": dynamic(() => import("@/components/docs/music-player-demo").then((m) => ({ default: m.MusicPlayerDemo })), { ssr: false, loading: LOADING }),
 };
 
 export function DemoRenderer({ slug }: { slug: string }) {

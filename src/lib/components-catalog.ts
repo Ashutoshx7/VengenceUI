@@ -67,6 +67,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
       { name: "Typing Keyboard", slug: "typing-keyboard", description: "3D isometric keyboard with auto-typing screen", componentName: "typing-keyboard", isNew: true },
       { name: "Solar System", slug: "solar-system", description: "Interactive 3D technology ecosystem orbit animation", componentName: "solar-system", isNew: true },
       { name: "Interactive Particles", slug: "interactive-particles", description: "Image-sampled particles that scatter around the cursor", componentName: "interactive-particles", isNew: true },
+      { name: "Music Player", slug: "music-player", description: "Collapsible glass music player with equalizer and seekable progress", componentName: "music-player", isNew: true },
     ],
   },
   {

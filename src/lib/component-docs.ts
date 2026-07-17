@@ -1409,6 +1409,40 @@ export function AnimatedFooterDemo() {
     ],
   },
 
+  "music-player": {
+    dependencies: "npm install lucide-react clsx tailwind-merge",
+    includeUtils: true,
+    manualNotes: [
+      "Fully self-contained — no audio library or Web Audio setup. Playback is driven by a native `<audio>` element, and the equalizer is pure CSS, so `lucide-react` is the only runtime dependency.",
+      "Pass a `tracks` array of `{ title, artist, src, artwork? }`. Audio `src` URLs must be same-origin or served with CORS enabled so the browser can stream them.",
+      "The floating avatar uses the player-level `avatar` prop, falling back to each track's `artwork`. Square images (e.g. 200×200) look best.",
+      "Skipping (prev/next) and reaching the end of a track always continue playback; set `loop={false}` to stop at the end of the playlist instead of wrapping to the first track.",
+      "The bar collapses to a compact pill via the toggle in the corner — start collapsed with `defaultCollapsed`. Width animates, so give it room in your layout or constrain it with `className`.",
+    ],
+    usageCode: `import { MusicPlayer, type MusicTrack } from "@/components/ui/music-player"
+
+const tracks: MusicTrack[] = [
+  { title: "Play It", artist: "Witchitaw", src: "/songs/play-it.mp3", artwork: "/artwork/witchitaw.jpg" },
+  { title: "Real Time", artist: "Tilden", src: "/songs/real-time.mp3", artwork: "/artwork/tilden.jpg" },
+]
+
+export function MusicPlayerDemo() {
+  return <MusicPlayer tracks={tracks} accentColor="#ff6a00" />
+}`,
+    props: [
+      { prop: "tracks", type: "MusicTrack[]", defaultValue: "-", description: "Playlist to play through: { title, artist, src, artwork? }. Renders nothing when empty." },
+      { prop: "avatar", type: "string", defaultValue: "-", description: "Floating avatar image. Falls back to the current track's artwork." },
+      { prop: "startIndex", type: "number", defaultValue: "0", description: "Index of the track to start on." },
+      { prop: "autoPlay", type: "boolean", defaultValue: "false", description: "Begin playing as soon as the player mounts (browsers may block until interaction)." },
+      { prop: "loop", type: "boolean", defaultValue: "true", description: "Wrap from the last track back to the first when a track ends." },
+      { prop: "defaultCollapsed", type: "boolean", defaultValue: "false", description: "Render collapsed (compact pill) on first paint." },
+      { prop: "showProgress", type: "boolean", defaultValue: "true", description: "Show the seekable progress bar along the bottom edge." },
+      { prop: "accentColor", type: "string", defaultValue: "'currentColor'", description: "Accent color for the equalizer bars and progress fill." },
+      { prop: "onTrackChange", type: "(track: MusicTrack, index: number) => void", defaultValue: "-", description: "Called whenever the active track changes." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional classes for the root element." },
+    ],
+  },
+
   "faq-accordion": {
     dependencies: "npm install clsx tailwind-merge",
     includeUtils: true,
