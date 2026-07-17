@@ -101,7 +101,7 @@ export default function ComponentsIndexPage() {
             <div
               key={category.name}
               className={cn(
-                "border-r border-t border-border/70 bg-card p-5 first:border-t-0 md:[&:nth-child(2)]:border-t-0 xl:[&:nth-child(3)]:border-t-0",
+                "min-w-0 border-r border-t border-border/70 bg-card p-5 first:border-t-0 md:[&:nth-child(2)]:border-t-0 xl:[&:nth-child(3)]:border-t-0",
                 "md:[&:nth-child(2n)]:border-r-0 xl:[&:nth-child(2n)]:border-r xl:[&:nth-child(3n)]:border-r-0",
               )}
             >
@@ -127,10 +127,10 @@ export default function ComponentsIndexPage() {
                   <Link
                     key={item.slug}
                     href={`/components/${item.slug}`}
-                    className="group border border-transparent px-3 py-2 transition-colors hover:border-border hover:bg-muted/40"
+                    className="group block min-w-0 border border-transparent px-3 py-2 transition-colors hover:border-border hover:bg-muted/40"
                   >
-                    <span className="flex items-center justify-between gap-3">
-                      <span className="min-w-0">
+                    <span className="flex min-w-0 items-center justify-between gap-3">
+                      <span className="min-w-0 flex-1">
                         <span className="block truncate text-sm font-medium group-hover:text-foreground">{item.name}</span>
                         <span className="mt-0.5 block truncate text-xs text-muted-foreground">{item.description}</span>
                       </span>

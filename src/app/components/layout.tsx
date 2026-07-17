@@ -1,5 +1,4 @@
 import { Sidebar } from "@/components/layout/sidebar";
-import { AlignLeft } from "lucide-react";
 import { TableOfContents } from "@/components/layout/toc";
 export default function ComponentsLayout({
   children,
@@ -32,7 +31,7 @@ export default function ComponentsLayout({
         />
       </div>
 
-      <main className="relative py-3 lg:py-4 pr-2 md:pr-4 md:pl-8 lg:pl-12 xl:pl-20">
+      <main className="relative min-w-0 py-3 lg:py-4 pr-2 md:pr-4 md:pl-8 lg:pl-12 xl:pl-20">
         <div className="w-full min-w-0 [&>div]:max-w-6xl">
           {children}
         </div>
