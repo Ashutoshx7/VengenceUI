@@ -18,7 +18,7 @@ export function CopyButton({ code, className }: { code: string; className?: stri
   return (
     <button
       className={cn(
-        "relative z-10 flex h-7 w-7 items-center justify-center rounded-md border bg-zinc-900 border-zinc-800 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-50 transition-colors",
+        "relative z-10 flex h-7 w-7 items-center justify-center rounded-md border bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-neutral-700 hover:bg-zinc-800 dark:hover:text-zinc-50 transition-colors",
         className
       )}
       onClick={() => {
